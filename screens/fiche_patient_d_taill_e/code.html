@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediFlow | Fiche Patient - Marc Lefebvre</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#c3c6d7",
+                    "on-tertiary-fixed": "#191c1d",
+                    "on-background": "#0b1c30",
+                    "surface-variant": "#d3e4fe",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#005236",
+                    "tertiary-fixed-dim": "#c5c7c8",
+                    "inverse-on-surface": "#eaf1ff",
+                    "emergency-red": "#EF4444",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "tertiary": "#525556",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface-tint": "#0053db",
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#454748",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-tertiary-container": "#eff0f1",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#6ffbbe",
+                    "secondary-fixed-dim": "#4edea3",
+                    "primary": "#004ac6",
+                    "alert-orange": "#F59E0B",
+                    "tertiary-fixed": "#e1e3e4",
+                    "inverse-primary": "#b4c5ff",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#cbdbf5",
+                    "on-primary-container": "#eeefff",
+                    "surface-container-high": "#dce9ff",
+                    "surface-container": "#e5eeff",
+                    "on-surface-variant": "#434655",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#00174b",
+                    "border-subtle": "#E2E8F0",
+                    "outline": "#737686",
+                    "on-secondary-fixed": "#002113",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#00714d",
+                    "secondary-container": "#6cf8bb",
+                    "surface-white": "#FFFFFF",
+                    "background": "#f8f9ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary": "#006c49",
+                    "on-surface": "#0b1c30",
+                    "tertiary-container": "#6b6d6e",
+                    "surface": "#f8f9ff",
+                    "inverse-surface": "#213145",
+                    "primary-container": "#2563eb",
+                    "surface-container-low": "#eff4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "24px",
+                    "section-gap": "32px",
+                    "radius-md": "8px",
+                    "radius-lg": "16px",
+                    "gutter": "16px",
+                    "radius-sm": "4px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "data-mono": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-md": ["22px", {"lineHeight": "30px", "fontWeight": "600"}],
+                    "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+      .active-pulse { position: relative; }
+      .active-pulse::after {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        background: rgba(0, 74, 198, 0.2);
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.5); opacity: 0; }
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen flex">
+<!-- SideNavBar (from JSON) -->
+<aside class="fixed left-0 top-0 h-full w-64 flex flex-col py-base gap-2 bg-surface-white border-r border-outline-variant shadow-md z-50">
+<div class="px-6 py-8 flex flex-col gap-1">
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">MediFlow</h1>
+<p class="text-on-surface-variant font-label-caps text-[10px] tracking-widest">CLINICAL PRECISION</p>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 cursor-pointer active:scale-95 transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Tableau de bord</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 cursor-pointer active:scale-95 transition-all">
+<span class="material-symbols-outlined">home</span>
+<span class="font-body-md">Accueil</span>
+</div>
+<div class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 mx-2 border-l-4 border-primary">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Salle d'attente</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 cursor-pointer active:scale-95 transition-all">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md">Caisse</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 cursor-pointer active:scale-95 transition-all">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-body-md">Médecin</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 cursor-pointer active:scale-95 transition-all">
+<span class="material-symbols-outlined">medication</span>
+<span class="font-body-md">Pharmacien</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 cursor-pointer active:scale-95 transition-all">
+<span class="material-symbols-outlined">biotech</span>
+<span class="font-body-md">Laboratoire</span>
+</div>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 space-y-1">
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 cursor-pointer active:scale-95 transition-all">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md">Aide</span>
+</div>
+<div class="flex items-center gap-3 text-emergency-red hover:bg-error-container rounded-lg px-4 py-3 mx-2 cursor-pointer active:scale-95 transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md">Déconnexion</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 flex flex-col overflow-hidden">
+<!-- TopAppBar (from JSON) -->
+<header class="flex justify-between items-center px-container-padding h-16 w-full fixed top-0 z-40 bg-surface-bright border-b border-outline-variant shadow-sm ml-64 max-w-[calc(100%-16rem)]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer">arrow_back</span>
+<h2 class="font-headline-md text-headline-md text-primary">Dossier Patient : Marc Lefebvre</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-2 hover:bg-surface-container rounded-full">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-emergency-red rounded-full"></span>
+</div>
+<div class="flex items-center gap-2 cursor-pointer p-1 pl-3 rounded-full border border-outline-variant hover:bg-surface-container">
+<span class="text-body-sm font-medium">Dr. Sophie Martin</span>
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A professional headshot of a female doctor in a clinical setting, wearing a white coat and a stethoscope. The background is a clean, softly blurred medical office with light-mode aesthetics and professional blue accents. High-quality corporate photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAb6iJHtArvBhKMB0swKdmE7HyXaQNOVjFKL8lgYmkdnyP5wCBugPS5_ZA3V6A-oBm2gQVz2RH5nbiYuVaY_ndEr3VOLzT6DLy4NCZgfTymiv_MHbL2bj1yy904uPwrhIsfAlqLysl46TQ9_6Bq_4t9HpVu8p-DI4skVQEHm17rX-k_NqskSYcmZGVbsLCJC288EAdqk8jnSOyOsla0yx4qSVj9kqcoDw0h-XWAhmwqDygJhXnOWaBaA"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="mt-16 p-container-padding flex-1 overflow-y-auto custom-scrollbar">
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left Column: Patient Profile & Health Overview -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-gutter">
+<!-- Patient Hero Card -->
+<div class="bg-surface-white rounded-radius-lg p-8 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] flex flex-col md:flex-row gap-8 relative overflow-hidden">
+<!-- Decorative element -->
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="flex-shrink-0 flex flex-col items-center">
+<div class="relative group">
+<img class="w-32 h-32 rounded-2xl object-cover ring-4 ring-surface-container" data-alt="A studio portrait of a 45-year-old man named Marc Lefebvre with short brown hair and friendly eyes. He is wearing a simple blue casual shirt. The lighting is clean and medical-grade, highlighting clarity and trust, against a light gray background with subtle depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZaUv-6y2YBCBw1sRyBJmGqOOEn0H41RLPWpvLHHHmMKasg_6LemM6Xa0tr7_YipmzyRrixpFRUT4dHNjnzHNIm5fzbhgB3LCZ4KD5z0RDsP2vSIViTHClYq-i62CJAqLlacAct9r4b4hmXr-gEWYgi7JGtCz6hcY5ng_L6Uuy-u8ynwXL90af48P36B3W1MGP7qi3hgrzRFj6C8iBuT_auzNGy6edCSWuDYACpufmfdzKKzLdgT8ubg"/>
+<div class="absolute -bottom-2 -right-2 bg-secondary text-white p-1 rounded-lg">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+</div>
+</div>
+<div class="mt-4 flex flex-col items-center">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold font-label-caps">ID: 4882-ML</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Marc Lefebvre</h3>
+<p class="text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">cake</span> 14 Mars 1978 (45 ans) 
+                                        <span class="mx-2">•</span>
+<span class="material-symbols-outlined text-sm">male</span> Homme
+                                    </p>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-on-primary-fixed-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">edit</span> Éditer
+                                    </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+<div class="bg-surface-container-low p-4 rounded-xl border border-border-subtle">
+<p class="text-on-surface-variant font-label-caps text-[10px] mb-2 uppercase">Coordonnées</p>
+<div class="space-y-2 text-body-sm">
+<p class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-lg">location_on</span> 12 Avenue des Champs-Élysées, Paris</p>
+<p class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-lg">call</span> +33 6 12 34 56 78</p>
+<p class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-lg">mail</span> m.lefebvre@email.com</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-border-subtle">
+<p class="text-on-surface-variant font-label-caps text-[10px] mb-2 uppercase">Informations Urgentes</p>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-body-sm">Groupe Sanguin</span>
+<span class="font-bold text-primary">A+</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-error-container/30 border border-error/20">
+<span class="text-body-sm text-error font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">warning</span> Allergies
+                                            </span>
+<span class="text-error font-bold">Pénicilline</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Medical History Card -->
+<div class="bg-surface-white rounded-radius-lg p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)]">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span> Antécédents
+                                </h4>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">add_circle</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-start gap-4 p-3 hover:bg-tertiary/5 rounded-xl transition-colors">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary">heart_plus</span>
+</div>
+<div>
+<p class="font-semibold text-body-md">Hypertension Artérielle</p>
+<p class="text-body-sm text-on-surface-variant">Diagnostiqué en 2018. Suivi régulier.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-3 hover:bg-tertiary/5 rounded-xl transition-colors">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container">respiratory_rate</span>
+</div>
+<div>
+<p class="font-semibold text-body-md">Appendicectomie</p>
+<p class="text-body-sm text-on-surface-variant">Chirurgie effectuée en 2005 (Hôpital Saint-Louis).</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-3 hover:bg-tertiary/5 rounded-xl transition-colors">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant">monitor_weight</span>
+</div>
+<div>
+<p class="font-semibold text-body-md">Surpoids modéré</p>
+<p class="text-body-sm text-on-surface-variant">IMC: 27.5. Recommandations nutritionnelles.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Documents Card -->
+<div class="bg-surface-white rounded-radius-lg p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)]">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">folder_shared</span> Documents
+                                </h4>
+<span class="text-primary text-body-sm font-bold cursor-pointer hover:underline">Voir tout</span>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<div class="flex items-center justify-between p-3 border border-border-subtle rounded-xl hover:border-primary transition-all group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="bg-error-container/20 p-2 rounded-lg group-hover:bg-error-container/40">
+<span class="material-symbols-outlined text-error">picture_as_pdf</span>
+</div>
+<div>
+<p class="text-body-sm font-semibold truncate max-w-[120px]">Bilan_Sanguin_24.pdf</p>
+<p class="text-[10px] text-on-surface-variant font-data-mono">12 OCT 2023</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">download</span>
+</div>
+<div class="flex items-center justify-between p-3 border border-border-subtle rounded-xl hover:border-primary transition-all group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg group-hover:bg-primary/20">
+<span class="material-symbols-outlined text-primary">image</span>
+</div>
+<div>
+<p class="text-body-sm font-semibold truncate max-w-[120px]">Radio_Thorax.jpg</p>
+<p class="text-[10px] text-on-surface-variant font-data-mono">15 AOÛ 2023</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">visibility</span>
+</div>
+<div class="flex items-center justify-between p-3 border border-border-subtle rounded-xl hover:border-primary transition-all group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="bg-secondary-container p-2 rounded-lg group-hover:bg-secondary-container/60">
+<span class="material-symbols-outlined text-on-secondary-container">description</span>
+</div>
+<div>
+<p class="text-body-sm font-semibold truncate max-w-[120px]">Ordonnance_Cardio.pdf</p>
+<p class="text-[10px] text-on-surface-variant font-data-mono">02 JUIN 2023</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">print</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Past Visits Table -->
+<div class="bg-surface-white rounded-radius-lg shadow-[0px_4px_20px_rgba(0,0,0,0.03)] overflow-hidden">
+<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center">
+<h4 class="font-headline-md text-on-surface">Historique des visites</h4>
+<div class="flex gap-2">
+<span class="material-symbols-outlined p-2 border border-border-subtle rounded-lg cursor-pointer hover:bg-surface-container">filter_list</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-on-surface-variant font-label-caps text-[11px]">
+<tr>
+<th class="px-6 py-4">DATE</th>
+<th class="px-6 py-4">MOTIF</th>
+<th class="px-6 py-4">PRATICIEN</th>
+<th class="px-6 py-4">STATUT</th>
+<th class="px-6 py-4">ACTIONS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr class="hover:bg-tertiary/5 transition-colors">
+<td class="px-6 py-4 font-data-mono text-body-sm">12/10/2023</td>
+<td class="px-6 py-4 text-body-sm font-medium">Contrôle Tension</td>
+<td class="px-6 py-4 text-body-sm">Dr. Martin (Cardio)</td>
+<td class="px-6 py-4">
+<span class="bg-secondary-container/50 text-on-secondary-container px-2 py-1 rounded text-xs font-bold">TERMINÉ</span>
+</td>
+<td class="px-6 py-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_horiz</span>
+</td>
+</tr>
+<tr class="hover:bg-tertiary/5 transition-colors">
+<td class="px-6 py-4 font-data-mono text-body-sm">15/08/2023</td>
+<td class="px-6 py-4 text-body-sm font-medium">Douleur Thoracique</td>
+<td class="px-6 py-4 text-body-sm">Urgences Mediflow</td>
+<td class="px-6 py-4">
+<span class="bg-secondary-container/50 text-on-secondary-container px-2 py-1 rounded text-xs font-bold">TERMINÉ</span>
+</td>
+<td class="px-6 py-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_horiz</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column: Vertical Timeline & Contextual Stats -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- Journey Timeline Card -->
+<div class="bg-surface-white rounded-radius-lg p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] h-fit">
+<div class="mb-8">
+<h4 class="font-headline-md text-on-surface">Parcours du jour</h4>
+<p class="text-body-sm text-on-surface-variant">Lundi, 23 Octobre 2023</p>
+</div>
+<div class="relative pl-10 space-y-12">
+<!-- Timeline Track -->
+<div class="absolute left-[15px] top-1 bottom-1 w-0.5 bg-border-subtle"></div>
+<!-- Step 1: Accueil -->
+<div class="relative">
+<div class="absolute -left-[35px] w-6 h-6 bg-secondary rounded-full flex items-center justify-center text-white ring-4 ring-white z-10">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-bold text-body-md">Accueil</p>
+<p class="text-body-sm text-on-surface-variant">Enregistrement administratif</p>
+</div>
+<span class="font-data-mono text-xs text-on-surface-variant">09:00</span>
+</div>
+</div>
+<!-- Step 2: Caisse -->
+<div class="relative">
+<div class="absolute -left-[35px] w-6 h-6 bg-secondary rounded-full flex items-center justify-center text-white ring-4 ring-white z-10">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-bold text-body-md">Caisse</p>
+<p class="text-body-sm text-on-surface-variant">Paiement provisionnel</p>
+</div>
+<span class="font-data-mono text-xs text-on-surface-variant">09:15</span>
+</div>
+</div>
+<!-- Step 3: Consultation -->
+<div class="relative">
+<div class="absolute -left-[35px] w-6 h-6 bg-primary rounded-full ring-4 ring-white z-10 active-pulse"></div>
+<div class="flex justify-between items-start">
+<div class="bg-primary/5 p-4 rounded-xl border border-primary/20 w-full">
+<p class="font-bold text-body-md text-primary">Consultation</p>
+<p class="text-body-sm text-primary/80">Dr. Sophie Martin - Bureau 204</p>
+<div class="mt-3 flex items-center gap-2">
+<span class="bg-primary text-white text-[10px] px-2 py-0.5 rounded-full font-bold">EN COURS</span>
+</div>
+</div>
+<span class="font-data-mono text-xs text-primary font-bold ml-2">09:30</span>
+</div>
+</div>
+<!-- Step 4: Laboratoire -->
+<div class="relative">
+<div class="absolute -left-[35px] w-6 h-6 bg-surface-container border-2 border-border-subtle rounded-full ring-4 ring-white z-10"></div>
+<div class="flex justify-between items-start opacity-50">
+<div>
+<p class="font-bold text-body-md">Laboratoire</p>
+<p class="text-body-sm text-on-surface-variant">Prélèvement sanguin</p>
+</div>
+<span class="font-data-mono text-xs text-on-surface-variant">10:15</span>
+</div>
+</div>
+</div>
+<div class="mt-10 p-4 bg-surface-container-low rounded-xl border border-border-subtle text-center">
+<button class="w-full text-primary font-bold text-body-md py-2 hover:bg-primary/10 rounded-lg transition-colors">
+                                Ajouter une étape
+                            </button>
+</div>
+</div>
+<!-- Statistics / Quick Metrics -->
+<div class="bg-surface-white rounded-radius-lg p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)]">
+<h4 class="font-headline-md text-on-surface mb-4">Constantes (Dernières)</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-end p-4 bg-tertiary-fixed rounded-xl">
+<div>
+<p class="text-[10px] font-label-caps text-on-tertiary-fixed-variant uppercase">Tension Artérielle</p>
+<p class="font-display-lg text-[24px] text-on-tertiary-fixed">138 / 85</p>
+</div>
+<span class="bg-alert-orange/10 text-alert-orange text-[10px] px-2 py-1 rounded-full font-bold">Lég. Élevé</span>
+</div>
+<div class="flex justify-between items-end p-4 bg-surface-container rounded-xl">
+<div>
+<p class="text-[10px] font-label-caps text-on-surface-variant uppercase">Fréquence Cardiaque</p>
+<p class="font-display-lg text-[24px]">72 <span class="text-body-sm font-normal">bpm</span></p>
+</div>
+<span class="bg-secondary/10 text-secondary text-[10px] px-2 py-1 rounded-full font-bold">Normal</span>
+</div>
+</div>
+</div>
+<!-- Floating Action -->
+<button class="w-full bg-primary-container text-on-primary-container p-4 rounded-radius-lg font-bold shadow-lg flex items-center justify-center gap-3 hover:shadow-xl hover:translate-y-[-2px] transition-all">
+<span class="material-symbols-outlined">clinical_notes</span>
+                        Nouvelle Observation
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Animation Overlay Example (Micro-interaction) -->
+<script>
+        // Simple click listener for interactions
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            icon.addEventListener('click', function() {
+                this.classList.add('scale-125', 'text-primary');
+                setTimeout(() => {
+                    this.classList.remove('scale-125', 'text-primary');
+                }, 200);
+            });
+        });
+
+        // Dark mode toggle simulation if needed
+        // document.documentElement.classList.toggle('dark');
+    </script>
+</body></html>

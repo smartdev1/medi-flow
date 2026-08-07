@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediFlow - Sortie Patient</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Manrope:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#c3c6d7",
+                    "on-tertiary-fixed": "#191c1d",
+                    "on-background": "#0b1c30",
+                    "surface-variant": "#d3e4fe",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#005236",
+                    "tertiary-fixed-dim": "#c5c7c8",
+                    "inverse-on-surface": "#eaf1ff",
+                    "emergency-red": "#EF4444",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "tertiary": "#525556",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface-tint": "#0053db",
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#454748",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-tertiary-container": "#eff0f1",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#6ffbbe",
+                    "secondary-fixed-dim": "#4edea3",
+                    "primary": "#004ac6",
+                    "alert-orange": "#F59E0B",
+                    "tertiary-fixed": "#e1e3e4",
+                    "inverse-primary": "#b4c5ff",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#cbdbf5",
+                    "on-primary-container": "#eeefff",
+                    "surface-container-high": "#dce9ff",
+                    "surface-container": "#e5eeff",
+                    "on-surface-variant": "#434655",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#00174b",
+                    "border-subtle": "#E2E8F0",
+                    "outline": "#737686",
+                    "on-secondary-fixed": "#002113",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#00714d",
+                    "secondary-container": "#6cf8bb",
+                    "surface-white": "#FFFFFF",
+                    "background": "#f8f9ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary": "#006c49",
+                    "on-surface": "#0b1c30",
+                    "tertiary-container": "#6b6d6e",
+                    "surface": "#f8f9ff",
+                    "inverse-surface": "#213145",
+                    "primary-container": "#2563eb",
+                    "surface-container-low": "#eff4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "24px",
+                    "section-gap": "32px",
+                    "radius-md": "8px",
+                    "radius-lg": "16px",
+                    "gutter": "16px",
+                    "radius-sm": "4px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "data-mono": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-md": ["22px", {"lineHeight": "30px", "fontWeight": "600"}],
+                    "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f8f9ff;
+            color: #0b1c30;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .card-elevation {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E2E8F0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface-bright dark:bg-inverse-surface flex justify-between items-center px-container-padding h-16 w-full fixed top-0 z-50 shadow-sm border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<span class="font-display-lg text-display-lg font-bold text-primary dark:text-primary-fixed-dim">MediFlow</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-full text-body-sm focus:ring-2 focus:ring-primary focus:outline-none w-64" placeholder="Rechercher un dossier..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80 transition-colors duration-200 hover:bg-surface-container-low p-2 rounded-full">notifications</span>
+<div class="flex items-center gap-2 cursor-pointer active:opacity-80 transition-colors duration-200 hover:bg-surface-container-low p-1 pr-3 rounded-full border border-outline-variant">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Close-up professional portrait of a male doctor in his 40s wearing a clean white lab coat and a stethoscope. He has a friendly, confident expression with soft studio lighting that emphasizes a clinical yet warm atmosphere. The background is a blurred high-end medical facility with clean blue and white tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnPUjtqhUv5KuAkleatlHHTV_3t8UMbQtSH3wjhRApdVH-ouFgHgnuC3_P7OpfixLnfJZgZFokiMxbA8k_8LA8VHOm3L9fWXlBk5iN8-ymwNk8oPXOgN6L-mfnqfEWcn1HjolMIBug924lnrIgzaJVlZUh3YHapDzOVIcKIU6GLnhnOFpUIbHDQWALdtbgfGi1i77ED5hV4FYuRuvv0qBDJc8Vr5JWHgLt5RAgFmMpA_1oKjLWGQDeCw"/>
+<span class="font-label-caps text-on-surface uppercase">Dr. Julien Morel</span>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-64 bg-surface-white border-r border-outline-variant flex flex-col pt-20 pb-6 z-40 hidden md:flex">
+<div class="flex flex-col h-full py-base gap-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Tableau de bord</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-body-md">Accueil</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md">Caisse</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md">Salle d'attente</span>
+</a>
+<!-- Active State: Patient Exit/Summary usually relates to Medical Services -->
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 mx-2 border-l-4 border-primary shadow-sm" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-body-md font-bold">Sortie Patient</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">medication</span>
+<span class="font-body-md">Pharmacien</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span class="font-body-md">Laboratoire</span>
+</a>
+<div class="mt-auto">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md">Aide</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md">Déconnexion</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-20 md:ml-64 p-container-padding min-h-screen">
+<!-- Page Header -->
+<div class="mb-section-gap flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background">Résumé de Sortie Clinique</h1>
+<p class="text-on-surface-variant flex items-center gap-2 mt-1">
+<span class="font-bold">Patient:</span> M. Jean Dupont • <span class="font-bold">ID:</span> #MF-99283 • <span class="font-bold text-primary">Admission:</span> 12 Oct. 2023
+                </p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2 bg-surface-container border border-outline-variant text-on-surface-variant font-bold rounded-lg flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-base">print</span>
+                    Aperçu
+                </button>
+<button class="px-8 py-2 bg-primary text-on-primary font-bold rounded-lg flex items-center gap-2 hover:opacity-90 transition-opacity shadow-md" onclick="confirmExit()">
+<span class="material-symbols-outlined text-base">task_alt</span>
+                    Clôturer &amp; Générer PDF
+                </button>
+</div>
+</div>
+<!-- Bento Layout -->
+<div class="bento-grid">
+<!-- Summary Stats -->
+<div class="col-span-12 md:col-span-4 flex flex-col gap-6">
+<!-- Financial Summary Card -->
+<div class="bg-surface-white rounded-radius-lg p-6 card-elevation border border-border-subtle">
+<span class="font-label-caps text-on-surface-variant uppercase mb-4 block">Total des Paiements</span>
+<div class="flex justify-between items-end">
+<div>
+<span class="font-display-lg text-display-lg text-on-background">1 450,00 €</span>
+<div class="flex items-center gap-1 text-secondary mt-1">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-body-sm font-medium">Soldé intégralement</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-4xl text-primary opacity-20">payments</span>
+</div>
+<div class="mt-6 space-y-3">
+<div class="flex justify-between text-body-sm border-b border-border-subtle pb-2">
+<span class="text-on-surface-variant">Consultations (3)</span>
+<span class="font-medium">450,00 €</span>
+</div>
+<div class="flex justify-between text-body-sm border-b border-border-subtle pb-2">
+<span class="text-on-surface-variant">Analyses Labo</span>
+<span class="font-medium">320,00 €</span>
+</div>
+<div class="flex justify-between text-body-sm">
+<span class="text-on-surface-variant">Frais de séjour</span>
+<span class="font-medium">680,00 €</span>
+</div>
+</div>
+</div>
+<!-- Status Summary Card -->
+<div class="bg-surface-white rounded-radius-lg p-6 card-elevation border border-border-subtle">
+<span class="font-label-caps text-on-surface-variant uppercase mb-4 block">État du Dossier</span>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">fact_check</span>
+</div>
+<div>
+<p class="font-bold text-body-md">Examens validés</p>
+<p class="text-body-sm text-on-surface-variant">12/12 Terminés</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-fixed">description</span>
+</div>
+<div>
+<p class="font-bold text-body-md">Ordonnances</p>
+<p class="text-body-sm text-on-surface-variant">2 Prêtes pour délivrance</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Lists -->
+<div class="col-span-12 md:col-span-8 flex flex-col gap-6">
+<!-- Consultations & Timeline -->
+<div class="bg-surface-white rounded-radius-lg p-6 card-elevation border border-border-subtle">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-on-background">Historique des Consultations</h2>
+<span class="px-3 py-1 bg-surface-container-low text-primary rounded-full text-body-sm font-bold">3 Épisodes</span>
+</div>
+<div class="relative">
+<!-- Vertical Timeline Track -->
+<div class="absolute left-[19px] top-4 bottom-4 w-0.5 bg-border-subtle"></div>
+<div class="space-y-8 relative">
+<!-- Episode 1 -->
+<div class="flex gap-6">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center z-10 border-4 border-surface-white shadow-sm">
+<span class="material-symbols-outlined text-on-primary text-sm">stethoscope</span>
+</div>
+<div class="flex-1 pb-4 border-b border-border-subtle">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-body-lg">Consultation d'admission</h4>
+<p class="text-on-surface-variant text-body-sm">Dr. Sarah Lemoine • Cardiologie</p>
+</div>
+<span class="font-data-mono text-on-surface-variant text-sm">12 Oct. - 09:30</span>
+</div>
+<p class="mt-2 text-on-surface text-body-sm bg-surface-container-lowest p-3 rounded-lg italic">
+                                        "Patient admis pour douleurs thoraciques atypiques. Paramètres vitaux stables."
+                                    </p>
+</div>
+</div>
+<!-- Episode 2 -->
+<div class="flex gap-6">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center z-10 border-4 border-surface-white shadow-sm">
+<span class="material-symbols-outlined text-on-primary text-sm">biotech</span>
+</div>
+<div class="flex-1 pb-4 border-b border-border-subtle">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-body-lg">Examen de contrôle Écho</h4>
+<p class="text-on-surface-variant text-body-sm">Dr. Marc Volat • Imagerie</p>
+</div>
+<span class="font-data-mono text-on-surface-variant text-sm">13 Oct. - 14:15</span>
+</div>
+<div class="mt-3 flex gap-2">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">attachment</span> Rapport validé
+                                        </span>
+</div>
+</div>
+</div>
+<!-- Episode 3 -->
+<div class="flex gap-6">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center z-10 border-4 border-surface-white shadow-sm">
+<span class="material-symbols-outlined text-on-primary text-sm">verified</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-body-lg">Consultation de sortie</h4>
+<p class="text-on-surface-variant text-body-sm">Dr. Julien Morel • Médecine Générale</p>
+</div>
+<span class="font-data-mono text-on-surface-variant text-sm">Aujourd'hui - 10:00</span>
+</div>
+<p class="mt-2 text-on-surface text-body-sm">Pronostic favorable. Retour à domicile autorisé avec suivi cardiologique à 1 mois.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Exam Results & Prescriptions -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Exam Card -->
+<div class="bg-surface-white rounded-radius-lg p-6 card-elevation border border-border-subtle">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<h3 class="font-bold text-body-lg">Résultats Labo</h3>
+</div>
+<div class="space-y-3">
+<div class="p-3 bg-surface-container-low rounded-lg flex justify-between items-center">
+<span class="text-body-sm font-medium">Bilan Hépatique</span>
+<span class="text-secondary font-bold text-xs uppercase">Normal</span>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg flex justify-between items-center">
+<span class="text-body-sm font-medium">NFS - Plaquettes</span>
+<span class="text-secondary font-bold text-xs uppercase">Normal</span>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg flex justify-between items-center">
+<span class="text-body-sm font-medium">Glycémie à jeun</span>
+<span class="text-alert-orange font-bold text-xs uppercase">À surveiller</span>
+</div>
+</div>
+</div>
+<!-- Prescriptions Card -->
+<div class="bg-surface-white rounded-radius-lg p-6 card-elevation border border-border-subtle">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">pill</span>
+<h3 class="font-bold text-body-lg">Ordonnances</h3>
+</div>
+<div class="space-y-4">
+<div class="border-l-4 border-primary pl-3">
+<p class="text-body-sm font-bold">Traitement Fond (3 mois)</p>
+<p class="text-xs text-on-surface-variant">Cardiologie - Dr. Morel</p>
+</div>
+<div class="border-l-4 border-outline-variant pl-3">
+<p class="text-body-sm font-bold">Antalgiques (Si besoin)</p>
+<p class="text-xs text-on-surface-variant">Symptomatique</p>
+</div>
+<button class="w-full mt-2 py-2 border-2 border-dashed border-primary/30 text-primary font-bold text-xs rounded hover:bg-primary/5 transition-colors">
+                                + Ajouter une prescription de sortie
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Final Action Section -->
+<div class="mt-section-gap mb-12 p-8 bg-on-background text-on-primary rounded-radius-lg card-elevation relative overflow-hidden group">
+<!-- Animated Background Mesh -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+
+</div>
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="max-w-2xl text-center md:text-left">
+<h2 class="font-display-lg text-display-lg mb-2">Finaliser le dossier de sortie</h2>
+<p class="text-on-primary-container opacity-80 text-body-lg">
+                        En confirmant, vous validez l'intégralité des actes, les règlements financiers et la clôture administrative du dossier patient. Le compte-rendu sera automatiquement archivé et envoyé au médecin traitant.
+                    </p>
+</div>
+<div class="flex flex-col gap-4 w-full md:w-auto">
+<button class="w-full md:w-64 py-4 bg-primary text-white font-bold text-lg rounded-xl shadow-lg hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3" onclick="generateReport()">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+                        Générer Rapport Final
+                    </button>
+<p class="text-xs text-center text-on-primary-container opacity-60">Signature électronique requise (Dr. Morel)</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden items-center justify-center bg-on-background/40 backdrop-blur-sm" id="successModal">
+<div class="bg-surface-white p-10 rounded-radius-lg max-w-md w-full text-center shadow-2xl transform scale-95 transition-transform duration-300">
+<div class="w-20 h-20 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-2">Dossier Clôturé</h2>
+<p class="text-on-surface-variant mb-8">Le dossier de M. Jean Dupont a été finalisé avec succès. Le compte-rendu de sortie a été envoyé sur son Espace Santé.</p>
+<button class="w-full py-3 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 transition-opacity" onclick="window.location.reload()">
+                Retour au Tableau de Bord
+            </button>
+</div>
+</div>
+<script>
+        function confirmExit() {
+            if(confirm("Êtes-vous sûr de vouloir clore le dossier ? Cette action est irréversible.")) {
+                generateReport();
+            }
+        }
+
+        function generateReport() {
+            const btn = event.currentTarget;
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Génération...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                document.getElementById('successModal').classList.remove('hidden');
+                document.getElementById('successModal').classList.add('flex');
+                setTimeout(() => {
+                    document.querySelector('#successModal > div').classList.remove('scale-95');
+                    document.querySelector('#successModal > div').classList.add('scale-100');
+                }, 10);
+            }, 1500);
+        }
+    </script>
+</body></html>

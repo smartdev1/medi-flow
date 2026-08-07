@@ -1,0 +1,154 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\StorePatientRequest;
+use App\Models\Patient;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+
+class PatientController extends Controller
+{
+    public function store(StorePatientRequest $request): RedirectResponse
+    {
+        $data = $request->validated();
+        $urgent = (bool) ($data['urgent'] ?? false);
+        $isReturningPatient = ! empty($data['existing_patient_id']);
+
+        $patient = $isReturningPatient
+            ? Patient::findOrFail($data['existing_patient_id'])
+            : Patient::create([
+                'code' => Patient::generateCode(),
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'sex' => $data['sex'],
+                'birth_date' => $data['birth_date'] ?? null,
+                'phone' => $data['phone'] ?? null,
+                'coverage' => $data['coverage'],
+            ]);
+
+        $patient->visits()->create([
+            'arrived_at' => now(),
+            'orientation' => $data['orientation'],
+            'reason' => $data['reason'] ?? null,
+            'registered_by' => Auth::id(),
+            'status' => $urgent ? 'Prioritaire' : 'En attente',
+            'urgent' => $urgent,
+        ]);
+
+        $message = $isReturningPatient
+            ? "Nouvelle visite enregistrée pour {$patient->full_name} ({$patient->code})."
+            : "Patient {$patient->full_name} enregistré — identifiant {$patient->code}.";
+
+        return redirect()->route('accueil.index')->with('success', $message);
+    }
+
+    public function show(Patient $patient)
+    {
+        // Charger toutes les données historiques du patient
+        $patient->load([
+            'visits.consultations',
+            'admissions.room',
+            'exams',
+            'prescriptions.items.medication',
+            'payments',
+            'referrals'
+        ]);
+
+        // Organiser les événements par date (du plus récent au plus ancien)
+        $timeline = collect();
+
+        // Ajouter les visites et consultations
+        foreach ($patient->visits as $visit) {
+            if ($visit->arrived_at) {
+                $timeline->push([
+                    'date' => $visit->arrived_at,
+                    'type' => 'visit',
+                    'title' => 'Visite - ' . ($visit->reason ?: $visit->orientation),
+                    'details' => $visit,
+                    'icon' => 'calendar'
+                ]);
+            }
+
+            foreach ($visit->consultations as $consultation) {
+                if ($consultation->started_at) {
+                    $timeline->push([
+                        'date' => $consultation->started_at,
+                        'type' => 'consultation',
+                        'title' => 'Consultation avec ' . ($consultation->doctor->name ?? 'médecin'),
+                        'details' => $consultation,
+                        'icon' => 'stethoscope'
+                    ]);
+                }
+            }
+        }
+
+        // Ajouter les hospitalisations
+        foreach ($patient->admissions as $admission) {
+            if ($admission->admitted_at) {
+                $timeline->push([
+                    'date' => $admission->admitted_at,
+                    'type' => 'admission',
+                    'title' => 'Hospitalisation - ' . $admission->reason,
+                    'details' => $admission,
+                    'icon' => 'bed'
+                ]);
+            }
+        }
+
+        // Ajouter les examens
+        foreach ($patient->exams as $exam) {
+            if ($exam->requested_at) {
+                $timeline->push([
+                    'date' => $exam->requested_at,
+                    'type' => 'exam',
+                    'title' => 'Examen - ' . $exam->type,
+                    'details' => $exam,
+                    'icon' => 'microscope'
+                ]);
+            }
+        }
+
+        // Ajouter les prescriptions
+        foreach ($patient->prescriptions as $prescription) {
+            if ($prescription->prescribed_at) {
+                $timeline->push([
+                    'date' => $prescription->prescribed_at,
+                    'type' => 'prescription',
+                    'title' => 'Ordonnance - ' . count($prescription->items) . ' médicament(s)',
+                    'details' => $prescription,
+                    'icon' => 'prescription'
+                ]);
+            }
+        }
+
+        // Ajouter les paiements
+        foreach ($patient->payments as $payment) {
+            if ($payment->paid_at) {
+                $timeline->push([
+                    'date' => $payment->paid_at,
+                    'type' => 'payment',
+                    'title' => 'Paiement - ' . $payment->amount . ' ' . $payment->currency,
+                    'details' => $payment,
+                    'icon' => 'credit-card'
+                ]);
+            }
+        }
+
+        // Trier par date (du plus récent au plus ancien)
+        $timeline = $timeline->sortByDesc('date')->values();
+
+        $user = auth()->user();
+        $userName = $user?->name ?? 'Utilisateur';
+        $userRole = $user?->role?->label() ?? 'Personnel clinique';
+        $userInitials = $user?->initials ?? $this->initialsFor($userName);
+
+        return view('patients.show', [
+            'patient' => $patient,
+            'timeline' => $timeline,
+            'userName' => $userName,
+            'userRole' => $userRole,
+            'userInitials' => $userInitials,
+        ]);
+    }
+}
