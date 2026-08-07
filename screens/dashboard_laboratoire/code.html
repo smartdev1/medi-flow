@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediFlow | Laboratoire Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#c3c6d7",
+                    "on-tertiary-fixed": "#191c1d",
+                    "on-background": "#0b1c30",
+                    "surface-variant": "#d3e4fe",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#005236",
+                    "tertiary-fixed-dim": "#c5c7c8",
+                    "inverse-on-surface": "#eaf1ff",
+                    "emergency-red": "#EF4444",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "tertiary": "#525556",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface-tint": "#0053db",
+                    "surface-bright": "#f8f9ff",
+                    "on-tertiary-fixed-variant": "#454748",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "on-tertiary-container": "#eff0f1",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#6ffbbe",
+                    "secondary-fixed-dim": "#4edea3",
+                    "primary": "#004ac6",
+                    "alert-orange": "#F59E0B",
+                    "tertiary-fixed": "#e1e3e4",
+                    "inverse-primary": "#b4c5ff",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#cbdbf5",
+                    "on-primary-container": "#eeefff",
+                    "surface-container-high": "#dce9ff",
+                    "surface-container": "#e5eeff",
+                    "on-surface-variant": "#434655",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#00174b",
+                    "border-subtle": "#E2E8F0",
+                    "outline": "#737686",
+                    "on-secondary-fixed": "#002113",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#00714d",
+                    "secondary-container": "#6cf8bb",
+                    "surface-white": "#FFFFFF",
+                    "background": "#f8f9ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary": "#006c49",
+                    "on-surface": "#0b1c30",
+                    "tertiary-container": "#6b6d6e",
+                    "surface": "#f8f9ff",
+                    "inverse-surface": "#213145",
+                    "primary-container": "#2563eb",
+                    "surface-container-low": "#eff4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "24px",
+                    "section-gap": "32px",
+                    "radius-md": "8px",
+                    "radius-lg": "16px",
+                    "gutter": "16px",
+                    "radius-sm": "4px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "data-mono": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-md": ["22px", {"lineHeight": "30px", "fontWeight": "600"}],
+                    "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .glass-effect {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- SideNavBar Implementation -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-surface-white border-r border-outline-variant shadow-md flex flex-col py-base gap-2 z-50">
+<div class="px-6 py-8 flex flex-col items-start">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">biotech</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-black text-primary">MediFlow</h1>
+</div>
+<p class="text-on-surface-variant font-label-caps text-label-caps uppercase tracking-widest">Clinical Precision</p>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Tableau de bord</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md text-body-md">Salle d'attente</span>
+</a>
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 mx-2 border-l-4 border-primary transition-all duration-200" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span class="font-body-md text-body-md font-bold">Laboratoire</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-body-md text-body-md">Médecin</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">medication</span>
+<span class="font-body-md text-body-md">Pharmacien</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 mx-2 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Paramètres</span>
+</a>
+</nav>
+<div class="mt-auto px-2 pb-6 border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-2 mx-2" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Aide</span>
+</a>
+<a class="flex items-center gap-3 text-error hover:bg-error-container/20 rounded-lg px-4 py-2 mx-2" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Déconnexion</span>
+</a>
+</div>
+</aside>
+<!-- TopAppBar Implementation -->
+<header class="flex justify-between items-center px-container-padding h-16 w-[calc(100%-16rem)] fixed top-0 right-0 z-40 bg-surface-bright border-b border-outline-variant shadow-sm">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-sm w-80 focus:outline-none focus:ring-2 focus:ring-primary/20" placeholder="Rechercher un patient ou un examen..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-emergency-red rounded-full"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant">
+<div class="text-right">
+<p class="font-body-sm text-body-sm font-bold text-on-surface">Dr. Jean Dupont</p>
+<p class="text-[10px] font-label-caps uppercase text-on-surface-variant">Chef de Laboratoire</p>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a mature male laboratory director in a clean white medical coat. He is smiling warmly in a brightly lit, sterile clinical setting with soft blue ambient highlights. The photography is sharp with a shallow depth of field, focusing on his reliable and experienced expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGjBS_7mgrfPF8G91he0A8d8M_RbIfdF3K-wAs7qGxgDoJo-tCO3J8xmQsXJ6enSzgS9aSnJS96kXTL58z63yMzT4HT4u1E4FSdS01Vqtfc_4Le08H0jmYy5x3Mqa8KAP8FSP8zL8DLEso8q-xQkHy4u23Yz8H3RyP3w6M4gxyFQumaFSHgnfEq4xbQPW0BqAPiGIZQZ0YyB1JaxweSVyDXC0FxZMTStWdqZUGi3DqWZadn1rwgKVj2A"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pl-64 pr-container-padding pb-10 min-h-screen">
+<div class="max-w-[1440px] mx-auto space-y-8">
+<!-- Statistics Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="bg-surface-white rounded-radius-lg p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1">TOTAL ATTENTE</p>
+<h3 class="text-display-lg font-display-lg text-primary">14</h3>
+</div>
+<div class="mt-4 flex items-center gap-2 text-on-secondary-container bg-secondary-container/30 px-2 py-1 rounded-full w-fit">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-xs font-bold">+2 ce matin</span>
+</div>
+</div>
+<div class="bg-surface-white rounded-radius-lg p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1">EN ANALYSE</p>
+<h3 class="text-display-lg font-display-lg text-alert-orange">08</h3>
+</div>
+<div class="mt-4 flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">timer</span>
+<span class="text-xs">Moyenne 45 min</span>
+</div>
+</div>
+<div class="bg-surface-white rounded-radius-lg p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1">RÉSULTATS PRÊTS</p>
+<h3 class="text-display-lg font-display-lg text-secondary">22</h3>
+</div>
+<div class="mt-4 flex items-center gap-2 text-on-secondary-container bg-secondary-container/30 px-2 py-1 rounded-full w-fit">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-xs font-bold">100% Validés</span>
+</div>
+</div>
+<div class="bg-surface-white rounded-radius-lg p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1">URGENCES (STAT)</p>
+<h3 class="text-display-lg font-display-lg text-emergency-red">03</h3>
+</div>
+<div class="mt-4 flex items-center gap-2 text-on-error bg-emergency-red/10 px-2 py-1 rounded-full w-fit">
+<span class="material-symbols-outlined text-sm text-emergency-red">error</span>
+<span class="text-xs font-bold text-emergency-red">Priorité Haute</span>
+</div>
+</div>
+</div>
+<!-- Dashboard Layout: Bento Grid Style -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Main Queue Section -->
+<section class="col-span-12 lg:col-span-8 space-y-6">
+<div class="bg-surface-white rounded-radius-lg shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30 overflow-hidden">
+<div class="px-6 py-5 border-b border-outline-variant/30 flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">view_list</span>
+                                File d'attente des Examens
+                            </h2>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded-lg border border-outline-variant text-body-sm font-medium hover:bg-surface-container transition-colors">Tous</button>
+<button class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container text-body-sm font-bold">Urgents</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">PATIENT</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">EXAMEN</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">ARRIVÉE</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">STATUT</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-tertiary/5 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-primary">ML</div>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Marie Laurent</p>
+<p class="text-xs text-on-surface-variant">ID: #45902 • 34 ans</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium">Bilan Sanguin Complet</span>
+<span class="text-xs text-on-surface-variant">NFS, Glycémie, Cholestérol</span>
+</div>
+</td>
+<td class="px-6 py-4 font-data-mono text-data-mono text-on-surface-variant">08:45</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container text-on-error-container text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emergency-red animate-pulse"></span>
+                                                URGENT
+                                            </span>
+</td>
+<td class="px-6 py-4">
+<button class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-primary-container transition-all active:scale-95" onclick="openResultModal('Marie Laurent', 'Bilan Sanguin')">Saisir</button>
+</td>
+</tr>
+<tr class="hover:bg-tertiary/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-primary">JD</div>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Jean-Pierre Dubois</p>
+<p class="text-xs text-on-surface-variant">ID: #45910 • 58 ans</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-sm text-body-sm font-medium">ECG de contrôle</td>
+<td class="px-6 py-4 font-data-mono text-data-mono text-on-surface-variant">09:12</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[11px] font-bold">
+                                                EN ATTENTE
+                                            </span>
+</td>
+<td class="px-6 py-4">
+<button class="bg-surface-container-low text-on-surface text-xs font-bold px-4 py-2 rounded-lg border border-outline-variant hover:bg-surface-container transition-all">Démarrer</button>
+</td>
+</tr>
+<tr class="hover:bg-tertiary/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-primary">SV</div>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Sophie Vallet</p>
+<p class="text-xs text-on-surface-variant">ID: #45915 • 29 ans</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-sm text-body-sm font-medium">Test PCR</td>
+<td class="px-6 py-4 font-data-mono text-data-mono text-on-surface-variant">09:30</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/40 text-on-secondary-container text-[11px] font-bold">
+                                                EN ANALYSE
+                                            </span>
+</td>
+<td class="px-6 py-4">
+<button class="bg-surface-container-low text-on-surface-variant text-xs font-bold px-4 py-2 rounded-lg border border-outline-variant cursor-not-allowed opacity-50" disabled="">Détails</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Input Section Placeholder (Interactive Card) -->
+<div class="bg-surface-white rounded-radius-lg p-8 shadow-lg border-2 border-primary/20 hidden transition-all duration-500 transform translate-y-4" id="resultInputSection">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-1">Saisie des résultats : <span class="text-primary" id="currentPatientName">Marie Laurent</span></h3>
+<p class="text-body-sm text-on-surface-variant">Examen : <span class="font-bold" id="currentTestType">Bilan Sanguin Complet</span></p>
+</div>
+<button class="text-on-surface-variant hover:bg-surface-container rounded-full p-1" onclick="closeResultModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-8">
+<div class="space-y-4">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-2">HÉMOGLOBINE (G/DL)</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-radius-md px-4 py-3 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all" placeholder="Valeur" type="text"/>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-2">GLYCÉMIE (G/L)</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-radius-md px-4 py-3 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all" placeholder="Valeur" type="text"/>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-2">CHOLESTÉROL TOTAL (G/L)</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-radius-md px-4 py-3 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all" placeholder="Valeur" type="text"/>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-2">NOTES COMPLÉMENTAIRES</label>
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-radius-md px-4 py-3 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all" placeholder="Observations du biologiste..." rows="1"></textarea>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant pt-6">
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/30" type="checkbox"/>
+<span class="text-body-sm font-medium">Marquer comme validé par le biologiste</span>
+</label>
+<div class="flex gap-4">
+<button class="px-6 py-3 rounded-radius-md font-bold text-on-surface-variant hover:bg-surface-container-low transition-colors" onclick="closeResultModal()">Annuler</button>
+<button class="px-8 py-3 rounded-radius-md bg-primary text-white font-bold flex items-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">send</span>
+                                    Envoyer au Médecin
+                                </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Sidebar Content -->
+<section class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Activity Timeline -->
+<div class="bg-surface-white rounded-radius-lg p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30 h-fit">
+<h3 class="font-headline-md text-headline-md text-on-background mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span>
+                            Historique Récent
+                        </h3>
+<div class="relative pl-6 space-y-8 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-border-subtle">
+<!-- Timeline Item -->
+<div class="relative">
+<div class="absolute -left-[20px] top-1.5 w-3 h-3 rounded-full bg-secondary ring-4 ring-white"></div>
+<div class="flex flex-col">
+<div class="flex justify-between items-center mb-1">
+<p class="font-body-sm text-body-sm font-bold text-on-surface">Résultats envoyés</p>
+<span class="font-data-mono text-[10px] text-on-surface-variant">IL Y A 5 MIN</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-2">Patient : Marc Aurel • Bilan Lipidique</p>
+<div class="bg-surface-container-low p-2 rounded border border-outline-variant/20 flex items-center justify-between">
+<span class="text-[10px] font-bold text-secondary">TRANSMIS AU DR. MARTIN</span>
+<span class="material-symbols-outlined text-sm text-secondary">check</span>
+</div>
+</div>
+</div>
+<!-- Timeline Item -->
+<div class="relative">
+<div class="absolute -left-[20px] top-1.5 w-3 h-3 rounded-full bg-primary ring-4 ring-white"></div>
+<div class="flex flex-col">
+<div class="flex justify-between items-center mb-1">
+<p class="font-body-sm text-body-sm font-bold text-on-surface">Prélèvement effectué</p>
+<span class="font-data-mono text-[10px] text-on-surface-variant">IL Y A 22 MIN</span>
+</div>
+<p class="text-xs text-on-surface-variant">Patiente : Lucie Fernat • Test Séro</p>
+</div>
+</div>
+<!-- Timeline Item -->
+<div class="relative">
+<div class="absolute -left-[20px] top-1.5 w-3 h-3 rounded-full bg-alert-orange ring-4 ring-white pulse"></div>
+<div class="flex flex-col">
+<div class="flex justify-between items-center mb-1">
+<p class="font-body-sm text-body-sm font-bold text-on-surface">Analyse interrompue</p>
+<span class="font-data-mono text-[10px] text-on-surface-variant">IL Y A 1H</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-2">Échantillon insuffisant : Paul Leroy</p>
+<button class="w-fit text-[10px] font-bold text-primary flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-xs">refresh</span> REPRENDRE
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Lab Analytics Card -->
+<div class="bg-inverse-surface text-on-primary-container rounded-radius-lg p-6 shadow-xl relative overflow-hidden">
+
+<div class="relative z-10">
+<h4 class="font-headline-md text-headline-md mb-2">Performance Lab</h4>
+<p class="text-body-sm opacity-80 mb-6">Taux de précision ce mois-ci : 99.8%</p>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-bold mb-1">
+<span>DÉLAI DE TRAITEMENT</span>
+<span>-12%</span>
+</div>
+<div class="w-full h-1.5 bg-white/20 rounded-full">
+<div class="h-full bg-secondary-fixed-dim rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<div class="bg-white/10 p-3 rounded-lg backdrop-blur-sm">
+<p class="text-[10px] font-label-caps uppercase opacity-60 mb-1">PROCHAIN ÉTALONNAGE AUTOMATE</p>
+<p class="font-data-mono text-xs">Demain, 06:00 AM</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Global Floating Action Button -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all group z-50">
+<span class="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform">add</span>
+<div class="absolute right-16 bg-on-background text-white px-3 py-1 rounded text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            Nouveau Dossier Examen
+        </div>
+</button>
+<script>
+        function openResultModal(name, test) {
+            const modal = document.getElementById('resultInputSection');
+            const patientSpan = document.getElementById('currentPatientName');
+            const testSpan = document.getElementById('currentTestType');
+            
+            patientSpan.textContent = name;
+            testSpan.textContent = test;
+            
+            modal.classList.remove('hidden');
+            modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function closeResultModal() {
+            const modal = document.getElementById('resultInputSection');
+            modal.classList.add('hidden');
+        }
+
+        // Simple pulse animation script for specific nodes
+        const pulses = document.querySelectorAll('.pulse');
+        pulses.forEach(p => {
+            setInterval(() => {
+                p.classList.toggle('opacity-50');
+            }, 800);
+        });
+    </script>
+</body></html>

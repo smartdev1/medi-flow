@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediFlow | Connexion Clinique</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Manrope:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Manrope:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#e5eeff",
+                    "on-surface-variant": "#434655",
+                    "surface-container-low": "#eff4ff",
+                    "on-tertiary-fixed-variant": "#454748",
+                    "on-primary": "#ffffff",
+                    "emergency-red": "#EF4444",
+                    "inverse-surface": "#213145",
+                    "surface": "#f8f9ff",
+                    "tertiary-container": "#6b6d6e",
+                    "surface-bright": "#f8f9ff",
+                    "surface-variant": "#d3e4fe",
+                    "surface-dim": "#cbdbf5",
+                    "on-primary-container": "#eeefff",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#6ffbbe",
+                    "background": "#f8f9ff",
+                    "on-tertiary-container": "#eff0f1",
+                    "outline": "#737686",
+                    "outline-variant": "#c3c6d7",
+                    "secondary-container": "#6cf8bb",
+                    "border-subtle": "#E2E8F0",
+                    "on-secondary-container": "#00714d",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#0053db",
+                    "error-container": "#ffdad6",
+                    "alert-orange": "#F59E0B",
+                    "surface-container-high": "#dce9ff",
+                    "surface-white": "#FFFFFF",
+                    "tertiary-fixed-dim": "#c5c7c8",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-background": "#0b1c30",
+                    "tertiary": "#525556",
+                    "on-secondary-fixed-variant": "#005236",
+                    "on-tertiary-fixed": "#191c1d",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#dbe1ff",
+                    "tertiary-fixed": "#e1e3e4",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#d3e4fe",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-secondary-fixed": "#002113",
+                    "secondary": "#006c49",
+                    "on-surface": "#0b1c30",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#00174b",
+                    "primary-container": "#2563eb",
+                    "inverse-primary": "#b4c5ff",
+                    "on-error-container": "#93000a",
+                    "primary": "#004ac6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "32px",
+                    "radius-lg": "16px",
+                    "base": "8px",
+                    "container-padding": "24px",
+                    "radius-sm": "4px",
+                    "radius-md": "8px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "display-lg": ["Manrope"],
+                    "data-mono": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["22px", {"lineHeight": "30px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .clinical-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.85);
+        }
+        input:focus + label, input:not(:placeholder-shown) + label {
+            transform: translateY(-24px) scale(0.85);
+            color: #004ac6;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen">
+<main class="flex h-full w-full">
+<!-- Left Side: Login Form -->
+<section class="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-24 bg-surface-white relative z-10">
+<!-- Branding Header -->
+<div class="absolute top-12 left-8 md:left-24 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-xl shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-on-primary text-[24px]">medical_services</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary leading-tight">MediFlow</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Précision Clinique</p>
+</div>
+</div>
+<!-- Login Container -->
+<div class="max-w-md w-full mx-auto space-y-10">
+<header class="space-y-2">
+<h2 class="font-display-lg text-display-lg text-on-surface">Content de vous revoir.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Accédez à votre portail sécurisé pour gérer vos consultations.</p>
+</header>
+<form class="space-y-6" id="loginForm">
+<!-- Email Field -->
+<div class="relative">
+<div class="flex items-center border border-border-subtle rounded-xl p-4 bg-surface-container-low transition-all duration-300 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10">
+<span class="material-symbols-outlined text-outline-variant mr-3">mail</span>
+<input class="w-full bg-transparent border-none focus:ring-0 p-0 text-on-surface placeholder-transparent" id="email" placeholder=" " required="" type="email"/>
+<label class="absolute left-12 top-4 text-on-surface-variant pointer-events-none transition-all duration-200" for="email">Adresse email professionnelle</label>
+</div>
+</div>
+<!-- Password Field -->
+<div class="relative">
+<div class="flex items-center border border-border-subtle rounded-xl p-4 bg-surface-container-low transition-all duration-300 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10">
+<span class="material-symbols-outlined text-outline-variant mr-3">lock</span>
+<input class="w-full bg-transparent border-none focus:ring-0 p-0 text-on-surface placeholder-transparent" id="password" placeholder=" " required="" type="password"/>
+<label class="absolute left-12 top-4 text-on-surface-variant pointer-events-none transition-all duration-200" for="password">Mot de passe</label>
+<button class="text-outline-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<!-- Utilities -->
+<div class="flex items-center justify-between">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="w-4 h-4 rounded border-border-subtle text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Se souvenir de moi</span>
+</label>
+<a class="font-body-sm text-body-sm text-primary font-bold hover:underline" href="#">Mot de passe oublié ?</a>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary hover:bg-primary/90 text-on-primary font-headline-md text-headline-md py-4 rounded-xl shadow-lg shadow-primary/20 transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+                        Se connecter
+                        <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</form>
+<!-- Help Link -->
+<p class="text-center font-body-sm text-body-sm text-on-surface-variant">
+                    Besoin d'assistance ? <a class="text-primary font-bold hover:underline" href="#">Contacter le support technique</a>
+</p>
+</div>
+<!-- Footer Stats (Subtle) -->
+<div class="absolute bottom-8 left-8 md:left-24 hidden lg:flex items-center gap-8 border-t border-border-subtle pt-8">
+<div class="flex flex-col">
+<span class="font-data-mono text-data-mono text-primary font-bold">256-BIT</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Chiffrement AES</span>
+</div>
+<div class="flex flex-col">
+<span class="font-data-mono text-data-mono text-primary font-bold">HDS</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Certifié Santé</span>
+</div>
+</div>
+</section>
+<!-- Right Side: Medical Illustration -->
+<section class="hidden md:block md:w-1/2 relative bg-surface-container overflow-hidden">
+<!-- Animated Shader Background (Atmospheric Depth) -->
+
+<div class="absolute inset-0 z-10 flex flex-col items-center justify-center p-12 text-center">
+<!-- Large Central Card -->
+<div class="relative w-full max-w-lg aspect-square">
+<div class="absolute inset-0 bg-primary/10 rounded-[48px] rotate-3 blur-3xl"></div>
+<div class="absolute inset-0 glass-effect rounded-[48px] clinical-shadow border border-white/20 p-8 flex flex-col items-center justify-between">
+<!-- Main Image -->
+<div class="w-full h-2/3 rounded-3xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A hyper-realistic, minimalist 3D rendering of a modern medical research lab. The scene features clean white surfaces, soft turquoise lighting accents, and high-tech equipment like a holographic heartbeat monitor. The aesthetic is extremely hygienic, clinical, and reassuring, using a primary blue and white color palette to evoke trust and technological precision in healthcare." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi79eWsSyHNed38n5Q6b6gzWybMhfO1UGUEhI_Z-vy-tQ-O_syX5PmJkC6juX1VFbPO-CyyObZXSITtxwUnWIAJVCtOJC6BBm9VuLmmURUkO6TYPo9o43bLLAfW23OZG0TuMMtXUYxH7AGBVcxPpuOpIjuCl0ZQKJ4Wrull1gp5XyccwdivpkPoYe785qqT8q62EBgtsr1rWP2juqGdF64NDHsxoWqDPm-AnsYPMh2KGezlGgXHfMwgw"/>
+</div>
+<!-- Card Content -->
+<div class="space-y-4">
+<div class="flex justify-center -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-white bg-surface-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-primary">person</span>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-on-secondary-container">stethoscope</span>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-primary">microbiology</span>
+</div>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Plateforme Unifiée</h3>
+<p class="font-body-md text-body-md text-on-surface-variant px-6">
+                                Un écosystème intelligent conçu pour fluidifier le parcours patient et optimiser votre temps clinique.
+                            </p>
+</div>
+</div>
+<!-- Floating Badge 1 -->
+<div class="absolute -top-6 -right-6 glass-effect p-4 rounded-2xl clinical-shadow border border-white/40 flex items-center gap-3 animate-bounce shadow-xl" style="animation-duration: 3s;">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed text-[18px]">bolt</span>
+</div>
+<div class="text-left">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Performance</p>
+<p class="font-data-mono text-data-mono text-on-surface font-bold">120ms latency</p>
+</div>
+</div>
+<!-- Floating Badge 2 -->
+<div class="absolute -bottom-6 -left-6 glass-effect p-4 rounded-2xl clinical-shadow border border-white/40 flex items-center gap-3 animate-pulse shadow-xl">
+<div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+</div>
+<div class="text-left">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Securité</p>
+<p class="font-data-mono text-data-mono text-on-surface font-bold">Biométrie active</p>
+</div>
+</div>
+</div>
+<!-- Testimonial or Tagline -->
+<div class="mt-16 max-w-sm">
+<p class="italic text-primary font-body-lg text-body-lg">"L'innovation technologique au service de l'excellence médicale."</p>
+</div>
+</div>
+</section>
+</main>
+<script>
+        // Micro-interactions for form inputs
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('scale-[1.02]');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('scale-[1.02]');
+            });
+        });
+
+        // Form submission animation
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Authentification...';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Accès autorisé';
+                btn.classList.replace('bg-primary', 'bg-secondary');
+                
+                // Simulate redirect
+                setTimeout(() => {
+                    alert('Connexion réussie ! Redirection vers le tableau de bord...');
+                    btn.innerHTML = originalContent;
+                    btn.disabled = false;
+                    btn.classList.replace('bg-secondary', 'bg-primary');
+                }, 1000);
+            }, 2000);
+        });
+    </script>
+</body></html>
