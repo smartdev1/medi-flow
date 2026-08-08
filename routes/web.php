@@ -17,6 +17,9 @@ use App\Http\Controllers\OnCallShiftController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\InsuranceCompanyController;
+use App\Http\Controllers\InsuranceController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PharmacieController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\ProfileController;
@@ -42,8 +45,9 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware('role:accueil')->group(function () {
         Route::get('/accueil', [AccueilController::class, 'index'])->name('accueil.index');
+        Route::get('/patients', [PatientController::class, 'index'])->name('patients.index');
         Route::post('/patients', [PatientController::class, 'store'])->name('patients.store');
-Route::get('/patients/{patient}', [PatientController::class, 'show'])->name('patients.show');
+        Route::get('/patients/{patient}', [PatientController::class, 'show'])->name('patients.show');
         Route::get('/salle-attente', [AttenteController::class, 'index'])->name('attente.index');
     });
 
@@ -80,10 +84,21 @@ Route::get('/patients/{patient}', [PatientController::class, 'show'])->name('pat
     });
 
     Route::middleware('role:admin')->group(function () {
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::post('/users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
+
+        Route::get('/insurance', [InsuranceController::class, 'index'])->name('insurance.index');
+        Route::post('/insurance', [InsuranceController::class, 'store'])->name('insurance.store');
+        Route::put('/insurance/{insuranceCompany}', [InsuranceController::class, 'update'])->name('insurance.update');
+        Route::delete('/insurance/{insuranceCompany}', [InsuranceController::class, 'destroy'])->name('insurance.destroy');
+
         Route::get('/personnel', [PersonnelController::class, 'index'])->name('personnel.index');
         Route::post('/personnel', [PersonnelController::class, 'store'])->name('personnel.store');
         Route::patch('/personnel/{doctor}', [PersonnelController::class, 'update'])->name('personnel.update');
         Route::post('/personnel/{doctor}/statut', [PersonnelController::class, 'toggleActive'])->name('personnel.toggle');
+        Route::post('/assurances', [PersonnelController::class, 'storeInsuranceCompany'])->name('insurance-companies.store');
         Route::post('/gardes', [OnCallShiftController::class, 'store'])->name('on-call.store');
         Route::delete('/gardes/{onCallShift}', [OnCallShiftController::class, 'destroy'])->name('on-call.destroy');
     });
