@@ -10,17 +10,29 @@
     $currentUser = auth()->user();
 
     $nav = collect([
-        'accueil' => ['label' => 'Accueil', 'icon' => 'user-plus', 'href' => route('accueil.index'), 'roles' => ['accueil']],
-        'caisse' => ['label' => 'Caisse', 'icon' => 'credit-card', 'href' => route('caisse.index'), 'roles' => ['caissier']],
-        'attente' => ['label' => "Salle d'attente", 'icon' => 'users', 'href' => route('attente.index'), 'roles' => ['accueil']],
-        'medecin' => ['label' => 'Médecin', 'icon' => 'stethoscope', 'href' => route('medecin.index'), 'roles' => ['medecin', 'pediatre']],
-        'laboratoire' => ['label' => 'Laboratoire', 'icon' => 'beaker', 'href' => route('laboratoire.index'), 'roles' => ['laborantin']],
-        'pharmacie' => ['label' => 'Pharmacie', 'icon' => 'capsule', 'href' => route('pharmacie.index'), 'roles' => ['pharmacien']],
-        'hospitalisation' => ['label' => 'Hospitalisation', 'icon' => 'building', 'href' => route('hospitalisation.index'), 'roles' => ['medecin', 'pediatre']],
-        'chambres' => ['label' => 'Chambres', 'icon' => 'bed', 'href' => route('chambres.index'), 'roles' => ['medecin', 'pediatre']],
-        'sortie' => ['label' => 'Sortie patient', 'icon' => 'check-circle', 'href' => route('sortie.index'), 'roles' => ['accueil', 'caissier']],
-        'logistique' => ['label' => 'Logistique', 'icon' => 'archive-box', 'href' => route('logistique.index'), 'roles' => ['logistique']],
-        'personnel' => ['label' => 'Personnel médical', 'icon' => 'user-plus', 'href' => route('personnel.index'), 'roles' => []],
+        'accueil' => ['label' => 'Accueil', 'icon' => 'user-plus', 'href' => route('accueil.index'), 'roles' => ['accueil'], 'active_routes' => ['accueil.index']],
+        'caisse' => ['label' => 'Caisse', 'icon' => 'credit-card', 'href' => route('caisse.index'), 'roles' => ['caissier'], 'active_routes' => ['caisse.index']],
+        'attente' => ['label' => "Salle d'attente", 'icon' => 'users', 'href' => route('attente.index'), 'roles' => ['accueil'], 'active_routes' => ['attente.index']],
+        'medecin' => ['label' => 'Médecin', 'icon' => 'stethoscope', 'href' => route('medecin.index'), 'roles' => ['medecin', 'pediatre'], 'active_routes' => ['medecin.index']],
+        'laboratoire' => ['label' => 'Laboratoire', 'icon' => 'beaker', 'href' => route('laboratoire.index'), 'roles' => ['laborantin'], 'active_routes' => ['laboratoire.index']],
+        'pharmacie' => ['label' => 'Pharmacie', 'icon' => 'capsule', 'href' => route('pharmacie.index'), 'roles' => ['pharmacien'], 'active_routes' => ['pharmacie.index']],
+        'hospitalisation' => ['label' => 'Hospitalisation', 'icon' => 'building', 'href' => route('hospitalisation.index'), 'roles' => ['medecin', 'pediatre'], 'active_routes' => ['hospitalisation.index']],
+        'chambres' => ['label' => 'Chambres', 'icon' => 'bed', 'href' => route('chambres.index'), 'roles' => ['medecin', 'pediatre'], 'active_routes' => ['chambres.index']],
+        'sortie' => ['label' => 'Sortie patient', 'icon' => 'check-circle', 'href' => route('sortie.index'), 'roles' => ['accueil', 'caissier'], 'active_routes' => ['sortie.index']],
+        'logistique' => ['label' => 'Logistique', 'icon' => 'archive-box', 'href' => route('logistique.index'), 'roles' => ['logistique'], 'active_routes' => ['logistique.index']],
+        'gestion' => [
+            'label' => 'Gestion clinique',
+            'icon' => 'briefcase',
+            'href' => route('patients.index'),
+            'roles' => ['accueil'],
+            'active_routes' => ['patients.index', 'insurance.index', 'users.index', 'insurance-companies.store'],
+            'children' => [
+                ['label' => 'Compagnies d’assurance', 'icon' => 'shield-check', 'href' => '/insurance', 'route' => 'insurance.index'],
+                ['label' => 'Liste patients', 'icon' => 'users', 'href' => route('patients.index'), 'route' => 'patients.index'],
+                ['label' => 'Gestion utilisateur', 'icon' => 'user-group', 'href' => '/users', 'route' => 'users.index'],
+            ],
+        ],
+        'personnel' => ['label' => 'Personnel médical', 'icon' => 'user-plus', 'href' => route('personnel.index'), 'roles' => [], 'active_routes' => ['personnel.index']],
     ])->filter(fn ($item) => $currentUser && ($currentUser->isAdmin() || in_array($currentUser->role->value, $item['roles'], true)));
 @endphp
 

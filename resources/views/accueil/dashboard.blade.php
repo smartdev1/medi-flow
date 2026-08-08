@@ -88,6 +88,11 @@
                     <x-input-error :messages="$errors->get('coverage')" class="mt-1" />
                 </div>
 
+                <div x-show="form.coverage === 'Assurance'">
+                    <x-ui.select label="Compagnie d’assurance" name="insurance_company_id" placeholder="Sélectionner" :options="$insuranceCompanies->pluck('name', 'id')" />
+                    <x-input-error :messages="$errors->get('insurance_company_id')" class="mt-1" />
+                </div>
+
                 <div>
                     <x-ui.select label="Orientation" name="orientation" placeholder="Sélectionner un service" :options="$orientationOptions" required />
                     <x-input-error :messages="$errors->get('orientation')" class="mt-1" />
