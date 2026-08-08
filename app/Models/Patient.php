@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
@@ -19,6 +20,7 @@ class Patient extends Model
         'birth_date',
         'phone',
         'coverage',
+        'insurance_company_id',
         'allergies',
         'guardian_name',
         'emergency_contact',
@@ -27,6 +29,11 @@ class Patient extends Model
     protected $casts = [
         'birth_date' => 'date',
     ];
+
+    public function insuranceCompany(): BelongsTo
+    {
+        return $this->belongsTo(InsuranceCompany::class);
+    }
 
     public function visits(): HasMany
     {
@@ -74,6 +81,11 @@ class Patient extends Model
             ->filter()
             ->map(fn (string $part) => Str::upper($part[0]))
             ->implode('');
+    }
+
+    public function getIsInsuredAttribute(): bool
+    {
+        return $this->coverage === 'Assurance' && $this->insurance_company_id !== null;
     }
 
     public static function generateCode(): string

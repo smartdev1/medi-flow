@@ -25,6 +25,7 @@ class PatientController extends Controller
                 'birth_date' => $data['birth_date'] ?? null,
                 'phone' => $data['phone'] ?? null,
                 'coverage' => $data['coverage'],
+                'insurance_company_id' => $data['insurance_company_id'] ?? null,
             ]);
 
         $patient->visits()->create([

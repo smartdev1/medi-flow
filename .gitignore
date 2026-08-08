@@ -1,0 +1,52 @@
+```
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Logs
+*.log
+
+# Cache
+__pycache__/
+*.pyc
+*.pyo
+.Python
+
+# Build artifacts
+dist/
+build/
+*.so
+*.o
+*.obj
+*.out
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.coverage
+coverage/
+htmlcov/
+
+# Package manager
+package-lock.json
+composer.lock
+yarn.lock
+Gemfile.lock
+
+# Laravel specific
+/storage
+/bootstrap/cache
+```

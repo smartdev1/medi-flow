@@ -14,9 +14,9 @@ class AccueilController extends Controller
     {
         $filters = [
             ['label' => 'Tout', 'active' => true],
-            ['label' => 'Prive', 'active' => false],
+            ['label' => 'Non assuré', 'active' => false],
             ['label' => 'CMU', 'active' => false],
-            ['label' => 'Assurance', 'active' => false],
+            ['label' => 'Assuré', 'active' => false],
         ];
 
         $todaysVisits = Visit::with('patient')
@@ -57,17 +57,28 @@ class AccueilController extends Controller
             'urgentCount' => $todaysVisits->where('urgent', true)->count(),
             'occupancyRate' => $occupancyRate,
             'coverageOptions' => [
-                'Prive' => 'Prive',
+                'Non assuré' => 'Non assuré',
                 'CMU' => 'CMU',
-                'Assurance' => 'Assurance',
+                'Assuré' => 'Assuré',
             ],
             'orientationOptions' => [
-                'Medecin generaliste' => 'Medecin generaliste',
-                'Pediatrie' => 'Pediatrie',
+                'Médecin généraliste' => 'Médecin généraliste',
+                'Pédiatrie' => 'Pédiatrie',
                 'Urgence' => 'Urgence',
                 'Laboratoire' => 'Laboratoire',
+                'Gynécologie' => 'Gynécologie',
+                'ORL' => 'ORL',
+                'Ophtalmologie' => 'Ophtalmologie',
+                'Cardiologie' => 'Cardiologie',
+                'Dermatologie' => 'Dermatologie',
+                'Neurologie' => 'Neurologie',
+                'Urologie' => 'Urologie',
+                'Orthopédie / Traumatologie' => 'Orthopédie / Traumatologie',
+                'Nutrition / Diététique' => 'Nutrition / Diététique',
+                'Dentisterie' => 'Dentisterie',
             ],
             'patientOptions' => Patient::orderBy('first_name')->get(),
+            'insuranceCompanies' => \App\Models\InsuranceCompany::orderBy('name')->get(),
             'userName' => $userName,
             'userRole' => $userRole,
             'userInitials' => $userInitials,
