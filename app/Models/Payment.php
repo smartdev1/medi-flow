@@ -10,20 +10,30 @@ class Payment extends Model
 {
     use HasFactory;
 
+    public const STATUS_PAID = 'Payé';
+    public const STATUS_PARTIAL = 'Partiellement payé';
+    public const STATUS_PENDING = 'En attente';
+
     protected $fillable = [
         'patient_id',
         'visit_id',
         'prescription_id',
+        'act_id',
         'service',
+        'base_amount',
+        'taux',
         'amount',
         'method',
         'status',
         'closed_at',
         'closed_by',
         'cashier_id',
+        'cashier_session_id',
     ];
 
     protected $casts = [
+        'base_amount' => 'integer',
+        'taux' => 'decimal:2',
         'amount' => 'integer',
         'closed_at' => 'datetime',
     ];
@@ -43,6 +53,11 @@ class Payment extends Model
         return $this->belongsTo(Prescription::class);
     }
 
+    public function act(): BelongsTo
+    {
+        return $this->belongsTo(Act::class);
+    }
+
     public function closedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'closed_by');
@@ -51,6 +66,11 @@ class Payment extends Model
     public function cashier(): BelongsTo
     {
         return $this->belongsTo(User::class, 'cashier_id');
+    }
+
+    public function session(): BelongsTo
+    {
+        return $this->belongsTo(CashierSession::class, 'cashier_session_id');
     }
 
     public function scopeForCashier($query, int $cashierId)
@@ -71,8 +91,8 @@ class Payment extends Model
     public function getStatusToneAttribute(): string
     {
         return match ($this->status) {
-            'Payé' => 'success',
-            'Partiellement payé' => 'warning',
+            self::STATUS_PAID => 'success',
+            self::STATUS_PARTIAL => 'warning',
             default => 'neutral',
         };
     }

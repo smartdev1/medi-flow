@@ -11,6 +11,8 @@ enum Role: string
     case Laborantin = 'laborantin';
     case Pharmacien = 'pharmacien';
     case Logistique = 'logistique';
+    case AideSoignante = 'aide_soignante';
+    case DocteurGeneral = 'docteur_general';
     case Admin = 'admin';
 
     public function label(): string
@@ -23,6 +25,8 @@ enum Role: string
             self::Laborantin => 'Technicien de laboratoire',
             self::Pharmacien => 'Pharmacien',
             self::Logistique => 'Agent de logistique',
+            self::AideSoignante => 'Aide-soignante',
+            self::DocteurGeneral => 'Docteur Général',
             self::Admin => 'Administrateur du système',
         };
     }
@@ -36,6 +40,8 @@ enum Role: string
             self::Laborantin => 'laboratoire.index',
             self::Pharmacien => 'pharmacie.index',
             self::Logistique => 'logistique.index',
+            self::DocteurGeneral => 'docteurgeneral.index',
+            self::AideSoignante => 'attente.index',
         };
     }
 }

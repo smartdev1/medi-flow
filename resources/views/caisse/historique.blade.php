@@ -2,15 +2,15 @@
 
     <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-            <h1 class="text-2xl font-semibold text-ink">Historique des journées</h1>
+            <h1 class="text-2xl font-semibold text-ink">Historique des sessions</h1>
             <p class="mt-1 text-sm text-ink-muted">
-                Journées de caisse clôturées. Cliquez sur une journée pour consulter le détail des paiements.
+                Sessions de caisse cloturees. Cliquez sur une session pour consulter le detail des transactions.
             </p>
         </div>
         <a href="{{ route('caisse.index') }}">
             <x-ui.button variant="secondary" size="sm">
                 <x-ui.icon name="arrow-left" class="h-4 w-4" />
-                Retour à la caisse
+                Retour a la caisse
             </x-ui.button>
         </a>
     </div>
@@ -21,42 +21,45 @@
                 <thead>
                     <tr class="border-b border-line bg-surface-sunken text-xs uppercase tracking-wide text-ink-muted">
                         <th class="px-5 py-3 font-semibold">Date</th>
-                        <th class="px-5 py-3 font-semibold">Clôturée le</th>
+                        <th class="px-5 py-3 font-semibold">Caissier</th>
+                        <th class="px-5 py-3 font-semibold">Ouverture</th>
+                        <th class="px-5 py-3 font-semibold">Fermeture</th>
+                        <th class="px-5 py-3 font-semibold text-right">Ecart</th>
                         <th class="px-5 py-3 font-semibold text-right">Transactions</th>
-                        <th class="px-5 py-3 font-semibold text-right">Encaissé</th>
-                        <th class="px-5 py-3 font-semibold text-right">Impayé</th>
-                        <th class="px-5 py-3 font-semibold text-right">Action</th>
+                        <th class="px-5 py-3 font-semibold text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-line">
-                    @forelse ($closedDays as $day)
+                    @forelse ($sessions as $session)
                         @php
-                            $dayDate = \Carbon\Carbon::parse($day->day);
+                            $variance = $session->cashVariance();
+                            $varianceTone = match (true) {
+                                $variance === null => 'neutral',
+                                $variance === 0 => 'success',
+                                $variance > 0 => 'warning',
+                                default => 'danger',
+                            };
                         @endphp
                         <tr class="hover:bg-surface-sunken">
                             <td class="px-5 py-3.5">
                                 <div class="flex items-center gap-3">
                                     <x-ui.icon name="calendar" class="h-4 w-4 text-ink-muted" />
                                     <div>
-                                        <p class="font-medium text-ink">{{ $dayDate->translatedFormat('l j F Y') }}</p>
-                                        <p class="text-xs text-ink-muted">{{ $dayDate->translatedFormat('d/m/Y') }}</p>
+                                        <p class="font-medium text-ink">{{ $session->opened_at->translatedFormat('l j F Y') }}</p>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-5 py-3.5 text-ink-soft">
-                                {{ \Carbon\Carbon::parse($day->closed_at)->translatedFormat('d/m/Y H:i') }}
+                            <td class="px-5 py-3.5 text-ink-soft">{{ $session->cashier->name }}</td>
+                            <td class="px-5 py-3.5 text-ink-soft">{{ $session->opened_at->format('H:i') }}</td>
+                            <td class="px-5 py-3.5 text-ink-soft">{{ $session->closed_at->format('H:i') }}</td>
+                            <td class="px-5 py-3.5 text-right font-mono font-medium">
+                                <span class="text-{{ $varianceTone }}">
+                                    {{ $variance !== null ? number_format($variance, 0, ',', ' ').' FCFA' : '—' }}
+                                </span>
                             </td>
-                            <td class="px-5 py-3.5 text-right font-mono text-ink">
-                                {{ $day->transactions_count }}
-                            </td>
-                            <td class="px-5 py-3.5 text-right font-mono font-medium text-success">
-                                {{ number_format($day->paid_amount, 0, ',', ' ') }} FCFA
-                            </td>
-                            <td class="px-5 py-3.5 text-right font-mono text-ink-soft">
-                                {{ number_format($day->unpaid_amount ?? 0, 0, ',', ' ') }} FCFA
-                            </td>
+                            <td class="px-5 py-3.5 text-right text-ink">{{ $session->payments_count }}</td>
                             <td class="px-5 py-3.5 text-right">
-                                <a href="{{ route('caisse.jour', ['date' => $day->day]) }}">
+                                <a href="{{ route('caisse.sessions.show', $session) }}">
                                     <x-ui.button size="sm" variant="secondary">
                                         <x-ui.icon name="eye" class="h-4 w-4" />
                                         Voir
@@ -66,13 +69,13 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-5 py-12 text-center">
+                            <td colspan="7" class="px-5 py-12 text-center">
                                 <x-ui.icon name="archive" class="mx-auto h-8 w-8 text-ink-muted" />
                                 <p class="mt-3 text-sm text-ink-muted">
-                                    Aucune journée clôturée pour le moment.
+                                    Aucune session cloturee pour le moment.
                                 </p>
                                 <p class="mt-1 text-xs text-ink-muted">
-                                    La clôture s'effectue depuis la page Caisse en fin de journée.
+                                    Les sessions clôturees apparaissent ici.
                                 </p>
                             </td>
                         </tr>
@@ -82,9 +85,9 @@
         </div>
     </x-ui.card>
 
-    @if ($closedDays->hasPages())
+    @if ($sessions->hasPages())
         <div class="mt-4">
-            {{ $closedDays->links() }}
+            {{ $sessions->links() }}
         </div>
     @endif
 

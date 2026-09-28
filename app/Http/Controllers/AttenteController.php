@@ -6,6 +6,9 @@ use App\Models\Admission;
 use App\Models\Exam;
 use App\Models\Patient;
 use App\Models\Prescription;
+use App\Models\Visit;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class AttenteController extends Controller
@@ -14,46 +17,71 @@ class AttenteController extends Controller
      * Ordre d'affichage des colonnes du circuit, avec leur icône.
      */
     private const STAGES = [
-        'Accueil' => 'user-plus',
         'Consultation' => 'stethoscope',
         'Hospitalisation' => 'building',
+        'Mise en Observation' => 'eye',
         'Laboratoire' => 'beaker',
         'Retour médecin' => 'document',
-        'Pharmacie' => 'capsule',
         'Sortie' => 'check-circle',
     ];
 
     public function index(): View
     {
-        $patients = Patient::with(['visits', 'admissions.room', 'prescriptions.items.medication', 'exams', 'payments'])->get();
+        $stages = $this->getStagesData();
+
+        $canTakeVitals = auth()->user()?->role?->value === 'aide_soignante';
+
+        return view('attente.board', [
+            'stages' => $stages,
+            'canTakeVitals' => $canTakeVitals,
+        ]);
+    }
+
+    /**
+     * Rafraîchit les données du circuit patient (pour polling AJAX).
+     */
+    public function refresh(): JsonResponse
+    {
+        $stages = $this->getStagesData();
+
+        return response()->json([
+            'stages' => $stages,
+            'canTakeVitals' => auth()->user()?->role?->value === 'aide_soignante',
+        ]);
+    }
+
+    /**
+     * Récupère les données structurées pour le circuit patient.
+     * 
+     * @return array
+     */
+    private function getStagesData(): array
+    {
+        $visits = Visit::with([
+            'patient.insuranceCompany',
+            'patient.exams',
+            'patient.admissions.room',
+            'vitalsTakenBy',
+        ])->active()
+            ->whereDate('arrived_at', today())
+            ->orderBy('arrived_at')
+            ->get();
 
         $cardsByStage = collect(array_keys(self::STAGES))->mapWithKeys(fn (string $stage) => [$stage => collect()]);
 
-        foreach ($patients as $patient) {
-            $card = $this->buildCard($patient);
+        foreach ($visits as $visit) {
+            $card = $this->buildCard($visit->patient, $visit);
 
             if ($card) {
                 $cardsByStage[$card['stage']]->push($card);
             }
         }
 
-        $stages = collect(self::STAGES)->map(fn (string $icon, string $label) => [
+        return collect(self::STAGES)->map(fn (string $icon, string $label) => [
             'label' => $label,
             'icon' => $icon,
             'patients' => $cardsByStage[$label]->values()->all(),
-        ])->values();
-
-        $user = auth()->user();
-        $userName = $user?->name ?? 'Utilisateur';
-        $userRole = $user?->role?->label() ?? 'Personnel clinique';
-        $userInitials = $user?->initials ?? $this->initialsFor($userName);
-
-        return view('attente.board', [
-            'stages' => $stages,
-            'userName' => $userName,
-            'userRole' => $userRole,
-            'userInitials' => $userInitials,
-        ]);
+        ])->values()->all();
     }
 
     /**
@@ -61,18 +89,11 @@ class AttenteController extends Controller
      * ses vraies visites, paiements, examens, ordonnances et hospitalisations
      * — du stade le plus avancé (sortie) au moins avancé (accueil).
      */
-    private function buildCard(Patient $patient): ?array
+    private function buildCard(Patient $patient, ?Visit $visit = null): ?array
     {
-        // Vérifier d'abord si le patient a une visite active (non clôturée)
-        $activeVisit = $patient->visits->first(fn (\App\Models\Visit $visit) => $visit->isClosed() === false);
-        
-        if (!$activeVisit) {
-            // Si toutes les visites sont clôturées, ne pas afficher le patient dans le circuit
+        if (!$visit) {
             return null;
         }
-        
-        // Utiliser la visite active pour déterminer l'étape actuelle
-        $visit = $activeVisit;
 
         $admission = $patient->admissions->whereNull('discharged_at')->first();
         if ($admission) {
@@ -83,25 +104,13 @@ class AttenteController extends Controller
                 default => null,
             };
 
-            return $this->card($patient, 'Hospitalisation', "{$admission->room->number} — {$admission->reason}", $tone, $badge);
+            $stage = $admission->status === Admission::STATUS_OBSERVATION ? 'Mise en Observation' : 'Hospitalisation';
+            return $this->card($patient, $stage, "{$admission->room->number} — {$admission->reason}", $tone, $badge);
         }
 
-        if ($visit && $visit->orientation === 'Non orientée') {
-            return $this->card($patient, 'Accueil', 'Arrivée '.$visit->arrived_at->format('H:i').' — non orientée', 'neutral');
-        }
-
-        $pendingPrescription = $patient->prescriptions->first(fn (Prescription $p) => $p->status !== Prescription::STATUS_DISPENSED);
-        if ($pendingPrescription) {
-            $shortage = ! $pendingPrescription->hasSufficientStock();
-            $tone = $shortage ? 'warning' : 'neutral';
-            $badge = $shortage ? ['label' => 'Rupture', 'tone' => 'warning'] : null;
-
-            return $this->card($patient, 'Pharmacie', $pendingPrescription->medications_summary, $tone, $badge);
-        }
-
-        $readyExam = $patient->exams->firstWhere('status', Exam::STATUS_READY);
-        if ($readyExam) {
-            return $this->card($patient, 'Retour médecin', "Résultats reçus — {$readyExam->name}", 'success', ['label' => 'Prêt', 'tone' => 'success']);
+        if ($visit && str_starts_with($visit->status, 'Demande ')) {
+            $stage = $visit->status === Visit::STATUS_OBSERVATION_REQUESTED ? 'Mise en Observation' : 'Hospitalisation';
+            return $this->card($patient, $stage, $visit->reason ?: $stage, 'warning', ['label' => 'En attente validation', 'tone' => 'warning']);
         }
 
         $pendingExam = $patient->exams->first(fn (Exam $exam) => in_array($exam->status, [Exam::STATUS_AWAITING_SAMPLE, Exam::STATUS_IN_PROGRESS], true));
@@ -111,16 +120,15 @@ class AttenteController extends Controller
             return $this->card($patient, 'Laboratoire', "{$pendingExam->name} — ".lcfirst($pendingExam->status), $tone);
         }
 
-        $unpaidPayment = $patient->payments->first(fn ($payment) => $payment->status !== 'Payé');
-        if ($unpaidPayment && $visit?->status !== 'En consultation') {
-            return $this->card($patient, 'Accueil', "En attente de paiement — {$unpaidPayment->service}", 'warning');
-        }
-
         if ($visit) {
+            if ($visit->status === Visit::STATUS_CONSULTATION_CLOSED) {
+                return null;
+            }
+
             $tone = $visit->urgent ? 'danger' : 'brand';
             $badge = $visit->urgent ? ['label' => 'Urgent', 'tone' => 'danger'] : null;
 
-            return $this->card($patient, 'Consultation', $visit->orientation, $tone, $badge);
+            return $this->card($patient, 'Consultation', $visit->reason ?: 'Consultation', $tone, $badge);
         }
 
         return null;
@@ -128,15 +136,30 @@ class AttenteController extends Controller
 
     private function card(Patient $patient, string $stage, string $meta, string $tone, ?array $badge = null): array
     {
+        $activeVisit = $patient->visits->first(fn (Visit $visit) => $visit->isClosed() === false);
+
         return [
             'stage' => $stage,
             'name' => $patient->full_name,
             'id' => $patient->code,
             'patient_id' => $patient->id,
+            'visit_id' => $activeVisit?->id,
+            'vitals_taken_at' => $activeVisit?->vitals_taken_at,
+            'vitals_taken_by' => $activeVisit?->vitalsTakenBy?->name,
             'meta' => $meta,
             'tone' => $tone,
             'badge' => $badge,
         ];
+    }
+
+    public function markVitals(Visit $visit)
+    {
+        $visit->update([
+            'vitals_taken_at' => now(),
+            'vitals_taken_by' => Auth::id(),
+        ]);
+
+        return back()->with('success', "Constantes enregistrées pour {$visit->patient->full_name}.");
     }
 
 

@@ -5,7 +5,7 @@
     <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
             <h1 class="text-2xl font-semibold text-ink">Accueil & Réception</h1>
-            <p class="mt-1 text-sm text-ink-muted">Gestion des arrivées et de l'orientation des patients — {{ $today }}.</p>
+            <p class="mt-1 text-sm text-ink-muted">Gestion des arrivées des patients — {{ $today }}.</p>
         </div>
         <x-ui.slide-over title="Nouveau patient">
             <x-slot:trigger>
@@ -19,27 +19,10 @@
                 method="POST"
                 action="{{ route('patients.store') }}"
                 class="flex flex-col gap-4"
-                x-data="{
-                    existingPatientId: null,
-                    form: {
-                        first_name: @js(old('first_name', '')),
-                        last_name: @js(old('last_name', '')),
-                        sex: @js(old('sex', '')),
-                        birth_date: @js(old('birth_date', '')),
-                        phone: @js(old('phone', '')),
-                        coverage: @js(old('coverage', '')),
-                    },
-                }"
-                @patient-selected="
-                    existingPatientId = $event.detail.id;
-                    form.first_name = $event.detail.first_name;
-                    form.last_name = $event.detail.last_name;
-                    form.sex = $event.detail.sex;
-                    form.birth_date = $event.detail.birth_date ?? '';
-                    form.phone = $event.detail.phone ?? '';
-                    form.coverage = $event.detail.coverage;
-                "
-                @patient-search-cleared="existingPatientId = null"
+                x-data="patientForm"
+                data-old="{{ json_encode(old()) }}"
+                @patient-selected="handlePatientSelected($event.detail)"
+                @patient-search-cleared="handlePatientSearchCleared()"
             >
                 @csrf
 
@@ -59,44 +42,65 @@
 
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                        <x-ui.field label="Prénom" name="first_name" x-model="form.first_name" x-bind:disabled="existingPatientId !== null" required autofocus />
+                        <x-ui.field label="Prénom" name="first_name" x-model="patient.first_name" x-bind:disabled="existingPatientId !== null" required autofocus />
                         <x-input-error :messages="$errors->get('first_name')" class="mt-1" />
                     </div>
                     <div>
-                        <x-ui.field label="Nom" name="last_name" x-model="form.last_name" x-bind:disabled="existingPatientId !== null" required />
+                        <x-ui.field label="Nom" name="last_name" x-model="patient.last_name" x-bind:disabled="existingPatientId !== null" required />
                         <x-input-error :messages="$errors->get('last_name')" class="mt-1" />
                     </div>
                 </div>
 
                 <div>
-                    <x-ui.select label="Sexe" name="sex" placeholder="Sélectionner" :options="['M' => 'Masculin', 'F' => 'Féminin']" x-model="form.sex" x-bind:disabled="existingPatientId !== null" required />
+                    <x-ui.select label="Sexe" name="sex" placeholder="Sélectionner" :options="['M' => 'Masculin', 'F' => 'Féminin']" x-model="patient.sex" x-bind:disabled="existingPatientId !== null" required />
                     <x-input-error :messages="$errors->get('sex')" class="mt-1" />
                 </div>
 
                 <div>
-                    <x-ui.field label="Date de naissance" name="birth_date" type="date" x-model="form.birth_date" x-bind:disabled="existingPatientId !== null" />
+                    <x-ui.field label="Date de naissance" name="birth_date" type="date" x-model="patient.birth_date" x-bind:disabled="existingPatientId !== null" />
                     <x-input-error :messages="$errors->get('birth_date')" class="mt-1" />
                 </div>
 
                 <div>
-                    <x-ui.field label="Téléphone" name="phone" icon="phone" placeholder="+225 07 00 00 00 00" x-model="form.phone" x-bind:disabled="existingPatientId !== null" />
+                    <x-ui.field label="Téléphone" name="phone" icon="phone" placeholder="+225 07 00 00 00 00" x-model="patient.phone" x-bind:disabled="existingPatientId !== null" />
                     <x-input-error :messages="$errors->get('phone')" class="mt-1" />
                 </div>
 
                 <div>
-                    <x-ui.select label="Prise en charge" name="coverage" placeholder="Sélectionner" :options="$coverageOptions" x-model="form.coverage" x-bind:disabled="existingPatientId !== null" required />
+                    <x-ui.select label="Prise en charge" name="coverage" placeholder="Sélectionner" :options="$coverageOptions" x-model="patient.coverage" required />
                     <x-input-error :messages="$errors->get('coverage')" class="mt-1" />
                 </div>
 
-                <div>
-                    <x-ui.select label="Orientation" name="orientation" placeholder="Sélectionner un service" :options="$orientationOptions" required />
-                    <x-input-error :messages="$errors->get('orientation')" class="mt-1" />
+                <div x-show="patient.coverage === 'Assuré'">
+                    <x-ui.select label="Compagnie d'assurance" name="insurance_company_id" placeholder="Sélectionner" :options="$insuranceCompanies->pluck('name', 'id')" />
+                    <x-input-error :messages="$errors->get('insurance_company_id')" class="mt-1" />
+                </div>
+
+                <div x-show="patient.coverage === 'Assuré'">
+                    <x-ui.field label="Ticket modérateur (%)" name="ticket_moderateur" type="number" x-model="patient.ticket_moderateur" placeholder="20" :value="old('ticket_moderateur', config('clinic.default_ticket_rate', 20))" min="0" max="100" step="0.01" />
+                    <x-input-error :messages="$errors->get('ticket_moderateur')" class="mt-1" />
+                    <p class="mt-1 text-xs text-ink-muted">Part payée par le patient (ex: 20 = 20%)</p>
                 </div>
 
                 <div>
-                    <x-ui.field label="Motif de la visite" name="reason" placeholder="Ex : Fièvre, contrôle de routine..." :value="old('reason')" />
-                    <p class="mt-1 text-xs text-ink-muted">En langage général — le diagnostic reste au médecin.</p>
-                    <x-input-error :messages="$errors->get('reason')" class="mt-1" />
+                    <label class="text-sm font-medium text-ink">Acte demandé</label>
+                    <select name="act_id" x-model="patient.act_id" @change="updateRouting()" class="mt-1 w-full rounded-md border border-line bg-white py-2.5 px-3 text-sm text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                        <option value="">— Sélectionner l'acte —</option>
+                        @foreach ($acts->groupBy('category') as $category => $categoryActs)
+                            <optgroup label="{{ \App\Enums\ActCategory::from($category)->label() }}">
+                                @foreach ($categoryActs as $act)
+                                    <option value="{{ $act->id }}" data-code="{{ $act->code }}">{{ $act->label }}</option>
+                                @endforeach
+                            </optgroup>
+                        @endforeach
+                    </select>
+                    <div x-show="routingDestination" x-cloak class="mt-2 flex items-center gap-2 rounded-md bg-brand-50 px-3 py-2">
+                        <x-ui.icon name="navigation" class="h-4 w-4 text-brand" />
+                        <span class="text-sm text-ink-soft">Orientation suggérée :</span>
+                        <span class="text-sm font-medium text-brand" x-text="routingDestination"></span>
+                    </div>
+                    <p class="mt-1 text-xs text-ink-muted">Permet à la caisse de pré-remplir la facture automatiquement.</p>
+                    <x-input-error :messages="$errors->get('act_id')" class="mt-1" />
                 </div>
 
                 <label class="flex items-center gap-2 text-sm text-ink-soft">
@@ -118,6 +122,36 @@
         <x-ui.stat-card label="Taux d'occupation" value="{{ $occupancyRate }}%" icon="chart-bar" trend="Capacité clinique" trend-tone="neutral" />
     </div>
 
+    @if (count($observationPatients) > 0)
+        <div class="mt-6 rounded-md border border-warning/30 bg-warning/5 p-4">
+            <div class="flex items-center justify-between gap-3 mb-3">
+                <div class="flex items-center gap-2">
+                    <x-ui.icon name="eye" class="h-5 w-5 text-warning" />
+                    <h3 class="text-sm font-semibold text-warning">Patients en observation : {{ count($observationPatients) }}</h3>
+                </div>
+            </div>
+            <div class="divide-y divide-line/50">
+                @foreach ($observationPatients as $patient)
+                    <div class="flex items-center justify-between py-2.5 text-sm">
+                        <div class="flex items-center gap-3">
+                            <x-ui.avatar :initials="$patient['initials']" size="sm" />
+                            <div>
+                                <p class="font-medium text-ink">{{ $patient['name'] }}</p>
+                                <p class="font-mono text-xs text-ink-muted">{{ $patient['code'] }}</p>
+                            </div>
+                            <span class="text-xs text-ink-muted">
+                                {{ $patient['room'] }} — {{ $patient['ward'] }}
+                            </span>
+                        </div>
+                        <x-ui.badge :tone="$patient['status_tone']" class="text-xs">
+                            {{ $patient['reason'] }}
+                        </x-ui.badge>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
     <x-ui.filter-pills class="mt-6" :items="$filters" label="Filtrer par prise en charge">
         <x-slot:trailing>
             <x-ui.icon name="calendar" class="h-4 w-4" />
@@ -132,7 +166,6 @@
                     <tr class="border-b border-line bg-surface-sunken text-xs uppercase tracking-wide text-ink-muted">
                         <th class="px-5 py-3 font-semibold">Patient</th>
                         <th class="px-5 py-3 font-semibold">Arrivée</th>
-                        <th class="px-5 py-3 font-semibold">Orientation</th>
                         <th class="px-5 py-3 font-semibold">Prise en charge</th>
                         <th class="px-5 py-3 font-semibold">Statut</th>
                         <th class="px-5 py-3 font-semibold text-right">Actions</th>
@@ -140,10 +173,7 @@
                 </thead>
                 <tbody class="divide-y divide-line">
                     @foreach ($patients as $patient)
-                        <tr class="hover:bg-surface-sunken"
-                            x-show="filter === 'Tout' || patient.coverage === filter"
-                            x-cloak
-                            x-data="{ patient: @js($patient) }">
+                        <tr class="hover:bg-surface-sunken">
                             <td class="px-5 py-3.5">
                                 <div class="flex items-center gap-3">
                                     <x-ui.avatar :initials="$patient['initials']" :tone="$patient['urgent'] ? 'danger' : 'brand'" size="sm" />
@@ -154,7 +184,6 @@
                                 </div>
                             </td>
                             <td class="px-5 py-3.5 font-mono text-ink-soft">{{ $patient['arrival'] }}</td>
-                            <td class="px-5 py-3.5 text-ink-soft">{{ $patient['orientation'] }}</td>
                             <td class="px-5 py-3.5">
                                 <x-ui.badge tone="neutral">{{ $patient['coverage'] }}</x-ui.badge>
                             </td>
@@ -170,7 +199,7 @@
             </table>
         </div>
         <div class="flex items-center justify-between border-t border-line px-5 py-3 text-sm text-ink-muted">
-            <p><span x-text="$el.parentElement.querySelectorAll('tbody tr[x-show]:not([style*=\"display: none\"])').length"></span> arrivée(s) affichée(s) / {{ count($patients) }} arrivée(s) enregistrée(s) aujourd'hui</p>
+            <p>{{ count($patients) }} arrivée(s) affichée(s) / {{ count($patients) }} arrivée(s) enregistrée(s) aujourd'hui</p>
             <div class="flex gap-1">
                 <button class="flex h-8 w-8 items-center justify-center rounded-md border border-line text-ink-muted hover:bg-surface-sunken" disabled>
                     <x-ui.icon name="chevron-left" class="h-4 w-4" />
@@ -183,6 +212,68 @@
     </x-ui.card>
 
 </x-layout.app-shell>
+
+<script>
+    function patientForm() {
+        const oldData = @json(old());
+        const selectedPatient = oldData && oldData.existing_patient_id ? null : null;
+
+        return {
+            existingPatientId: selectedPatient ? selectedPatient.id : null,
+            patient: {
+                first_name: (oldData && oldData.first_name) || '',
+                last_name: (oldData && oldData.last_name) || '',
+                sex: (oldData && oldData.sex) || '',
+                birth_date: (oldData && oldData.birth_date) || '',
+                phone: (oldData && oldData.phone) || '',
+                coverage: (oldData && oldData.coverage) || '',
+                insurance_company_id: (oldData && oldData.insurance_company_id) || '',
+                ticket_moderateur: (oldData && oldData.ticket_moderateur) || '',
+                act_id: (oldData && oldData.act_id) || '',
+            },
+            routingDestination: '',
+
+            handlePatientSelected(option) {
+                this.existingPatientId = option.id;
+                this.patient = {
+                    first_name: option.first_name || '',
+                    last_name: option.last_name || '',
+                    sex: option.sex || '',
+                    birth_date: option.birth_date || '',
+                    phone: option.phone || '',
+                    coverage: option.coverage || '',
+                    insurance_company_id: '',
+                    ticket_moderateur: '',
+                    act_id: '',
+                };
+                this.routingDestination = '';
+            },
+
+            handlePatientSearchCleared() {
+                this.existingPatientId = null;
+            },
+
+            updateRouting() {
+                const select = this.$el.querySelector('select[name="act_id"]');
+                if (!select) { this.routingDestination = ''; return; }
+                const selectedOption = select.options[select.selectedIndex];
+                if (!selectedOption || !selectedOption.dataset.code) { this.routingDestination = ''; return; }
+
+                const code = selectedOption.dataset.code;
+                const firstLetter = code.charAt(0).toUpperCase();
+                const destinations = {
+                    'C': 'Caisse',
+                    'L': 'Laboratoire',
+                    'P': 'Pharmacie',
+                    'M': 'Médecin',
+                    'H': 'Hospitalisation',
+                    'S': 'Sortie',
+                };
+                this.routingDestination = destinations[firstLetter] || 'Orientation inconnue';
+            }
+        };
+    }
+</script>
 
 
 

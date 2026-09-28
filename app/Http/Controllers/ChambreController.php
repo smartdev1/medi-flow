@@ -39,13 +39,8 @@ class ChambreController extends Controller
         $totalBeds = $rooms->sum('capacity');
         $occupiedBeds = $rooms->sum('occupied_count');
 
-        $user = auth()->user();
-        $userName = $user?->name ?? 'Utilisateur';
-        $userRole = $user?->role?->label() ?? 'Personnel clinique';
-        $userInitials = $user?->initials ?? $this->initialsFor($userName);
-
         $wardsList = Room::select('ward')->distinct()->orderBy('ward')->pluck('ward', 'ward')->toArray();
-        
+
         // Créer les éléments de filtre
         $filterItems = [['label' => 'Tous les services', 'active' => true]];
         foreach ($wards as $ward) {
@@ -60,9 +55,6 @@ class ChambreController extends Controller
             'occupancyRate' => $totalBeds > 0 ? round(($occupiedBeds / $totalBeds) * 100) : 0,
             'wardsList' => $wardsList,
             'filterItems' => $filterItems,
-            'userName' => $userName,
-            'userRole' => $userRole,
-            'userInitials' => $userInitials,
         ]);
     }
 

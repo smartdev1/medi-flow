@@ -3,10 +3,14 @@
 namespace App\Support;
 
 use App\Models\Admission;
+use App\Models\Consultation;
 use App\Models\Exam;
 use App\Models\Patient;
+use App\Models\Payment;
 use App\Models\Prescription;
+use App\Models\Visit;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 class PatientTimeline
 {
@@ -16,6 +20,27 @@ class PatientTimeline
      * orientations — au lieu d'une chronologie figée codée en dur.
      */
     public static function build(Patient $patient): array
+    {
+        $steps = self::buildSteps($patient);
+
+        return self::formatSteps($steps);
+    }
+
+    /**
+     * Chronologie restreinte à une seule visite.
+     */
+    public static function buildForVisit(Visit $visit): array
+    {
+        $patient = $visit->patient;
+        $visitStart = Carbon::parse($visit->arrived_at ?? now());
+        $visitEnd = $visit->discharged_at ? Carbon::parse($visit->discharged_at) : now();
+
+        $steps = self::buildSteps($patient, $visitStart, $visitEnd);
+
+        return self::formatSteps($steps);
+    }
+
+    private static function buildSteps(Patient $patient, ?Carbon $visitStart = null, ?Carbon $visitEnd = null): Collection
     {
         $patient->loadMissing(['visits', 'payments', 'consultations.doctor', 'exams', 'prescriptions.items', 'admissions.room', 'referrals']);
 
@@ -47,7 +72,7 @@ class PatientTimeline
                 'label' => 'Paiement',
                 'meta' => "{$payment->service} — {$payment->status}",
                 'icon' => 'credit-card',
-                'status' => $payment->status === 'Payé' ? 'done' : 'current',
+                'status' => $payment->status === Payment::STATUS_PAID ? 'done' : 'current',
             ]);
         }
 
@@ -57,11 +82,15 @@ class PatientTimeline
                 'label' => 'Consultation',
                 'meta' => $consultation->doctor->name ?? 'Médecin',
                 'icon' => 'stethoscope',
-                'status' => $consultation->status === $consultation::STATUS_CLOSED ? 'done' : 'current',
+                'status' => $consultation->status === Consultation::STATUS_CLOSED ? 'done' : 'current',
             ]);
         }
 
         foreach ($patient->exams as $exam) {
+            if ($visitStart && $visitEnd && !Carbon::parse($exam->requested_at)->between($visitStart, $visitEnd)) {
+                continue;
+            }
+
             $steps->push([
                 'time' => $exam->requested_at,
                 'label' => 'Laboratoire',
@@ -72,6 +101,10 @@ class PatientTimeline
         }
 
         foreach ($patient->prescriptions as $prescription) {
+            if ($visitStart && $visitEnd && !Carbon::parse($prescription->requested_at)->between($visitStart, $visitEnd)) {
+                continue;
+            }
+
             $steps->push([
                 'time' => $prescription->requested_at,
                 'label' => 'Pharmacie',
@@ -82,6 +115,10 @@ class PatientTimeline
         }
 
         foreach ($patient->admissions as $admission) {
+            if ($visitStart && $visitEnd && !Carbon::parse($admission->admitted_at)->between($visitStart, $visitEnd)) {
+                continue;
+            }
+
             $steps->push([
                 'time' => $admission->admitted_at,
                 'label' => 'Hospitalisation',
@@ -102,6 +139,10 @@ class PatientTimeline
         }
 
         foreach ($patient->referrals as $referral) {
+            if ($visitStart && $visitEnd && !Carbon::parse($referral->requested_at)->between($visitStart, $visitEnd)) {
+                continue;
+            }
+
             $steps->push([
                 'time' => $referral->requested_at,
                 'label' => 'Orientation — '.$referral->service,
@@ -111,6 +152,11 @@ class PatientTimeline
             ]);
         }
 
+        return $steps;
+    }
+
+    private static function formatSteps(Collection $steps): array
+    {
         return $steps
             ->sortBy(fn (array $step) => Carbon::parse($step['time']))
             ->map(fn (array $step) => [

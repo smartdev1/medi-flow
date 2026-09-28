@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use App\Models\Exam;
+use App\Models\Invoice;
+use App\Models\Payment;
+use App\Models\Patient;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +17,11 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Patient::class => \App\Policies\PatientPolicy::class,
+        Payment::class => \App\Policies\PaymentPolicy::class,
+        Exam::class => \App\Policies\ExamPolicy::class,
+        Invoice::class => \App\Policies\InvoicePolicy::class,
+        CashierSession::class => \App\Policies\CashierSessionPolicy::class,
     ];
 
     /**
@@ -23,6 +31,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // Admin bypass for all gates
+        Gate::before(function ($user, $ability) {
+            if ($user->isAdmin()) {
+                return true;
+            }
+        });
     }
 }
