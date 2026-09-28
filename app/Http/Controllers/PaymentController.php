@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePaymentRequest;
+use App\Models\Act;
+use App\Models\CashierSession;
+use App\Models\Invoice;
 use App\Models\Patient;
 use App\Models\Payment;
 use Carbon\Carbon;
@@ -13,6 +16,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -21,14 +25,33 @@ class PaymentController extends Controller
         $data = $request->validated();
         $patient = Patient::findOrFail($data['patient_id']);
 
+        $act = ! empty($data['act_id']) ? Act::find($data['act_id']) : null;
+
+        if (! $act) {
+            $visit = $patient->visits()->active()->latest('arrived_at')->first();
+            $act = ($visit && $visit->act_id) ? $visit->act : null;
+        }
+
+        $activeSession = \App\Models\CashierSession::where('cashier_id', Auth::id())->active()->first();
+
+        if (! $activeSession) {
+            return redirect()
+                ->route('caisse.index')
+                ->with('error', 'Vous devez ouvrir une session de caisse avant d\'encaisser un paiement.');
+        }
+
         $payment = Payment::create([
             'patient_id' => $patient->id,
             'visit_id' => $patient->visits()->latest('arrived_at')->value('id'),
-            'service' => $data['service'],
+            'act_id' => $act?->id,
+            'service' => $act ? $act->label : $data['service'],
+            'base_amount' => $data['base_amount'],
+            'taux' => $data['taux'],
             'amount' => $data['amount'],
             'method' => $data['method'],
             'status' => $data['status'],
             'cashier_id' => Auth::id(),
+            'cashier_session_id' => $activeSession->id,
         ]);
 
         return redirect()
@@ -43,8 +66,10 @@ class PaymentController extends Controller
         ]);
 
         $date = Carbon::createFromFormat('Y-m-d', $validated['date'])->startOfDay();
-        $cashierId = Auth::id(); // Utiliser l'ID du caissier connecté
+        $cashierId = Auth::user()->hasRole('docteur_general') ? null : Auth::id();
         $now = now();
+
+        Log::channel('deprecations')->warning('Deprecated: closeDay() called by user {user_id}. Use CashierSession instead.', ['user_id' => Auth::id()]);
 
         // Récupérer uniquement les paiements OUVERTS pour ce caissier et cette date
         $openPayments = Payment::whereDate('created_at', $date)
@@ -80,13 +105,30 @@ class PaymentController extends Controller
 
         $payment = Payment::findOrFail($validated['payment_id']);
 
-        if ($payment->cashier_id !== null && $payment->cashier_id !== Auth::id()) {
-            abort(403, "Ce paiement appartient à un autre caissier.");
-        }
+        $this->authorize('markAsPaid', $payment);
 
-        $payment->update([
-            'status' => 'Payé',
-        ]);
+        // Mark the payment as paid first
+        $payment->update(['status' => Payment::STATUS_PAID]);
+
+        // Sync the associated Invoice status if one exists for the same visit
+        if ($payment->visit_id) {
+            $invoice = \App\Models\Invoice::where('visit_id', $payment->visit_id)
+                ->where('status', '!=', Invoice::STATUS_PAID)
+                ->first();
+
+            if ($invoice) {
+                $totalPaid = Payment::where('visit_id', $payment->visit_id)
+                    ->where('status', Payment::STATUS_PAID)
+                    ->sum('amount');
+
+                $invoice->update([
+                    'status' => Invoice::STATUS_PAID,
+                    'paid_amount' => $totalPaid,
+                    'cashier_id' => Auth::id(),
+                    'paid_at' => now(),
+                ]);
+            }
+        }
 
         if ($request->wantsJson()) {
             return response()->json(['success' => true, 'message' => "Paiement marqué comme payé pour {$payment->patient->full_name}."]);
@@ -100,6 +142,8 @@ class PaymentController extends Controller
     {
         $payment = Payment::where('id', $paymentId)->with(['patient', 'cashier', 'visit'])->firstOrFail();
 
+        $this->authorize('view', $payment);
+
         $payment->receipt_number = sprintf('R-%06d', $payment->id);
 
         return view('caisse.receipt', [
@@ -111,6 +155,8 @@ class PaymentController extends Controller
     public function downloadReceipt($paymentId): Response
     {
         $payment = Payment::where('id', $paymentId)->with(['patient', 'cashier', 'visit'])->firstOrFail();
+
+        $this->authorize('view', $payment);
 
         $payment->receipt_number = sprintf('R-%06d', $payment->id);
 

@@ -1,13 +1,17 @@
 <?php
 
 use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\ActController;
 use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\AttenteController;
+use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\CaisseController;
 use App\Http\Controllers\ChambreController;
+use App\Http\Controllers\DocteurGeneralController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\HospitalisationController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LaboratoireController;
 use App\Http\Controllers\LogistiqueController;
 use App\Http\Controllers\MedecinController;
@@ -17,6 +21,9 @@ use App\Http\Controllers\OnCallShiftController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\InsuranceCompanyController;
+use App\Http\Controllers\InsuranceController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PharmacieController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\ProfileController;
@@ -40,19 +47,28 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::middleware('role:accueil')->group(function () {
+    Route::middleware('role:accueil,docteur_general,aide_soignante')->group(function () {
         Route::get('/accueil', [AccueilController::class, 'index'])->name('accueil.index');
+        Route::get('/patients', [PatientController::class, 'index'])->name('patients.index');
         Route::post('/patients', [PatientController::class, 'store'])->name('patients.store');
-Route::get('/patients/{patient}', [PatientController::class, 'show'])->name('patients.show');
+        Route::get('/patients/{patient}', [PatientController::class, 'show'])->name('patients.show');
         Route::get('/salle-attente', [AttenteController::class, 'index'])->name('attente.index');
+        Route::get('/salle-attente/refresh', [AttenteController::class, 'refresh'])->name('attente.refresh');
     });
 
-    Route::middleware('role:accueil,caissier')->group(function () {
+    Route::middleware('role:aide_soignante')->group(function () {
+        Route::post('/visites/{visit}/constantes', [AttenteController::class, 'markVitals'])->name('visits.vitals');
+        Route::get('/admission-requests', [HospitalisationController::class, 'pendingRequests'])->name('admission-requests.index');
+        Route::post('/admission-requests/{request}/approve', [HospitalisationController::class, 'approveRequest'])->name('admission-requests.approve');
+        Route::post('/admission-requests/{request}/reject', [HospitalisationController::class, 'rejectRequest'])->name('admission-requests.reject');
+    });
+
+    Route::middleware('role:accueil,docteur_general')->group(function () {
         Route::get('/sortie', [SortieController::class, 'index'])->name('sortie.index');
         Route::post('/sortie/{visit}/cloturer', [SortieController::class, 'close'])->name('sortie.close');
     });
 
-    Route::middleware('role:caissier')->group(function () {
+    Route::middleware('role:caissier,docteur_general')->group(function () {
         Route::get('/caisse', [CaisseController::class, 'index'])->name('caisse.index');
         Route::get('/caisse/historique', [CaisseController::class, 'history'])->name('caisse.historique');
         Route::get('/caisse/jour/{date}', [CaisseController::class, 'showDay'])->name('caisse.jour');
@@ -60,16 +76,29 @@ Route::get('/patients/{patient}', [PatientController::class, 'show'])->name('pat
         Route::post('/caisse/cloturer', [PaymentController::class, 'closeDay'])->name('caisse.cloturer');
         Route::get('/paiements/{payment}/recu', [PaymentController::class, 'receipt'])->name('payments.receipt')->where('payment', '.*');
         Route::get('/paiements/{payment}/recu/pdf', [PaymentController::class, 'downloadReceipt'])->name('payments.receipt.download')->where('payment', '.*');
+        Route::get('/caisse/paniers/{invoice}', [InvoiceController::class, 'show'])->name('caisse.paniers.show');
+        Route::post('/caisse/paniers/{invoice}/payer', [InvoiceController::class, 'pay'])->name('caisse.paniers.pay');
+
+        Route::get('/caisse/sessions', [App\Http\Controllers\CashierSessionController::class, 'index'])->name('caisse.sessions.index');
+        Route::get('/caisse/sessions/{cashierSession}', [App\Http\Controllers\CashierSessionController::class, 'show'])->name('caisse.sessions.show');
+        Route::get('/caisse/session/open', [App\Http\Controllers\CashierSessionController::class, 'openForm'])->name('caisse.sessions.open');
+        Route::post('/caisse/session/open', [App\Http\Controllers\CashierSessionController::class, 'open'])->name('caisse.sessions.open.store');
+        Route::get('/caisse/session/close', [App\Http\Controllers\CashierSessionController::class, 'closeForm'])->name('caisse.sessions.close');
+        Route::post('/caisse/session/close', [App\Http\Controllers\CashierSessionController::class, 'close'])->name('caisse.sessions.close.store');
     });
 
     // Route pour encaisser un paiement - accessible aux caissiers
-    Route::post('/paiements/encaisser', [PaymentController::class, 'markAsPaid'])->name('payments.encaisser')->middleware('role:caissier');
+    Route::post('/paiements/encaisser', [PaymentController::class, 'markAsPaid'])->name('payments.encaisser')->middleware('role:caissier,docteur_general');
 
-    Route::middleware('role:medecin,pediatre')->group(function () {
+    Route::middleware('role:medecin,pediatre,docteur_general')->group(function () {
         Route::get('/medecin', [MedecinController::class, 'index'])->name('medecin.index');
+        Route::post('/medecin/visites/{visit}/take', [MedecinController::class, 'takeVisit'])->name('medecin.visits.take');
+        Route::post('/medecin/visites/{visit}/hospitalize', [MedecinController::class, 'requestHospitalization'])->name('medecin.visits.hospitalize');
+        Route::post('/medecin/visites/{visit}/observe', [MedecinController::class, 'requestObservation'])->name('medecin.visits.observe');
         Route::post('/consultations/{consultation}', [ConsultationController::class, 'update'])->name('consultations.update');
         Route::post('/consultations/{consultation}/cloturer', [ConsultationController::class, 'close'])->name('consultations.close');
         Route::get('/hospitalisation', [HospitalisationController::class, 'index'])->name('hospitalisation.index');
+        Route::get('/observation', [HospitalisationController::class, 'observation'])->name('observation.index');
         Route::post('/admissions', [AdmissionController::class, 'store'])->name('admissions.store');
         Route::post('/admissions/{admission}/sortie', [AdmissionController::class, 'discharge'])->name('admissions.discharge');
         Route::get('/chambres', [ChambreController::class, 'index'])->name('chambres.index');
@@ -79,34 +108,60 @@ Route::get('/patients/{patient}', [PatientController::class, 'show'])->name('pat
         Route::post('/orientations', [ReferralController::class, 'store'])->name('referrals.store');
     });
 
-    Route::middleware('role:admin')->group(function () {
+    Route::middleware('role:admin,docteur_general')->group(function () {
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::get('/insurance', [InsuranceController::class, 'index'])->name('insurance.index');
         Route::get('/personnel', [PersonnelController::class, 'index'])->name('personnel.index');
+    });
+
+    Route::middleware('role:admin')->group(function () {
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::post('/users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
+
+        Route::post('/insurance', [InsuranceController::class, 'store'])->name('insurance.store');
+        Route::put('/insurance/{insuranceCompany}', [InsuranceController::class, 'update'])->name('insurance.update');
+        Route::delete('/insurance/{insuranceCompany}', [InsuranceController::class, 'destroy'])->name('insurance.destroy');
+
         Route::post('/personnel', [PersonnelController::class, 'store'])->name('personnel.store');
         Route::patch('/personnel/{doctor}', [PersonnelController::class, 'update'])->name('personnel.update');
         Route::post('/personnel/{doctor}/statut', [PersonnelController::class, 'toggleActive'])->name('personnel.toggle');
+        Route::post('/assurances', [PersonnelController::class, 'storeInsuranceCompany'])->name('insurance-companies.store');
         Route::post('/gardes', [OnCallShiftController::class, 'store'])->name('on-call.store');
         Route::delete('/gardes/{onCallShift}', [OnCallShiftController::class, 'destroy'])->name('on-call.destroy');
     });
 
-    Route::middleware('role:laborantin,medecin,pediatre')->group(function () {
+    Route::middleware('role:admin,docteur_general')->group(function () {
+        Route::get('/acts', [ActController::class, 'index'])->name('acts.index');
+    });
+
+    Route::middleware('role:admin')->group(function () {
+        Route::post('/acts', [ActController::class, 'store'])->name('acts.store');
+        Route::put('/acts/{act}', [ActController::class, 'update'])->name('acts.update');
+        Route::delete('/acts/{act}', [ActController::class, 'destroy'])->name('acts.destroy');
+    });
+
+    Route::middleware('role:laborantin,medecin,pediatre,docteur_general')->group(function () {
         Route::post('/examens', [ExamController::class, 'store'])->name('exams.store');
     });
 
-    Route::middleware('role:laborantin')->group(function () {
+    Route::middleware('role:laborantin,docteur_general')->group(function () {
         Route::get('/laboratoire', [LaboratoireController::class, 'index'])->name('laboratoire.index');
         Route::post('/examens/{exam}/avancer', [ExamController::class, 'advance'])->name('exams.advance');
     });
 
-    Route::middleware('role:medecin,pediatre')->group(function () {
+    Route::middleware('role:medecin,pediatre,docteur_general')->group(function () {
         Route::post('/ordonnances', [PrescriptionController::class, 'store'])->name('prescriptions.store');
     });
 
-    Route::middleware('role:pharmacien')->group(function () {
+    Route::middleware('role:pharmacien,docteur_general')->group(function () {
         Route::get('/pharmacie', [PharmacieController::class, 'index'])->name('pharmacie.index');
         Route::post('/ordonnances/{prescription}/delivrer', [PrescriptionController::class, 'dispense'])->name('prescriptions.dispense');
+        Route::get('/patients/search', [PharmacieController::class, 'searchPatients'])->name('pharmacie.patients.search');
+        Route::get('/medicaments/search', [PharmacieController::class, 'searchMedications'])->name('pharmacie.medications.search');
     });
 
-    Route::middleware('role:logistique')->group(function () {
+    Route::middleware('role:logistique,docteur_general')->group(function () {
         Route::get('/logistique', [LogistiqueController::class, 'index'])->name('logistique.index');
         Route::post('/medicaments', [MedicationController::class, 'store'])->name('medications.store');
         Route::post('/medicaments/{medication}/stock', [MedicationController::class, 'adjustStock'])->name('medications.adjust-stock');
@@ -114,11 +169,16 @@ Route::get('/patients/{patient}', [PatientController::class, 'show'])->name('pat
         Route::post('/commandes/{medicationOrder}/reception', [MedicationOrderController::class, 'receive'])->name('medication-orders.receive');
         Route::get('/commandes/{medicationOrder}/imprimer', [MedicationOrderController::class, 'print'])->name('medication-orders.print');
     });
+
+    Route::middleware('role:docteur_general')->group(function () {
+        Route::get('/docteur-general', [DocteurGeneralController::class, 'index'])->name('docteurgeneral.index');
+    });
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/api/badges', [BadgeController::class, 'counts'])->name('api.badges');
 });
 
 require __DIR__.'/auth.php';
