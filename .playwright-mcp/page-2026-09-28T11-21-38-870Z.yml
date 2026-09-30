@@ -1,0 +1,67 @@
+- generic [ref=f9e3]:
+  - banner [ref=f9e4]:
+    - button "Ouvrir le menu" [ref=f9e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f9e9]
+    - generic [ref=f9e10]:
+      - button [ref=f9e11] [cursor=pointer]
+      - generic [ref=f9e16]: DG
+  - main [ref=f9e20]:
+    - generic [ref=f9e21]:
+      - generic [ref=f9e22]:
+        - generic [ref=f9e23]:
+          - heading "Accueil & Réception" [level=1] [ref=f9e24]
+          - paragraph [ref=f9e25]: Gestion des arrivées des patients — lundi 28 septembre.
+        - button "Nouveau patient" [ref=f9e28] [cursor=pointer]
+      - generic [ref=f9e31]:
+        - generic [ref=f9e32]:
+          - paragraph [ref=f9e34]: Arrivées aujourd'hui
+          - generic [ref=f9e38]:
+            - generic [ref=f9e39]: "0"
+            - generic [ref=f9e40]: Visites du jour
+        - generic [ref=f9e41]:
+          - paragraph [ref=f9e43]: En attente
+          - generic [ref=f9e47]:
+            - generic [ref=f9e48]: "0"
+            - generic [ref=f9e49]: Avant consultation
+        - generic [ref=f9e50]:
+          - paragraph [ref=f9e52]: Urgences
+          - generic [ref=f9e56]:
+            - generic [ref=f9e57]: "0"
+            - generic [ref=f9e58]: Priorité immédiate
+        - generic [ref=f9e59]:
+          - paragraph [ref=f9e61]: Taux d'occupation
+          - generic [ref=f9e65]:
+            - generic [ref=f9e66]: 7%
+            - generic [ref=f9e67]: Capacité clinique
+      - generic [ref=f9e68]:
+        - 'heading "Patients en observation : 1" [level=3] [ref=f9e73]'
+        - generic [ref=f9e75]:
+          - generic [ref=f9e76]:
+            - generic [ref=f9e77]: AA
+            - generic [ref=f9e78]:
+              - paragraph [ref=f9e79]: Aristide Adouko
+              - paragraph [ref=f9e80]: CSM-8147
+            - generic [ref=f9e81]: Chambre 5 — Chirurgie
+          - generic [ref=f9e82]: Mise en observation
+      - generic [ref=f9e84]:
+        - generic [ref=f9e85]: "Filtrer par prise en charge :"
+        - generic [ref=f9e88]:
+          - button "Tout" [ref=f9e89] [cursor=pointer]
+          - button "Assuré" [ref=f9e90] [cursor=pointer]
+          - button "Non assuré" [ref=f9e91] [cursor=pointer]
+        - generic [ref=f9e92]: lundi 28 septembre
+      - generic [ref=f9e95]:
+        - table [ref=f9e97]:
+          - rowgroup [ref=f9e98]:
+            - row [ref=f9e99]:
+              - columnheader "Patient" [ref=f9e100]
+              - columnheader "Arrivée" [ref=f9e101]
+              - columnheader "Prise en charge" [ref=f9e102]
+              - columnheader "Statut" [ref=f9e103]
+              - columnheader "Actions" [ref=f9e104]
+          - rowgroup
+        - generic [ref=f9e105]:
+          - paragraph [ref=f9e106]: arrivée(s) affichée(s) / 0 arrivée(s) enregistrée(s) aujourd'hui
+          - generic [ref=f9e107]:
+            - button [disabled] [ref=f9e108]
+            - button [ref=f9e111] [cursor=pointer]

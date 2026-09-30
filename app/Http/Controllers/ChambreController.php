@@ -47,6 +47,11 @@ class ChambreController extends Controller
             $filterItems[] = ['label' => $ward['label'], 'active' => false];
         }
 
+        $user = auth()->user();
+        $userName = $user?->name ?? 'Utilisateur';
+        $userRole = $user?->role?->label() ?? 'Personnel clinique';
+        $userInitials = $user?->initials ?? $this->initialsFor($userName);
+
         return view('chambres.board', [
             'wards' => $wards,
             'totalBeds' => $totalBeds,
@@ -55,6 +60,9 @@ class ChambreController extends Controller
             'occupancyRate' => $totalBeds > 0 ? round(($occupiedBeds / $totalBeds) * 100) : 0,
             'wardsList' => $wardsList,
             'filterItems' => $filterItems,
+            'userName' => $userName,
+            'userRole' => $userRole,
+            'userInitials' => $userInitials,
         ]);
     }
 

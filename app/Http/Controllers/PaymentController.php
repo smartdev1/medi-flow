@@ -3,144 +3,165 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePaymentRequest;
-use App\Models\Act;
 use App\Models\CashierSession;
 use App\Models\Invoice;
 use App\Models\Patient;
 use App\Models\Payment;
-use Carbon\Carbon;
-use Illuminate\Http\JsonResponse;
+use App\Models\SessionTransfer;
+use App\Models\User;
+use App\Models\Versement;
+use App\Services\CashierService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Log;
+use RuntimeException;
 
 class PaymentController extends Controller
 {
-    public function store(StorePaymentRequest $request): RedirectResponse
+    public function store(StorePaymentRequest $request, CashierService $cashier): RedirectResponse
     {
         $data = $request->validated();
         $patient = Patient::findOrFail($data['patient_id']);
+        $visit = $patient->visits()->active()->latest('arrived_at')->first();
 
-        $act = ! empty($data['act_id']) ? Act::find($data['act_id']) : null;
-
-        if (! $act) {
-            $visit = $patient->visits()->active()->latest('arrived_at')->first();
-            $act = ($visit && $visit->act_id) ? $visit->act : null;
+        try {
+            $payment = $cashier->recordManualPayment(auth()->user(), [
+                'patient_id' => $patient->id,
+                'visit_id' => $visit?->id,
+                'service' => $data['service'],
+                'base_amount' => $data['base_amount'] ?? null,
+                'taux' => $data['taux'] ?? null,
+                'amount' => $data['amount'],
+                'method' => $data['method'],
+                'status' => $data['status'] ?? Payment::STATUS_PAID,
+            ]);
+        } catch (RuntimeException $e) {
+            return redirect()->route('caisse.index')->with('error', $e->getMessage());
         }
-
-        $activeSession = \App\Models\CashierSession::where('cashier_id', Auth::id())->active()->first();
-
-        if (! $activeSession) {
-            return redirect()
-                ->route('caisse.index')
-                ->with('error', 'Vous devez ouvrir une session de caisse avant d\'encaisser un paiement.');
-        }
-
-        $payment = Payment::create([
-            'patient_id' => $patient->id,
-            'visit_id' => $patient->visits()->latest('arrived_at')->value('id'),
-            'act_id' => $act?->id,
-            'service' => $act ? $act->label : $data['service'],
-            'base_amount' => $data['base_amount'],
-            'taux' => $data['taux'],
-            'amount' => $data['amount'],
-            'method' => $data['method'],
-            'status' => $data['status'],
-            'cashier_id' => Auth::id(),
-            'cashier_session_id' => $activeSession->id,
-        ]);
 
         return redirect()
             ->route('caisse.index', ['date' => $payment->created_at->toDateString()])
             ->with('success', "Encaissement enregistré pour {$patient->full_name}.");
     }
 
-    public function closeDay(Request $request): RedirectResponse
+    /**
+     * Annulation d'un encaissement.
+     *
+     * La piste comptable est conservée : le paiement passe en « Annulé » et la
+     * facture est rouverte, plutôt que d'être supprimé.
+     */
+    public function cancel(Request $request, Payment $payment): RedirectResponse
     {
-        $validated = $request->validate([
-            'date' => ['required', 'date_format:Y-m-d'],
-        ]);
+        $this->authorize('update', $payment);
 
-        $date = Carbon::createFromFormat('Y-m-d', $validated['date'])->startOfDay();
-        $cashierId = Auth::user()->hasRole('docteur_general') ? null : Auth::id();
-        $now = now();
-
-        Log::channel('deprecations')->warning('Deprecated: closeDay() called by user {user_id}. Use CashierSession instead.', ['user_id' => Auth::id()]);
-
-        // Récupérer uniquement les paiements OUVERTS pour ce caissier et cette date
-        $openPayments = Payment::whereDate('created_at', $date)
-            ->where('cashier_id', $cashierId)
-            ->open()
-            ->get();
-
-        if ($openPayments->isEmpty()) {
-            return redirect()
-                ->route('caisse.index', ['date' => $date->toDateString()])
-                ->with('success', "Aucun paiement à clôturer pour le {$date->translatedFormat('d/m/Y')} (votre caisse).");
+        if ($payment->isVoided()) {
+            return back()->with('error', 'Cet encaissement est déjà annulé.');
         }
 
-        // Clôturer uniquement les paiements de ce caissier
-        Payment::whereDate('created_at', $date)
-            ->where('cashier_id', $cashierId)
-            ->open()
-            ->update([
-                'closed_at' => $now,
-                'closed_by' => Auth::id(),
-            ]);
+        $invoice = $payment->invoice;
 
-        return redirect()
-            ->route('caisse.historique')
-            ->with('success', "Votre caisse du {$date->translatedFormat('d/m/Y')} a été clôturée ({$openPayments->count()} paiement(s)).");
+        $payment->update(['status' => Payment::STATUS_CANCELLED]);
+
+        if ($invoice) {
+            $remaining = max(0, (int) $invoice->paid_amount - (int) $payment->amount);
+
+            $invoice->update([
+                'paid_amount' => $remaining,
+                'status' => $remaining > 0 ? Invoice::STATUS_PARTIAL : Invoice::STATUS_AWAITING_PAYMENT,
+                'paid_at' => null,
+            ]);
+        }
+
+        return back()->with('success', 'Encaissement annulé et facture rouverte.');
     }
 
-    public function markAsPaid(Request $request): JsonResponse|RedirectResponse
+    /**
+     * Versement journalier : ce qui remonte effectivement à la caisse centrale.
+     * Indépendant de la clôture de vacation, puisqu'il peut intervenir le
+     * lendemain.
+     */
+    public function deposit(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'payment_id' => ['required', 'integer'],
+            'session_id' => ['required', 'exists:cashier_sessions,id'],
+            'amount' => ['required', 'integer', 'min:1'],
+            'method' => ['required', 'string', 'max:255'],
+            'reference' => ['nullable', 'string', 'max:255'],
+            'notes' => ['nullable', 'string', 'max:1000'],
         ]);
 
-        $payment = Payment::findOrFail($validated['payment_id']);
+        $session = CashierSession::findOrFail($validated['session_id']);
 
-        $this->authorize('markAsPaid', $payment);
-
-        // Mark the payment as paid first
-        $payment->update(['status' => Payment::STATUS_PAID]);
-
-        // Sync the associated Invoice status if one exists for the same visit
-        if ($payment->visit_id) {
-            $invoice = \App\Models\Invoice::where('visit_id', $payment->visit_id)
-                ->where('status', '!=', Invoice::STATUS_PAID)
-                ->first();
-
-            if ($invoice) {
-                $totalPaid = Payment::where('visit_id', $payment->visit_id)
-                    ->where('status', Payment::STATUS_PAID)
-                    ->sum('amount');
-
-                $invoice->update([
-                    'status' => Invoice::STATUS_PAID,
-                    'paid_amount' => $totalPaid,
-                    'cashier_id' => Auth::id(),
-                    'paid_at' => now(),
-                ]);
-            }
+        if (! $session->isClosed()) {
+            return back()->with('error', 'La vacation doit être clôturée avant le versement.');
         }
 
-        if ($request->wantsJson()) {
-            return response()->json(['success' => true, 'message' => "Paiement marqué comme payé pour {$payment->patient->full_name}."]);
+        $available = $session->availableForRemittance();
+
+        if ($validated['amount'] > $available) {
+            return back()->with('error', "Le versement dépasse le disponible de la vacation ({$available} FCFA).");
         }
 
-        return back()
-            ->with('success', "Paiement marqué comme payé pour {$payment->patient->full_name}.");
+        $versement = Versement::create([
+            'date' => today(),
+            'cashier_id' => $session->cashier_id,
+            'amount' => $validated['amount'],
+            'method' => $validated['method'],
+            'reference' => $validated['reference'] ?? null,
+            'deposited_at' => now(),
+            'deposited_by' => auth()->id(),
+            'notes' => $validated['notes'] ?? null,
+        ]);
+
+        $versement->sessions()->attach($session->id);
+
+        return back()->with('success', "Versement de {$versement->formatted_amount} enregistré.");
+    }
+
+    /**
+     * Remise de fonds au caissier suivant (relevé de caisse). L'argent reste
+     * au coffre : c'est la responsabilité qui change de main.
+     */
+    public function handOver(Request $request, CashierSession $session): RedirectResponse
+    {
+        $validated = $request->validate([
+            'to_cashier_id' => ['required', 'exists:users,id'],
+            'amount' => ['required', 'integer', 'min:0'],
+            'notes' => ['nullable', 'string', 'max:1000'],
+        ]);
+
+        if (! $session->isClosed()) {
+            return back()->with('error', 'Clôturez d\'abord la vacation avant de transmettre le fonds.');
+        }
+
+        $available = $session->availableForRemittance();
+
+        if ($validated['amount'] > $available) {
+            return back()->with('error', "La remise dépasse le disponible de la vacation ({$available} FCFA).");
+        }
+
+        $target = User::where('id', $validated['to_cashier_id'])
+            ->whereIn('role', ['caissier', 'docteur_general'])
+            ->firstOrFail();
+
+        SessionTransfer::create([
+            'from_session_id' => $session->id,
+            'to_cashier_id' => $target->id,
+            'from_cashier_id' => $session->cashier_id,
+            'amount' => $validated['amount'],
+            'transferred_at' => now(),
+            'counted_by' => auth()->id(),
+            'notes' => $validated['notes'] ?? null,
+        ]);
+
+        return back()->with('success', "Fonds de {$validated['amount']} FCFA transmis à {$target->name}.");
     }
 
     public function receipt($paymentId): View
     {
-        $payment = Payment::where('id', $paymentId)->with(['patient', 'cashier', 'visit'])->firstOrFail();
+        $payment = Payment::with(['patient', 'cashier', 'visit', 'invoice'])->findOrFail($paymentId);
 
         $this->authorize('view', $payment);
 
@@ -154,7 +175,7 @@ class PaymentController extends Controller
 
     public function downloadReceipt($paymentId): Response
     {
-        $payment = Payment::where('id', $paymentId)->with(['patient', 'cashier', 'visit'])->firstOrFail();
+        $payment = Payment::with(['patient', 'cashier', 'visit', 'invoice'])->findOrFail($paymentId);
 
         $this->authorize('view', $payment);
 

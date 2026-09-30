@@ -1,0 +1,35 @@
+- generic [ref=f16e2]:
+  - generic [ref=f16e3]:
+    - generic [ref=f16e4]: Clinique Saint Matthieu
+    - generic [ref=f16e9]:
+      - heading "Le parcours patient, coordonné du premier contact à la sortie." [level=1] [ref=f16e10]
+      - paragraph [ref=f16e11]: "Accueil, caisse, consultation, laboratoire, pharmacie : une seule plateforme pour suivre chaque patient, en temps réel, à chaque étape de son passage en clinique."
+      - list [ref=f16e12]:
+        - listitem [ref=f16e13]:
+          - generic [ref=f16e16]: Suivi du statut patient en temps réel, service par service
+        - listitem [ref=f16e17]:
+          - generic [ref=f16e20]: Dossier, historique et documents centralisés
+        - listitem [ref=f16e21]:
+          - generic [ref=f16e24]: File d'attente et orientation automatisées
+    - generic [ref=f16e25]: Hébergement de données de santé certifié — conforme RGPD
+  - generic [ref=f16e30]:
+    - paragraph [ref=f16e31]: Espace professionnel
+    - heading "Bon retour" [level=2] [ref=f16e32]
+    - paragraph [ref=f16e33]: Connectez-vous avec vos identifiants professionnels.
+    - generic [ref=f16e34]:
+      - generic [ref=f16e36]:
+        - generic [ref=f16e37]: Adresse e-mail
+        - textbox "Adresse e-mail" [active] [ref=f16e39]:
+          - /placeholder: prenom.nom@clinique-saintmatthieu.ci
+      - generic [ref=f16e41]:
+        - generic [ref=f16e42]: Mot de passe
+        - textbox "Mot de passe" [ref=f16e44]:
+          - /placeholder: ••••••••••
+      - generic [ref=f16e45]:
+        - generic [ref=f16e46]:
+          - checkbox "Se souvenir de moi" [ref=f16e47]
+          - text: Se souvenir de moi
+        - link "Mot de passe oublié ?" [ref=f16e48] [cursor=pointer]:
+          - /url: http://localhost:8000/forgot-password
+      - button "Se connecter" [ref=f16e49] [cursor=pointer]
+    - paragraph [ref=f16e52]: Accès restreint au personnel autorisé de la Clinique Saint Matthieu. Besoin d'aide ? Contactez votre administrateur système.

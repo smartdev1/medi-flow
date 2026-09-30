@@ -28,6 +28,16 @@
                     </div>
 
                     <div>
+                        <label class="text-sm font-medium text-ink">Unité de prise en charge</label>
+                        <select name="type" class="mt-1 w-full rounded-md border border-line bg-white py-2.5 px-3 text-sm text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                            <option value="hospitalisation">Hospitalisation</option>
+                            <option value="observation">Mise en observation</option>
+                        </select>
+                        <p class="mt-1 text-xs text-ink-muted">Détermine l'unité où le patient sera suivi.</p>
+                        <x-input-error :messages="$errors->get('type')" class="mt-1" />
+                    </div>
+
+                    <div>
                         <x-ui.select label="Chambre" name="room_id" placeholder="Sélectionner une chambre disponible" :options="$roomOptions" required />
                         <x-input-error :messages="$errors->get('room_id')" class="mt-1" />
                     </div>
@@ -52,7 +62,7 @@
 
     <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <x-ui.stat-card label="Patients hospitalisés" value="{{ count($patients) }}" icon="building" trend="Toutes unités" trend-tone="neutral" />
-        <x-ui.stat-card label="Sorties prévues aujourd'hui" value="{{ $plannedDischarges }}" icon="check-circle" trend="À préparer" trend-tone="warning" />
+        <x-ui.stat-card label="Sorties prévues" value="{{ $plannedDischarges }}" icon="check-circle" trend="À préparer" trend-tone="warning" />
         <x-ui.stat-card label="Durée moyenne de séjour" value="{{ $averageStay }}" icon="clock" trend="Sur les 7 derniers jours" trend-tone="neutral" />
     </div>
 
@@ -89,15 +99,27 @@
                             <td class="px-5 py-3.5">
                                 <x-ui.badge :tone="$patient['status_tone']">{{ $patient['status'] }}</x-ui.badge>
                             </td>
-                            <td class="px-5 py-3.5 text-right">
-                                <div class="flex justify-end gap-2">
-                                    <x-ui.button variant="secondary" size="sm" :href="route('patients.show', $patient['patient_id'])">Voir dossier</x-ui.button>
-                                    <form method="POST" action="{{ route('admissions.discharge', $patient['id']) }}">
-                                        @csrf
-                                        <x-ui.button size="sm" type="submit">Programmer la sortie</x-ui.button>
-                                    </form>
-                                </div>
-                            </td>
+                                <td class="px-5 py-3.5 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        <x-ui.button variant="secondary" size="sm" :href="route('patients.show', $patient['patient_id'])">Voir dossier</x-ui.button>
+
+                                        @if ($patient['discharge_planned'])
+                                            <form method="POST" action="{{ route('admissions.discharge', $patient['id']) }}">
+                                                @csrf
+                                                <x-ui.button size="sm" type="submit">Enregistrer la sortie</x-ui.button>
+                                            </form>
+                                            <form method="POST" action="{{ route('admissions.cancel-discharge', $patient['id']) }}">
+                                                @csrf
+                                                <x-ui.button variant="secondary" size="sm" type="submit">Annuler</x-ui.button>
+                                            </form>
+                                        @else
+                                            <form method="POST" action="{{ route('admissions.plan-discharge', $patient['id']) }}">
+                                                @csrf
+                                                <x-ui.button size="sm" type="submit">Programmer la sortie</x-ui.button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -1,0 +1,33 @@
+- generic [ref=f27e2]:
+  - complementary [ref=f27e3]:
+    - generic [ref=f27e8]:
+      - paragraph [ref=f27e9]: Clinique Saint Matthieu
+      - paragraph [ref=f27e10]: Espace professionnel
+    - navigation "Navigation principale" [ref=f27e11]:
+      - paragraph [ref=f27e13]: Parcours Patient
+      - link "Salle d'attente 1" [ref=f27e15] [cursor=pointer]:
+        - /url: http://localhost:8000/salle-attente
+        - generic [ref=f27e18]: Salle d'attente
+        - generic [ref=f27e19]: "1"
+      - button "Hospitalisation" [ref=f27e21] [cursor=pointer]
+      - paragraph [ref=f27e29]: Administratif
+      - link "Caisse" [ref=f27e31] [cursor=pointer]:
+        - /url: http://localhost:8000/caisse
+      - link "Sortie patient" [ref=f27e35] [cursor=pointer]:
+        - /url: http://localhost:8000/sortie
+  - generic [ref=f27e39]:
+    - banner [ref=f27e40]:
+      - textbox "Rechercher..." [ref=f27e42]
+      - generic [ref=f27e43]:
+        - button [ref=f27e44] [cursor=pointer]
+        - generic [ref=f27e51] [cursor=pointer]:
+          - generic [ref=f27e52]: S
+          - generic [ref=f27e53]:
+            - paragraph [ref=f27e54]: Stéphanie Aubier
+            - paragraph [ref=f27e55]: Aide-soignante
+    - main [ref=f27e58]:
+      - generic [ref=f27e60]:
+        - heading "Accès refusé" [level=1] [ref=f27e64]
+        - paragraph [ref=f27e65]: Vous n'avez pas les permissions nécessaires pour accéder à cette page. Si vous pensez qu'il s'agit d'une erreur, contactez votre administrateur.
+        - link "Retour à l'accueil" [ref=f27e66] [cursor=pointer]:
+          - /url: http://localhost:8000/accueil

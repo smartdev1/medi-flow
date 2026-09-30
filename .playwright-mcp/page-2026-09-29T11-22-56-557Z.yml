@@ -1,0 +1,88 @@
+- generic [ref=f8e2]:
+  - complementary [ref=f8e3]:
+    - generic [ref=f8e8]:
+      - paragraph [ref=f8e9]: Clinique Saint Matthieu
+      - paragraph [ref=f8e10]: Espace professionnel
+    - navigation "Navigation principale" [ref=f8e11]:
+      - paragraph [ref=f8e13]: Parcours Patient
+      - link "Salle d'attente 1" [ref=f8e15] [cursor=pointer]:
+        - /url: http://localhost:8000/salle-attente
+        - generic [ref=f8e18]: Salle d'attente
+        - generic [ref=f8e19]: "1"
+      - button "Hospitalisation" [ref=f8e21] [cursor=pointer]
+      - paragraph [ref=f8e29]: Administratif
+      - link "Caisse" [ref=f8e31] [cursor=pointer]:
+        - /url: http://localhost:8000/caisse
+      - link "Sortie patient" [ref=f8e35] [cursor=pointer]:
+        - /url: http://localhost:8000/sortie
+  - generic [ref=f8e39]:
+    - banner [ref=f8e40]:
+      - textbox "Rechercher..." [ref=f8e42]
+      - generic [ref=f8e43]:
+        - button [ref=f8e44] [cursor=pointer]
+        - generic [ref=f8e51] [cursor=pointer]:
+          - generic [ref=f8e52]: SA
+          - generic [ref=f8e53]:
+            - paragraph [ref=f8e54]: Stéphanie Aubier
+            - paragraph [ref=f8e55]: Aide-soignante
+    - main [ref=f8e58]:
+      - generic [ref=f8e59]:
+        - generic [ref=f8e60]: Constantes enregistrées pour Aristide Adouko.
+        - generic [ref=f8e63]:
+          - generic [ref=f8e64]:
+            - generic [ref=f8e65]:
+              - heading "Circuit patient — vue d'ensemble" [level=1] [ref=f8e66]
+              - paragraph [ref=f8e67]: Position de chaque patient dans le parcours de soins, en temps réel.
+            - generic [ref=f8e68]:
+              - generic [ref=f8e69]: "Dernière MAJ : 11:22:48"
+              - button "Rafraîchir" [ref=f8e74] [cursor=pointer]
+          - generic [ref=f8e78]:
+            - generic [ref=f8e79]:
+              - generic [ref=f8e80]:
+                - generic [ref=f8e81]: Consultation
+                - generic [ref=f8e85]: "3"
+              - generic [ref=f8e86]:
+                - generic [ref=f8e87]:
+                  - paragraph [ref=f8e89]: Tim Coock
+                  - paragraph [ref=f8e90]: CSM-1909
+                  - paragraph [ref=f8e91]: Consultation
+                  - generic [ref=f8e93]:
+                    - checkbox "Constantes prises par Stéphanie Aubier" [checked] [disabled] [ref=f8e94]
+                    - generic [ref=f8e95]: Constantes prises par Stéphanie Aubier
+                - generic [ref=f8e96]:
+                  - paragraph [ref=f8e98]: Aristide Adouko
+                  - paragraph [ref=f8e99]: CSM-1063
+                  - paragraph [ref=f8e100]: Consultation
+                  - generic [ref=f8e102]:
+                    - checkbox "Constantes prises par Stéphanie Aubier" [checked] [disabled] [ref=f8e103]
+                    - generic [ref=f8e104]: Constantes prises par Stéphanie Aubier
+                - generic [ref=f8e105]:
+                  - paragraph [ref=f8e107]: Mourad Junior
+                  - paragraph [ref=f8e108]: CSM-6440
+                  - paragraph [ref=f8e109]: Consultation
+                  - button "Confirmer les constantes" [ref=f8e112] [cursor=pointer]
+            - generic [ref=f8e115]:
+              - generic [ref=f8e116]:
+                - generic [ref=f8e117]: Hospitalisation
+                - generic [ref=f8e121]: "0"
+              - generic [ref=f8e122]: Aucun patient
+            - generic [ref=f8e124]:
+              - generic [ref=f8e125]:
+                - generic [ref=f8e126]: Mise en Observation
+                - generic [ref=f8e130]: "0"
+              - generic [ref=f8e131]: Aucun patient
+            - generic [ref=f8e133]:
+              - generic [ref=f8e134]:
+                - generic [ref=f8e135]: Laboratoire
+                - generic [ref=f8e139]: "0"
+              - generic [ref=f8e140]: Aucun patient
+            - generic [ref=f8e142]:
+              - generic [ref=f8e143]:
+                - generic [ref=f8e144]: Retour médecin
+                - generic [ref=f8e148]: "0"
+              - generic [ref=f8e149]: Aucun patient
+            - generic [ref=f8e151]:
+              - generic [ref=f8e152]:
+                - generic [ref=f8e153]: Sortie
+                - generic [ref=f8e157]: "0"
+              - generic [ref=f8e158]: Aucun patient

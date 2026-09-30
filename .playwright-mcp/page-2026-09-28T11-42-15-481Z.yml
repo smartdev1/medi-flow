@@ -1,0 +1,27 @@
+- generic [ref=f24e3]:
+  - banner [ref=f24e4]:
+    - button "Ouvrir le menu" [ref=f24e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f24e9]
+    - generic [ref=f24e10]:
+      - button [ref=f24e11] [cursor=pointer]
+      - generic [ref=f24e16]:
+        - generic [ref=f24e17] [cursor=pointer]: AS
+        - generic [ref=f24e39]:
+          - generic [ref=f24e40]:
+            - paragraph [ref=f24e41]: Aide Soignante
+            - paragraph [ref=f24e42]: Aide-soignante
+          - link "Paramètres du compte" [ref=f24e43] [cursor=pointer]:
+            - /url: http://localhost:8000/profile
+          - button "Se déconnecter" [ref=f24e47] [cursor=pointer]
+  - main [ref=f24e20]:
+    - generic [ref=f24e21]:
+      - generic [ref=f24e22]: Demande approuvée pour QA PatientTest.
+      - generic [ref=f24e25]:
+        - generic [ref=f24e26]:
+          - heading "Demandes d'admission" [level=1] [ref=f24e27]
+          - paragraph [ref=f24e28]: Validez les demandes d'hospitalisation ou de mise en observation.
+        - link "Hospitalisations" [ref=f24e30] [cursor=pointer]:
+          - /url: http://localhost:8000/hospitalisation
+      - generic [ref=f24e34]:
+        - paragraph [ref=f24e37]: Aucune demande en attente
+        - paragraph [ref=f24e38]: Toutes les demandes ont été traitées.

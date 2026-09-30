@@ -261,25 +261,40 @@
                                             Detail
                                         </a>
                                     @endif
-                                    @if ($row['can_encaisser'])
-                                        @if ($row['invoice_id'])
-                                            <form method="POST" action="{{ route('caisse.paniers.pay', $row['invoice_id']) }}">
-                                                @csrf
-                                                <button type="submit" class="rounded-md bg-success px-3 py-1.5 text-xs font-medium text-white hover:bg-success/90">
-                                                    Encaisser
-                                                </button>
-                                            </form>
-                                        @else
-                                            <x-ui.button
-                                                size="sm"
-                                                data-payment-id="{{ $row['payment_id'] }}"
-                                                data-amount="{{ $row['montant_total'] }}"
-                                                data-name="{{ $row['patient_name'] }}"
-                                                onclick="handleEncaisser(this)"
-                                            >
+                                    @if ($row['can_encaisser'] && $row['invoice_id'])
+                                        {{-- L'encaissement exige un mode de paiement : sans ce
+                                             champ, la validation le refuse et le bouton
+                                             semble inopérant. Le montant est pré-rempli
+                                             avec le solde restant, et reste modifiable
+                                             pour un encaissement partiel. --}}
+                                        <form method="POST" action="{{ route('caisse.paniers.pay', $row['invoice_id']) }}" class="flex flex-col items-end gap-1.5">
+                                            @csrf
+                                            <div class="flex items-center gap-1.5">
+                                                <input
+                                                    type="number"
+                                                    name="amount"
+                                                    min="1"
+                                                    max="{{ $row['remaining_amount'] }}"
+                                                    value="{{ old('amount', $row['remaining_amount']) }}"
+                                                    aria-label="Montant à encaisser"
+                                                    class="w-24 rounded-md border border-line bg-white py-1.5 px-2 text-right text-xs text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+                                                >
+                                                <select
+                                                    name="method"
+                                                    aria-label="Mode de paiement"
+                                                    class="rounded-md border border-line bg-white py-1.5 px-2 text-xs text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+                                                >
+                                                    @foreach (array_keys(config('clinic.payment_methods')) as $method)
+                                                        <option value="{{ $method }}">{{ $method }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <x-input-error :messages="$errors->get('method')" />
+                                            <x-input-error :messages="$errors->get('amount')" />
+                                            <button type="submit" class="self-end rounded-md bg-success px-3 py-1.5 text-xs font-medium text-white hover:bg-success/90">
                                                 Encaisser
-                                            </x-ui.button>
-                                        @endif
+                                            </button>
+                                        </form>
                                     @endif
                                     @if ($row['can_receipt'] && $row['payment_id'])
                                         <a href="{{ route('payments.receipt', $row['payment_id']) }}" target="_blank">
@@ -303,51 +318,5 @@
             </table>
         </div>
     </x-ui.card>
-
-    <script>
-        function handleEncaisser(button) {
-            const paymentId = button.getAttribute('data-payment-id');
-            const amount = button.getAttribute('data-amount');
-            const name = button.getAttribute('data-name');
-
-            if (!paymentId) {
-                alert('Identifiant de paiement manquant.');
-                return;
-            }
-
-            if (!confirm('Confirmer l\'encaissement de ' + amount + ' FCFA pour ' + name + ' ?')) {
-                return;
-            }
-
-            fetch('{{ route("payments.encaisser") }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({ payment_id: paymentId })
-            })
-            .then(async (response) => {
-                const data = await response.json().catch(() => ({}));
-                if (!response.ok) {
-                    const message = data.message || ('Erreur serveur: ' + response.status);
-                    throw new Error(message);
-                }
-                return data;
-            })
-            .then((data) => {
-                if (data.success) {
-                    location.reload();
-                } else {
-                    alert('Reponse inattendue du serveur.');
-                }
-            })
-            .catch((error) => {
-                console.error('Erreur:', error);
-                alert('Une erreur est survenue lors de l\'encaissement : ' + error.message);
-            });
-        }
-    </script>
 
 </x-layout.app-shell>

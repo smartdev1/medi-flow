@@ -1,0 +1,32 @@
+[  107749ms] [WARNING] Alpine Expression Error: selectedId is not defined
+
+Expression: "selectedId"
+
+ JSHandle@node @ http://localhost:8000/build/assets/app-fda4e741.js:8
+[  107749ms] [WARNING] Alpine Expression Error: selectedId is not defined
+
+Expression: "item.medication_id = selectedId"
+
+ JSHandle@node @ http://localhost:8000/build/assets/app-fda4e741.js:8
+[  107766ms] ReferenceError: selectedId is not defined
+    at [Alpine] selectedId (eval at <anonymous> (http://localhost:8000/build/assets/app-fda4e741.js:13:747), <anonymous>:3:32)
+    at http://localhost:8000/build/assets/app-fda4e741.js:13:1163
+    at la (http://localhost:8000/build/assets/app-fda4e741.js:9:10787)
+    at http://localhost:8000/build/assets/app-fda4e741.js:13:26008
+    at http://localhost:8000/build/assets/app-fda4e741.js:9:6222
+    at n (http://localhost:8000/build/assets/app-fda4e741.js:13:19099)
+    at Object.bc [as effect] (http://localhost:8000/build/assets/app-fda4e741.js:13:18885)
+    at he (http://localhost:8000/build/assets/app-fda4e741.js:9:5876)
+    at Fr (http://localhost:8000/build/assets/app-fda4e741.js:9:6208)
+    at Proxy.<anonymous> (http://localhost:8000/build/assets/app-fda4e741.js:13:25987)
+[  107766ms] ReferenceError: selectedId is not defined
+    at [Alpine] item.medication_id = selectedId (eval at <anonymous> (http://localhost:8000/build/assets/app-fda4e741.js:13:747), <anonymous>:3:53)
+    at http://localhost:8000/build/assets/app-fda4e741.js:13:1163
+    at la (http://localhost:8000/build/assets/app-fda4e741.js:9:10787)
+    at n (http://localhost:8000/build/assets/app-fda4e741.js:13:19099)
+    at Object.bc [as effect] (http://localhost:8000/build/assets/app-fda4e741.js:13:18885)
+    at he (http://localhost:8000/build/assets/app-fda4e741.js:9:5876)
+    at http://localhost:8000/build/assets/app-fda4e741.js:9:5990
+    at http://localhost:8000/build/assets/app-fda4e741.js:13:28571
+    at Function.<anonymous> (http://localhost:8000/build/assets/app-fda4e741.js:13:12557)
+    at n (http://localhost:8000/build/assets/app-fda4e741.js:13:3089)

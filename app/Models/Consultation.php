@@ -53,5 +53,9 @@ class Consultation extends Model
     public function close(): void
     {
         $this->update(['status' => self::STATUS_CLOSED, 'closed_at' => now()]);
+
+        // Clôturer une consultation clôturerait la visite ; sans cela la
+        // visite resterait « En consultation » indéfiniment.
+        $this->visit?->update(['status' => Visit::STATUS_CONSULTATION_CLOSED]);
     }
 }

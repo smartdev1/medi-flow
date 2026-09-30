@@ -13,10 +13,15 @@ class Payment extends Model
     public const STATUS_PAID = 'Payé';
     public const STATUS_PARTIAL = 'Partiellement payé';
     public const STATUS_PENDING = 'En attente';
+    public const STATUS_CANCELLED = 'Annulé';
+    public const STATUS_REFUNDED = 'Remboursé';
+
+    public const METHOD_CASH = 'Espèces';
 
     protected $fillable = [
         'patient_id',
         'visit_id',
+        'invoice_id',
         'prescription_id',
         'act_id',
         'service',
@@ -25,8 +30,6 @@ class Payment extends Model
         'amount',
         'method',
         'status',
-        'closed_at',
-        'closed_by',
         'cashier_id',
         'cashier_session_id',
     ];
@@ -35,7 +38,6 @@ class Payment extends Model
         'base_amount' => 'integer',
         'taux' => 'decimal:2',
         'amount' => 'integer',
-        'closed_at' => 'datetime',
     ];
 
     public function patient(): BelongsTo
@@ -48,6 +50,11 @@ class Payment extends Model
         return $this->belongsTo(Visit::class);
     }
 
+    public function invoice(): BelongsTo
+    {
+        return $this->belongsTo(Invoice::class);
+    }
+
     public function prescription(): BelongsTo
     {
         return $this->belongsTo(Prescription::class);
@@ -56,11 +63,6 @@ class Payment extends Model
     public function act(): BelongsTo
     {
         return $this->belongsTo(Act::class);
-    }
-
-    public function closedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'closed_by');
     }
 
     public function cashier(): BelongsTo
@@ -93,13 +95,19 @@ class Payment extends Model
         return match ($this->status) {
             self::STATUS_PAID => 'success',
             self::STATUS_PARTIAL => 'warning',
+            self::STATUS_CANCELLED, self::STATUS_REFUNDED => 'danger',
             default => 'neutral',
         };
     }
 
-    public function isClosed(): bool
+    public function isSettled(): bool
     {
-        return $this->closed_at !== null;
+        return in_array($this->status, [self::STATUS_PAID, self::STATUS_PARTIAL], true);
+    }
+
+    public function isVoided(): bool
+    {
+        return in_array($this->status, [self::STATUS_CANCELLED, self::STATUS_REFUNDED], true);
     }
 
     public function scopeForDate($query, \DateTimeInterface|string $date)
@@ -107,13 +115,12 @@ class Payment extends Model
         return $query->whereDate('created_at', $date);
     }
 
-    public function scopeOpen($query)
+    /**
+     * Encaissements réels : les annulations et remboursements ne mouvementent
+     * pas la caisse.
+     */
+    public function scopeSettled($query)
     {
-        return $query->whereNull('closed_at');
-    }
-
-    public function scopeClosed($query)
-    {
-        return $query->whereNotNull('closed_at');
+        return $query->whereIn('status', [self::STATUS_PAID, self::STATUS_PARTIAL]);
     }
 }

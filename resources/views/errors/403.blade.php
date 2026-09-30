@@ -25,15 +25,6 @@
             Si vous pensez qu'il s'agit d'une erreur, contactez votre administrateur.
         </p>
 
-        {{-- Rôle de l'utilisateur connecté --}}
-        @if ($currentUser)
-            <div class="mt-6 rounded-md border border-line bg-white px-4 py-3 text-sm text-ink-soft shadow-sm">
-                <span class="font-medium">Rôle connecté :</span>
-                {{ $currentUser->role->label() }}
-                <span class="text-ink-muted">({{ $currentUser->role->value }})</span>
-            </div>
-        @endif
-
         {{-- Bouton retour accueil --}}
         <a
             href="{{ route('accueil.index') }}"

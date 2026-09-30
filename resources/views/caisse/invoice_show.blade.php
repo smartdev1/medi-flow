@@ -12,8 +12,28 @@
                 Retour
             </a>
             @if ($invoice->isAwaitingPayment() || $invoice->isPending())
-                <form method="POST" action="{{ route('caisse.paniers.pay', $invoice) }}">
+                <form method="POST" action="{{ route('caisse.paniers.pay', $invoice) }}" class="flex flex-wrap items-end justify-end gap-2">
                     @csrf
+                    <div>
+                        <label for="amount" class="text-xs font-medium text-ink-soft">Montant</label>
+                        <input type="number"
+                               name="amount"
+                               id="amount"
+                               min="1"
+                               max="{{ $invoice->remaining_amount }}"
+                               value="{{ old('amount', $invoice->remaining_amount) }}"
+                               class="mt-1 w-32 rounded-md border border-line bg-white px-2 py-2 text-right font-mono text-sm text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                    </div>
+                    <div>
+                        <label for="method" class="text-xs font-medium text-ink-soft">Mode de paiement</label>
+                        <select name="method"
+                                id="method"
+                                class="mt-1 rounded-md border border-line bg-white px-2 py-2 text-sm text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                            @foreach (array_keys(config('clinic.payment_methods')) as $method)
+                                <option value="{{ $method }}" @selected(old('method', $method) === $method)>{{ $method }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <button type="submit" class="rounded-md bg-success px-4 py-2 text-sm font-medium text-white hover:bg-success/90">
                         Encaisser
                     </button>
@@ -31,6 +51,24 @@
             @endif
         </div>
     </div>
+
+    @if ($invoice->isAwaitingPayment() || $invoice->isPending())
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-md border px-4 py-3 text-sm {{ $cashierSession ? 'border-success/20 bg-success-tint text-success' : 'border-warning/20 bg-warning-tint text-warning' }}">
+            <div class="flex items-center gap-2">
+                <x-ui.icon :name="$cashierSession ? 'check-circle' : 'alert-triangle'" class="h-4 w-4 shrink-0" />
+                @if ($cashierSession)
+                    <span>Session de caisse ouverte depuis {{ $cashierSession->opened_at->format('d/m/Y H:i') }} — l'encaissement sera rattaché à ce fonds.</span>
+                @else
+                    <span>Aucune session de caisse ouverte : l'encaissement sera refusé tant qu'une session n'est pas ouverte.</span>
+                @endif
+            </div>
+            @unless ($cashierSession)
+                <a href="{{ route('caisse.sessions.open') }}" class="rounded-md border border-warning/30 bg-white px-3 py-1.5 text-xs font-medium text-warning hover:bg-warning-tint">
+                    Ouvrir une session
+                </a>
+            @endunless
+        </div>
+    @endif
 
     <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div class="lg:col-span-2">

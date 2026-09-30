@@ -1,0 +1,57 @@
+- generic [ref=f67e3]:
+  - banner [ref=f67e4]:
+    - button "Ouvrir le menu" [ref=f67e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f67e9]
+    - generic [ref=f67e10]:
+      - button [ref=f67e11] [cursor=pointer]
+      - generic [ref=f67e16]: AK
+  - main [ref=f67e20]:
+    - generic [ref=f67e21]:
+      - generic [ref=f67e22]:
+        - generic [ref=f67e23]:
+          - heading "Accueil & Réception" [level=1] [ref=f67e24]
+          - paragraph [ref=f67e25]: Gestion des arrivées des patients — lundi 28 septembre.
+        - button "Nouveau patient" [ref=f67e28] [cursor=pointer]
+      - generic [ref=f67e31]:
+        - generic [ref=f67e32]:
+          - paragraph [ref=f67e34]: Arrivées aujourd'hui
+          - generic [ref=f67e38]:
+            - generic [ref=f67e39]: "0"
+            - generic [ref=f67e40]: Visites du jour
+        - generic [ref=f67e41]:
+          - paragraph [ref=f67e43]: En attente
+          - generic [ref=f67e47]:
+            - generic [ref=f67e48]: "0"
+            - generic [ref=f67e49]: Avant consultation
+        - generic [ref=f67e50]:
+          - paragraph [ref=f67e52]: Urgences
+          - generic [ref=f67e56]:
+            - generic [ref=f67e57]: "0"
+            - generic [ref=f67e58]: Priorité immédiate
+        - generic [ref=f67e59]:
+          - paragraph [ref=f67e61]: Taux d'occupation
+          - generic [ref=f67e65]:
+            - generic [ref=f67e66]: 0%
+            - generic [ref=f67e67]: Capacité clinique
+      - generic [ref=f67e68]:
+        - generic [ref=f67e69]: "Filtrer par prise en charge :"
+        - generic [ref=f67e72]:
+          - button "Tout" [ref=f67e73] [cursor=pointer]
+          - button "Assuré" [ref=f67e74] [cursor=pointer]
+          - button "Non assuré" [ref=f67e75] [cursor=pointer]
+        - generic [ref=f67e76]: lundi 28 septembre
+      - generic [ref=f67e79]:
+        - table [ref=f67e81]:
+          - rowgroup [ref=f67e82]:
+            - row [ref=f67e83]:
+              - columnheader "Patient" [ref=f67e84]
+              - columnheader "Arrivée" [ref=f67e85]
+              - columnheader "Prise en charge" [ref=f67e86]
+              - columnheader "Statut" [ref=f67e87]
+              - columnheader "Actions" [ref=f67e88]
+          - rowgroup
+        - generic [ref=f67e89]:
+          - paragraph [ref=f67e90]: 0 arrivée(s) affichée(s) / 0 arrivée(s) enregistrée(s) aujourd'hui
+          - generic [ref=f67e91]:
+            - button [disabled] [ref=f67e92]
+            - button [ref=f67e95] [cursor=pointer]

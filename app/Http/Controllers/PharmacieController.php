@@ -49,4 +49,40 @@ class PharmacieController extends Controller
             'userInitials' => $userInitials,
         ]);
     }
+
+    public function searchPatients(Request $request)
+    {
+        $query = $request->string('q')->toString();
+
+        $patients = Patient::query()
+            ->when($query, function ($q, $query) {
+                $q->where('code', 'like', "%{$query}%")
+                  ->orWhere('first_name', 'like', "%{$query}%")
+                  ->orWhere('last_name', 'like', "%{$query}%");
+            })
+            ->orderBy('first_name')
+            ->limit(20)
+            ->get(['id', 'first_name', 'last_name', 'code', 'coverage']);
+
+        return response()->json($patients->map(fn ($patient) => [
+            'id' => $patient->id,
+            'first_name' => $patient->first_name,
+            'last_name' => $patient->last_name,
+            'code' => $patient->code,
+            'coverage' => $patient->coverage,
+        ]));
+    }
+
+    public function searchMedications(Request $request)
+    {
+        $query = $request->string('q')->toString();
+
+        $medications = Medication::query()
+            ->when($query, fn ($q, $query) => $q->where('name', 'like', "%{$query}%"))
+            ->orderBy('name')
+            ->limit(20)
+            ->get(['id', 'name', 'unit', 'unit_price', 'stock_quantity']);
+
+        return response()->json($medications);
+    }
 }

@@ -1,0 +1,22 @@
+- generic [ref=f30e3]:
+  - banner [ref=f30e4]:
+    - button "Ouvrir le menu" [ref=f30e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f30e9]
+    - generic [ref=f30e10]:
+      - button [ref=f30e11] [cursor=pointer]
+      - generic [ref=f30e16]: DG
+  - main [ref=f30e20]:
+    - generic [ref=f30e21]:
+      - generic [ref=f30e23]:
+        - heading "Sortie patient" [level=1] [ref=f30e24]
+        - paragraph [ref=f30e25]: Recherchez un patient pour consulter son résumé et clôturer sa visite.
+      - generic [ref=f30e27]:
+        - text: Rechercher un patient
+        - textbox "Rechercher par CSM-XXXX ou par nom..." [ref=f30e29]
+      - generic [ref=f30e30]:
+        - generic [ref=f30e32]:
+          - paragraph [ref=f30e35]: Aucun patient prêt pour la sortie
+          - paragraph [ref=f30e36]: Tous les patients ont été clôturés.
+        - generic [ref=f30e38]:
+          - heading "Recherche avancée" [level=3] [ref=f30e39]
+          - paragraph [ref=f30e40]: Utilisez la recherche ci-dessus pour trouver un patient spécifique

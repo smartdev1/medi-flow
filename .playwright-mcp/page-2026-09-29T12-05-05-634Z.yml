@@ -1,0 +1,56 @@
+- generic [ref=f35e2]:
+  - complementary [ref=f35e3]:
+    - generic [ref=f35e8]:
+      - paragraph [ref=f35e9]: Clinique Saint Matthieu
+      - paragraph [ref=f35e10]: Espace professionnel
+    - navigation "Navigation principale" [ref=f35e11]:
+      - paragraph [ref=f35e13]: Parcours Patient
+      - link "Médecin 2" [ref=f35e15] [cursor=pointer]:
+        - /url: http://localhost:8000/medecin
+        - generic [ref=f35e18]: Médecin
+        - generic [ref=f35e19]: "2"
+      - button "Hospitalisation" [ref=f35e21] [cursor=pointer]
+      - paragraph [ref=f35e29]: Administratif
+      - link "Sortie patient" [ref=f35e31] [cursor=pointer]:
+        - /url: http://localhost:8000/sortie
+  - generic [ref=f35e35]:
+    - banner [ref=f35e36]:
+      - textbox "Rechercher..." [ref=f35e38]
+      - generic [ref=f35e39]:
+        - button [ref=f35e40] [cursor=pointer]
+        - generic [ref=f35e47] [cursor=pointer]:
+          - generic [ref=f35e48]: AT
+          - generic [ref=f35e49]:
+            - paragraph [ref=f35e50]: Adama Traoré
+            - paragraph [ref=f35e51]: Médecin
+    - main [ref=f35e54]:
+      - generic [ref=f35e56]:
+        - generic [ref=f35e57]:
+          - generic [ref=f35e58]:
+            - heading "Espace Médecin" [level=1] [ref=f35e59]
+            - paragraph [ref=f35e60]: 2 patient(s) en attente de consultation aujourd'hui.
+          - generic [ref=f35e61]:
+            - generic [ref=f35e62]: Chargement...
+            - button "Rafraîchir" [disabled] [ref=f35e65]
+        - generic [ref=f35e69]:
+          - generic [ref=f35e70]:
+            - generic [ref=f35e71]:
+              - heading "File d'attente" [level=2] [ref=f35e72]
+              - generic [ref=f35e73]: 2 patients
+            - button "TC Tim Coock 2 heures d'attente Consultation" [ref=f35e74] [cursor=pointer]:
+              - generic [ref=f35e75]: TC
+              - generic [ref=f35e76]:
+                - generic [ref=f35e77]:
+                  - paragraph [ref=f35e78]: Tim Coock
+                  - generic [ref=f35e79]: 2 heures d'attente
+                - paragraph [ref=f35e80]: Consultation
+            - button "AA Aristide Adouko 1 heure d'attente Consultation" [ref=f35e81] [cursor=pointer]:
+              - generic [ref=f35e82]: AA
+              - generic [ref=f35e83]:
+                - generic [ref=f35e84]:
+                  - paragraph [ref=f35e85]: Aristide Adouko
+                  - generic [ref=f35e86]: 1 heure d'attente
+                - paragraph [ref=f35e87]: Consultation
+          - generic [ref=f35e89]:
+            - paragraph [ref=f35e92]: Aucun patient sélectionné
+            - paragraph [ref=f35e93]: Sélectionnez un patient dans la file d'attente pour commencer la consultation.

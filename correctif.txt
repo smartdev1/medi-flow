@@ -1,0 +1,51 @@
+sept. 7, 2026
+Débrief appli clinique 
+Invité kobenanpremier@gmail.com Aristide Adouko
+Pièces jointes Débrief appli clinique 
+
+
+Résumé
+Revue des rôles utilisateurs et validation de la facturation et maintien des dossiers physiques.
+
+Configuration des rôles utilisateurs
+Configuration des profils utilisateurs et rôles spécifiques. Conservation d'une vision globale pour l'administrateur système.
+
+Gestion financière et assurance
+Conception d'un système standard pour l'assurance. Simplification du calcul des tarifs et du ticket modérateur.
+
+Flux de sortie et validation
+Maintien des dossiers physiques pour les soins et validation obligatoire du paiement par la caisse avant clôture.
+
+
+Décisions
+En accord
+Adoption d'un système tarifaire standard pour les assurances Il est décidé de concevoir un système tarifaire standard basé sur un taux global de ticket modérateur pour les assurances, quitte à l'adapter aux réalités du terrain ultérieurement.
+Maintien du format papier pour la transmission des constantes L'application conservera une méthode semi-numérisée pour les constantes, maintenant la transmission par support papier par les aides-soignantes tandis que le champ informatique dédié est grisé.
+Modification du flux de sortie des patients hospitalisés Le parcours de sortie des patients hospitalisés est validé de sorte que les aides-soignantes préparent la sortie, transmettent les documents à l'accueil pour instruction vers la caisse, et conditionnent la clôture définitive du dossier au paiement effectif.
+
+
+Étapes suivantes
+[Aristide Adouko] Cacher saisie constantes: Masquer ou griser les champs de saisie des constantes médicales dans l interface utilisateur, car les aides-soignantes continueront d utiliser un support papier.
+[Aristide Adouko] Ajouter notifications observation: Intégrer des indicateurs visuels sur le tableau de bord pour signaler aux aides-soignantes les patients placés en observation.
+[Aristide Adouko] Paramétrer calcul assurance: Concevoir un système de calcul standard pour le ticket modérateur et permettre aux agents d accueil d éditer les prix si nécessaire.
+[Aristide Adouko] Appliquer correctifs flux: Appliquer les correctifs concernant le flux de sortie des patients et le calcul automatique des tarifs.
+[Aristide Adouko] Définir revenus service: Définir le montant des revenus par service sur le tableau de bord financier.
+[Aristide Adouko] Étudier chirurgie labo: Analyser le fonctionnement des services de chirurgie et de laboratoire pour une intégration au système.
+[Le groupe] Programmer réunion suivi: Organiser une réunion de suivi pour présenter les solutions adaptées aux besoins des médecins.
+
+
+Détails
+Mise en place des rôles et accès utilisateurs: Aristide Adouko a finalisé la configuration des profils utilisateurs dans l'application en créant des rôles spécifiques pour les aides-soignantes, l'accueil, la caisse, les médecins généralistes, les spécialistes, la supervision, la logistique, le laboratoire et la pharmacie. Arnaud Kobenan et Aristide Adouko conviennent que l'administrateur système doit conserver une vision globale et la capacité d'intervenir sur tous les modules, tout en restreignant certaines actions pour maintenir une logique cohérente de gestion.
+Enregistrement des patients et gestion de l'assurance: Le processus d'enregistrement inclut les informations de base du patient et ses données d'assurance. La gestion du "ticket modérateur" (le reste à charge) est identifiée comme un point complexe, car les tarifs varient selon les accords entre la clinique et les compagnies d'assurance. Il est décidé de concevoir un système standard plutôt que de chercher à intégrer immédiatement chaque protocole d'assurance spécifique, afin de ne pas alourdir l'application inutilement.
+Calcul des tarifs et logique financière: Pour les calculs de facturation, Arnaud Kobenan et Aristide Adouko s'accordent sur une méthode simplifiée : l'accueil saisit le montant de base de la consultation et le pourcentage du ticket modérateur, permettant ainsi à la caisse de calculer automatiquement le reste à payer en fonction des services consommés. Cette approche évite de complexifier inutilement le système tout en assurant une facturation précise pour les services additionnels comme le laboratoire.
+Flux de travail des aides-soignantes et constantes médicales: Le flux de travail prévoit que les aides-soignantes prennent les constantes (vignettes de santé) des patients. Bien qu'une saisie dans le système soit possible, il est convenu de conserver la méthode habituelle sur papier, où les constantes sont notées sur un document physique transmis au médecin, afin de simplifier la charge de travail et d'éviter une numérisation complexe à ce stade. Le champ de saisie numérique sera masqué ou laissé de côté pour le moment.
+Gestion de l'observation et des protocoles de soins: Lorsqu'un médecin place un patient en observation, le système doit notifier les aides-soignantes pour la préparation de la chambre. Concernant les prescriptions et protocoles de médicaments lors de l'hospitalisation, il est décidé de maintenir les dossiers physiques pour les passations entre les équipes médicales (changements de garde), car cette méthode est jugée plus efficace que la saisie numérique dans le contexte actuel de la clinique.
+Processus de sortie et dépiquage: La sortie du patient implique une étape de "dépiquage" effectuée par les aides-soignantes, qui doivent ensuite notifier l'accueil de la fin de l'hospitalisation. Les aides-soignantes préparent le dossier et le remettent à l'accueil, s'assurant que le patient ou ses parents récupèrent les médicaments restants avant d'être orientés vers la caisse.
+Validation du paiement et clôture du dossier: Le système est configuré de sorte qu'un dossier patient ne puisse être clôturé par l'accueil ou le médecin tant que la caisse n'a pas validé l'encaissement de la facture. Une fois le reçu de paiement présenté à l'accueil, le processus de libération du patient peut être finalisé.
+Suivi de la performance et tableau de bord: Aristide Adouko a présenté un aperçu du tableau de bord administratif qui permet de suivre les encaissements quotidiens. Il est prévu d'améliorer cet outil pour fournir une analyse plus détaillée par service, incluant le taux de recouvrement, afin de mieux identifier les créances ou les paiements en attente.
+Extension aux services de chirurgie et laboratoires externes: Arnaud Kobenan souligne l'importance d'intégrer les services de chirurgie et de bloc opératoire dans le flux de l'application, étant donné leur forte consommation de produits pharmaceutiques. De plus, les cas de laboratoires externes ou de spécialistes en rotation doivent être enregistrés dans le système comme des patients pour assurer une traçabilité complète, même s'ils ne suivent pas le parcours standard de consultation.
+Prochaines étapes et calendrier: Aristide Adouko travaillera sur l'implémentation des correctifs liés au flux de sortie, à la gestion des tarifs et aux nouvelles demandes de fonctionnalités. Un nouvel appel de suivi est prévu pour mercredi pour discuter de l'avancement des développements.
+
+
+Nous vous conseillons d'examiner les notes de Gemini pour vérifier qu'elles ne contiennent pas d'erreur. Profitez de nos astuces et découvrez comment Gemini prend des notes
+Que pensez-vous de la qualité de ces notes spécifiques ? Participez à une courte enquête pour nous faire part de vos commentaires et nous dire si ces notes vous ont été utiles.

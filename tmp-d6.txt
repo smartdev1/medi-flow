@@ -1,0 +1,20 @@
+PHPUnit 10.5.63 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.14
+Configuration: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\phpunit.xml
+
+F                                                                   1 / 1 (100%)
+
+Time: 00:12.876, Memory: 50.00 MB
+
+There was 1 failure:
+
+1) Tests\Feature\PaymentFlowTest::test_caissier_can_create_payment
+Expected response status code [201, 301, 302, 303, 307, 308] but received 500.
+Failed asserting that false is true.
+
+C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:173
+C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\tests\Feature\PaymentFlowTest.php:39
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1, PHPUnit Deprecations: 1.

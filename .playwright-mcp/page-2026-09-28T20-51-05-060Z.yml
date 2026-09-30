@@ -1,0 +1,50 @@
+- generic [ref=f5e3]:
+  - banner [ref=f5e4]:
+    - button "Ouvrir le menu" [ref=f5e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f5e9]
+    - generic [ref=f5e10]:
+      - button [ref=f5e11] [cursor=pointer]
+      - generic [ref=f5e16]: DG
+  - main [ref=f5e20]:
+    - generic [ref=f5e22]:
+      - generic [ref=f5e23]:
+        - generic [ref=f5e24]:
+          - heading "Circuit patient — vue d'ensemble" [level=1] [ref=f5e25]
+          - paragraph [ref=f5e26]: Position de chaque patient dans le parcours de soins, en temps réel.
+        - generic [ref=f5e27]:
+          - generic [ref=f5e28]: "Dernière MAJ : 20:51:04"
+          - button "Rafraîchir" [ref=f5e33] [cursor=pointer]
+      - generic [ref=f5e37]:
+        - generic [ref=f5e38]:
+          - generic [ref=f5e39]:
+            - generic [ref=f5e40]: Consultation
+            - generic [ref=f5e43]: "1"
+          - generic [ref=f5e45]:
+            - paragraph [ref=f5e47]: Lisa Folawiyo
+            - paragraph [ref=f5e48]: CSM-6172
+            - paragraph [ref=f5e49]: Consultation
+        - generic [ref=f5e50]:
+          - generic [ref=f5e51]:
+            - generic [ref=f5e52]: Hospitalisation
+            - generic [ref=f5e55]: "0"
+          - generic [ref=f5e56]: Aucun patient
+        - generic [ref=f5e58]:
+          - generic [ref=f5e59]:
+            - generic [ref=f5e60]: Mise en Observation
+            - generic [ref=f5e63]: "0"
+          - generic [ref=f5e64]: Aucun patient
+        - generic [ref=f5e66]:
+          - generic [ref=f5e67]:
+            - generic [ref=f5e68]: Laboratoire
+            - generic [ref=f5e71]: "0"
+          - generic [ref=f5e72]: Aucun patient
+        - generic [ref=f5e74]:
+          - generic [ref=f5e75]:
+            - generic [ref=f5e76]: Retour médecin
+            - generic [ref=f5e79]: "0"
+          - generic [ref=f5e80]: Aucun patient
+        - generic [ref=f5e82]:
+          - generic [ref=f5e83]:
+            - generic [ref=f5e84]: Sortie
+            - generic [ref=f5e87]: "0"
+          - generic [ref=f5e88]: Aucun patient

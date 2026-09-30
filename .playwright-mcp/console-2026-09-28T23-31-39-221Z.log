@@ -1,0 +1,3 @@
+[     760ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/docteur-general:0
+[     811ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/docteur-general:173
+[     824ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(59), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/docteur-general} @ http://localhost:8000/docteur-general:178

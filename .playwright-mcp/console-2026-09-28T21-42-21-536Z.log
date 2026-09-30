@@ -1,0 +1,2 @@
+[  222977ms] [LOG] [vite] server connection lost. polling for restart... @ http://[::1]:5173/@vite/client:287
+[  222985ms] [ERROR] Failed to load resource: net::ERR_NETWORK_IO_SUSPENDED @ http://[::1]:5173/:0

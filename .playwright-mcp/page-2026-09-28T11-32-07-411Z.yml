@@ -1,0 +1,32 @@
+- generic [ref=f18e3]:
+  - banner [ref=f18e4]:
+    - button "Ouvrir le menu" [ref=f18e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f18e9]
+    - generic [ref=f18e10]:
+      - button [ref=f18e11] [cursor=pointer]
+      - generic [ref=f18e16]: DG
+  - main [ref=f18e20]:
+    - generic [ref=f18e21]:
+      - generic [ref=f18e22]:
+        - generic [ref=f18e23]:
+          - heading "Espace Médecin" [level=1] [ref=f18e24]
+          - paragraph [ref=f18e25]: 1 patient(s) en attente de consultation aujourd'hui.
+        - generic [ref=f18e26]: Dr. Gnlé · Docteur Général
+      - generic [ref=f18e29]:
+        - generic [ref=f18e30]:
+          - generic [ref=f18e31]:
+            - heading "File d'attente" [level=2] [ref=f18e32]
+            - generic [ref=f18e33]: 1 patients
+          - list [ref=f18e34]:
+            - listitem [ref=f18e35]:
+              - button "QP QA PatientTest 6 minutes d'attente Consultation Constantes prises par Aide Soignante" [ref=f18e36] [cursor=pointer]:
+                - generic [ref=f18e37]: QP
+                - generic [ref=f18e38]:
+                  - generic [ref=f18e39]:
+                    - paragraph [ref=f18e40]: QA PatientTest
+                    - generic [ref=f18e41]: 6 minutes d'attente
+                  - paragraph [ref=f18e42]: Consultation
+                  - paragraph [ref=f18e43]: Constantes prises par Aide Soignante
+        - generic [ref=f18e45]:
+          - paragraph [ref=f18e48]: Sélectionnez un patient
+          - paragraph [ref=f18e49]: Cliquez sur un patient dans la file d’attente pour commencer la consultation.

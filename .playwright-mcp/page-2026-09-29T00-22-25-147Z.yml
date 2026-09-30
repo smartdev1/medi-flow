@@ -1,0 +1,510 @@
+- generic [ref=f8e2]:
+  - navigation [ref=f8e3]:
+    - generic [ref=f8e4]:
+      - generic [ref=f8e6]:
+        - list [ref=f8e7]:
+          - listitem [ref=f8e8]:
+            - link [ref=f8e9] [cursor=pointer]:
+              - /url: "#stack"
+              - button [ref=f8e10]
+          - listitem [ref=f8e14]:
+            - link [ref=f8e15] [cursor=pointer]:
+              - /url: "#context"
+              - button [ref=f8e16]
+          - listitem [ref=f8e20]:
+            - link [ref=f8e21] [cursor=pointer]:
+              - /url: https://flareapp.io/?utm_campaign=ignition&utm_source=ignition
+              - button [ref=f8e22]
+        - list [ref=f8e29]:
+          - listitem [ref=f8e30]:
+            - link [ref=f8e31] [cursor=pointer]:
+              - /url: "#share"
+              - button [ref=f8e32]
+            - generic:
+              - generic:
+                - generic:
+                  - heading "Share with Flare" [level=4]
+                  - link "Docs":
+                    - /url: https://flareapp.io/docs/ignition/introducing-ignition/sharing-errors?utm_campaign=ignition&utm_source=ignition
+                - list:
+                  - listitem:
+                    - generic:
+                      - checkbox "Stack" [checked]
+                      - generic: Stack
+                  - listitem:
+                    - generic:
+                      - checkbox "Context" [checked]
+                      - generic: Context
+                  - listitem:
+                    - generic:
+                      - checkbox "Debug" [checked]
+                      - generic: Debug
+                - generic:
+                  - button "Create Share"
+          - listitem [ref=f8e36]:
+            - link [ref=f8e37] [cursor=pointer]:
+              - /url: https://laravel.com/docs/
+              - button [ref=f8e38]
+          - listitem [ref=f8e42]:
+            - link [ref=f8e43] [cursor=pointer]:
+              - /url: "#settings"
+              - button [ref=f8e44]
+            - generic:
+              - generic:
+                - generic:
+                  - heading "Ignition Settings" [level=4]
+                  - link "Docs":
+                    - /url: https://flareapp.io/ignition?utm_campaign=ignition&utm_source=ignition
+                - generic:
+                  - text: Editor
+                  - generic:
+                    - combobox "Editor":
+                      - option "Clipboard"
+                      - option "Sublime"
+                      - option "TextMate"
+                      - option "Emacs"
+                      - option "MacVim"
+                      - option "PhpStorm" [selected]
+                      - option "PHPStorm Remote"
+                      - option "Idea"
+                      - option "VS Code"
+                      - option "VS Code Insiders"
+                      - option "VS Code Remote"
+                      - option "VS Code Insiders Remote"
+                      - option "VS Codium"
+                      - option "Cursor"
+                      - option "Atom"
+                      - option "Nova"
+                      - option "NetBeans"
+                      - option "Zed"
+                      - option "Windsurf"
+                      - option "Xdebug"
+                - generic:
+                  - text: Theme
+                  - button "auto"
+                - generic:
+                  - button "Save settings"
+                - paragraph:
+                  - text: Settings will be saved locally in
+                  - code: ~/.ignition.json
+                  - text: .
+      - 'link "The GET method is not supported for route logout. Supported methods: POST." [ref=f8e50] [cursor=pointer]':
+        - /url: "#top"
+  - main [ref=f8e52]:
+    - main [ref=f8e56]:
+      - generic [ref=f8e58]:
+        - generic [ref=f8e59]:
+          - generic [ref=f8e61]:
+            - generic [ref=f8e62]: Symfony
+            - generic [ref=f8e63]: \
+            - generic [ref=f8e64]: Component
+            - generic [ref=f8e65]: \
+            - generic [ref=f8e66]: HttpKernel
+            - generic [ref=f8e67]: \
+            - generic [ref=f8e68]: Exception
+            - generic [ref=f8e69]: \
+            - generic [ref=f8e70]: MethodNotAllowedHttpException
+          - generic [ref=f8e71]:
+            - generic [ref=f8e72]: PHP 8.5.5
+            - generic [ref=f8e73]: 10.50.2
+        - generic [ref=f8e76]: "The GET method is not supported for route logout. Supported methods: POST."
+    - generic [ref=f8e80]:
+      - complementary [ref=f8e81]:
+        - generic [ref=f8e82]:
+          - button [ref=f8e84] [cursor=pointer]
+          - list [ref=f8e91]:
+            - listitem [ref=f8e92] [cursor=pointer]: 26 vendor frames
+            - listitem [ref=f8e95]:
+              - generic [ref=f8e97]:
+                - generic [ref=f8e98]: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\public\index
+                - generic [ref=f8e99]: .php
+                - generic [ref=f8e100]: ": 51"
+              - generic [ref=f8e101]: require_once
+            - listitem [ref=f8e102]
+            - listitem [ref=f8e103] [cursor=pointer]: 1 vendor frame
+      - generic [ref=f8e106]:
+        - 'link "C:\\Users\\Aristide Adouko\\OneDrive\\Documents\\LATEST PROJECTS\\moderne\\public\\index .php : 51" [ref=f8e108] [cursor=pointer]':
+          - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=51
+          - generic [ref=f8e109]:
+            - generic [ref=f8e110]: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\public\index
+            - generic [ref=f8e111]: .php
+            - generic [ref=f8e112]: ": 51"
+        - main [ref=f8e113]:
+          - navigation [ref=f8e114]:
+            - generic [ref=f8e115]:
+              - paragraph [ref=f8e116]: "27"
+              - paragraph [ref=f8e117]: "28"
+              - paragraph [ref=f8e118]: "29"
+              - paragraph [ref=f8e119]: "30"
+              - paragraph [ref=f8e120]: "31"
+              - paragraph [ref=f8e121]: "32"
+              - paragraph [ref=f8e122]: "33"
+              - paragraph [ref=f8e123]: "34"
+              - paragraph [ref=f8e124]: "35"
+              - paragraph [ref=f8e125]: "36"
+              - paragraph [ref=f8e126]: "37"
+              - paragraph [ref=f8e127]: "38"
+              - paragraph [ref=f8e128]: "39"
+              - paragraph [ref=f8e129]: "40"
+              - paragraph [ref=f8e130]: "41"
+              - paragraph [ref=f8e131]: "42"
+              - paragraph [ref=f8e132]: "43"
+              - paragraph [ref=f8e133]: "44"
+              - paragraph [ref=f8e134]: "45"
+              - paragraph [ref=f8e135]: "46"
+              - paragraph [ref=f8e136]: "47"
+              - paragraph [ref=f8e137]: "48"
+              - paragraph [ref=f8e138]: "49"
+              - paragraph [ref=f8e139]: "50"
+              - paragraph [ref=f8e140]: "51"
+              - paragraph [ref=f8e141]: "52"
+              - paragraph [ref=f8e142]: "53"
+              - paragraph [ref=f8e143]: "54"
+              - paragraph [ref=f8e144]: "55"
+              - paragraph [ref=f8e145]: "56"
+          - code [ref=f8e148]:
+            - generic [ref=f8e149]:
+              - link [ref=f8e150] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=27
+                - button [ref=f8e151]
+              - generic [ref=f8e154]: "|"
+            - generic [ref=f8e156]:
+              - link [ref=f8e157] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=28
+                - button [ref=f8e158]
+              - generic [ref=f8e161]: "| Composer provides a convenient, automatically generated class loader for"
+            - generic [ref=f8e163]:
+              - link [ref=f8e164] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=29
+                - button [ref=f8e165]
+              - generic [ref=f8e168]: "| this application. We just need to utilize it! We'll simply require it"
+            - generic [ref=f8e170]:
+              - link [ref=f8e171] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=30
+                - button [ref=f8e172]
+              - generic [ref=f8e175]: "| into the script here so we don't need to manually load our classes."
+            - generic [ref=f8e177]:
+              - link [ref=f8e178] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=31
+                - button [ref=f8e179]
+              - generic [ref=f8e182]: "|"
+            - generic [ref=f8e183]:
+              - link [ref=f8e184] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=32
+                - button [ref=f8e185]
+              - generic [ref=f8e188]: "*/"
+            - link [ref=f8e190] [cursor=pointer]:
+              - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=33
+              - button [ref=f8e191]
+            - generic [ref=f8e195]:
+              - link [ref=f8e196] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=34
+                - button [ref=f8e197]
+              - generic [ref=f8e200]: require __DIR__.'/../vendor/autoload.php';
+            - link [ref=f8e203] [cursor=pointer]:
+              - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=35
+              - button [ref=f8e204]
+            - generic [ref=f8e208]:
+              - link [ref=f8e209] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=36
+                - button [ref=f8e210]
+              - generic [ref=f8e213]: /*
+            - generic [ref=f8e214]:
+              - link [ref=f8e215] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=37
+                - button [ref=f8e216]
+              - generic [ref=f8e219]: "|--------------------------------------------------------------------------"
+            - generic [ref=f8e220]:
+              - link [ref=f8e221] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=38
+                - button [ref=f8e222]
+              - generic [ref=f8e225]: "| Run The Application"
+            - generic [ref=f8e227]:
+              - link [ref=f8e228] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=39
+                - button [ref=f8e229]
+              - generic [ref=f8e232]: "|--------------------------------------------------------------------------"
+            - generic [ref=f8e233]:
+              - link [ref=f8e234] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=40
+                - button [ref=f8e235]
+              - generic [ref=f8e238]: "|"
+            - generic [ref=f8e239]:
+              - link [ref=f8e240] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=41
+                - button [ref=f8e241]
+              - generic [ref=f8e244]: "| Once we have the application, we can handle the incoming request using"
+            - generic [ref=f8e246]:
+              - link [ref=f8e247] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=42
+                - button [ref=f8e248]
+              - generic [ref=f8e251]: "| the application's HTTP kernel. Then, we will send the response back"
+            - generic [ref=f8e253]:
+              - link [ref=f8e254] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=43
+                - button [ref=f8e255]
+              - generic [ref=f8e258]: "| to this client's browser, allowing them to enjoy our application."
+            - generic [ref=f8e260]:
+              - link [ref=f8e261] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=44
+                - button [ref=f8e262]
+              - generic [ref=f8e265]: "|"
+            - generic [ref=f8e266]:
+              - link [ref=f8e267] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=45
+                - button [ref=f8e268]
+              - generic [ref=f8e271]: "*/"
+            - link [ref=f8e273] [cursor=pointer]:
+              - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=46
+              - button [ref=f8e274]
+            - generic [ref=f8e278]:
+              - link [ref=f8e279] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=47
+                - button [ref=f8e280]
+              - generic [ref=f8e283]: $app = require_once __DIR__.'/../bootstrap/app.php';
+            - link [ref=f8e286] [cursor=pointer]:
+              - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=48
+              - button [ref=f8e287]
+            - generic [ref=f8e291]:
+              - link [ref=f8e292] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=49
+                - button [ref=f8e293]
+              - generic [ref=f8e296]: $kernel = $app->make(Kernel::class);
+            - link [ref=f8e299] [cursor=pointer]:
+              - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=50
+              - button [ref=f8e300]
+            - generic [ref=f8e304]:
+              - link [ref=f8e305] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=51
+                - button [ref=f8e306]
+              - generic [ref=f8e309]: $response = $kernel->handle(
+            - generic [ref=f8e311]:
+              - link [ref=f8e312] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=52
+                - button [ref=f8e313]
+              - generic [ref=f8e316]: $request = Request::capture()
+            - generic [ref=f8e318]:
+              - link [ref=f8e319] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=53
+                - button [ref=f8e320]
+              - generic [ref=f8e323]: )->send();
+            - link [ref=f8e326] [cursor=pointer]:
+              - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=54
+              - button [ref=f8e327]
+            - generic [ref=f8e331]:
+              - link [ref=f8e332] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=55
+                - button [ref=f8e333]
+              - generic [ref=f8e336]: $kernel->terminate($request, $response);
+            - link [ref=f8e339] [cursor=pointer]:
+              - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cpublic%5Cindex.php&line=56
+              - button [ref=f8e340]
+      - generic [ref=f8e344]:
+        - generic [ref=f8e345]: arguments
+        - generic [ref=f8e347]:
+          - term [ref=f8e348]:
+            - generic [ref=f8e349]:
+              - generic [ref=f8e350]:
+                - generic "by reference"
+                - text: $request
+              - generic [ref=f8e351]: :Illuminate\Http\Request
+          - definition [ref=f8e352]:
+            - generic [ref=f8e353]:
+              - code [ref=f8e356]: GET http://localhost:8000/logout
+              - button "Copy to clipboard" [ref=f8e358] [cursor=pointer]
+    - generic [ref=f8e362]:
+      - navigation [ref=f8e363]:
+        - list [ref=f8e365]:
+          - listitem [ref=f8e366]:
+            - link "Request" [ref=f8e367] [cursor=pointer]:
+              - /url: "#context-request"
+            - list [ref=f8e368]:
+              - listitem [ref=f8e369]:
+                - link "Browser" [ref=f8e370] [cursor=pointer]:
+                  - /url: "#context-request-browser"
+              - listitem [ref=f8e375]:
+                - link "Headers" [ref=f8e376] [cursor=pointer]:
+                  - /url: "#context-request-headers"
+              - listitem [ref=f8e381]:
+                - link "Body" [ref=f8e382] [cursor=pointer]:
+                  - /url: "#context-request-body"
+          - listitem [ref=f8e387]:
+            - link "Context" [ref=f8e388] [cursor=pointer]:
+              - /url: "#context-context"
+            - list [ref=f8e389]:
+              - listitem [ref=f8e390]:
+                - link "Versions" [ref=f8e391] [cursor=pointer]:
+                  - /url: "#context-context-versions"
+      - generic [ref=f8e396]:
+        - generic [ref=f8e397]:
+          - heading "Request" [level=2] [ref=f8e398]
+          - generic [ref=f8e399]:
+            - generic [ref=f8e400]:
+              - generic [ref=f8e401]:
+                - generic [ref=f8e402]: http://localhost:8000/logout
+                - generic [ref=f8e403]: GET
+              - generic [ref=f8e405] [cursor=pointer]:
+                - code [ref=f8e408]:
+                  - code [ref=f8e410]: "curl \"http://localhost:8000/logout\" \\ -X GET \\ -H 'host: localhost:8000' \\ -H 'connection: keep-alive' \\ -H 'sec-ch-ua: \"Chromium\";v=\"154\", \"Google Chrome\";v=\"154\", \"Not A(Brand\";v=\"99\"' \\ -H 'sec-ch-ua-mobile: ?0' \\ -H 'sec-ch-ua-platform: \"Windows\"' \\ -H 'upgrade-insecure-requests: 1' \\ -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36' \\ -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \\ -H 'sec-fetch-site: none' \\ -H 'sec-fetch-mode: navigate' \\ -H 'sec-fetch-user: ?1' \\ -H 'sec-fetch-dest: document' \\ -H 'accept-encoding: gzip, deflate, br, zstd' \\ -H 'accept-language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7' \\ -H 'cookie: <CENSORED>';"
+                - button "Copy to clipboard" [ref=f8e412]
+                - button [ref=f8e415]
+            - generic [ref=f8e418]:
+              - heading [level=1] [ref=f8e419]
+              - generic [ref=f8e423]:
+                - code [ref=f8e426]: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36
+                - button "Copy to clipboard" [ref=f8e428] [cursor=pointer]
+            - generic [ref=f8e431]:
+              - heading [level=1] [ref=f8e432]
+              - generic [ref=f8e436]:
+                - generic [ref=f8e437]:
+                  - term [ref=f8e438]: host
+                  - definition [ref=f8e439]:
+                    - generic [ref=f8e440]:
+                      - code [ref=f8e443]: localhost:8000
+                      - button "Copy to clipboard" [ref=f8e445] [cursor=pointer]
+                - generic [ref=f8e448]:
+                  - term [ref=f8e449]: connection
+                  - definition [ref=f8e450]:
+                    - generic [ref=f8e451]:
+                      - code [ref=f8e454]: keep-alive
+                      - button "Copy to clipboard" [ref=f8e456] [cursor=pointer]
+                - generic [ref=f8e459]:
+                  - term [ref=f8e460]: sec-ch-ua
+                  - definition [ref=f8e461]:
+                    - generic [ref=f8e462]:
+                      - code [ref=f8e465]: "\"Chromium\";v=\"154\", \"Google Chrome\";v=\"154\", \"Not A(Brand\";v=\"99\""
+                      - button "Copy to clipboard" [ref=f8e467] [cursor=pointer]
+                - generic [ref=f8e470]:
+                  - term [ref=f8e471]: sec-ch-ua-mobile
+                  - definition [ref=f8e472]:
+                    - generic [ref=f8e473]:
+                      - code [ref=f8e476]: "?0"
+                      - button "Copy to clipboard" [ref=f8e478] [cursor=pointer]
+                - generic [ref=f8e481]:
+                  - term [ref=f8e482]: sec-ch-ua-platform
+                  - definition [ref=f8e483]:
+                    - generic [ref=f8e484]:
+                      - code [ref=f8e487]: "\"Windows\""
+                      - button "Copy to clipboard" [ref=f8e489] [cursor=pointer]
+                - generic [ref=f8e492]:
+                  - term [ref=f8e493]: upgrade-insecure-requests
+                  - definition [ref=f8e494]:
+                    - generic [ref=f8e495]:
+                      - code [ref=f8e498]: "1"
+                      - button "Copy to clipboard" [ref=f8e500] [cursor=pointer]
+                - generic [ref=f8e503]:
+                  - term [ref=f8e504]: user-agent
+                  - definition [ref=f8e505]:
+                    - generic [ref=f8e506]:
+                      - code [ref=f8e509]: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36
+                      - button "Copy to clipboard" [ref=f8e511] [cursor=pointer]
+                - generic [ref=f8e514]:
+                  - term [ref=f8e515]: accept
+                  - definition [ref=f8e516]:
+                    - generic [ref=f8e517]:
+                      - code [ref=f8e520]: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+                      - button "Copy to clipboard" [ref=f8e522] [cursor=pointer]
+                - generic [ref=f8e525]:
+                  - term [ref=f8e526]: sec-fetch-site
+                  - definition [ref=f8e527]:
+                    - generic [ref=f8e528]:
+                      - code [ref=f8e531]: none
+                      - button "Copy to clipboard" [ref=f8e533] [cursor=pointer]
+                - generic [ref=f8e536]:
+                  - term [ref=f8e537]: sec-fetch-mode
+                  - definition [ref=f8e538]:
+                    - generic [ref=f8e539]:
+                      - code [ref=f8e542]: navigate
+                      - button "Copy to clipboard" [ref=f8e544] [cursor=pointer]
+                - generic [ref=f8e547]:
+                  - term [ref=f8e548]: sec-fetch-user
+                  - definition [ref=f8e549]:
+                    - generic [ref=f8e550]:
+                      - code [ref=f8e553]: "?1"
+                      - button "Copy to clipboard" [ref=f8e555] [cursor=pointer]
+                - generic [ref=f8e558]:
+                  - term [ref=f8e559]: sec-fetch-dest
+                  - definition [ref=f8e560]:
+                    - generic [ref=f8e561]:
+                      - code [ref=f8e564]: document
+                      - button "Copy to clipboard" [ref=f8e566] [cursor=pointer]
+                - generic [ref=f8e569]:
+                  - term [ref=f8e570]: accept-encoding
+                  - definition [ref=f8e571]:
+                    - generic [ref=f8e572]:
+                      - code [ref=f8e575]: gzip, deflate, br, zstd
+                      - button "Copy to clipboard" [ref=f8e577] [cursor=pointer]
+                - generic [ref=f8e580]:
+                  - term [ref=f8e581]: accept-language
+                  - definition [ref=f8e582]:
+                    - generic [ref=f8e583]:
+                      - code [ref=f8e586]: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7
+                      - button "Copy to clipboard" [ref=f8e588] [cursor=pointer]
+                - generic [ref=f8e591]:
+                  - term [ref=f8e592]: cookie
+                  - definition [ref=f8e593]:
+                    - generic [ref=f8e594]:
+                      - code [ref=f8e597]: <CENSORED>
+                      - button "Copy to clipboard" [ref=f8e599] [cursor=pointer]
+            - generic [ref=f8e602]:
+              - heading [level=1] [ref=f8e603]
+              - generic [ref=f8e607]:
+                - code [ref=f8e610]: "[]"
+                - button "Copy to clipboard" [ref=f8e612] [cursor=pointer]
+        - generic [ref=f8e615]:
+          - heading "Context" [level=2] [ref=f8e616]
+          - generic [ref=f8e618]:
+            - heading [level=1] [ref=f8e619]
+            - generic [ref=f8e623]:
+              - generic [ref=f8e624]:
+                - term [ref=f8e625]: Php Version
+                - definition [ref=f8e626]:
+                  - generic [ref=f8e627]:
+                    - code [ref=f8e630]: 8.5.5
+                    - button "Copy to clipboard" [ref=f8e632] [cursor=pointer]
+              - generic [ref=f8e635]:
+                - term [ref=f8e636]: Laravel Version
+                - definition [ref=f8e637]:
+                  - generic [ref=f8e638]:
+                    - code [ref=f8e641]: 10.50.2
+                    - button "Copy to clipboard" [ref=f8e643] [cursor=pointer]
+              - generic [ref=f8e646]:
+                - term [ref=f8e647]: Laravel Locale
+                - definition [ref=f8e648]:
+                  - generic [ref=f8e649]:
+                    - code [ref=f8e652]: fr
+                    - button "Copy to clipboard" [ref=f8e654] [cursor=pointer]
+              - generic [ref=f8e657]:
+                - term [ref=f8e658]: Laravel Config Cached
+                - definition [ref=f8e659]:
+                  - generic [ref=f8e660]: "false"
+              - generic [ref=f8e664]:
+                - term [ref=f8e665]: App Debug
+                - definition [ref=f8e666]:
+                  - generic [ref=f8e667]: "true"
+              - generic [ref=f8e671]:
+                - term [ref=f8e672]: App Env
+                - definition [ref=f8e673]:
+                  - generic [ref=f8e674]:
+                    - code [ref=f8e677]: local
+                    - button "Copy to clipboard" [ref=f8e679] [cursor=pointer]
+    - generic [ref=f8e683]:
+      - list [ref=f8e684]:
+        - listitem [ref=f8e685]
+        - listitem [ref=f8e694]: ·
+        - listitem [ref=f8e695]:
+          - link "Source" [ref=f8e696] [cursor=pointer]:
+            - /url: https://github.com/spatie/laravel-ignition
+        - listitem [ref=f8e697]: ·
+        - listitem [ref=f8e698]:
+          - link "Docs" [ref=f8e699] [cursor=pointer]:
+            - /url: https://flareapp.io/docs/ignition/introducing-ignition/overview
+        - listitem [ref=f8e700]: ·
+        - listitem [ref=f8e701]:
+          - link "Laravel" [ref=f8e702] [cursor=pointer]:
+            - /url: https://laravel.com
+      - paragraph [ref=f8e704]:
+        - text: Ignition is built by
+        - link "Flare" [ref=f8e705] [cursor=pointer]:
+          - /url: https://flareapp.io/?utm_campaign=ignition&utm_source=ignition
+        - text: ", the Laravel error reporting service."

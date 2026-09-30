@@ -1,0 +1,3 @@
+[     378ms] [WARNING] Alpine Warning: x-for templates require a single root element, additional elements will be ignored. JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:803
+[     379ms] [WARNING] Alpine Warning: x-for templates require a single root element, additional elements will be ignored. JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:803
+[     380ms] [WARNING] Alpine Warning: x-for templates require a single root element, additional elements will be ignored. JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:803

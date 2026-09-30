@@ -1,0 +1,288 @@
+[  393391ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients.length"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393391ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393392ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "!stage.patients || stage.patients.length === 0"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393392ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients.length"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393392ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393392ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "!stage.patients || stage.patients.length === 0"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393392ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients.length"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393393ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393393ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "!stage.patients || stage.patients.length === 0"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393393ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients.length"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393393ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393393ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "!stage.patients || stage.patients.length === 0"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393393ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients.length"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393394ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393394ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "!stage.patients || stage.patients.length === 0"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393394ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients.length"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393397ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "stage.patients"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393397ms] [WARNING] Alpine Expression Error: stage is not defined
+
+Expression: "!stage.patients || stage.patients.length === 0"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[  393454ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients.length (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3031:5
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3030:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)
+[  393455ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at loop (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3202:3)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:3)
+[  393455ms] ReferenceError: stage is not defined
+    at [Alpine] !stage.patients || stage.patients.length === 0 (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:33)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)
+[  393455ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients.length (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3031:5
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3030:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)
+[  393455ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at loop (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3202:3)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:3)
+[  393455ms] ReferenceError: stage is not defined
+    at [Alpine] !stage.patients || stage.patients.length === 0 (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:33)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)
+[  393455ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients.length (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3031:5
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3030:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)
+[  393456ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at loop (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3202:3)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:3)
+[  393456ms] ReferenceError: stage is not defined
+    at [Alpine] !stage.patients || stage.patients.length === 0 (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:33)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)
+[  393456ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients.length (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3031:5
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3030:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)
+[  393456ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at loop (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3202:3)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:3)
+[  393456ms] ReferenceError: stage is not defined
+    at [Alpine] !stage.patients || stage.patients.length === 0 (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:33)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)
+[  393456ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients.length (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3031:5
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3030:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)
+[  393456ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at loop (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3202:3)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:3)
+[  393456ms] ReferenceError: stage is not defined
+    at [Alpine] !stage.patients || stage.patients.length === 0 (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:33)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)
+[  393456ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients.length (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3031:5
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3030:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)
+[  393456ms] ReferenceError: stage is not defined
+    at [Alpine] stage.patients (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at loop (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3202:3)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3183:3)
+[  393457ms] ReferenceError: stage is not defined
+    at [Alpine] !stage.patients || stage.patients.length === 0 (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:33)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:17
+    at reactiveEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1837:16)
+    at Object.effect2 [as effect] (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:1812:5)
+    at effect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:61:33)
+    at wrappedEffect (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:77:27)
+    at Function.<anonymous> (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:3164:3)
+    at flushHandlers (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:669:46)

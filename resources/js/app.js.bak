@@ -1,0 +1,137 @@
+import './bootstrap';
+
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+// Defer Alpine initialization so inline <script> tags in Blade
+// templates (e.g. attenteBoard()) are parsed first.
+// Vite bundles load async; without this delay Alpine may scan the
+// DOM before those functions exist, silently failing x-data.
+document.addEventListener('DOMContentLoaded', () => {
+    Alpine.start();
+});
+
+export default Alpine;
+
+Alpine.data('patientForm', () => ({
+    existingPatientId: null,
+    routingDestination: '',
+    patient: {
+        first_name: '',
+        last_name: '',
+        sex: '',
+        birth_date: '',
+        phone: '',
+        coverage: '',
+        insurance_company_id: '',
+        act_id: '',
+        ticket_moderateur: '',
+    },
+
+    init() {
+        const raw = this.$el.getAttribute('data-old');
+        const oldValues = raw ? (JSON.parse(raw) || {}) : {};
+
+        this.patient = {
+            first_name: oldValues.first_name || '',
+            last_name: oldValues.last_name || '',
+            sex: oldValues.sex || '',
+            birth_date: oldValues.birth_date || '',
+            phone: oldValues.phone || '',
+            coverage: oldValues.coverage || '',
+            insurance_company_id: oldValues.insurance_company_id || '',
+            act_id: oldValues.act_id || '',
+            ticket_moderateur: oldValues.ticket_moderateur || '',
+        };
+
+        if (oldValues.existing_patient_id) {
+            this.existingPatientId = oldValues.existing_patient_id;
+        }
+
+        this.updateRouting();
+    },
+
+    getRouting(code) {
+        const map = {
+            'CONS-GEN': 'Médecin généraliste',
+            'CONS-SUIVI': 'Médecin généraliste',
+            'CONS-URG': 'Urgence',
+            'CONS-PED': 'Pédiatrie',
+            'CONS-GYN': 'Gynécologie',
+            'CONS-CARDIO': 'Cardiologie',
+            'CONS-DERMA': 'Dermatologie',
+            'CONS-ORL': 'ORL',
+            'CONS-OPHT': 'Ophtalmologie',
+            'LAB-NFS': 'Laboratoire',
+            'LAB-GLYC': 'Laboratoire',
+            'LAB-LIPID': 'Laboratoire',
+            'LAB-URINE': 'Laboratoire',
+            'LAB-SERO-VIH': 'Laboratoire',
+            'LAB-SERO-HEP': 'Laboratoire',
+            'LAB-GROSS': 'Laboratoire',
+            'LAB-BACT': 'Laboratoire',
+            'IMG-RX': 'Imagerie / Radiologie',
+            'IMG-ECHO-ABD': 'Imagerie / Échographie',
+            'IMG-ECHO-OBST': 'Imagerie / Échographie obstétricale',
+            'IMG-ECHO-PELV': 'Imagerie / Échographie pelvienne',
+            'IMG-CT': 'Imagerie / Scanner',
+            'IMG-IRM': 'IRM',
+            'IMG-MAMMO': 'Mammographie',
+            'CHIR-PANSEMENT': 'Médecin généraliste',
+            'CHIR-SUTURE': 'Médecin généraliste',
+            'CHIR-INJECT': 'Médecin généraliste',
+            'CHIR-PETITE': 'Chirurgie',
+            'CHIR-PERFUSION': 'Médecin généraliste',
+            'MAT-PRENAT': 'Maternité',
+            'MAT-ACCOUCH-N': 'Maternité',
+            'MAT-ACCOUCH-C': 'Maternité',
+            'MAT-POSTNAT': 'Maternité',
+            'MAT-PLANFAM': 'Maternité',
+            'HOSP-JOUR-COMM': 'Hospitalisation',
+            'HOSP-JOUR-INDIV': 'Hospitalisation',
+            'HOSP-JOUR-VIP': 'Hospitalisation',
+            'HOSP-SOINS': 'Hospitalisation',
+            'HOSP-SURV': 'Hospitalisation',
+            'BLOC-MINEURE': 'Bloc opératoire',
+            'BLOC-MAJEURE': 'Bloc opératoire',
+            'BLOC-ANESTH-LOC': 'Bloc opératoire',
+            'BLOC-ANESTH-GEN': 'Bloc opératoire',
+            'AUT-VACCIN': 'Médecin généraliste',
+            'AUT-CERTIF': 'Médecin généraliste',
+            'AUT-CHECKUP': 'Médecin généraliste',
+            'AUT-KINE': 'Kinésithérapie',
+            'AUT-DENTAIRE': 'Dentaire',
+        };
+
+        return map[code] || 'Service concerné';
+    },
+
+    updateRouting() {
+        if (!this.patient.act_id) {
+            this.routingDestination = '';
+            return;
+        }
+
+        const selectEl = document.querySelector('select[name="act_id"]');
+        const selectedOption = selectEl ? selectEl.options[selectEl.selectedIndex] : null;
+        const code = selectedOption ? selectedOption.dataset.code : '';
+        this.routingDestination = code ? this.getRouting(code) : '';
+    },
+
+    handlePatientSelected(event) {
+        this.existingPatientId = event.detail.id;
+        this.patient.first_name = event.detail.first_name;
+        this.patient.last_name = event.detail.last_name;
+        this.patient.sex = event.detail.sex;
+        this.patient.birth_date = event.detail.birth_date || '';
+        this.patient.phone = event.detail.phone || '';
+        this.patient.coverage = event.detail.coverage;
+        this.patient.insurance_company_id = event.detail.insurance_company_id || '';
+    },
+
+    handlePatientSearchCleared() {
+        this.existingPatientId = null;
+        this.patient.insurance_company_id = '';
+    },
+});

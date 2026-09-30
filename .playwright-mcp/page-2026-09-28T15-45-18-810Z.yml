@@ -1,0 +1,844 @@
+- generic [ref=f10e2]:
+  - navigation [ref=f10e3]:
+    - generic [ref=f10e4]:
+      - generic [ref=f10e6]:
+        - list [ref=f10e7]:
+          - listitem [ref=f10e8]:
+            - link [ref=f10e9] [cursor=pointer]:
+              - /url: "#stack"
+              - button [ref=f10e10]
+          - listitem [ref=f10e14]:
+            - link [ref=f10e15] [cursor=pointer]:
+              - /url: "#context"
+              - button [ref=f10e16]
+          - listitem [ref=f10e20]:
+            - link [ref=f10e21] [cursor=pointer]:
+              - /url: "#debug"
+              - button [ref=f10e22]
+          - listitem [ref=f10e26]:
+            - link [ref=f10e27] [cursor=pointer]:
+              - /url: https://flareapp.io/?utm_campaign=ignition&utm_source=ignition
+              - button [ref=f10e28]
+        - list [ref=f10e35]:
+          - listitem [ref=f10e36]:
+            - link [ref=f10e37] [cursor=pointer]:
+              - /url: "#share"
+              - button [ref=f10e38]
+            - generic:
+              - generic:
+                - generic:
+                  - heading "Share with Flare" [level=4]
+                  - link "Docs":
+                    - /url: https://flareapp.io/docs/ignition/introducing-ignition/sharing-errors?utm_campaign=ignition&utm_source=ignition
+                - list:
+                  - listitem:
+                    - generic:
+                      - checkbox "Stack" [checked]
+                      - generic: Stack
+                  - listitem:
+                    - generic:
+                      - checkbox "Context" [checked]
+                      - generic: Context
+                  - listitem:
+                    - generic:
+                      - checkbox "Debug" [checked]
+                      - generic: Debug
+                - generic:
+                  - button "Create Share"
+          - listitem [ref=f10e42]:
+            - link [ref=f10e43] [cursor=pointer]:
+              - /url: https://laravel.com/docs/
+              - button [ref=f10e44]
+          - listitem [ref=f10e48]:
+            - link [ref=f10e49] [cursor=pointer]:
+              - /url: "#settings"
+              - button [ref=f10e50]
+            - generic:
+              - generic:
+                - generic:
+                  - heading "Ignition Settings" [level=4]
+                  - link "Docs":
+                    - /url: https://flareapp.io/ignition?utm_campaign=ignition&utm_source=ignition
+                - generic:
+                  - text: Editor
+                  - generic:
+                    - combobox "Editor":
+                      - option "Clipboard"
+                      - option "Sublime"
+                      - option "TextMate"
+                      - option "Emacs"
+                      - option "MacVim"
+                      - option "PhpStorm" [selected]
+                      - option "PHPStorm Remote"
+                      - option "Idea"
+                      - option "VS Code"
+                      - option "VS Code Insiders"
+                      - option "VS Code Remote"
+                      - option "VS Code Insiders Remote"
+                      - option "VS Codium"
+                      - option "Cursor"
+                      - option "Atom"
+                      - option "Nova"
+                      - option "NetBeans"
+                      - option "Zed"
+                      - option "Windsurf"
+                      - option "Xdebug"
+                - generic:
+                  - text: Theme
+                  - button "auto"
+                - generic:
+                  - button "Save settings"
+                - paragraph:
+                  - text: Settings will be saved locally in
+                  - code: ~/.ignition.json
+                  - text: .
+      - link "Undefined array key \"href\"" [ref=f10e56] [cursor=pointer]:
+        - /url: "#top"
+  - main [ref=f10e58]:
+    - main [ref=f10e62]:
+      - generic [ref=f10e64]:
+        - generic [ref=f10e65]:
+          - generic [ref=f10e66]: ErrorException
+          - generic [ref=f10e69]:
+            - generic [ref=f10e70]: PHP 8.5.5
+            - generic [ref=f10e71]: 10.50.2
+        - generic [ref=f10e74]: Undefined array key "href"
+    - generic [ref=f10e78]:
+      - complementary [ref=f10e79]:
+        - generic [ref=f10e80]:
+          - button [ref=f10e82] [cursor=pointer]
+          - list [ref=f10e89]:
+            - listitem [ref=f10e90]:
+              - generic [ref=f10e92]:
+                - generic [ref=f10e93]: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\resources\views\components\ui\queue-list.blade
+                - generic [ref=f10e94]: .php
+                - generic [ref=f10e95]: ": 26"
+              - generic [ref=f10e96]: require
+            - listitem [ref=f10e97]
+            - listitem [ref=f10e98] [cursor=pointer]: 8 vendor frames
+            - listitem [ref=f10e101] [cursor=pointer]:
+              - generic [ref=f10e103]:
+                - generic [ref=f10e104]: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\resources\views\pharmacie\dashboard.blade
+                - generic [ref=f10e105]: .php
+                - generic [ref=f10e106]: ": 155"
+              - generic [ref=f10e107]: require
+            - listitem [ref=f10e108] [cursor=pointer]: 13 vendor frames
+            - listitem [ref=f10e111] [cursor=pointer]:
+              - generic [ref=f10e113]:
+                - generic [ref=f10e114]: App
+                - generic [ref=f10e115]: \
+                - generic [ref=f10e116]: Http
+                - generic [ref=f10e117]: \
+                - generic [ref=f10e118]: Middleware
+                - generic [ref=f10e119]: \
+                - generic [ref=f10e120]: EnsureUserHasRole
+                - generic [ref=f10e121]: ": 27"
+              - generic [ref=f10e122]: handle
+            - listitem [ref=f10e123] [cursor=pointer]: 42 vendor frames
+            - listitem [ref=f10e126] [cursor=pointer]:
+              - generic [ref=f10e128]:
+                - generic [ref=f10e129]: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\public\index
+                - generic [ref=f10e130]: .php
+                - generic [ref=f10e131]: ": 51"
+              - generic [ref=f10e132]: require_once
+            - listitem [ref=f10e133] [cursor=pointer]: 1 vendor frame
+      - generic [ref=f10e136]:
+        - 'link "C:\\Users\\Aristide Adouko\\OneDrive\\Documents\\LATEST PROJECTS\\moderne\\resources\\views\\components\\ui\\queue-list.blade .php : 26" [ref=f10e138] [cursor=pointer]':
+          - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=26
+          - generic [ref=f10e139]:
+            - generic [ref=f10e140]: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\resources\views\components\ui\queue-list.blade
+            - generic [ref=f10e141]: .php
+            - generic [ref=f10e142]: ": 26"
+        - main [ref=f10e143]:
+          - navigation [ref=f10e144]:
+            - generic [ref=f10e145]:
+              - paragraph [ref=f10e146]: "11"
+              - paragraph [ref=f10e147]: "12"
+              - paragraph [ref=f10e148]: "13"
+              - paragraph [ref=f10e149]: "14"
+              - paragraph [ref=f10e150]: "15"
+              - paragraph [ref=f10e151]: "16"
+              - paragraph [ref=f10e152]: "17"
+              - paragraph [ref=f10e153]: "18"
+              - paragraph [ref=f10e154]: "19"
+              - paragraph [ref=f10e155]: "20"
+              - paragraph [ref=f10e156]: "21"
+              - paragraph [ref=f10e157]: "22"
+              - paragraph [ref=f10e158]: "23"
+              - paragraph [ref=f10e159]: "24"
+              - paragraph [ref=f10e160]: "25"
+              - paragraph [ref=f10e161]: "26"
+              - paragraph [ref=f10e162]: "27"
+              - paragraph [ref=f10e163]: "28"
+              - paragraph [ref=f10e164]: "29"
+              - paragraph [ref=f10e165]: "30"
+              - paragraph [ref=f10e166]: "31"
+              - paragraph [ref=f10e167]: "32"
+              - paragraph [ref=f10e168]: "33"
+              - paragraph [ref=f10e169]: "34"
+              - paragraph [ref=f10e170]: "35"
+              - paragraph [ref=f10e171]: "36"
+              - paragraph [ref=f10e172]: "37"
+              - paragraph [ref=f10e173]: "38"
+              - paragraph [ref=f10e174]: "39"
+              - paragraph [ref=f10e175]: "40"
+          - code [ref=f10e178]:
+            - generic [ref=f10e179]:
+              - link [ref=f10e180] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=11
+                - button [ref=f10e181]
+              - generic [ref=f10e184]: <ul class="divide-y divide-line">
+            - generic [ref=f10e186]:
+              - link [ref=f10e187] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=12
+                - button [ref=f10e188]
+              - generic [ref=f10e191]: "@forelse ($items as $item)"
+            - generic [ref=f10e193]:
+              - link [ref=f10e194] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=13
+                - button [ref=f10e195]
+              - generic [ref=f10e198]: <li>
+            - generic [ref=f10e200]:
+              - link [ref=f10e201] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=14
+                - button [ref=f10e202]
+              - generic [ref=f10e205]: <button
+            - generic [ref=f10e207]:
+              - link [ref=f10e208] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=15
+                - button [ref=f10e209]
+              - generic [ref=f10e212]: type="button"
+            - generic [ref=f10e214]:
+              - link [ref=f10e215] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=16
+                - button [ref=f10e216]
+              - generic [ref=f10e219]: "@if(!($item['selected'] ?? false))"
+            - generic [ref=f10e221]:
+              - link [ref=f10e222] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=17
+                - button [ref=f10e223]
+              - generic [ref=f10e226]: "@click=\"$dispatch('open-confirm', {"
+            - generic [ref=f10e228]:
+              - link [ref=f10e229] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=18
+                - button [ref=f10e230]
+              - generic [ref=f10e233]: "visitId: '{{ $item['id'] }}',"
+            - generic [ref=f10e235]:
+              - link [ref=f10e236] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=19
+                - button [ref=f10e237]
+              - generic [ref=f10e240]: "patientName: '{{ $item['name'] }}',"
+            - generic [ref=f10e242]:
+              - link [ref=f10e243] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=20
+                - button [ref=f10e244]
+              - generic [ref=f10e247]: "href: '{{ $item['href'] }}'"
+            - generic [ref=f10e249]:
+              - link [ref=f10e250] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=21
+                - button [ref=f10e251]
+              - generic [ref=f10e254]: "})\""
+            - generic [ref=f10e255]:
+              - link [ref=f10e256] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=22
+                - button [ref=f10e257]
+              - generic [ref=f10e260]: "@endif"
+            - generic [ref=f10e262]:
+              - link [ref=f10e263] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=23
+                - button [ref=f10e264]
+              - generic [ref=f10e267]: class="flex w-full items-start gap-3 px-5 py-4 text-left transition-colors
+            - generic [ref=f10e268]:
+              - link [ref=f10e269] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=24
+                - button [ref=f10e270]
+              - generic [ref=f10e273]: "{{ ($item['selected'] ?? false) ? 'bg-brand-50' : (($item['vitals_taken'] ?? false) ? 'bg-success/5 border-l-4 border-success' : 'hover:bg-surface-sunken') }}\""
+            - generic [ref=f10e275]:
+              - link [ref=f10e276] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=25
+                - button [ref=f10e277]
+              - generic [ref=f10e280]: ">"
+            - generic [ref=f10e281]:
+              - link [ref=f10e282] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=26
+                - button [ref=f10e283]
+              - generic [ref=f10e286]: "<x-ui.avatar :initials=\"$item['initials']\" :tone=\"($item['urgent'] ?? false) ? 'danger' : (($item['vitals_taken'] ?? false) ? 'success' : 'brand')\" size=\"sm\" />"
+            - generic [ref=f10e288]:
+              - link [ref=f10e289] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=27
+                - button [ref=f10e290]
+              - generic [ref=f10e293]: <div class="min-w-0 flex-1">
+            - generic [ref=f10e295]:
+              - link [ref=f10e296] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=28
+                - button [ref=f10e297]
+              - generic [ref=f10e300]: <div class="flex items-center justify-between gap-2">
+            - generic [ref=f10e302]:
+              - link [ref=f10e303] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=29
+                - button [ref=f10e304]
+              - generic [ref=f10e307]: "<p class=\"truncate text-sm font-medium text-ink\">{{ $item['name'] }}</p>"
+            - generic [ref=f10e309]:
+              - link [ref=f10e310] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=30
+                - button [ref=f10e311]
+              - generic [ref=f10e314]: "@if (!empty($item['time']))"
+            - generic [ref=f10e316]:
+              - link [ref=f10e317] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=31
+                - button [ref=f10e318]
+              - generic [ref=f10e321]: "<span class=\"font-mono text-xs text-ink-muted\">{{ $item['time'] }}</span>"
+            - generic [ref=f10e323]:
+              - link [ref=f10e324] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=32
+                - button [ref=f10e325]
+              - generic [ref=f10e328]: "@endif"
+            - generic [ref=f10e330]:
+              - link [ref=f10e331] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=33
+                - button [ref=f10e332]
+              - generic [ref=f10e335]: </div>
+            - generic [ref=f10e337]:
+              - link [ref=f10e338] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=34
+                - button [ref=f10e339]
+              - generic [ref=f10e342]: "<p class=\"mt-0.5 truncate text-xs text-ink-muted\">{{ $item['meta'] }}</p>"
+            - generic [ref=f10e344]:
+              - link [ref=f10e345] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=35
+                - button [ref=f10e346]
+              - generic [ref=f10e349]: "@if (!empty($item['vitals_by']))"
+            - generic [ref=f10e351]:
+              - link [ref=f10e352] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=36
+                - button [ref=f10e353]
+              - generic [ref=f10e356]: "<p class=\"mt-0.5 truncate text-[11px] font-medium text-success\">Constantes prises par {{ $item['vitals_by'] }}</p>"
+            - generic [ref=f10e358]:
+              - link [ref=f10e359] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=37
+                - button [ref=f10e360]
+              - generic [ref=f10e363]: "@endif"
+            - generic [ref=f10e365]:
+              - link [ref=f10e366] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=38
+                - button [ref=f10e367]
+              - generic [ref=f10e370]: "@if (($item['urgent'] ?? false) || !empty($item['badge']))"
+            - generic [ref=f10e372]:
+              - link [ref=f10e373] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=39
+                - button [ref=f10e374]
+              - generic [ref=f10e377]: <div class="mt-2 flex flex-wrap gap-1.5">
+            - generic [ref=f10e379]:
+              - link [ref=f10e380] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=40
+                - button [ref=f10e381]
+              - generic [ref=f10e384]: "@if ($item['urgent'] ?? false)"
+    - generic [ref=f10e387]:
+      - navigation [ref=f10e388]:
+        - list [ref=f10e390]:
+          - listitem [ref=f10e391]:
+            - link "App" [ref=f10e392] [cursor=pointer]:
+              - /url: "#context-app"
+            - list [ref=f10e393]:
+              - listitem [ref=f10e394]:
+                - link "Routing" [ref=f10e395] [cursor=pointer]:
+                  - /url: "#context-app-routing"
+              - listitem [ref=f10e400]:
+                - link "Views" [ref=f10e401] [cursor=pointer]:
+                  - /url: "#context-app-views"
+          - listitem [ref=f10e406]:
+            - link "Request" [ref=f10e407] [cursor=pointer]:
+              - /url: "#context-request"
+            - list [ref=f10e408]:
+              - listitem [ref=f10e409]:
+                - link "Browser" [ref=f10e410] [cursor=pointer]:
+                  - /url: "#context-request-browser"
+              - listitem [ref=f10e415]:
+                - link "Headers" [ref=f10e416] [cursor=pointer]:
+                  - /url: "#context-request-headers"
+              - listitem [ref=f10e421]:
+                - link "Body" [ref=f10e422] [cursor=pointer]:
+                  - /url: "#context-request-body"
+          - listitem [ref=f10e427]:
+            - link "Context" [ref=f10e428] [cursor=pointer]:
+              - /url: "#context-context"
+            - list [ref=f10e429]:
+              - listitem [ref=f10e430]:
+                - link "User" [ref=f10e431] [cursor=pointer]:
+                  - /url: "#context-user-user"
+              - listitem [ref=f10e436]:
+                - link "Versions" [ref=f10e437] [cursor=pointer]:
+                  - /url: "#context-context-versions"
+      - generic [ref=f10e442]:
+        - generic [ref=f10e443]:
+          - heading "App" [level=2] [ref=f10e444]
+          - generic [ref=f10e445]:
+            - generic [ref=f10e446]:
+              - heading [level=1] [ref=f10e447]
+              - generic [ref=f10e451]:
+                - generic [ref=f10e452]:
+                  - term [ref=f10e453]: Controller
+                  - definition [ref=f10e454]:
+                    - generic [ref=f10e455]:
+                      - code [ref=f10e458]: App\Http\Controllers\PharmacieController@index
+                      - button "Copy to clipboard" [ref=f10e460] [cursor=pointer]
+                - generic [ref=f10e463]:
+                  - term [ref=f10e464]: Route name
+                  - definition [ref=f10e465]:
+                    - generic [ref=f10e466]:
+                      - code [ref=f10e469]: pharmacie.index
+                      - button "Copy to clipboard" [ref=f10e471] [cursor=pointer]
+                - generic [ref=f10e474]:
+                  - term [ref=f10e475]: Middleware
+                  - definition [ref=f10e476]:
+                    - list [ref=f10e477]:
+                      - listitem [ref=f10e478]:
+                        - generic [ref=f10e479]:
+                          - code [ref=f10e482]: web
+                          - button "Copy to clipboard" [ref=f10e484] [cursor=pointer]
+                      - listitem [ref=f10e487]:
+                        - generic [ref=f10e488]:
+                          - code [ref=f10e491]: auth
+                          - button "Copy to clipboard" [ref=f10e493] [cursor=pointer]
+                      - listitem [ref=f10e496]:
+                        - generic [ref=f10e497]:
+                          - code [ref=f10e500]: verified
+                          - button "Copy to clipboard" [ref=f10e502] [cursor=pointer]
+                      - listitem [ref=f10e505]:
+                        - generic [ref=f10e506]:
+                          - code [ref=f10e509]: role:pharmacien,docteur_general
+                          - button "Copy to clipboard" [ref=f10e511] [cursor=pointer]
+            - generic [ref=f10e514]:
+              - heading [level=1] [ref=f10e515]
+              - generic [ref=f10e519]:
+                - generic [ref=f10e520]:
+                  - term [ref=f10e521]: View
+                  - definition [ref=f10e522]:
+                    - link "C:\\Users\\Aristide Adouko\\OneDrive\\Documents\\LATEST PROJECTS\\moderne\\resources\\views\\components\\ui\\queue-list.blade .php" [ref=f10e523] [cursor=pointer]:
+                      - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Ccomponents%5Cui%5Cqueue-list.blade.php&line=1
+                      - generic [ref=f10e524]:
+                        - generic [ref=f10e525]: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\resources\views\components\ui\queue-list.blade
+                        - generic [ref=f10e526]: .php
+                - generic [ref=f10e527]:
+                  - term [ref=f10e528]: Data
+                  - definition [ref=f10e529]:
+                    - generic [ref=f10e530]:
+                      - generic [ref=f10e531]:
+                        - term [ref=f10e532]: errors
+                        - definition [ref=f10e533]:
+                          - generic [ref=f10e535]:
+                            - text: "Illuminate\\Support\\ViewErrorBag {"
+                            - generic "[Ctrl+click] Expand all children" [ref=f10e536] [cursor=pointer]:
+                              - text: "#456"
+                              - generic [ref=f10e537]: ▼
+                            - generic [ref=f10e538]: "#bags: []"
+                            - text: "}"
+                      - generic [ref=f10e539]:
+                        - term [ref=f10e540]: title
+                        - definition [ref=f10e541]:
+                          - generic [ref=f10e542]: "\"Ordonnances à traiter\""
+                      - generic [ref=f10e544]:
+                        - term [ref=f10e545]: items
+                        - definition [ref=f10e546]:
+                          - generic [ref=f10e548]:
+                            - text: "Illuminate\\Support\\Collection {"
+                            - generic "[Ctrl+click] Expand all children" [ref=f10e549] [cursor=pointer]:
+                              - text: "#1207"
+                              - generic [ref=f10e550]: ▼
+                            - generic [ref=f10e551]:
+                              - text: "#items: array:6 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f10e552] [cursor=pointer]: ▶
+                              - text: "] #escapeWhenCastingToString: true"
+                            - text: "}"
+                      - generic [ref=f10e554]:
+                        - term [ref=f10e555]: class
+                        - definition [ref=f10e556]:
+                          - generic [ref=f10e557]: "\"lg:col-span-1\""
+                      - generic [ref=f10e559]:
+                        - term [ref=f10e560]: attributes
+                        - definition [ref=f10e561]:
+                          - generic [ref=f10e563]:
+                            - text: "Illuminate\\View\\ComponentAttributeBag {"
+                            - generic "[Ctrl+click] Expand all children" [ref=f10e564] [cursor=pointer]:
+                              - text: "#1234"
+                              - generic [ref=f10e565]: ▼
+                            - generic [ref=f10e566]:
+                              - text: "#attributes: array:3 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f10e567] [cursor=pointer]: ▶
+                              - text: "]"
+                            - text: "}"
+                      - generic [ref=f10e569]:
+                        - term [ref=f10e570]: slot
+                        - definition [ref=f10e571]:
+                          - generic [ref=f10e573]:
+                            - text: "Illuminate\\View\\ComponentSlot {"
+                            - generic "[Ctrl+click] Expand all children" [ref=f10e574] [cursor=pointer]:
+                              - text: "#1288"
+                              - generic [ref=f10e575]: ▼
+                            - generic [ref=f10e576]:
+                              - text: "+attributes:"
+                              - generic "Illuminate\\View\\ComponentAttributeBag" [ref=f10e577]:
+                                - generic [ref=f10e578]: Illuminate\View
+                                - generic [ref=f10e579]: \
+                                - text: ComponentAttributeBag
+                              - text: "{"
+                              - generic "[Ctrl+click] Expand all children" [ref=f10e580] [cursor=pointer]:
+                                - text: "#1283"
+                                - generic [ref=f10e581]: ▶
+                              - text: "} #contents: \"\""
+                            - text: "}"
+                      - generic [ref=f10e582]:
+                        - term [ref=f10e583]: __laravel_slots
+                        - definition [ref=f10e584]:
+                          - generic [ref=f10e586]:
+                            - text: array:1 [
+                            - generic "[Ctrl+click] Expand all children" [ref=f10e587] [cursor=pointer]: ▼
+                            - generic [ref=f10e589]:
+                              - text: "\"__default\" =>"
+                              - generic "Illuminate\\View\\ComponentSlot" [ref=f10e590]:
+                                - generic [ref=f10e591]: Illuminate\View
+                                - generic [ref=f10e592]: \
+                                - text: ComponentSlot
+                              - text: "{"
+                              - generic "[Ctrl+click] Expand all children" [ref=f10e593] [cursor=pointer]:
+                                - text: "#1288"
+                                - generic [ref=f10e594]: ▶
+                              - text: "}"
+                            - text: "]"
+                      - generic [ref=f10e595]:
+                        - term [ref=f10e596]: userName
+                        - definition [ref=f10e597]:
+                          - generic [ref=f10e598]: "\"Dr. Gnlé\""
+                      - generic [ref=f10e600]:
+                        - term [ref=f10e601]: userRole
+                        - definition [ref=f10e602]:
+                          - generic [ref=f10e603]: "\"Docteur Général\""
+                      - generic [ref=f10e605]:
+                        - term [ref=f10e606]: userInitials
+                        - definition [ref=f10e607]:
+                          - generic [ref=f10e608]: "\"DG\""
+        - generic [ref=f10e610]:
+          - heading "Request" [level=2] [ref=f10e611]
+          - generic [ref=f10e612]:
+            - generic [ref=f10e613]:
+              - generic [ref=f10e614]:
+                - generic [ref=f10e615]: http://localhost:8000/pharmacie
+                - generic [ref=f10e616]: GET
+              - generic [ref=f10e618] [cursor=pointer]:
+                - code [ref=f10e621]:
+                  - code [ref=f10e623]: "curl \"http://localhost:8000/pharmacie\" \\ -X GET \\ -H 'host: localhost:8000' \\ -H 'connection: keep-alive' \\ -H 'sec-ch-ua: \"Chromium\";v=\"154\", \"Google Chrome\";v=\"154\", \"Not A(Brand\";v=\"99\"' \\ -H 'sec-ch-ua-mobile: ?0' \\ -H 'sec-ch-ua-platform: \"Windows\"' \\ -H 'upgrade-insecure-requests: 1' \\ -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36' \\ -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \\ -H 'sec-fetch-site: none' \\ -H 'sec-fetch-mode: navigate' \\ -H 'sec-fetch-user: ?1' \\ -H 'sec-fetch-dest: document' \\ -H 'accept-encoding: gzip, deflate, br, zstd' \\ -H 'accept-language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7' \\ -H 'cookie: <CENSORED>';"
+                - button "Copy to clipboard" [ref=f10e625]
+                - button [ref=f10e628]
+            - generic [ref=f10e631]:
+              - heading [level=1] [ref=f10e632]
+              - generic [ref=f10e636]:
+                - code [ref=f10e639]: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36
+                - button "Copy to clipboard" [ref=f10e641] [cursor=pointer]
+            - generic [ref=f10e644]:
+              - heading [level=1] [ref=f10e645]
+              - generic [ref=f10e649]:
+                - generic [ref=f10e650]:
+                  - term [ref=f10e651]: host
+                  - definition [ref=f10e652]:
+                    - generic [ref=f10e653]:
+                      - code [ref=f10e656]: localhost:8000
+                      - button "Copy to clipboard" [ref=f10e658] [cursor=pointer]
+                - generic [ref=f10e661]:
+                  - term [ref=f10e662]: connection
+                  - definition [ref=f10e663]:
+                    - generic [ref=f10e664]:
+                      - code [ref=f10e667]: keep-alive
+                      - button "Copy to clipboard" [ref=f10e669] [cursor=pointer]
+                - generic [ref=f10e672]:
+                  - term [ref=f10e673]: sec-ch-ua
+                  - definition [ref=f10e674]:
+                    - generic [ref=f10e675]:
+                      - code [ref=f10e678]: "\"Chromium\";v=\"154\", \"Google Chrome\";v=\"154\", \"Not A(Brand\";v=\"99\""
+                      - button "Copy to clipboard" [ref=f10e680] [cursor=pointer]
+                - generic [ref=f10e683]:
+                  - term [ref=f10e684]: sec-ch-ua-mobile
+                  - definition [ref=f10e685]:
+                    - generic [ref=f10e686]:
+                      - code [ref=f10e689]: "?0"
+                      - button "Copy to clipboard" [ref=f10e691] [cursor=pointer]
+                - generic [ref=f10e694]:
+                  - term [ref=f10e695]: sec-ch-ua-platform
+                  - definition [ref=f10e696]:
+                    - generic [ref=f10e697]:
+                      - code [ref=f10e700]: "\"Windows\""
+                      - button "Copy to clipboard" [ref=f10e702] [cursor=pointer]
+                - generic [ref=f10e705]:
+                  - term [ref=f10e706]: upgrade-insecure-requests
+                  - definition [ref=f10e707]:
+                    - generic [ref=f10e708]:
+                      - code [ref=f10e711]: "1"
+                      - button "Copy to clipboard" [ref=f10e713] [cursor=pointer]
+                - generic [ref=f10e716]:
+                  - term [ref=f10e717]: user-agent
+                  - definition [ref=f10e718]:
+                    - generic [ref=f10e719]:
+                      - code [ref=f10e722]: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36
+                      - button "Copy to clipboard" [ref=f10e724] [cursor=pointer]
+                - generic [ref=f10e727]:
+                  - term [ref=f10e728]: accept
+                  - definition [ref=f10e729]:
+                    - generic [ref=f10e730]:
+                      - code [ref=f10e733]: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+                      - button "Copy to clipboard" [ref=f10e735] [cursor=pointer]
+                - generic [ref=f10e738]:
+                  - term [ref=f10e739]: sec-fetch-site
+                  - definition [ref=f10e740]:
+                    - generic [ref=f10e741]:
+                      - code [ref=f10e744]: none
+                      - button "Copy to clipboard" [ref=f10e746] [cursor=pointer]
+                - generic [ref=f10e749]:
+                  - term [ref=f10e750]: sec-fetch-mode
+                  - definition [ref=f10e751]:
+                    - generic [ref=f10e752]:
+                      - code [ref=f10e755]: navigate
+                      - button "Copy to clipboard" [ref=f10e757] [cursor=pointer]
+                - generic [ref=f10e760]:
+                  - term [ref=f10e761]: sec-fetch-user
+                  - definition [ref=f10e762]:
+                    - generic [ref=f10e763]:
+                      - code [ref=f10e766]: "?1"
+                      - button "Copy to clipboard" [ref=f10e768] [cursor=pointer]
+                - generic [ref=f10e771]:
+                  - term [ref=f10e772]: sec-fetch-dest
+                  - definition [ref=f10e773]:
+                    - generic [ref=f10e774]:
+                      - code [ref=f10e777]: document
+                      - button "Copy to clipboard" [ref=f10e779] [cursor=pointer]
+                - generic [ref=f10e782]:
+                  - term [ref=f10e783]: accept-encoding
+                  - definition [ref=f10e784]:
+                    - generic [ref=f10e785]:
+                      - code [ref=f10e788]: gzip, deflate, br, zstd
+                      - button "Copy to clipboard" [ref=f10e790] [cursor=pointer]
+                - generic [ref=f10e793]:
+                  - term [ref=f10e794]: accept-language
+                  - definition [ref=f10e795]:
+                    - generic [ref=f10e796]:
+                      - code [ref=f10e799]: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7
+                      - button "Copy to clipboard" [ref=f10e801] [cursor=pointer]
+                - generic [ref=f10e804]:
+                  - term [ref=f10e805]: cookie
+                  - definition [ref=f10e806]:
+                    - generic [ref=f10e807]:
+                      - code [ref=f10e810]: <CENSORED>
+                      - button "Copy to clipboard" [ref=f10e812] [cursor=pointer]
+            - generic [ref=f10e815]:
+              - heading [level=1] [ref=f10e816]
+              - generic [ref=f10e820]:
+                - code [ref=f10e823]: "[]"
+                - button "Copy to clipboard" [ref=f10e825] [cursor=pointer]
+        - generic [ref=f10e828]:
+          - heading "Context" [level=2] [ref=f10e829]
+          - generic [ref=f10e830]:
+            - generic [ref=f10e831]:
+              - heading [level=1] [ref=f10e832]
+              - generic [ref=f10e836]:
+                - img "dr.gnle@cmsm.com" [ref=f10e838]
+                - generic [ref=f10e839]:
+                  - paragraph [ref=f10e840]: Dr. Gnlé
+                  - paragraph [ref=f10e841]: dr.gnle@cmsm.com
+              - generic [ref=f10e842] [cursor=pointer]:
+                - code [ref=f10e845]:
+                  - code [ref=f10e847]: "{ \"id\": 9, \"name\": \"Dr. Gnlé\", \"email\": \"dr.gnle@cmsm.com\", \"role\": \"docteur_general\", \"is_active\": true, \"email_verified_at\": \"2026-09-11T16:45:22.000000Z\", \"created_at\": \"2026-09-11T16:45:22.000000Z\", \"updated_at\": \"2026-09-11T16:45:22.000000Z\" }"
+                - button "Copy to clipboard" [ref=f10e849]
+                - button [ref=f10e852]
+            - generic [ref=f10e855]:
+              - heading [level=1] [ref=f10e856]
+              - generic [ref=f10e860]:
+                - generic [ref=f10e861]:
+                  - term [ref=f10e862]: Php Version
+                  - definition [ref=f10e863]:
+                    - generic [ref=f10e864]:
+                      - code [ref=f10e867]: 8.5.5
+                      - button "Copy to clipboard" [ref=f10e869] [cursor=pointer]
+                - generic [ref=f10e872]:
+                  - term [ref=f10e873]: Laravel Version
+                  - definition [ref=f10e874]:
+                    - generic [ref=f10e875]:
+                      - code [ref=f10e878]: 10.50.2
+                      - button "Copy to clipboard" [ref=f10e880] [cursor=pointer]
+                - generic [ref=f10e883]:
+                  - term [ref=f10e884]: Laravel Locale
+                  - definition [ref=f10e885]:
+                    - generic [ref=f10e886]:
+                      - code [ref=f10e889]: fr
+                      - button "Copy to clipboard" [ref=f10e891] [cursor=pointer]
+                - generic [ref=f10e894]:
+                  - term [ref=f10e895]: Laravel Config Cached
+                  - definition [ref=f10e896]:
+                    - generic [ref=f10e897]: "false"
+                - generic [ref=f10e901]:
+                  - term [ref=f10e902]: App Debug
+                  - definition [ref=f10e903]:
+                    - generic [ref=f10e904]: "true"
+                - generic [ref=f10e908]:
+                  - term [ref=f10e909]: App Env
+                  - definition [ref=f10e910]:
+                    - generic [ref=f10e911]:
+                      - code [ref=f10e914]: local
+                      - button "Copy to clipboard" [ref=f10e916] [cursor=pointer]
+    - generic [ref=f10e920]:
+      - navigation:
+        - list [ref=f10e921]:
+          - listitem [ref=f10e922]:
+            - button "9 Queries" [ref=f10e923] [cursor=pointer]:
+              - generic [ref=f10e924]: "9"
+              - generic [ref=f10e925]: Queries
+          - listitem [ref=f10e926]:
+            - button "10 Logs" [ref=f10e927] [cursor=pointer]:
+              - generic [ref=f10e928]: "10"
+              - generic [ref=f10e929]: Logs
+      - generic [ref=f10e930]:
+        - generic [ref=f10e931]:
+          - generic [ref=f10e932]:
+            - generic [ref=f10e933]: 15:45:13
+            - generic [ref=f10e934]:
+              - img "Runtime" [ref=f10e935]
+              - text: 23.43ms
+            - generic [ref=f10e937]:
+              - img "Connection" [ref=f10e938]
+              - text: mysql
+          - generic [ref=f10e941]:
+            - generic [ref=f10e942] [cursor=pointer]:
+              - code [ref=f10e945]:
+                - code [ref=f10e947]: "select * from `users` where `id` = 9 limit 1"
+              - button "Copy to clipboard" [ref=f10e949]
+              - button [ref=f10e952]
+            - button "1 query parameter" [ref=f10e956] [cursor=pointer]
+        - generic [ref=f10e959]:
+          - generic [ref=f10e960]:
+            - generic [ref=f10e961]: 15:45:13
+            - generic [ref=f10e962]:
+              - img "Runtime" [ref=f10e963]
+              - text: 1.53ms
+            - generic [ref=f10e965]:
+              - img "Connection" [ref=f10e966]
+              - text: mysql
+          - generic [ref=f10e969] [cursor=pointer]:
+            - code [ref=f10e972]:
+              - code [ref=f10e974]: "select * from `prescriptions` order by `requested_at` asc"
+            - button "Copy to clipboard" [ref=f10e976]
+            - button [ref=f10e979]
+        - generic [ref=f10e982]:
+          - generic [ref=f10e983]:
+            - generic [ref=f10e984]: 15:45:13
+            - generic [ref=f10e985]:
+              - img "Runtime" [ref=f10e986]
+              - text: 1.4ms
+            - generic [ref=f10e988]:
+              - img "Connection" [ref=f10e989]
+              - text: mysql
+          - generic [ref=f10e992] [cursor=pointer]:
+            - code [ref=f10e995]:
+              - code [ref=f10e997]: "select * from `patients` where `patients`.`id` in (1, 7)"
+            - button "Copy to clipboard" [ref=f10e999]
+            - button [ref=f10e1002]
+        - generic [ref=f10e1005]:
+          - generic [ref=f10e1006]:
+            - generic [ref=f10e1007]: 15:45:13
+            - generic [ref=f10e1008]:
+              - img "Runtime" [ref=f10e1009]
+              - text: 1.44ms
+            - generic [ref=f10e1011]:
+              - img "Connection" [ref=f10e1012]
+              - text: mysql
+          - generic [ref=f10e1015] [cursor=pointer]:
+            - code [ref=f10e1018]:
+              - code [ref=f10e1020]: "select * from `prescription_items` where `prescription_items`.`prescription_id` in (1, 4, 5, 6, 7, 8, 9)"
+            - button "Copy to clipboard" [ref=f10e1022]
+            - button [ref=f10e1025]
+        - generic [ref=f10e1028]:
+          - generic [ref=f10e1029]:
+            - generic [ref=f10e1030]: 15:45:13
+            - generic [ref=f10e1031]:
+              - img "Runtime" [ref=f10e1032]
+              - text: 1.05ms
+            - generic [ref=f10e1034]:
+              - img "Connection" [ref=f10e1035]
+              - text: mysql
+          - generic [ref=f10e1038] [cursor=pointer]:
+            - code [ref=f10e1041]:
+              - code [ref=f10e1043]: "select * from `medications` where `medications`.`id` in (1, 12)"
+            - button "Copy to clipboard" [ref=f10e1045]
+            - button [ref=f10e1048]
+        - generic [ref=f10e1051]:
+          - generic [ref=f10e1052]:
+            - generic [ref=f10e1053]: 15:45:13
+            - generic [ref=f10e1054]:
+              - img "Runtime" [ref=f10e1055]
+              - text: 0.91ms
+            - generic [ref=f10e1057]:
+              - img "Connection" [ref=f10e1058]
+              - text: mysql
+          - generic [ref=f10e1061] [cursor=pointer]:
+            - code [ref=f10e1064]:
+              - code [ref=f10e1066]: "select * from `users` where `users`.`id` in (9)"
+            - button "Copy to clipboard" [ref=f10e1068]
+            - button [ref=f10e1071]
+        - generic [ref=f10e1074]:
+          - generic [ref=f10e1075]:
+            - generic [ref=f10e1076]: 15:45:13
+            - generic [ref=f10e1077]:
+              - img "Runtime" [ref=f10e1078]
+              - text: 1.12ms
+            - generic [ref=f10e1080]:
+              - img "Connection" [ref=f10e1081]
+              - text: mysql
+          - generic [ref=f10e1084] [cursor=pointer]:
+            - code [ref=f10e1087]:
+              - code [ref=f10e1089]: "select * from `users` where `users`.`id` in (9)"
+            - button "Copy to clipboard" [ref=f10e1091]
+            - button [ref=f10e1094]
+        - generic [ref=f10e1097]:
+          - generic [ref=f10e1098]:
+            - generic [ref=f10e1099]: 15:45:13
+            - generic [ref=f10e1100]:
+              - img "Runtime" [ref=f10e1101]
+              - text: 1.32ms
+            - generic [ref=f10e1103]:
+              - img "Connection" [ref=f10e1104]
+              - text: mysql
+          - generic [ref=f10e1107] [cursor=pointer]:
+            - code [ref=f10e1110]:
+              - code [ref=f10e1112]: "select * from `patients` order by `last_name` asc, `first_name` asc"
+            - button "Copy to clipboard" [ref=f10e1114]
+            - button [ref=f10e1117]
+        - generic [ref=f10e1120]:
+          - generic [ref=f10e1121]:
+            - generic [ref=f10e1122]: 15:45:13
+            - generic [ref=f10e1123]:
+              - img "Runtime" [ref=f10e1124]
+              - text: 1.15ms
+            - generic [ref=f10e1126]:
+              - img "Connection" [ref=f10e1127]
+              - text: mysql
+          - generic [ref=f10e1130] [cursor=pointer]:
+            - code [ref=f10e1133]:
+              - code [ref=f10e1135]: "select * from `medications` order by `name` asc"
+            - button "Copy to clipboard" [ref=f10e1137]
+            - button [ref=f10e1140]
+    - generic [ref=f10e1144]:
+      - list [ref=f10e1145]:
+        - listitem [ref=f10e1146]
+        - listitem [ref=f10e1155]: ·
+        - listitem [ref=f10e1156]:
+          - link "Source" [ref=f10e1157] [cursor=pointer]:
+            - /url: https://github.com/spatie/laravel-ignition
+        - listitem [ref=f10e1158]: ·
+        - listitem [ref=f10e1159]:
+          - link "Docs" [ref=f10e1160] [cursor=pointer]:
+            - /url: https://flareapp.io/docs/ignition/introducing-ignition/overview
+        - listitem [ref=f10e1161]: ·
+        - listitem [ref=f10e1162]:
+          - link "Laravel" [ref=f10e1163] [cursor=pointer]:
+            - /url: https://laravel.com
+      - paragraph [ref=f10e1165]:
+        - text: Ignition is built by
+        - link "Flare" [ref=f10e1166] [cursor=pointer]:
+          - /url: https://flareapp.io/?utm_campaign=ignition&utm_source=ignition
+        - text: ", the Laravel error reporting service."

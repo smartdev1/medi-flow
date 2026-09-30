@@ -1,0 +1,103 @@
+[  435290ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  445285ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  455350ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  465284ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  475295ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  485288ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  495296ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  505297ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  515337ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  525291ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  535298ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  545258ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  555418ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  565220ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  575397ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  585330ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  595299ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  605391ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  615317ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  625222ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  635402ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  645329ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  655351ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  665369ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  675337ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  685450ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  695365ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  705304ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  715344ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  725285ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  735304ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  745300ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  755348ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  765301ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  775278ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  785409ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  795320ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  805305ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente/refresh:0
+[  822019ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente:0
+[  948033ms] [LOG] [vite] server connection lost. polling for restart... @ http://[::1]:5173/@vite/client:287
+[  949044ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente:0
+[ 1658508ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[ 1668518ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[ 1678592ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[ 1688729ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[ 1705428ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente:0
+[ 1924049ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente:0
+[ 2154169ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente:0
+[ 2957503ms] [LOG] [vite] server connection lost. polling for restart... @ http://[::1]:5173/@vite/client:287
+[ 2958232ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente:0
+[ 3576809ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente:0
+[ 3585567ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[ 3585788ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[ 3585844ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[ 3594744ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[ 3594893ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[ 3594908ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[ 9611633ms] [LOG] [vite] server connection lost. polling for restart... @ http://[::1]:5173/@vite/client:287
+[ 9616994ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[ 9617314ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[ 9617379ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[ 9902206ms] [LOG] [vite] server connection lost. polling for restart... @ http://[::1]:5173/@vite/client:287
+[ 9905102ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[ 9905400ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[ 9905475ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[13187406ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[13187702ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[13187772ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[13675089ms] [LOG] [vite] server connection lost. polling for restart... @ http://[::1]:5173/@vite/client:287
+[13678917ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[13679265ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[13679333ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[14781084ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[14781350ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[14781417ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[14799975ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[14800109ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[14800126ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[14814131ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[14814332ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[14814363ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[14876201ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[14876297ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[14876336ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[14888687ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[14888799ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[14888818ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[15131394ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[15131675ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[15131732ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[15189176ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[15189301ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[15189328ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[15452594ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[15452889ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[15452948ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[15630887ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[15631157ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[15631210ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[15646615ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/salle-attente:0
+[15646739ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/salle-attente:221
+[15646757ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(83), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/salle-attente} @ http://localhost:8000/salle-attente:226
+[16158331ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/salle-attente:0

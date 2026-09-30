@@ -1,0 +1,86 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e8]:
+      - paragraph [ref=e9]: Clinique Saint Matthieu
+      - paragraph [ref=e10]: Espace professionnel
+    - navigation "Navigation principale" [ref=e11]:
+      - paragraph [ref=e13]: Parcours Patient
+      - link "Salle d'attente 1" [ref=e15] [cursor=pointer]:
+        - /url: http://localhost:8000/salle-attente
+        - generic [ref=e18]: Salle d'attente
+        - generic [ref=e19]: "1"
+      - button "Hospitalisation" [ref=e21] [cursor=pointer]
+      - paragraph [ref=e29]: Administratif
+      - link "Caisse" [ref=e31] [cursor=pointer]:
+        - /url: http://localhost:8000/caisse
+      - link "Sortie patient" [ref=e35] [cursor=pointer]:
+        - /url: http://localhost:8000/sortie
+  - generic [ref=e39]:
+    - banner [ref=e40]:
+      - textbox "Rechercher..." [ref=e42]
+      - generic [ref=e43]:
+        - button [ref=e44] [cursor=pointer]
+        - generic [ref=e51] [cursor=pointer]:
+          - generic [ref=e52]: SA
+          - generic [ref=e53]:
+            - paragraph [ref=e54]: Stéphanie Aubier
+            - paragraph [ref=e55]: Aide-soignante
+    - main [ref=e58]:
+      - generic [ref=e60]:
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - heading "Circuit patient — vue d'ensemble" [level=1] [ref=e63]
+            - paragraph [ref=e64]: Position de chaque patient dans le parcours de soins, en temps réel.
+          - generic [ref=e65]:
+            - generic [ref=e66]: "Dernière MAJ : 11:27:53"
+            - button "Rafraîchir" [ref=e71] [cursor=pointer]
+        - generic [ref=e75]:
+          - generic [ref=e76]:
+            - generic [ref=e77]:
+              - generic [ref=e78]: Consultation
+              - generic [ref=e82]: "3"
+            - generic [ref=e83]:
+              - generic [ref=e84]:
+                - paragraph [ref=e86]: Tim Coock
+                - paragraph [ref=e87]: CSM-1909
+                - paragraph [ref=e88]: Consultation
+                - generic [ref=e90]:
+                  - checkbox "Constantes prises par Stéphanie Aubier" [checked] [disabled] [ref=e91]
+                  - generic [ref=e92]: Constantes prises par Stéphanie Aubier
+              - generic [ref=e93]:
+                - paragraph [ref=e95]: Aristide Adouko
+                - paragraph [ref=e96]: CSM-1063
+                - paragraph [ref=e97]: Consultation
+                - generic [ref=e99]:
+                  - checkbox "Constantes prises par Stéphanie Aubier" [checked] [disabled] [ref=e100]
+                  - generic [ref=e101]: Constantes prises par Stéphanie Aubier
+              - generic [ref=e102]:
+                - paragraph [ref=e104]: Mourad Junior
+                - paragraph [ref=e105]: CSM-6440
+                - paragraph [ref=e106]: Consultation
+                - button "Confirmer les constantes" [ref=e109] [cursor=pointer]
+          - generic [ref=e112]:
+            - generic [ref=e113]:
+              - generic [ref=e114]: Hospitalisation
+              - generic [ref=e118]: "0"
+            - generic [ref=e119]: Aucun patient
+          - generic [ref=e121]:
+            - generic [ref=e122]:
+              - generic [ref=e123]: Mise en Observation
+              - generic [ref=e127]: "0"
+            - generic [ref=e128]: Aucun patient
+          - generic [ref=e130]:
+            - generic [ref=e131]:
+              - generic [ref=e132]: Laboratoire
+              - generic [ref=e136]: "0"
+            - generic [ref=e137]: Aucun patient
+          - generic [ref=e139]:
+            - generic [ref=e140]:
+              - generic [ref=e141]: Retour médecin
+              - generic [ref=e145]: "0"
+            - generic [ref=e146]: Aucun patient
+          - generic [ref=e148]:
+            - generic [ref=e149]:
+              - generic [ref=e150]: Sortie
+              - generic [ref=e154]: "0"
+            - generic [ref=e155]: Aucun patient

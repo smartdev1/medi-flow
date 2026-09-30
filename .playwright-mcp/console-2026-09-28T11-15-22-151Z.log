@@ -1,0 +1,17 @@
+[     374ms] [WARNING] Alpine Expression Error: Invalid or unexpected token
+
+Expression: "$el.parentElement.querySelectorAll('tbody tr[x-show]:not([style*=\"
+
+ JSHandle@node @ http://localhost:8000/build/assets/app-fda4e741.js:8
+[     394ms] SyntaxError: Invalid or unexpected token
+    at new AsyncFunction (<anonymous>)
+    at http://localhost:8000/build/assets/app-fda4e741.js:13:747
+    at ma (http://localhost:8000/build/assets/app-fda4e741.js:13:971)
+    at ya (http://localhost:8000/build/assets/app-fda4e741.js:13:1016)
+    at _a (http://localhost:8000/build/assets/app-fda4e741.js:13:335)
+    at N (http://localhost:8000/build/assets/app-fda4e741.js:13:181)
+    at Function.<anonymous> (http://localhost:8000/build/assets/app-fda4e741.js:13:34713)
+    at n (http://localhost:8000/build/assets/app-fda4e741.js:13:3089)
+    at r (http://localhost:8000/build/assets/app-fda4e741.js:13:3119)
+    at Sa (http://localhost:8000/build/assets/app-fda4e741.js:13:3129)
+[  315234ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/patients:0

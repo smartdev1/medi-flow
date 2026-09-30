@@ -1,0 +1,24 @@
+- generic [ref=f27e3]:
+  - banner [ref=f27e4]:
+    - button "Ouvrir le menu" [ref=f27e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f27e9]
+    - generic [ref=f27e10]:
+      - button [ref=f27e11] [cursor=pointer]
+      - generic [ref=f27e16]: DG
+  - main [ref=f27e20]:
+    - generic [ref=f27e21]:
+      - generic [ref=f27e22]:
+        - generic [ref=f27e23]:
+          - heading "Espace Médecin" [level=1] [ref=f27e24]
+          - paragraph [ref=f27e25]: 0 patient(s) en attente de consultation aujourd'hui.
+        - generic [ref=f27e26]: Dr. Gnlé · Docteur Général
+      - generic [ref=f27e29]:
+        - generic [ref=f27e30]:
+          - generic [ref=f27e31]:
+            - heading "File d'attente" [level=2] [ref=f27e32]
+            - generic [ref=f27e33]: 0 patients
+          - list [ref=f27e34]:
+            - listitem [ref=f27e35]: Aucun patient dans cette file.
+        - generic [ref=f27e37]:
+          - paragraph [ref=f27e40]: Aucun patient en attente
+          - paragraph [ref=f27e41]: La file de consultation est vide pour le moment.

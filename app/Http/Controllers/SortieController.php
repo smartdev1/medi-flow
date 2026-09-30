@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use App\Models\Patient;
 use App\Models\Visit;
 use App\Support\PatientTimeline;
@@ -20,13 +21,23 @@ class SortieController extends Controller
 
         $activeVisit = $patient?->visits->whereNull('discharged_at')->sortByDesc('arrived_at')->first();
 
-        // Charger les patients avec des visites actives (prêts pour la sortie)
-        $patientsReadyForDischarge = Patient::with(['visits'])
-            ->whereHas('visits', function($query) {
-                $query->active(); // Utilise la portée pour filtrer les visites actives
-            })
+        $activeInvoice = $activeVisit
+            ? Invoice::where('visit_id', $activeVisit->id)->where('status', '!=', Invoice::STATUS_PAID)->first()
+            : null;
+
+        // Patients dont le dossier est prêt à être clôturé : consultation
+        // terminée, ou séjour dont la sortie médicale a été enregistrée.
+        //
+        // On ne passe pas par le scope `active` de Visit : il exclut
+        // précisément le statut « Consultation terminée », alors que c'est
+        // lui qui qualifie un dossier de prêt à sortir. La seule condition
+        // est que la visite ne soit pas encore clôturée.
+        $patientsReadyForDischarge = Patient::with(['visits.admissions'])
+            ->whereHas('visits', fn ($query) => $query->whereNull('discharged_at'))
             ->orderBy('first_name')
-            ->get();
+            ->get()
+            ->filter(fn (Patient $p) => $p->visits->contains(fn (Visit $visit) => $this->isReadyForClosure($visit)))
+            ->values();
 
         $user = Auth::user();
         $userName = $user?->name ?? 'Utilisateur';
@@ -36,6 +47,7 @@ class SortieController extends Controller
         return view('sortie.show', [
             'patient' => $patient,
             'activeVisit' => $activeVisit,
+            'activeInvoice' => $activeInvoice,
             'timeline' => $patient ? PatientTimeline::build($patient) : [],
             'patientOptions' => Patient::orderBy('first_name')->get(),
             'patientsReadyForDischarge' => $patientsReadyForDischarge,
@@ -45,8 +57,43 @@ class SortieController extends Controller
         ]);
     }
 
+    /**
+     * Un dossier est prêt à être clôturé lorsque la consultation est terminée
+     * ou lorsque le patient a quitté l'unité (hospitalisation ou observation).
+     */
+    private function isReadyForClosure(Visit $visit): bool
+    {
+        if ($visit->status === Visit::STATUS_CONSULTATION_CLOSED) {
+            return true;
+        }
+
+        return $visit->admissions->whereNotNull('discharged_at')->isNotEmpty();
+    }
+
+    /**
+     * Sortie du patient — invariant 4.
+     *
+     * Refusée tant que la facture porte un solde restant. Le médecin, lui, peut
+     * clôturer sa consultation sans que la caisse ait soldé : les deux gestes
+     * sont distincts et le second est le seul qui libère le patient.
+     */
     public function close(Visit $visit): RedirectResponse
     {
+        $invoice = Invoice::where('visit_id', $visit->id)
+            ->where('status', '!=', Invoice::STATUS_PAID)
+            ->first();
+
+        if ($invoice) {
+            $remaining = max(0, (int) $invoice->patient_amount - (int) $invoice->paid_amount);
+            $threshold = (int) config('clinic.discharge_unpaid_threshold', 0);
+
+            if ($remaining > $threshold) {
+                return redirect()
+                    ->route('sortie.index', ['patient' => $visit->patient_id])
+                    ->with('error', "Clôture impossible : il reste ".number_format($remaining, 0, ',', ' ')." FCFA à encaisser à la caisse pour ce dossier.");
+            }
+        }
+
         $visit->update(['discharged_at' => now()]);
 
         return redirect()

@@ -1,0 +1,57 @@
+- generic [ref=f8e2]:
+  - complementary [ref=f8e3]:
+    - generic [ref=f8e8]:
+      - paragraph [ref=f8e9]: Clinique Saint Matthieu
+      - paragraph [ref=f8e10]: Espace professionnel
+    - navigation "Navigation principale" [ref=f8e11]:
+      - paragraph [ref=f8e13]: Parcours Patient
+      - link "Médecin 2" [ref=f8e15] [cursor=pointer]:
+        - /url: http://localhost:8000/medecin
+        - generic [ref=f8e18]: Médecin
+        - generic [ref=f8e19]: "2"
+      - button "Hospitalisation" [ref=f8e21] [cursor=pointer]
+      - paragraph [ref=f8e29]: Administratif
+      - link "Sortie patient" [ref=f8e31] [cursor=pointer]:
+        - /url: http://localhost:8000/sortie
+  - generic [ref=f8e35]:
+    - banner [ref=f8e36]:
+      - textbox "Rechercher..." [ref=f8e38]
+      - generic [ref=f8e39]:
+        - button [ref=f8e40] [cursor=pointer]
+        - generic [ref=f8e47] [cursor=pointer]:
+          - generic [ref=f8e48]: AT
+          - generic [ref=f8e49]:
+            - paragraph [ref=f8e50]: Adama Traoré
+            - paragraph [ref=f8e51]: Médecin
+    - main [ref=f8e54]:
+      - generic [ref=f8e56]:
+        - generic [ref=f8e57]:
+          - generic [ref=f8e58]:
+            - heading "Espace Médecin" [level=1] [ref=f8e59]
+            - paragraph [ref=f8e60]: 2 patient(s) en attente de consultation aujourd'hui.
+          - generic [ref=f8e61]: Adama Traoré · Médecin
+        - generic [ref=f8e64]:
+          - generic [ref=f8e65]:
+            - generic [ref=f8e66]:
+              - heading "File d'attente" [level=2] [ref=f8e67]
+              - generic [ref=f8e68]: 2 patients
+            - list [ref=f8e69]:
+              - listitem [ref=f8e70]:
+                - button "TC Tim Coock 1 heure d'attente Consultation" [ref=f8e71] [cursor=pointer]:
+                  - generic [ref=f8e72]: TC
+                  - generic [ref=f8e73]:
+                    - generic [ref=f8e74]:
+                      - paragraph [ref=f8e75]: Tim Coock
+                      - generic [ref=f8e76]: 1 heure d'attente
+                    - paragraph [ref=f8e77]: Consultation
+              - listitem [ref=f8e78]:
+                - button "AA Aristide Adouko 1 heure d'attente Consultation" [ref=f8e79] [cursor=pointer]:
+                  - generic [ref=f8e80]: AA
+                  - generic [ref=f8e81]:
+                    - generic [ref=f8e82]:
+                      - paragraph [ref=f8e83]: Aristide Adouko
+                      - generic [ref=f8e84]: 1 heure d'attente
+                    - paragraph [ref=f8e85]: Consultation
+          - generic [ref=f8e87]:
+            - paragraph [ref=f8e90]: Aucun patient en attente
+            - paragraph [ref=f8e91]: La file de consultation est vide pour le moment.

@@ -1,0 +1,7 @@
+[     244ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/pharmacie:0
+[   38878ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://localhost:8000/pharmacie:0
+[   97844ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://[::1]:5173/resources/js/app.js:0
+[  213822ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://[::1]:5173/resources/js/app.js:0
+[  233261ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://[::1]:5173/resources/js/app.js:0
+[  293264ms] [WARNING] Alpine Warning: Alpine has already been initialized on this page. Calling Alpine.start() more than once can cause problems. @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:803
+[  296941ms] [WARNING] Alpine Warning: Alpine has already been initialized on this page. Calling Alpine.start() more than once can cause problems. @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:803

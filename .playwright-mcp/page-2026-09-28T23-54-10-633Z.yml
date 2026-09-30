@@ -1,0 +1,22 @@
+- generic [ref=f66e4]:
+  - generic [ref=f66e5]: Clinique Saint Matthieu
+  - paragraph [ref=f66e10]: Espace professionnel
+  - heading "Bon retour" [level=2] [ref=f66e11]
+  - paragraph [ref=f66e12]: Connectez-vous avec vos identifiants professionnels.
+  - generic [ref=f66e13]:
+    - generic [ref=f66e15]:
+      - generic [ref=f66e16]: Adresse e-mail
+      - textbox "Adresse e-mail" [active] [ref=f66e18]:
+        - /placeholder: prenom.nom@clinique-saintmatthieu.ci
+    - generic [ref=f66e20]:
+      - generic [ref=f66e21]: Mot de passe
+      - textbox "Mot de passe" [ref=f66e23]:
+        - /placeholder: ••••••••••
+    - generic [ref=f66e24]:
+      - generic [ref=f66e25]:
+        - checkbox "Se souvenir de moi" [ref=f66e26]
+        - text: Se souvenir de moi
+      - link "Mot de passe oublié ?" [ref=f66e27] [cursor=pointer]:
+        - /url: http://localhost:8000/forgot-password
+    - button "Se connecter" [ref=f66e28] [cursor=pointer]
+  - paragraph [ref=f66e31]: Accès restreint au personnel autorisé de la Clinique Saint Matthieu. Besoin d'aide ? Contactez votre administrateur système.

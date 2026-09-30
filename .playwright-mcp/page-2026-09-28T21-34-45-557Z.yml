@@ -1,0 +1,23 @@
+- generic [ref=f21e3]:
+  - banner [ref=f21e4]:
+    - button "Ouvrir le menu" [ref=f21e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f21e9]
+    - generic [ref=f21e10]:
+      - button [ref=f21e11] [cursor=pointer]
+      - generic [ref=f21e16]: DG
+  - main [ref=f21e20]:
+    - generic [ref=f21e22]:
+      - generic [ref=f21e23]:
+        - generic [ref=f21e24]:
+          - heading "Circuit patient — vue d'ensemble" [level=1] [ref=f21e25]
+          - paragraph [ref=f21e26]: Position de chaque patient dans le parcours de soins, en temps réel.
+        - generic [ref=f21e27]:
+          - generic [ref=f21e28]: Chargement...
+          - button "Rafraîchir" [disabled] [ref=f21e33]
+      - generic [ref=f21e37]:
+        - generic [ref=f21e38]: Consultation
+        - generic [ref=f21e44]: Hospitalisation
+        - generic [ref=f21e50]: Mise en Observation
+        - generic [ref=f21e56]: Laboratoire
+        - generic [ref=f21e62]: Retour médecin
+        - generic [ref=f21e68]: Sortie

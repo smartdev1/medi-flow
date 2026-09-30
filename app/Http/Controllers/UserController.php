@@ -21,7 +21,17 @@ class UserController extends Controller
 
         $editingUser = $users->firstWhere('id', request('edit_user_id'));
 
+        $user = auth()->user();
+        $userName = $user?->name ?? 'Utilisateur';
+        $userRole = $user?->role?->label() ?? 'Personnel clinique';
+        $userInitials = $user?->initials ?? $this->initialsFor($userName);
+
         return view('users.index', [
+            'users' => $users,
+            'editingUser' => $editingUser,
+            'userName' => $userName,
+            'userRole' => $userRole,
+            'userInitials' => $userInitials,
         ]);
     }
 

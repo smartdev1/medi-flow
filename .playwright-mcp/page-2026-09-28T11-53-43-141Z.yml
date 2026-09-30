@@ -1,0 +1,91 @@
+- generic [ref=f32e3]:
+  - banner [ref=f32e4]:
+    - button "Ouvrir le menu" [ref=f32e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f32e9]
+    - generic [ref=f32e10]:
+      - button [ref=f32e11] [cursor=pointer]
+      - generic [ref=f32e16]: DG
+  - main [ref=f32e20]:
+    - generic [ref=f32e21]:
+      - generic [ref=f32e22]:
+        - generic [ref=f32e23]:
+          - heading "Hospitalisation & Observation" [level=1] [ref=f32e24]
+          - paragraph [ref=f32e25]: Suivi des patients admis, séparés par type de prise en charge.
+        - generic [ref=f32e26]:
+          - link "Carte des chambres" [ref=f32e27] [cursor=pointer]:
+            - /url: http://localhost:8000/chambres
+          - button "Nouvelle admission" [ref=f32e32] [cursor=pointer]
+      - generic [ref=f32e35]:
+        - generic [ref=f32e36]:
+          - paragraph [ref=f32e38]: Patients hospitalisés
+          - generic [ref=f32e42]:
+            - generic [ref=f32e43]: "1"
+            - generic [ref=f32e44]: Unité hospitalisation
+        - generic [ref=f32e45]:
+          - paragraph [ref=f32e47]: Patients en observation
+          - generic [ref=f32e51]:
+            - generic [ref=f32e52]: "1"
+            - generic [ref=f32e53]: Unité observation
+        - generic [ref=f32e54]:
+          - paragraph [ref=f32e56]: Sorties prévues aujourd'hui
+          - generic [ref=f32e60]:
+            - generic [ref=f32e61]: "0"
+            - generic [ref=f32e62]: À préparer
+      - generic [ref=f32e63]:
+        - heading "Hospitalisations en cours" [level=2] [ref=f32e64]
+        - table [ref=f32e67]:
+          - rowgroup [ref=f32e68]:
+            - row [ref=f32e69]:
+              - columnheader "Patient" [ref=f32e70]
+              - columnheader "Chambre" [ref=f32e71]
+              - columnheader "Service" [ref=f32e72]
+              - columnheader "Motif" [ref=f32e73]
+              - columnheader "Admission" [ref=f32e74]
+              - columnheader "Statut" [ref=f32e75]
+              - columnheader "Actions" [ref=f32e76]
+          - rowgroup [ref=f32e77]:
+            - 'row "{\"id\":1,\"ward\":\"M\\u00e9decine g\\u00e9n\\u00e9rale\",\"number\":\"Chambre 10\",\"capacity\":2,\"maintenance\":false,\"created_at\":\"2026-09-11T16:45:22.000000Z\",\"updated_at\":\"2026-09-11T16:45:22.000000Z\"} Hospitalisation Stable Voir dossier Programmer la sortie" [ref=f32e78]':
+              - cell [ref=f32e79]:
+                - generic [ref=f32e80]:
+                  - generic:
+                    - paragraph
+                    - paragraph
+              - 'cell "{\"id\":1,\"ward\":\"M\\u00e9decine g\\u00e9n\\u00e9rale\",\"number\":\"Chambre 10\",\"capacity\":2,\"maintenance\":false,\"created_at\":\"2026-09-11T16:45:22.000000Z\",\"updated_at\":\"2026-09-11T16:45:22.000000Z\"}" [ref=f32e82]'
+              - cell [ref=f32e83]
+              - cell "Hospitalisation" [ref=f32e84]
+              - cell [ref=f32e85]
+              - cell "Stable" [ref=f32e86]
+              - cell [ref=f32e89]:
+                - generic [ref=f32e90]:
+                  - link "Voir dossier" [ref=f32e91] [cursor=pointer]:
+                    - /url: http://localhost:8000/patients/9
+                  - button "Programmer la sortie" [ref=f32e93] [cursor=pointer]
+      - generic [ref=f32e94]:
+        - heading "Mises en observation" [level=2] [ref=f32e95]
+        - table [ref=f32e98]:
+          - rowgroup [ref=f32e99]:
+            - row [ref=f32e100]:
+              - columnheader "Patient" [ref=f32e101]
+              - columnheader "Chambre" [ref=f32e102]
+              - columnheader "Service" [ref=f32e103]
+              - columnheader "Motif" [ref=f32e104]
+              - columnheader "Admission" [ref=f32e105]
+              - columnheader "Statut" [ref=f32e106]
+              - columnheader "Actions" [ref=f32e107]
+          - rowgroup [ref=f32e108]:
+            - 'row "{\"id\":4,\"ward\":\"Chirurgie\",\"number\":\"Chambre 5\",\"capacity\":1,\"maintenance\":false,\"created_at\":\"2026-09-11T16:45:22.000000Z\",\"updated_at\":\"2026-09-11T16:45:22.000000Z\"} Mise en observation En observation Voir dossier Programmer la sortie" [ref=f32e109]':
+              - cell [ref=f32e110]:
+                - generic [ref=f32e111]:
+                  - generic:
+                    - paragraph
+                    - paragraph
+              - 'cell "{\"id\":4,\"ward\":\"Chirurgie\",\"number\":\"Chambre 5\",\"capacity\":1,\"maintenance\":false,\"created_at\":\"2026-09-11T16:45:22.000000Z\",\"updated_at\":\"2026-09-11T16:45:22.000000Z\"}" [ref=f32e113]'
+              - cell [ref=f32e114]
+              - cell "Mise en observation" [ref=f32e115]
+              - cell [ref=f32e116]
+              - cell "En observation" [ref=f32e117]
+              - cell [ref=f32e120]:
+                - generic [ref=f32e121]:
+                  - link "Voir dossier" [ref=f32e122] [cursor=pointer]:
+                    - /url: http://localhost:8000/patients/1
+                  - button "Programmer la sortie" [ref=f32e124] [cursor=pointer]

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePaymentRequest;
 use App\Models\CashierSession;
 use App\Models\Payment;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class CashierSessionController extends Controller
@@ -30,28 +28,28 @@ class CashierSessionController extends Controller
 
         $sessions = $query->paginate(15)->withQueryString();
 
-        return view('caisse.sessions.index', [
+        return view('caisse.sessions.index', array_merge($this->layout(), [
             'sessions' => $sessions,
-        ]);
+        ]));
     }
 
     public function show(CashierSession $cashierSession): View
     {
         $this->authorize('view', $cashierSession);
 
-        $cashierSession->load(['cashier', 'payments.patient', 'payments.cashier']);
+        $cashierSession->load(['cashier', 'payments.patient']);
 
         $variance = $cashierSession->cashVariance();
         $duration = $cashierSession->duration();
 
-        return view('caisse.sessions.show', [
+        return view('caisse.sessions.show', array_merge($this->layout(), [
             'session' => $cashierSession,
             'variance' => $variance,
             'duration' => $duration,
-        ]);
+        ]));
     }
 
-    public function openForm(Request $request): View
+    public function openForm(Request $request): View|RedirectResponse
     {
         $this->authorize('create', CashierSession::class);
 
@@ -65,7 +63,7 @@ class CashierSessionController extends Controller
                 ->with('error', 'Vous avez déjà une session de caisse en cours. Fermez-la avant d\'en ouvrir une nouvelle.');
         }
 
-        return view('caisse.sessions.open');
+        return view('caisse.sessions.open', $this->layout());
     }
 
     public function open(Request $request): RedirectResponse
@@ -99,7 +97,7 @@ class CashierSessionController extends Controller
             ->with('success', "Session de caisse ouverte avec un fond de caisse de ".number_format($validated['opening_balance'], 0, ',', ' ')." FCFA.");
     }
 
-    public function closeForm(Request $request): View
+    public function closeForm(Request $request): View|RedirectResponse
     {
         /** @var CashierSession|null $activeSession */
         $activeSession = CashierSession::where('cashier_id', Auth::id())
@@ -118,10 +116,10 @@ class CashierSessionController extends Controller
             ->whereIn('status', [Payment::STATUS_PENDING, Payment::STATUS_PARTIAL])
             ->count();
 
-        return view('caisse.sessions.close', [
+        return view('caisse.sessions.close', array_merge($this->layout(), [
             'session' => $activeSession,
             'openPaymentsCount' => $openPaymentsCount,
-        ]);
+        ]));
     }
 
     public function close(Request $request): RedirectResponse
@@ -158,5 +156,22 @@ class CashierSessionController extends Controller
         return redirect()
             ->route('caisse.index')
             ->with('success', "Session de caisse fermée avec un fond de clôture de ".number_format($validated['closing_balance'], 0, ',', ' ')." FCFA.".$varianceMessage);
+    }
+
+    /**
+     * Identité affichée par le cadre commun des écrans de vacation.
+     *
+     * Les quatre vues la consomment ; sans elle, la page ne s'affiche pas.
+     */
+    private function layout(): array
+    {
+        $user = Auth::user();
+        $userName = $user?->name ?? 'Caissier';
+
+        return [
+            'userName' => $userName,
+            'userRole' => $user?->role?->label() ?? 'Caisse',
+            'userInitials' => $user?->initials ?? $this->initialsFor($userName),
+        ];
     }
 }

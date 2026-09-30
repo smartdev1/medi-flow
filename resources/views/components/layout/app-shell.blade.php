@@ -24,44 +24,114 @@
     ];
 
     $nav = collect([
-        'supervision' => ['label' => 'Supervision', 'icon' => 'grid', 'href' => route('docteurgeneral.index'), 'roles' => ['docteur_general'], 'active_routes' => ['docteurgeneral.index']],
-        'accueil' => ['label' => 'Accueil', 'icon' => 'user-plus', 'href' => route('accueil.index'), 'roles' => ['accueil', 'docteur_general'], 'active_routes' => ['accueil.index']],
-        'caisse' => ['label' => 'Caisse', 'icon' => 'credit-card', 'href' => route('caisse.index'), 'roles' => ['caissier', 'docteur_general'], 'active_routes' => ['caisse.index', 'caisse.paniers.show']],
-        'attente' => ['label' => "Salle d'attente", 'icon' => 'users', 'href' => route('attente.index'), 'roles' => ['accueil', 'docteur_general', 'aide_soignante'], 'active_routes' => ['attente.index']],
-        'medecin' => ['label' => 'Médecin', 'icon' => 'stethoscope', 'href' => route('medecin.index'), 'roles' => ['medecin', 'pediatre', 'docteur_general'], 'active_routes' => ['medecin.index']],
-        'laboratoire' => ['label' => 'Laboratoire', 'icon' => 'beaker', 'href' => route('laboratoire.index'), 'roles' => ['laborantin', 'docteur_general'], 'active_routes' => ['laboratoire.index']],
-        'pharmacie' => ['label' => 'Pharmacie', 'icon' => 'capsule', 'href' => route('pharmacie.index'), 'roles' => ['pharmacien', 'docteur_general'], 'active_routes' => ['pharmacie.index']],
-        'hospitalisation' => [
-            'label' => 'Hospitalisation',
-            'icon' => 'building',
-            'href' => route('hospitalisation.index'),
-            'roles' => ['medecin', 'pediatre', 'docteur_general', 'aide_soignante'],
+        // ── Zone 0 : Supervision ──────────────────────────────────────────────
+        // La vue d'ensemble est l'écran d'arrivée du docteur général : sans
+        // cette entrée, il y atterrissait mais ne pouvait plus y revenir.
+        [
+            'type' => 'section',
+            'label' => 'Supervision',
+            'items' => [
+                'supervision' => ['label' => "Vue d'ensemble", 'icon' => 'grid', 'href' => route('docteurgeneral.index'), 'roles' => ['docteur_general'], 'active_routes' => ['docteurgeneral.index']],
+            ],
+        ],
+
+        // ── Zone 1 : Parcours Patient ──────────────────────────────────────────
+        // Les rôles reprennent exactement ceux des middlewares de route : un
+        // lien affiché à un rôle qui n'a pas la route ne mène qu'à un 403.
+        [
+            'type' => 'section',
+            'label' => 'Parcours Patient',
+            'items' => [
+                'accueil'     => ['label' => 'Accueil',          'icon' => 'user-plus',     'href' => route('accueil.index'),     'roles' => ['accueil', 'docteur_general', 'aide_soignante'],         'active_routes' => ['accueil.index']],
+                'attente'     => ['label' => "Salle d'attente",   'icon' => 'users',         'href' => route('attente.index'),     'roles' => ['accueil', 'docteur_general', 'aide_soignante'],         'active_routes' => ['attente.index']],
+                'medecin'     => ['label' => 'Médecin',           'icon' => 'stethoscope',   'href' => route('medecin.index'),     'roles' => ['medecin', 'pediatre', 'docteur_general'],         'active_routes' => ['medecin.index']],
+                'laboratoire' => ['label' => 'Laboratoire',       'icon' => 'beaker',        'href' => route('laboratoire.index'), 'roles' => ['laborantin', 'docteur_general'],                       'active_routes' => ['laboratoire.index']],
+                'pharmacie'   => ['label' => 'Pharmacie',         'icon' => 'capsule',       'href' => route('pharmacie.index'),   'roles' => ['pharmacien', 'docteur_general'],                       'active_routes' => ['pharmacie.index']],
+            ],
+        ],
+
+        // ── Zone 2 : Hospitalisation (parent pliable) ─────────────────────────
+        [
+            'type'     => 'section',
+            'label'    => 'Hospitalisation',
+            'key'      => 'hospitalisation',
+            'icon'     => 'building',
+            'href'     => route('hospitalisation.index'),
+            'roles'    => ['medecin', 'pediatre', 'docteur_general', 'aide_soignante'],
             'active_routes' => ['hospitalisation.index', 'admission-requests.index', 'observation.index', 'chambres.index'],
             'children' => [
-                ['label' => 'Hospitalisation', 'icon' => 'building', 'href' => route('hospitalisation.index'), 'route' => 'hospitalisation.index'],
-                ['label' => 'Demandes d\'admission', 'icon' => 'clipboard-document', 'href' => route('admission-requests.index'), 'route' => 'admission-requests.index'],
-                ['label' => 'Mise en Observation', 'icon' => 'eye', 'href' => route('observation.index'), 'route' => 'observation.index'],
-                ['label' => 'Chambres', 'icon' => 'bed', 'href' => route('chambres.index'), 'route' => 'chambres.index'],
+                ['label' => 'Hospitalisation',     'icon' => 'building',           'href' => route('hospitalisation.index'),    'route' => 'hospitalisation.index',    'roles' => ['medecin', 'pediatre', 'docteur_general']],
+                ['label' => "Demandes d'admission", 'icon' => 'clipboard-document', 'href' => route('admission-requests.index'), 'route' => 'admission-requests.index', 'roles' => ['aide_soignante', 'medecin', 'pediatre', 'docteur_general']],
+                ['label' => 'Mise en Observation',  'icon' => 'eye',                'href' => route('observation.index'),         'route' => 'observation.index',         'roles' => ['medecin', 'pediatre', 'docteur_general']],
+                ['label' => 'Chambres',             'icon' => 'bed',                'href' => route('chambres.index'),            'route' => 'chambres.index',            'roles' => ['medecin', 'pediatre', 'docteur_general']],
             ],
         ],
-        'sortie' => ['label' => 'Sortie patient', 'icon' => 'check-circle', 'href' => route('sortie.index'), 'roles' => ['accueil', 'docteur_general', 'medecin', 'pediatre'], 'active_routes' => ['sortie.index']],
-        'logistique' => ['label' => 'Logistique', 'icon' => 'archive-box', 'href' => route('logistique.index'), 'roles' => ['logistique', 'docteur_general'], 'active_routes' => ['logistique.index']],
-        'gestion' => [
-            'label' => 'Gestion clinique',
-            'icon' => 'briefcase',
-            'href' => route('patients.index'),
-            'roles' => ['accueil', 'docteur_general'],
-            'active_routes' => ['patients.index', 'insurance.index', 'users.index', 'insurance-companies.store'],
+
+        // ── Zone 3 : Administratif ────────────────────────────────────────────
+        [
+            'type' => 'section',
+            'label' => 'Administratif',
+            'items' => [
+                'caisse'      => ['label' => 'Caisse',         'icon' => 'credit-card',  'href' => route('caisse.index'),      'roles' => ['caissier', 'docteur_general'], 'active_routes' => ['caisse.index', 'caisse.paniers.show']],
+                'vacations'   => ['label' => 'Vacations',      'icon' => 'clock',        'href' => route('caisse.sessions.index'), 'roles' => ['caissier', 'docteur_general'], 'active_routes' => ['caisse.sessions.index', 'caisse.sessions.show', 'caisse.historique', 'caisse.jour']],
+                'sortie'      => ['label' => 'Sortie patient',  'icon' => 'check-circle', 'href' => route('sortie.index'),      'roles' => ['accueil', 'docteur_general'],   'active_routes' => ['sortie.index']],
+                'logistique'  => ['label' => 'Logistique',     'icon' => 'archive-box',  'href' => route('logistique.index'),  'roles' => ['logistique', 'docteur_general'], 'active_routes' => ['logistique.index']],
+            ],
+        ],
+
+        // ── Zone 4 : Gestion (parent pliable) ─────────────────────────────────
+        [
+            'type'     => 'section',
+            'label'    => 'Gestion',
+            'key'      => 'gestion',
+            'icon'     => 'briefcase',
+            'href'     => route('patients.index'),
+            'roles'    => ['accueil', 'docteur_general', 'aide_soignante', 'admin'],
+            'active_routes' => [
+                'patients.index', 'insurance.index',
+                'users.index', 'personnel.index', 'acts.index', 'acts.store', 'acts.update', 'acts.destroy',
+            ],
             'children' => [
-                ['label' => 'Compagnies d’assurance', 'icon' => 'shield-check', 'href' => '/insurance', 'route' => 'insurance.index'],
-                ['label' => 'Liste patients', 'icon' => 'users', 'href' => route('patients.index'), 'route' => 'patients.index'],
-                ['label' => 'Gestion utilisateur', 'icon' => 'user-group', 'href' => '/users', 'route' => 'users.index'],
+                ['label' => 'Compagnies d\'assurance', 'icon' => 'shield-check', 'href' => route('insurance.index'),   'route' => 'insurance.index',   'roles' => ['admin', 'docteur_general']],
+                ['label' => 'Liste patients',           'icon' => 'users',        'href' => route('patients.index'),    'route' => 'patients.index',    'roles' => ['accueil', 'docteur_general', 'aide_soignante']],
+                ['label' => 'Gestion utilisateur',      'icon' => 'user-group',   'href' => route('users.index'),       'route' => 'users.index',       'roles' => ['admin', 'docteur_general']],
+                ['label' => 'Actes médicaux',           'icon' => 'document',     'href' => route('acts.index'),        'route' => 'acts.index',        'roles' => ['admin', 'docteur_general']],
             ],
         ],
-        'personnel' => ['label' => 'Personnel médical', 'icon' => 'user-plus', 'href' => route('personnel.index'), 'roles' => [], 'active_routes' => ['personnel.index']],
-        'acts' => ['label' => 'Actes médicaux', 'icon' => 'document', 'href' => route('acts.index'), 'roles' => ['admin', 'docteur_general'], 'active_routes' => ['acts.index', 'acts.store', 'acts.update', 'acts.destroy']],
-    ])->filter(fn ($item) => $currentUser && ($currentUser->isAdmin() || in_array($currentUser->role->value, $item['roles'], true)))
-    ->map(fn ($item, $key) => array_merge($item, ['badge' => $badgeCounts[$key] ?? 0]));
+    ])
+    // Le filtrage se fait ici, une seule fois : la vue ne fait plus que rendre.
+    // Une section dont il ne reste aucun lien visible est retirée, sinon elle
+    // afficherait un titre et une séparation au-dessus d'une liste vide.
+    ->map(function ($section) use ($currentUser, $badgeCounts) {
+        if (($section['type'] ?? null) !== 'section') {
+            return $section;
+        }
+
+        $allowed = fn (array $roles): bool => $currentUser
+            && $currentUser->role
+            && ($currentUser->isAdmin() || in_array($currentUser->role->value, $roles, true));
+
+        if (isset($section['items'])) {
+            $section['items'] = collect($section['items'])
+                ->filter(fn ($item) => $allowed($item['roles'] ?? []))
+                ->map(fn ($item, $key) => array_merge($item, ['badge' => $badgeCounts[$key] ?? 0]))
+                ->all();
+        } elseif (isset($section['children'])) {
+            $section['children'] = collect($section['children'])
+                ->filter(fn ($child) => $allowed($child['roles'] ?? $section['roles'] ?? []))
+                ->values()
+                ->all();
+        }
+
+        // Le badge se porte sur la clé de la section parente ; une section
+        // plate n'en a pas et n'affiche rien.
+        $section['badge'] = isset($section['key']) ? ($badgeCounts[$section['key']] ?? 0) : 0;
+        $section['visible'] = count($section['items'] ?? $section['children'] ?? []) > 0;
+
+        return $section;
+    })
+    ->filter(fn ($section) => $section['visible'] ?? false)
+    ->values();
 @endphp
 
 <!DOCTYPE html>
@@ -76,41 +146,44 @@
     {{-- Intercept Alpine.start() so inline Blade x-data scripts (attenteBoard, etc.)
          are defined before Alpine scans the DOM. --}}
     <script>
-        (function () {
-            var timer = setInterval(function () {
-                if (window.Alpine && typeof Alpine.start === 'function') {
-                    clearInterval(timer);
-                    Alpine._deferredStart = Alpine.start;
-                    Alpine.start = function () {};
-                }
-            }, 10);
-        })();
+        if (!window.Alpine || !Alpine._deferredStart) {
+            (function () {
+                var timer = setInterval(function () {
+                    if (window.Alpine && typeof Alpine.start === 'function' && !Alpine._deferredStart) {
+                        clearInterval(timer);
+                        Alpine._deferredStart = Alpine.start;
+                        Alpine.start = function () {};
+                    }
+                }, 10);
+            })();
+        }
     </script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
         window.addEventListener('load', function () {
-            if (window.Alpine && Alpine._deferredStart) {
+            if (window.Alpine && Alpine._deferredStart && !Alpine._started) {
+                Alpine._started = true;
                 Alpine._deferredStart();
             }
         });
     </script>
 </head>
 <body class="font-sans text-ink antialiased bg-surface-sunken">
-        <div class="flex min-h-screen" x-data="{
-            mobileNavOpen: false,
-            badges: {{ json_encode($badgeCounts) }},
-            init() {
-                setInterval(() => {
-                    fetch('{{ route('api.badges') }}')
-                        .then(r => r.ok ? r.json() : Promise.reject())
-                        .then(data => { this.badges = data; })
-                        .catch(() => {});
-                }, 30000);
-            }
-        }">
+    <div class="flex min-h-screen" x-data="{
+        mobileNavOpen: false,
+        badges: {{ json_encode($badgeCounts) }},
+        init() {
+            setInterval(() => {
+                fetch('{{ route('api.badges') }}')
+                    .then(r => r.ok ? r.json() : Promise.reject())
+                    .then(data => { Object.assign(this.badges, data); })
+                    .catch(() => {});
+            }, 30000);
+        }
+    }">
         <aside class="hidden w-64 shrink-0 flex-col border-r border-line bg-white lg:flex">
-            <x-layout.sidebar-nav :nav="$nav" :active="$active" />
+            <x-layout.sidebar-nav :nav="$nav" :active="$active" :badgeCounts="$badgeCounts" />
         </aside>
 
         {{-- Tiroir de navigation mobile / tablette --}}
@@ -140,7 +213,7 @@
                 <button type="button" aria-label="Fermer le menu" @click="mobileNavOpen = false" class="absolute right-3 top-3 rounded-md p-1.5 text-ink-muted hover:bg-surface-muted">
                     <x-ui.icon name="x-circle" class="h-5 w-5" />
                 </button>
-                <x-layout.sidebar-nav :nav="$nav" :active="$active" />
+                <x-layout.sidebar-nav :nav="$nav" :active="$active" :badgeCounts="$badgeCounts" />
             </div>
         </div>
 
@@ -212,6 +285,20 @@
                         <div class="mb-6 flex items-center gap-2 rounded-md border border-danger/20 bg-danger-tint px-4 py-3 text-sm text-danger">
                             <x-ui.icon name="alert-triangle" class="h-4 w-4 shrink-0" />
                             {{ session('error') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="mb-6 rounded-md border border-danger/20 bg-danger-tint px-4 py-3 text-sm text-danger">
+                            <div class="flex items-center gap-2 font-medium">
+                                <x-ui.icon name="alert-triangle" class="h-4 w-4 shrink-0" />
+                                <span>Le formulaire n'a pas pu être enregistré.</span>
+                            </div>
+                            <ul class="mt-2 list-disc space-y-0.5 pl-6">
+                                @foreach ($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
 

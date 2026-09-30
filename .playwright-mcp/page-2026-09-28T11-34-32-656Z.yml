@@ -1,0 +1,89 @@
+- generic [ref=f19e3]:
+  - banner [ref=f19e4]:
+    - button "Ouvrir le menu" [ref=f19e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f19e9]
+    - generic [ref=f19e10]:
+      - button [ref=f19e11] [cursor=pointer]
+      - generic [ref=f19e16]: DG
+  - main [ref=f19e20]:
+    - generic [ref=f19e21]:
+      - generic [ref=f19e22]: Patient QA PatientTest pris en consultation.
+      - generic [ref=f19e25]:
+        - generic [ref=f19e26]:
+          - heading "Espace Médecin" [level=1] [ref=f19e27]
+          - paragraph [ref=f19e28]: 1 patient(s) en attente de consultation aujourd'hui.
+        - generic [ref=f19e29]: Dr. Gnlé · Docteur Général
+      - generic [ref=f19e32]:
+        - generic [ref=f19e33]:
+          - generic [ref=f19e34]:
+            - heading "File d'attente" [level=2] [ref=f19e35]
+            - generic [ref=f19e36]: 1 patients
+          - list [ref=f19e37]:
+            - listitem [ref=f19e38]:
+              - button "QP QA PatientTest 8 minutes d'attente Consultation Constantes prises par Aide Soignante" [ref=f19e39] [cursor=pointer]:
+                - generic [ref=f19e40]: QP
+                - generic [ref=f19e41]:
+                  - generic [ref=f19e42]:
+                    - paragraph [ref=f19e43]: QA PatientTest
+                    - generic [ref=f19e44]: 8 minutes d'attente
+                  - paragraph [ref=f19e45]: Consultation
+                  - paragraph [ref=f19e46]: Constantes prises par Aide Soignante
+        - generic [ref=f19e47]:
+          - generic [ref=f19e49]:
+            - generic [ref=f19e50]:
+              - generic [ref=f19e51]: QP
+              - generic [ref=f19e52]:
+                - heading "QA PatientTest" [level=2] [ref=f19e53]
+                - paragraph [ref=f19e54]: CSM-7880
+                - generic [ref=f19e55]:
+                  - generic [ref=f19e56]: 36 ans · M
+                  - generic [ref=f19e58]: "Allergie : Aucune connue"
+                  - generic [ref=f19e60]: Non assuré
+                  - generic [ref=f19e62]: "Facture #9 · En cours"
+                  - generic [ref=f19e64]: "Net à payer : 5 000 FCFA"
+            - generic [ref=f19e66]:
+              - button "Labo" [ref=f19e69] [cursor=pointer]
+              - button "Ordonnance" [ref=f19e74] [cursor=pointer]
+          - generic [ref=f19e77]:
+            - generic [ref=f19e78]:
+              - generic [ref=f19e79]:
+                - heading "Constantes" [level=3] [ref=f19e80]
+                - generic [ref=f19e81]:
+                  - generic [ref=f19e82]:
+                    - text: Tension
+                    - textbox [disabled] [ref=f19e83]
+                  - generic [ref=f19e84]:
+                    - text: Température
+                    - textbox [disabled] [ref=f19e85]
+                  - generic [ref=f19e86]:
+                    - text: Pouls
+                    - textbox [disabled] [ref=f19e87]
+                  - generic [ref=f19e88]:
+                    - text: Saturation
+                    - textbox [disabled] [ref=f19e89]
+                - paragraph [ref=f19e90]: Les constantes sont relevées sur support papier par les aides-soignantes.
+              - generic [ref=f19e92]:
+                - generic [ref=f19e93]: Diagnostic & notes
+                - textbox "Diagnostic & notes" [ref=f19e94]:
+                  - /placeholder: Symptômes, diagnostic, recommandations...
+              - button "Enregistrer les constantes & notes" [ref=f19e96] [cursor=pointer]
+            - generic [ref=f19e97]:
+              - button "Orienter vers un service" [ref=f19e100] [cursor=pointer]
+              - button "Mise en Observation" [ref=f19e103] [cursor=pointer]
+              - button "Hospitaliser" [ref=f19e104] [cursor=pointer]
+              - button "Clôturer la consultation" [ref=f19e106] [cursor=pointer]
+          - generic [ref=f19e107]:
+            - heading "Parcours de la visite" [level=3] [ref=f19e108]
+            - list [ref=f19e109]:
+              - listitem [ref=f19e110]:
+                - generic [ref=f19e115]:
+                  - generic [ref=f19e116]:
+                    - paragraph [ref=f19e117]: Accueil
+                    - generic [ref=f19e118]: 11:25
+                  - paragraph [ref=f19e119]: Akissi Koffi
+              - listitem [ref=f19e120]:
+                - generic [ref=f19e124]:
+                  - generic [ref=f19e125]:
+                    - paragraph [ref=f19e126]: Consultation
+                    - generic [ref=f19e127]: 11:34
+                  - paragraph [ref=f19e128]: Dr. Gnlé

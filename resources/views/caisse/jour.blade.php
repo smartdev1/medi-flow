@@ -4,20 +4,21 @@
         <div>
             <div class="flex items-center gap-2">
                 <h1 class="text-2xl font-semibold text-ink">{{ $currentDate->translatedFormat('l j F Y') }}</h1>
-                @if ($isClosed)
-                    <x-ui.badge tone="success">
-                        <x-ui.icon name="lock-closed" class="h-3 w-3" />
-                        Journée clôturée
-                    </x-ui.badge>
-                @else
+                @if ($sessions->contains(fn ($session) => $session->isActive()))
                     <x-ui.badge tone="warning">
                         <x-ui.icon name="lock-open" class="h-3 w-3" />
-                        Journée ouverte
+                        Vacation en cours
+                    </x-ui.badge>
+                @else
+                    <x-ui.badge tone="success">
+                        <x-ui.icon name="lock-closed" class="h-3 w-3" />
+                        Vacations clôturées
                     </x-ui.badge>
                 @endif
             </div>
             <p class="mt-1 text-sm text-ink-muted">
-                Détail des paiements enregistrés le {{ $currentDate->translatedFormat('d/m/Y') }}.
+                La journée se lit à travers les vacations : une vacation de 22h à 6h encaisse
+                après minuit sans être amputée de ses encaissements.
             </p>
         </div>
         <a href="{{ route('caisse.historique') }}">
@@ -29,60 +30,135 @@
     </div>
 
     <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <x-ui.stat-card label="Total encaissé" value="{{ number_format($totalAmount, 0, ',', ' ') }} FCFA" icon="credit-card" trend="Paiements validés" trend-tone="success" />
-        <x-ui.stat-card label="Transactions" value="{{ $payments->count() }}" icon="list" trend="Sur la journée" trend-tone="neutral" />
-        <x-ui.stat-card label="Impayés" value="{{ $pendingCount }}" icon="alert-triangle" trend="À suivre" trend-tone="danger" />
+        <x-ui.stat-card
+            label="Total encaissé"
+            value="{{ number_format($totalAmount, 0, ',', ' ') }} FCFA"
+            icon="credit-card"
+            trend="Sur les vacations du jour"
+            trend-tone="success"
+        />
+        <x-ui.stat-card
+            label="Vacations"
+            value="{{ $sessions->count() }}"
+            icon="clock"
+            trend="Ouvertes et clôturées"
+            trend-tone="neutral"
+        />
+        <x-ui.stat-card
+            label="Versé en caisse"
+            value="{{ number_format($versements->sum('amount'), 0, ',', ' ') }} FCFA"
+            icon="arrow-up-right"
+            trend="{{ $versements->count() }} versement(s)"
+            trend-tone="info"
+        />
     </div>
 
-    <x-ui.card :padded="false" class="mt-6 overflow-hidden">
+    <x-ui.card class="mt-6" :padded="false">
+        <div class="border-b border-line px-5 py-4">
+            <h2 class="text-sm font-semibold text-ink">Vacations</h2>
+        </div>
         <div class="overflow-x-auto">
             <table class="w-full text-left text-sm">
                 <thead>
                     <tr class="border-b border-line bg-surface-sunken text-xs uppercase tracking-wide text-ink-muted">
-                        <th class="px-5 py-3 font-semibold">Heure</th>
-                        <th class="px-5 py-3 font-semibold">Patient</th>
-                        <th class="px-5 py-3 font-semibold">Service</th>
-                        <th class="px-5 py-3 font-semibold">Montant</th>
-                        <th class="px-5 py-3 font-semibold">Mode</th>
-                        <th class="px-5 py-3 font-semibold">Statut</th>
-                        <th class="px-5 py-3 font-semibold">Action</th>
+                        <th class="px-5 py-3 font-semibold">Ouverture</th>
+                        <th class="px-5 py-3 font-semibold">Caissier</th>
+                        <th class="px-5 py-3 font-semibold text-right">Encaissé</th>
+                        <th class="px-5 py-3 font-semibold text-right">Clôture</th>
+                        <th class="px-5 py-3 font-semibold text-right">Écart</th>
+                        <th class="px-5 py-3 font-semibold">État</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-line">
-                    @forelse ($payments as $payment)
+                    @forelse ($sessions as $session)
                         <tr class="hover:bg-surface-sunken">
                             <td class="px-5 py-3.5 font-mono text-xs text-ink-muted">
-                                {{ $payment->created_at->format('H:i') }}
+                                {{ $session->opened_at->format('d/m/Y H:i') }}
                             </td>
-                            <td class="px-5 py-3.5">
-                                <div class="flex items-center gap-3">
-                                    <x-ui.avatar :initials="$payment->patient->initials" size="sm" />
-                                    <div>
-                                        <p class="font-medium text-ink">{{ $payment->patient->full_name }}</p>
-                                        <p class="font-mono text-xs text-ink-muted">{{ $payment->patient->code }}</p>
-                                    </div>
-                                </div>
+                            <td class="px-5 py-3.5 text-ink">{{ $session->cashier?->name ?? '—' }}</td>
+                            <td class="px-5 py-3.5 text-right font-mono font-medium text-ink">
+                                {{ number_format($session->settledAmount(), 0, ',', ' ') }}
                             </td>
-                            <td class="px-5 py-3.5 text-ink-soft">{{ $payment->service }}</td>
-                            <td class="px-5 py-3.5 font-mono font-medium text-ink">{{ $payment->formatted_amount }}</td>
-                            <td class="px-5 py-3.5 text-ink-soft">{{ $payment->method }}</td>
-                            <td class="px-5 py-3.5">
-                                <x-ui.badge :tone="$payment->status_tone">{{ $payment->status }}</x-ui.badge>
+                            <td class="px-5 py-3.5 text-right font-mono text-ink-soft">
+                                {{ $session->isClosed() ? number_format($session->closing_balance, 0, ',', ' ') : '—' }}
                             </td>
-                            <td class="px-5 py-3.5 text-right">
-                                @if($payment->status === 'Payé')
-                                    <a href="{{ route('payments.receipt', $payment->id) }}" target="_blank" class="inline-flex items-center rounded-md border border-line bg-white px-3 py-2 text-xs font-medium text-ink hover:bg-surface-muted">
-                                        Imprimer
-                                    </a>
+                            <td class="px-5 py-3.5 text-right font-mono text-ink-soft">
+                                @php $variance = $session->cashVariance(); @endphp
+                                @if ($variance === null)
+                                    —
+                                @elseif ($variance === 0)
+                                    <span class="text-success">0</span>
                                 @else
-                                    <span class="text-xs text-ink-muted">Non disponible</span>
+                                    <span class="{{ $variance > 0 ? 'text-warning' : 'text-danger' }}">
+                                        {{ number_format($variance, 0, ',', ' ') }}
+                                    </span>
+                                @endif
+                            </td>
+                            <td class="px-5 py-3.5">
+                                @if ($session->isActive())
+                                    <x-ui.badge tone="warning">En cours</x-ui.badge>
+                                @else
+                                    <x-ui.badge tone="success">Clôturée</x-ui.badge>
+                                    @if ($session->transferredAmount() > 0)
+                                        <p class="mt-1 text-xs text-ink-muted">
+                                            Relève : {{ number_format($session->transferredAmount(), 0, ',', ' ') }} FCFA
+                                        </p>
+                                    @endif
                                 @endif
                             </td>
                         </tr>
                     @empty
                         <tr>
                             <td colspan="6" class="px-5 py-10 text-center text-sm text-ink-muted">
-                                Aucun paiement enregistré pour cette date.
+                                Aucune vacation ouverte cette date.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </x-ui.card>
+
+    <x-ui.card class="mt-6" :padded="false">
+        <div class="border-b border-line px-5 py-4">
+            <h2 class="text-sm font-semibold text-ink">Versements à la caisse centrale</h2>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+                <thead>
+                    <tr class="border-b border-line bg-surface-sunken text-xs uppercase tracking-wide text-ink-muted">
+                        <th class="px-5 py-3 font-semibold">Déposé le</th>
+                        <th class="px-5 py-3 font-semibold">Caissier</th>
+                        <th class="px-5 py-3 font-semibold">Mode</th>
+                        <th class="px-5 py-3 font-semibold">Référence</th>
+                        <th class="px-5 py-3 font-semibold text-right">Montant</th>
+                        <th class="px-5 py-3 font-semibold">Validation</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-line">
+                    @forelse ($versements as $versement)
+                        <tr class="hover:bg-surface-sunken">
+                            <td class="px-5 py-3.5 font-mono text-xs text-ink-muted">
+                                {{ $versement->deposited_at?->format('d/m/Y H:i') ?? $versement->date?->format('d/m/Y') }}
+                            </td>
+                            <td class="px-5 py-3.5 text-ink">{{ $versement->cashier?->name ?? '—' }}</td>
+                            <td class="px-5 py-3.5 text-ink-soft">{{ $versement->method }}</td>
+                            <td class="px-5 py-3.5 text-ink-soft">{{ $versement->reference ?? '—' }}</td>
+                            <td class="px-5 py-3.5 text-right font-mono font-medium text-ink">
+                                {{ $versement->formatted_amount }}
+                            </td>
+                            <td class="px-5 py-3.5">
+                                @if ($versement->isValidated())
+                                    <x-ui.badge tone="success">Validé</x-ui.badge>
+                                @else
+                                    <x-ui.badge tone="warning">À valider</x-ui.badge>
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="px-5 py-10 text-center text-sm text-ink-muted">
+                                Aucun versement enregistré cette date.
                             </td>
                         </tr>
                     @endforelse

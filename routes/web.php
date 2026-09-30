@@ -56,11 +56,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/salle-attente/refresh', [AttenteController::class, 'refresh'])->name('attente.refresh');
     });
 
-    Route::middleware('role:aide_soignante')->group(function () {
+    // Le montant de séjour est arrêté par l'accueil, quand le patient est
+    // hospitalisé. La caisse n'enregistre aucun montant : elle encaisse ce que
+    // l'accueil a porté sur la facture.
+    Route::middleware('role:accueil')->group(function () {
+        Route::post('/accueil/visites/{visit}/montant-sejour', [AccueilController::class, 'updateStayAmount'])->name('accueil.visits.stay-amount');
+    });
+
+    Route::middleware('role:aide_soignante,medecin,pediatre,docteur_general')->group(function () {
         Route::post('/visites/{visit}/constantes', [AttenteController::class, 'markVitals'])->name('visits.vitals');
         Route::get('/admission-requests', [HospitalisationController::class, 'pendingRequests'])->name('admission-requests.index');
-        Route::post('/admission-requests/{request}/approve', [HospitalisationController::class, 'approveRequest'])->name('admission-requests.approve');
-        Route::post('/admission-requests/{request}/reject', [HospitalisationController::class, 'rejectRequest'])->name('admission-requests.reject');
+        Route::post('/admission-requests/{admissionRequest}/approve', [HospitalisationController::class, 'approveRequest'])->name('admission-requests.approve');
+        Route::post('/admission-requests/{admissionRequest}/reject', [HospitalisationController::class, 'rejectRequest'])->name('admission-requests.reject');
     });
 
     Route::middleware('role:accueil,docteur_general')->group(function () {
@@ -73,7 +80,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/caisse/historique', [CaisseController::class, 'history'])->name('caisse.historique');
         Route::get('/caisse/jour/{date}', [CaisseController::class, 'showDay'])->name('caisse.jour');
         Route::post('/paiements', [PaymentController::class, 'store'])->name('payments.store');
-        Route::post('/caisse/cloturer', [PaymentController::class, 'closeDay'])->name('caisse.cloturer');
+        Route::post('/paiements/{payment}/annuler', [PaymentController::class, 'cancel'])->name('payments.cancel');
+        Route::post('/caisse/versement', [PaymentController::class, 'deposit'])->name('caisse.versement');
+        Route::post('/caisse/sessions/{session}/releve', [PaymentController::class, 'handOver'])->name('caisse.sessions.handover');
         Route::get('/paiements/{payment}/recu', [PaymentController::class, 'receipt'])->name('payments.receipt')->where('payment', '.*');
         Route::get('/paiements/{payment}/recu/pdf', [PaymentController::class, 'downloadReceipt'])->name('payments.receipt.download')->where('payment', '.*');
         Route::get('/caisse/paniers/{invoice}', [InvoiceController::class, 'show'])->name('caisse.paniers.show');
@@ -87,11 +96,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/caisse/session/close', [App\Http\Controllers\CashierSessionController::class, 'close'])->name('caisse.sessions.close.store');
     });
 
-    // Route pour encaisser un paiement - accessible aux caissiers
-    Route::post('/paiements/encaisser', [PaymentController::class, 'markAsPaid'])->name('payments.encaisser')->middleware('role:caissier,docteur_general');
-
     Route::middleware('role:medecin,pediatre,docteur_general')->group(function () {
         Route::get('/medecin', [MedecinController::class, 'index'])->name('medecin.index');
+        Route::get('/medecin/refresh', [MedecinController::class, 'refresh'])->name('medecin.refresh');
         Route::post('/medecin/visites/{visit}/take', [MedecinController::class, 'takeVisit'])->name('medecin.visits.take');
         Route::post('/medecin/visites/{visit}/hospitalize', [MedecinController::class, 'requestHospitalization'])->name('medecin.visits.hospitalize');
         Route::post('/medecin/visites/{visit}/observe', [MedecinController::class, 'requestObservation'])->name('medecin.visits.observe');
@@ -100,6 +107,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/hospitalisation', [HospitalisationController::class, 'index'])->name('hospitalisation.index');
         Route::get('/observation', [HospitalisationController::class, 'observation'])->name('observation.index');
         Route::post('/admissions', [AdmissionController::class, 'store'])->name('admissions.store');
+        Route::post('/admissions/{admission}/sortie-prevue', [AdmissionController::class, 'planDischarge'])->name('admissions.plan-discharge');
+        Route::post('/admissions/{admission}/sortie-annulee', [AdmissionController::class, 'cancelPlannedDischarge'])->name('admissions.cancel-discharge');
         Route::post('/admissions/{admission}/sortie', [AdmissionController::class, 'discharge'])->name('admissions.discharge');
         Route::get('/chambres', [ChambreController::class, 'index'])->name('chambres.index');
         Route::post('/chambres', [ChambreController::class, 'store'])->name('chambres.store');
@@ -125,8 +134,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::post('/personnel', [PersonnelController::class, 'store'])->name('personnel.store');
         Route::patch('/personnel/{doctor}', [PersonnelController::class, 'update'])->name('personnel.update');
-        Route::post('/personnel/{doctor}/statut', [PersonnelController::class, 'toggleActive'])->name('personnel.toggle');
-        Route::post('/assurances', [PersonnelController::class, 'storeInsuranceCompany'])->name('insurance-companies.store');
+        Route::post('/personnel/{doctor}/statut', [PersonnelController::class, 'toggleActive'])->name('personnel.toggleActive');
         Route::post('/gardes', [OnCallShiftController::class, 'store'])->name('on-call.store');
         Route::delete('/gardes/{onCallShift}', [OnCallShiftController::class, 'destroy'])->name('on-call.destroy');
     });
@@ -156,9 +164,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::middleware('role:pharmacien,docteur_general')->group(function () {
         Route::get('/pharmacie', [PharmacieController::class, 'index'])->name('pharmacie.index');
-        Route::post('/ordonnances/{prescription}/delivrer', [PrescriptionController::class, 'dispense'])->name('prescriptions.dispense');
         Route::get('/patients/search', [PharmacieController::class, 'searchPatients'])->name('pharmacie.patients.search');
         Route::get('/medicaments/search', [PharmacieController::class, 'searchMedications'])->name('pharmacie.medications.search');
+        Route::post('/ordonnances/{prescription}/delivrer', [PrescriptionController::class, 'dispense'])->name('prescriptions.dispense');
     });
 
     Route::middleware('role:logistique,docteur_general')->group(function () {

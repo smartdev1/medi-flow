@@ -1,0 +1,25 @@
+- generic [ref=f20e3]:
+  - banner [ref=f20e4]:
+    - button "Ouvrir le menu" [ref=f20e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f20e9]
+    - generic [ref=f20e10]:
+      - button [ref=f20e11] [cursor=pointer]
+      - generic [ref=f20e16]: DG
+  - main [ref=f20e20]:
+    - generic [ref=f20e21]:
+      - generic [ref=f20e22]: Demande d'hospitalisation pour QA PatientTest envoyée.
+      - generic [ref=f20e25]:
+        - generic [ref=f20e26]:
+          - heading "Espace Médecin" [level=1] [ref=f20e27]
+          - paragraph [ref=f20e28]: 0 patient(s) en attente de consultation aujourd'hui.
+        - generic [ref=f20e29]: Dr. Gnlé · Docteur Général
+      - generic [ref=f20e32]:
+        - generic [ref=f20e33]:
+          - generic [ref=f20e34]:
+            - heading "File d'attente" [level=2] [ref=f20e35]
+            - generic [ref=f20e36]: 0 patients
+          - list [ref=f20e37]:
+            - listitem [ref=f20e38]: Aucun patient dans cette file.
+        - generic [ref=f20e40]:
+          - paragraph [ref=f20e43]: Aucun patient en attente
+          - paragraph [ref=f20e44]: La file de consultation est vide pour le moment.

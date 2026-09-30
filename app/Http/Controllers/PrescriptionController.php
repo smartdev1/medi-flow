@@ -38,6 +38,7 @@ class PrescriptionController extends Controller
             $prescription->items()->create([
                 'medication_id' => $medication->id,
                 'name' => $medication->name,
+                'posology' => $item['posology'] ?? null,
                 'quantity' => $item['quantity'],
                 'unit_price' => $medication->unit_price,
             ]);

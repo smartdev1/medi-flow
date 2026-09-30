@@ -1,0 +1,161 @@
+- generic [ref=f11e3]:
+  - banner [ref=f11e4]:
+    - button "Ouvrir le menu" [ref=f11e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f11e9]
+    - generic [ref=f11e10]:
+      - button [ref=f11e11] [cursor=pointer]
+      - generic [ref=f11e16]: AK
+  - main [ref=f11e20]:
+    - generic [ref=f11e21]:
+      - generic [ref=f11e22]:
+        - generic [ref=f11e23]:
+          - heading "Accueil & Réception" [level=1] [ref=f11e24]
+          - paragraph [ref=f11e25]: Gestion des arrivées des patients — lundi 28 septembre.
+        - generic [ref=f11e26]:
+          - button "Nouveau patient" [ref=f11e28] [cursor=pointer]
+          - generic [ref=f11e116]:
+            - generic [ref=f11e117]:
+              - heading "Nouveau patient" [level=2] [ref=f11e118]
+              - button [ref=f11e119] [cursor=pointer]
+            - generic [ref=f11e123]:
+              - generic [ref=f11e124]:
+                - generic [ref=f11e125]:
+                  - generic [ref=f11e126]: Patient déjà existant ?
+                  - textbox "Rechercher par CSM-XXXX ou par nom..." [ref=f11e128]
+                - paragraph [ref=f11e129]: Laissez vide pour créer un nouveau dossier patient.
+              - generic [ref=f11e130]:
+                - generic [ref=f11e132]:
+                  - generic [ref=f11e133]: Prénom
+                  - textbox "Prénom" [ref=f11e135]: QA
+                - generic [ref=f11e137]:
+                  - generic [ref=f11e138]: Nom
+                  - textbox "Nom" [ref=f11e140]: PatientTest
+              - generic [ref=f11e142]:
+                - generic [ref=f11e143]: Sexe
+                - combobox "Sexe" [active] [ref=f11e144]:
+                  - option "Sélectionner" [disabled]
+                  - option "Masculin" [selected]
+                  - option "Féminin"
+              - generic [ref=f11e146]:
+                - generic [ref=f11e147]: Date de naissance
+                - textbox "Date de naissance" [ref=f11e149]
+              - generic [ref=f11e151]:
+                - generic [ref=f11e152]: Téléphone
+                - textbox "Téléphone" [ref=f11e154]:
+                  - /placeholder: +225 07 00 00 00 00
+              - generic [ref=f11e156]:
+                - generic [ref=f11e157]: Prise en charge
+                - combobox "Prise en charge" [ref=f11e158]:
+                  - option "Sélectionner" [disabled] [selected]
+                  - option "Assuré"
+                  - option "Non assuré"
+              - generic [ref=f11e159]:
+                - text: Acte demandé
+                - combobox [ref=f11e160]:
+                  - option "— Sélectionner l'acte —" [selected]
+                  - option "Bilan de santé / check-up complet"
+                  - option "Certificat médical"
+                  - option "Consultation dentaire"
+                  - option "Kinésithérapie / rééducation"
+                  - option "Vaccination"
+                  - option "Anesthésie générale"
+                  - option "Anesthésie locale"
+                  - option "Chirurgie majeure"
+                  - option "Chirurgie mineure"
+                  - option "Injection"
+                  - option "Pansement"
+                  - option "Petite chirurgie (kyste, abcès)"
+                  - option "Pose de perfusion"
+                  - option "Suture"
+                  - option "Consultation cardiologie"
+                  - option "Consultation d'urgence"
+                  - option "Consultation de suivi / contrôle"
+                  - option "Consultation dermatologie"
+                  - option "Consultation générale"
+                  - option "Consultation gynécologie"
+                  - option "Consultation ophtalmologie"
+                  - option "Consultation ORL"
+                  - option "Consultation pédiatrique"
+                  - option "Journée d'hospitalisation — chambre commune"
+                  - option "Journée d'hospitalisation — chambre individuelle"
+                  - option "Journée d'hospitalisation — chambre VIP"
+                  - option "Soins infirmiers en hospitalisation"
+                  - option "Surveillance médicale continue"
+                  - option "Échographie abdominale"
+                  - option "Échographie obstétricale"
+                  - option "Échographie pelvienne"
+                  - option "IRM"
+                  - option "Mammographie"
+                  - option "Radiographie standard"
+                  - option "Scanner / Tomodensitométrie"
+                  - option "Analyse bactériologique / microbiologique"
+                  - option "Analyse d'urines"
+                  - option "Bilan lipidique"
+                  - option "Glycémie"
+                  - option "NFS (numération formule sanguine)"
+                  - option "Sérologies hépatites (A,B,C)"
+                  - option "Test de grossesse"
+                  - option "Test sérologique VIH"
+                  - option "Accouchement normal"
+                  - option "Accouchement par césarienne"
+                  - option "Consultation prénatale"
+                  - option "Planning familial"
+                  - option "Suivi postnatal"
+                - paragraph [ref=f11e161]: Permet à la caisse de pré-remplir la facture automatiquement.
+              - generic [ref=f11e162]:
+                - checkbox "Cas prioritaire / urgent" [ref=f11e163]
+                - text: Cas prioritaire / urgent
+              - button "Enregistrer le patient" [ref=f11e165] [cursor=pointer]
+      - generic [ref=f11e31]:
+        - generic [ref=f11e32]:
+          - paragraph [ref=f11e34]: Arrivées aujourd'hui
+          - generic [ref=f11e38]:
+            - generic [ref=f11e39]: "0"
+            - generic [ref=f11e40]: Visites du jour
+        - generic [ref=f11e41]:
+          - paragraph [ref=f11e43]: En attente
+          - generic [ref=f11e47]:
+            - generic [ref=f11e48]: "0"
+            - generic [ref=f11e49]: Avant consultation
+        - generic [ref=f11e50]:
+          - paragraph [ref=f11e52]: Urgences
+          - generic [ref=f11e56]:
+            - generic [ref=f11e57]: "0"
+            - generic [ref=f11e58]: Priorité immédiate
+        - generic [ref=f11e59]:
+          - paragraph [ref=f11e61]: Taux d'occupation
+          - generic [ref=f11e65]:
+            - generic [ref=f11e66]: 7%
+            - generic [ref=f11e67]: Capacité clinique
+      - generic [ref=f11e68]:
+        - 'heading "Patients en observation : 1" [level=3] [ref=f11e73]'
+        - generic [ref=f11e75]:
+          - generic [ref=f11e76]:
+            - generic [ref=f11e77]: AA
+            - generic [ref=f11e78]:
+              - paragraph [ref=f11e79]: Aristide Adouko
+              - paragraph [ref=f11e80]: CSM-8147
+            - generic [ref=f11e81]: Chambre 5 — Chirurgie
+          - generic [ref=f11e82]: Mise en observation
+      - generic [ref=f11e84]:
+        - generic [ref=f11e85]: "Filtrer par prise en charge :"
+        - generic [ref=f11e88]:
+          - button "Tout" [ref=f11e89] [cursor=pointer]
+          - button "Assuré" [ref=f11e90] [cursor=pointer]
+          - button "Non assuré" [ref=f11e91] [cursor=pointer]
+        - generic [ref=f11e92]: lundi 28 septembre
+      - generic [ref=f11e95]:
+        - table [ref=f11e97]:
+          - rowgroup [ref=f11e98]:
+            - row [ref=f11e99]:
+              - columnheader "Patient" [ref=f11e100]
+              - columnheader "Arrivée" [ref=f11e101]
+              - columnheader "Prise en charge" [ref=f11e102]
+              - columnheader "Statut" [ref=f11e103]
+              - columnheader "Actions" [ref=f11e104]
+          - rowgroup
+        - generic [ref=f11e105]:
+          - paragraph [ref=f11e106]: arrivée(s) affichée(s) / 0 arrivée(s) enregistrée(s) aujourd'hui
+          - generic [ref=f11e107]:
+            - button [disabled] [ref=f11e108]
+            - button [ref=f11e111] [cursor=pointer]

@@ -1,0 +1,152 @@
+- generic [ref=f3e3]:
+  - banner [ref=f3e4]:
+    - button "Ouvrir le menu" [ref=f3e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f3e9]
+    - generic [ref=f3e10]:
+      - button [ref=f3e11] [cursor=pointer]
+      - generic [ref=f3e16]: DG
+  - main [ref=f3e20]:
+    - generic [ref=f3e21]:
+      - generic [ref=f3e22]:
+        - generic [ref=f3e23]:
+          - heading "Supervision générale" [level=1] [ref=f3e24]
+          - paragraph [ref=f3e25]: "Période : Ce mois."
+        - generic [ref=f3e26]:
+          - generic [ref=f3e27]: Période
+          - link "Aujourd'hui" [ref=f3e28] [cursor=pointer]:
+            - /url: http://localhost:8000/docteur-general?period=today
+          - link "7 jours" [ref=f3e29] [cursor=pointer]:
+            - /url: http://localhost:8000/docteur-general?period=7d
+          - link "30 jours" [ref=f3e30] [cursor=pointer]:
+            - /url: http://localhost:8000/docteur-general?period=30d
+          - link "Ce mois" [ref=f3e31] [cursor=pointer]:
+            - /url: http://localhost:8000/docteur-general?period=month
+          - link "Cette année" [ref=f3e32] [cursor=pointer]:
+            - /url: http://localhost:8000/docteur-general?period=year
+      - generic [ref=f3e33]:
+        - generic [ref=f3e34]:
+          - button "Synthèse" [ref=f3e35] [cursor=pointer]
+          - button "Finance" [ref=f3e36] [cursor=pointer]
+          - button "Opérations" [ref=f3e37] [cursor=pointer]
+        - generic [ref=f3e38]:
+          - generic [ref=f3e39]:
+            - generic [ref=f3e40]:
+              - paragraph [ref=f3e42]: CA (période)
+              - generic [ref=f3e46]: 32 100 FCFA
+            - generic [ref=f3e48]:
+              - paragraph [ref=f3e50]: Taux d'occupation
+              - generic [ref=f3e54]: 0 %
+            - generic [ref=f3e56]:
+              - paragraph [ref=f3e58]: Marge
+              - generic [ref=f3e62]: À connecter
+            - generic [ref=f3e64]:
+              - paragraph [ref=f3e66]: Taux d'impayés
+              - generic [ref=f3e70]: 0 %
+            - generic [ref=f3e72]:
+              - paragraph [ref=f3e74]: Actes réalisés
+              - generic [ref=f3e78]: "15"
+            - generic [ref=f3e80]:
+              - paragraph [ref=f3e82]: Temps d'attente
+              - generic [ref=f3e86]: 3 min
+          - generic [ref=f3e88]:
+            - generic [ref=f3e89]:
+              - heading "Tendance du CA (12 mois)" [level=2] [ref=f3e90]
+              - generic [ref=f3e91]:
+                - 'generic "oct. 25 : 0 FCFA" [ref=f3e92]':
+                  - generic [ref=f3e93]: 0 FCFA
+                  - generic [ref=f3e94]: oct. 25
+                - 'generic "nov. 25 : 0 FCFA" [ref=f3e95]':
+                  - generic [ref=f3e96]: 0 FCFA
+                  - generic [ref=f3e97]: nov. 25
+                - 'generic "déc. 25 : 0 FCFA" [ref=f3e98]':
+                  - generic [ref=f3e99]: 0 FCFA
+                  - generic [ref=f3e100]: déc. 25
+                - 'generic "janv. 26 : 0 FCFA" [ref=f3e101]':
+                  - generic [ref=f3e102]: 0 FCFA
+                  - generic [ref=f3e103]: janv. 26
+                - 'generic "févr. 26 : 0 FCFA" [ref=f3e104]':
+                  - generic [ref=f3e105]: 0 FCFA
+                  - generic [ref=f3e106]: févr. 26
+                - 'generic "mars 26 : 0 FCFA" [ref=f3e107]':
+                  - generic [ref=f3e108]: 0 FCFA
+                  - generic [ref=f3e109]: mars 26
+                - 'generic "avr. 26 : 0 FCFA" [ref=f3e110]':
+                  - generic [ref=f3e111]: 0 FCFA
+                  - generic [ref=f3e112]: avr. 26
+                - 'generic "mai 26 : 0 FCFA" [ref=f3e113]':
+                  - generic [ref=f3e114]: 0 FCFA
+                  - generic [ref=f3e115]: mai 26
+                - 'generic "juin 26 : 0 FCFA" [ref=f3e116]':
+                  - generic [ref=f3e117]: 0 FCFA
+                  - generic [ref=f3e118]: juin 26
+                - 'generic "juil. 26 : 0 FCFA" [ref=f3e119]':
+                  - generic [ref=f3e120]: 0 FCFA
+                  - generic [ref=f3e121]: juil. 26
+                - 'generic "août 26 : 0 FCFA" [ref=f3e122]':
+                  - generic [ref=f3e123]: 0 FCFA
+                  - generic [ref=f3e124]: août 26
+                - 'generic "sept. 26 : 32 100 FCFA" [ref=f3e125]':
+                  - generic [ref=f3e126]: 32 100 FCFA
+                  - generic [ref=f3e127]: sept. 26
+            - generic [ref=f3e128]:
+              - heading "Tendance des actes (12 mois)" [level=2] [ref=f3e129]
+              - generic [ref=f3e130]:
+                - 'generic "oct. 25 : 0 actes" [ref=f3e131]':
+                  - generic [ref=f3e132]: "0"
+                  - generic [ref=f3e133]: oct. 25
+                - 'generic "nov. 25 : 0 actes" [ref=f3e134]':
+                  - generic [ref=f3e135]: "0"
+                  - generic [ref=f3e136]: nov. 25
+                - 'generic "déc. 25 : 0 actes" [ref=f3e137]':
+                  - generic [ref=f3e138]: "0"
+                  - generic [ref=f3e139]: déc. 25
+                - 'generic "janv. 26 : 0 actes" [ref=f3e140]':
+                  - generic [ref=f3e141]: "0"
+                  - generic [ref=f3e142]: janv. 26
+                - 'generic "févr. 26 : 0 actes" [ref=f3e143]':
+                  - generic [ref=f3e144]: "0"
+                  - generic [ref=f3e145]: févr. 26
+                - 'generic "mars 26 : 0 actes" [ref=f3e146]':
+                  - generic [ref=f3e147]: "0"
+                  - generic [ref=f3e148]: mars 26
+                - 'generic "avr. 26 : 0 actes" [ref=f3e149]':
+                  - generic [ref=f3e150]: "0"
+                  - generic [ref=f3e151]: avr. 26
+                - 'generic "mai 26 : 0 actes" [ref=f3e152]':
+                  - generic [ref=f3e153]: "0"
+                  - generic [ref=f3e154]: mai 26
+                - 'generic "juin 26 : 0 actes" [ref=f3e155]':
+                  - generic [ref=f3e156]: "0"
+                  - generic [ref=f3e157]: juin 26
+                - 'generic "juil. 26 : 0 actes" [ref=f3e158]':
+                  - generic [ref=f3e159]: "0"
+                  - generic [ref=f3e160]: juil. 26
+                - 'generic "août 26 : 0 actes" [ref=f3e161]':
+                  - generic [ref=f3e162]: "0"
+                  - generic [ref=f3e163]: août 26
+                - 'generic "sept. 26 : 15 actes" [ref=f3e164]':
+                  - generic [ref=f3e165]: "15"
+                  - generic [ref=f3e166]: sept. 26
+      - generic [ref=f3e167]:
+        - heading "Accès rapide" [level=2] [ref=f3e168]
+        - generic [ref=f3e169]:
+          - link "Accueil" [ref=f3e170] [cursor=pointer]:
+            - /url: http://localhost:8000/accueil
+          - link "Salle d'attente" [ref=f3e171] [cursor=pointer]:
+            - /url: http://localhost:8000/salle-attente
+          - link "Médecin" [ref=f3e172] [cursor=pointer]:
+            - /url: http://localhost:8000/medecin
+          - link "Laboratoire" [ref=f3e173] [cursor=pointer]:
+            - /url: http://localhost:8000/laboratoire
+          - link "Pharmacie" [ref=f3e174] [cursor=pointer]:
+            - /url: http://localhost:8000/pharmacie
+          - link "Caisse" [ref=f3e175] [cursor=pointer]:
+            - /url: http://localhost:8000/caisse
+          - link "Logistique" [ref=f3e176] [cursor=pointer]:
+            - /url: http://localhost:8000/logistique
+          - link "Hospitalisation" [ref=f3e177] [cursor=pointer]:
+            - /url: http://localhost:8000/hospitalisation
+          - link "Sortie" [ref=f3e178] [cursor=pointer]:
+            - /url: http://localhost:8000/sortie
+          - link "Chambres" [ref=f3e179] [cursor=pointer]:
+            - /url: http://localhost:8000/chambres

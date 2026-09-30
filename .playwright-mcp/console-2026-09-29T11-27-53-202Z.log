@@ -1,0 +1,3 @@
+[   42016ms] [ERROR] Failed to load resource: the server responded with a status of 419 (unknown status) @ http://localhost:8000/logout:0
+[  413704ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0
+[  423709ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8000/salle-attente/refresh:0

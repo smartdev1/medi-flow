@@ -1,0 +1,44 @@
+- generic [ref=f23e3]:
+  - banner [ref=f23e4]:
+    - button "Ouvrir le menu" [ref=f23e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f23e9]
+    - generic [ref=f23e10]:
+      - button [ref=f23e11] [cursor=pointer]
+      - generic [ref=f23e16]: AS
+  - main [ref=f23e20]:
+    - generic [ref=f23e21]:
+      - generic [ref=f23e22]:
+        - generic [ref=f23e23]:
+          - heading "Demandes d'admission" [level=1] [ref=f23e24]
+          - paragraph [ref=f23e25]: Validez les demandes d'hospitalisation ou de mise en observation.
+        - link "Hospitalisations" [ref=f23e27] [cursor=pointer]:
+          - /url: http://localhost:8000/hospitalisation
+      - generic [ref=f23e33]:
+        - generic [ref=f23e34]:
+          - generic [ref=f23e35]: QP
+          - generic [ref=f23e36]:
+            - heading "QA PatientTest" [level=2] [ref=f23e37]
+            - paragraph [ref=f23e38]: CSM-7880
+            - generic [ref=f23e39]:
+              - generic [ref=f23e40]: Hospitalisation
+              - generic [ref=f23e42]: Demandé par Dr. Gnlé
+              - generic [ref=f23e44]: il y a 2 minutes
+            - paragraph [ref=f23e46]: "Motif : Hospitalisation"
+        - generic [ref=f23e47]:
+          - generic [ref=f23e48]:
+            - generic [ref=f23e49]:
+              - combobox [ref=f23e50]:
+                - option "Chambre"
+                - option "Chirurgie — Chambre 6 (Disponible)"
+                - option "Maternité — Chambre 8 (Disponible)"
+                - option "Maternité — Chambre 9 (Disponible)"
+                - option "Médecine générale — Chambre 10 (Disponible)" [selected]
+                - option "Médecine générale — Chambre 11 (Disponible)"
+                - option "Médecine générale — Chambre 12 (Disponible)"
+                - option "Pédiatrie — Chambre 14 (Disponible)"
+              - combobox [ref=f23e51]:
+                - option "Lit"
+                - option "Lit 1" [selected]
+                - option "Lit 2"
+            - button "Approuver" [ref=f23e52] [cursor=pointer]
+          - button "Rejeter" [ref=f23e56] [cursor=pointer]

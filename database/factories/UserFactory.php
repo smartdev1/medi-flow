@@ -23,6 +23,10 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            // Le rôle est posé explicitement : la colonne a bien une valeur par
+            // défaut en base, mais celle-ci n'est jamais relue dans le modèle
+            // retourné par la factory, qui aurait donc un rôle vide en mémoire.
+            'role' => \App\Enums\Role::Accueil->value,
         ];
     }
 
@@ -35,6 +39,13 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    public function withRole(\App\Enums\Role $role): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => $role->value,
         ]);
     }
 }

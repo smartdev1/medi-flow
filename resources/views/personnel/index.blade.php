@@ -82,7 +82,7 @@
                                 <x-ui.badge :tone="$doctor->is_active ? 'success' : 'neutral'">{{ $doctor->is_active ? 'Actif' : 'Désactivé' }}</x-ui.badge>
                             </td>
                             <td class="px-5 py-3.5 text-right">
-                                <form method="POST" action="{{ route('personnel.toggle', $doctor) }}">
+                                <form method="POST" action="{{ route('personnel.toggleActive', $doctor) }}">
                                     @csrf
                                     <x-ui.button variant="secondary" size="sm" type="submit">
                                         {{ $doctor->is_active ? 'Désactiver' : 'Réactiver' }}

@@ -1,0 +1,65 @@
+- generic [ref=f6e3]:
+  - banner [ref=f6e4]:
+    - button "Ouvrir le menu" [ref=f6e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f6e9]
+    - generic [ref=f6e10]:
+      - button [ref=f6e11] [cursor=pointer]
+      - generic [ref=f6e16]:
+        - generic [ref=f6e17] [cursor=pointer]: AK
+        - generic [ref=f6e98]:
+          - generic [ref=f6e99]:
+            - paragraph [ref=f6e100]: Akissi Koffi
+            - paragraph [ref=f6e101]: Agent d'accueil
+          - link "Paramètres du compte" [ref=f6e102] [cursor=pointer]:
+            - /url: http://localhost:8000/profile
+          - button "Se déconnecter" [ref=f6e106] [cursor=pointer]
+  - main [ref=f6e20]:
+    - generic [ref=f6e21]:
+      - generic [ref=f6e22]:
+        - generic [ref=f6e23]:
+          - heading "Accueil & Réception" [level=1] [ref=f6e24]
+          - paragraph [ref=f6e25]: Gestion des arrivées des patients — mardi 29 septembre.
+        - button "Nouveau patient" [ref=f6e28] [cursor=pointer]
+      - generic [ref=f6e31]:
+        - generic [ref=f6e32]:
+          - paragraph [ref=f6e34]: Arrivées aujourd'hui
+          - generic [ref=f6e38]:
+            - generic [ref=f6e39]: "0"
+            - generic [ref=f6e40]: Visites du jour
+        - generic [ref=f6e41]:
+          - paragraph [ref=f6e43]: En attente
+          - generic [ref=f6e47]:
+            - generic [ref=f6e48]: "0"
+            - generic [ref=f6e49]: Avant consultation
+        - generic [ref=f6e50]:
+          - paragraph [ref=f6e52]: Urgences
+          - generic [ref=f6e56]:
+            - generic [ref=f6e57]: "0"
+            - generic [ref=f6e58]: Priorité immédiate
+        - generic [ref=f6e59]:
+          - paragraph [ref=f6e61]: Taux d'occupation
+          - generic [ref=f6e65]:
+            - generic [ref=f6e66]: 0%
+            - generic [ref=f6e67]: Capacité clinique
+      - generic [ref=f6e68]:
+        - generic [ref=f6e69]: "Filtrer par prise en charge :"
+        - generic [ref=f6e72]:
+          - button "Tout" [ref=f6e73] [cursor=pointer]
+          - button "Assuré" [ref=f6e74] [cursor=pointer]
+          - button "Non assuré" [ref=f6e75] [cursor=pointer]
+        - generic [ref=f6e76]: mardi 29 septembre
+      - generic [ref=f6e79]:
+        - table [ref=f6e81]:
+          - rowgroup [ref=f6e82]:
+            - row [ref=f6e83]:
+              - columnheader "Patient" [ref=f6e84]
+              - columnheader "Arrivée" [ref=f6e85]
+              - columnheader "Prise en charge" [ref=f6e86]
+              - columnheader "Statut" [ref=f6e87]
+              - columnheader "Actions" [ref=f6e88]
+          - rowgroup
+        - generic [ref=f6e89]:
+          - paragraph [ref=f6e90]: 0 arrivée(s) affichée(s) / 0 arrivée(s) enregistrée(s) aujourd'hui
+          - generic [ref=f6e91]:
+            - button [disabled] [ref=f6e92]
+            - button [ref=f6e95] [cursor=pointer]

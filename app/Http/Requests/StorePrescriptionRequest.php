@@ -26,6 +26,7 @@ class StorePrescriptionRequest extends FormRequest
             'date' => ['required', 'date'],
             'items' => ['required', 'array', 'min:1'],
             'items.*.medication_id' => ['required', 'exists:medications,id'],
+            'items.*.posology' => ['nullable', 'string', 'max:255'],
             'items.*.quantity' => ['required', 'integer', 'min:1'],
         ];
     }

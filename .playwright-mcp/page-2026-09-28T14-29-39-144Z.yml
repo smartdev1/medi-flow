@@ -1,0 +1,59 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - button "Ouvrir le menu" [ref=e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=e9]
+    - generic [ref=e10]:
+      - button [ref=e11] [cursor=pointer]
+      - generic [ref=e16]: DG
+  - main [ref=e20]:
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - heading "Pharmacie" [level=1] [ref=e24]
+          - paragraph [ref=e25]: Délivrance des ordonnances et encaissement des ventes.
+        - button "Nouvelle ordonnance" [ref=e28] [cursor=pointer]
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - paragraph [ref=e34]: En attente de délivrance
+          - generic [ref=e38]:
+            - generic [ref=e39]: "0"
+            - generic [ref=e40]: Ordonnances reçues
+        - generic [ref=e41]:
+          - paragraph [ref=e43]: Alertes de stock
+          - generic [ref=e47]:
+            - generic [ref=e48]: "0"
+            - generic [ref=e49]: Réapprovisionnement requis
+        - generic [ref=e50]:
+          - paragraph [ref=e52]: Délivrées aujourd'hui
+          - generic [ref=e56]:
+            - generic [ref=e57]: "1"
+            - generic [ref=e58]: Dossiers clôturés
+      - generic [ref=e59]:
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - heading "Ordonnances à traiter" [level=2] [ref=e62]
+            - generic [ref=e63]: 0 patients
+          - list [ref=e64]:
+            - listitem [ref=e65]: Aucun patient dans cette file.
+        - table [ref=e68]:
+          - rowgroup [ref=e69]:
+            - row [ref=e70]:
+              - columnheader "Patient" [ref=e71]
+              - columnheader "Médicaments" [ref=e72]
+              - columnheader "Stock" [ref=e73]
+              - columnheader "Statut" [ref=e74]
+              - columnheader "Actions" [ref=e75]
+          - rowgroup [ref=e76]:
+            - row [ref=e77]:
+              - cell "PN Patient 2 Non-Assuré CSM-4025 Prescrit par Dr. Gnlé" [ref=e78]:
+                - generic [ref=e79]:
+                  - generic [ref=e80]: PN
+                  - generic [ref=e81]:
+                    - paragraph [ref=e82]: Patient 2 Non-Assuré
+                    - paragraph [ref=e83]: CSM-4025
+                    - paragraph [ref=e84]: Prescrit par Dr. Gnlé
+              - cell "Fer + Acide folique × 1" [ref=e85]
+              - cell "Disponible" [ref=e86]
+              - cell "Délivrée" [ref=e89]
+              - cell [ref=e92]:
+                - paragraph [ref=e93]: Par Dr. Gnlé

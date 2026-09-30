@@ -15,14 +15,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $staff = [
-            ['name' => 'Akissi Koffi', 'email' => 'akissi.koffi@clinique-saintmatthieu.ci', 'role' => Role::Accueil],
-            ['name' => 'Yao Kacou', 'email' => 'yao.kacou@clinique-saintmatthieu.ci', 'role' => Role::Caissier],
-            ['name' => 'Adama Traoré', 'email' => 'adama.traore@clinique-saintmatthieu.ci', 'role' => Role::Medecin],
-            ['name' => 'Fatoumata Sanogo', 'email' => 'fatoumata.sanogo@clinique-saintmatthieu.ci', 'role' => Role::Pediatre],
-            ['name' => 'Brou Kouassi', 'email' => 'brou.kouassi@clinique-saintmatthieu.ci', 'role' => Role::Laborantin],
-            ['name' => 'Aïcha Cissé', 'email' => 'aicha.cisse@clinique-saintmatthieu.ci', 'role' => Role::Pharmacien],
-            ['name' => 'Moussa Bamba', 'email' => 'moussa.bamba@clinique-saintmatthieu.ci', 'role' => Role::Logistique],
-            ['name' => 'Kouamé Bilé', 'email' => 'kouame.bile@clinique-saintmatthieu.ci', 'role' => Role::Admin],
+            ['name' => 'Akissi Koffi', 'email' => 'akissi.koffi@cmsm.ci', 'role' => Role::Accueil],
+            ['name' => 'Yao Kacou', 'email' => 'yao.kacou@cmsm.ci', 'role' => Role::Caissier],
+            ['name' => 'Adama Traoré', 'email' => 'adama.traore@cmsm.ci', 'role' => Role::Medecin],
+            ['name' => 'Fatoumata Sanogo', 'email' => 'fatoumata.sanogo@cmsm.ci', 'role' => Role::Pediatre],
+            ['name' => 'Brou Kouassi', 'email' => 'brou.kouassi@cmsm.ci', 'role' => Role::Laborantin],
+            ['name' => 'Aïcha Cissé', 'email' => 'aicha.cisse@cmsm.ci', 'role' => Role::Pharmacien],
+            ['name' => 'Moussa Bamba', 'email' => 'moussa.bamba@cmsm.ci', 'role' => Role::Logistique],
+            ['name' => 'Kouamé Bilé', 'email' => 'kouame.bile@cmsm.ci', 'role' => Role::Admin],
+            ['name' => 'Docteur Général', 'email' => 'dr_gnle@cmsm.ci', 'role' => Role::DocteurGeneral],
+            ['name' => 'Stéphanie Aubier', 'email' => 'aide@cmsm.ci', 'role' => Role::AideSoignante],
+            
         ];
 
         foreach ($staff as $entry) {

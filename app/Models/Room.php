@@ -10,10 +10,15 @@ class Room extends Model
 {
     use HasFactory;
 
+    const TYPE_INDIVIDUELLE = 'individuelle';
+    const TYPE_GROUPE = 'groupe';
+
     protected $fillable = [
         'ward',
         'number',
         'capacity',
+        'type',
+        'daily_rate',
         'maintenance',
     ];
 

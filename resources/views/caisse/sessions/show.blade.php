@@ -72,7 +72,6 @@
                             <th class="px-5 py-3 font-semibold text-right">Montant</th>
                             <th class="px-5 py-3 font-semibold">Mode</th>
                             <th class="px-5 py-3 font-semibold">Statut</th>
-                            <th class="px-5 py-3 font-semibold">Clôturé</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-line">
@@ -94,20 +93,10 @@
                                 <td class="px-5 py-3.5">
                                     <x-ui.badge :tone="$payment->status_tone">{{ $payment->status }}</x-ui.badge>
                                 </td>
-                                <td class="px-5 py-3.5">
-                                    @if ($payment->isClosed())
-                                        <x-ui.badge tone="success">
-                                            <x-ui.icon name="lock-closed" class="h-3 w-3" />
-                                            {{ $payment->closed_at?->format('H:i') }}
-                                        </x-ui.badge>
-                                    @else
-                                        <x-ui.badge tone="neutral">Ouvert</x-ui.badge>
-                                    @endif
-                                </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="px-5 py-10 text-center text-sm text-ink-muted">
+                                <td colspan="6" class="px-5 py-10 text-center text-sm text-ink-muted">
                                     Aucune transaction dans cette session.
                                 </td>
                             </tr>

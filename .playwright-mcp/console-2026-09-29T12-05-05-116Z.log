@@ -1,0 +1,76 @@
+[   51723ms] [WARNING] Alpine Expression Error: confirmPopup is not defined
+
+Expression: "confirmPopup"
+
+ JSHandle@node @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:466
+[   51728ms] ReferenceError: confirmPopup is not defined
+    at [Alpine] confirmPopup (eval at safeAsyncFunction (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:527:19), <anonymous>:3:32)
+    at http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:552:26
+    at tryCatch (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:450:12)
+    at Object.evaluate (http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:484:32)
+    at eval (eval at evaluate (:367:30), <anonymous>:4:19)
+    at UtilityScript.evaluate (<anonymous>:369:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[  264395ms] [WARNING] Alpine Warning: Alpine has already been initialized on this page. Calling Alpine.start() more than once can cause problems. @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:803
+[  701904ms] [LOG] [vite] server connection lost. polling for restart... @ http://[::1]:5173/@vite/client:287
+[  701915ms] [ERROR] Failed to load resource: net::ERR_NETWORK_IO_SUSPENDED @ http://[::1]:5173/:0
+[ 1329700ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[ 1329876ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[ 1329934ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[ 1338919ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[ 1338976ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[ 1338990ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[ 3777037ms] [LOG] [vite] server connection lost. polling for restart... @ http://[::1]:5173/@vite/client:287
+[ 3777057ms] [ERROR] Failed to load resource: net::ERR_NETWORK_IO_SUSPENDED @ http://[::1]:5173/:0
+[ 7329858ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[ 7330011ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[ 7330038ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[ 7531256ms] [LOG] [vite] server connection lost. polling for restart... @ http://[::1]:5173/@vite/client:287
+[ 7645675ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[ 7645783ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[ 7645805ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[10930335ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[10930521ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[10930558ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[11346385ms] [LOG] [vite] server connection lost. polling for restart... @ http://[::1]:5173/@vite/client:287
+[11346423ms] [ERROR] Failed to load resource: net::ERR_NETWORK_IO_SUSPENDED @ http://[::1]:5173/:0
+[11420534ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[11420725ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[11420752ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[12524878ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[12524981ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[12525002ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[12543634ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[12543753ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[12543773ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[12557129ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[12557260ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[12557284ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[12618645ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[12618755ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[12618777ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[12631555ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[12631650ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[12631669ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[12875355ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[12875448ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[12875471ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[12932641ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[12932780ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[12932804ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[13196391ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[13196484ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[13196506ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[13374840ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[13374930ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[13374950ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[13388749ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[13388883ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[13388903ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[13668184ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[13668294ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[13668318ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[13789880ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/medecin:0
+[13789995ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:8000/medecin:217
+[13790019ms] [LOG] {report: Object, shareableReport: Object, config: Object, solutions: Array(0), updateConfigEndpoint: /_ignition/update-config} {frames: Array(81), context_items: Object, custom_context_items: Array(0), type: web, entry_point: http://localhost:8000/medecin} @ http://localhost:8000/medecin:222
+[13903920ms] [WARNING] Alpine Warning: Alpine has already been initialized on this page. Calling Alpine.start() more than once can cause problems. @ http://[::1]:5173/node_modules/.vite/deps/alpinejs.js?v=65ad43f7:803

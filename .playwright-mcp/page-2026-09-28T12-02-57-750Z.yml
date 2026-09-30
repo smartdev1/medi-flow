@@ -1,0 +1,92 @@
+- generic [ref=f40e3]:
+  - banner [ref=f40e4]:
+    - button "Ouvrir le menu" [ref=f40e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f40e9]
+    - generic [ref=f40e10]:
+      - button [ref=f40e11] [cursor=pointer]
+      - generic [ref=f40e16]: DG
+  - main [ref=f40e20]:
+    - generic [ref=f40e21]:
+      - generic [ref=f40e22]: "Panier #9 encaissé avec succès."
+      - generic [ref=f40e25]:
+        - generic [ref=f40e26]:
+          - heading "Caisse" [level=1] [ref=f40e27]
+          - paragraph [ref=f40e28]: Encaissement des consultations, analyses et ordonnances du jour.
+        - generic [ref=f40e29]:
+          - button "Clôturer ma caisse" [ref=f40e31] [cursor=pointer]
+          - button "Nouvel encaissement" [ref=f40e36] [cursor=pointer]
+      - generic [ref=f40e39]:
+        - generic [ref=f40e40]:
+          - paragraph [ref=f40e42]: Paniers en cours
+          - generic [ref=f40e46]:
+            - generic [ref=f40e47]: "0"
+            - generic [ref=f40e48]: Factures en cours
+        - generic [ref=f40e49]:
+          - paragraph [ref=f40e51]: À payer
+          - generic [ref=f40e55]:
+            - generic [ref=f40e56]: "0"
+            - generic [ref=f40e57]: En attente de paiement
+        - generic [ref=f40e58]:
+          - paragraph [ref=f40e60]: Payées
+          - generic [ref=f40e64]:
+            - generic [ref=f40e65]: "1"
+            - generic [ref=f40e66]: Factures réglées
+        - generic [ref=f40e67]:
+          - paragraph [ref=f40e69]: Journée en cours
+          - generic [ref=f40e73]:
+            - generic [ref=f40e74]: 1 ouvert(s)
+            - generic [ref=f40e75]: 0 déjà clôturé(s)
+      - generic [ref=f40e76]:
+        - generic [ref=f40e77]:
+          - generic [ref=f40e78]: "Filtrer par statut :"
+          - generic [ref=f40e81]:
+            - button "Tout" [ref=f40e82] [cursor=pointer]
+            - button "Payé" [ref=f40e83] [cursor=pointer]
+            - button "Partiellement payé" [ref=f40e84] [cursor=pointer]
+            - button "En attente" [ref=f40e85] [cursor=pointer]
+        - generic [ref=f40e86]:
+          - generic [ref=f40e87]:
+            - generic [ref=f40e88]: Date
+            - textbox "Date" [ref=f40e89]: 2026-09-28
+            - button "Afficher" [ref=f40e90] [cursor=pointer]
+          - link [ref=f40e91] [cursor=pointer]:
+            - /url: http://localhost:8000/caisse/historique
+            - button "Historique" [ref=f40e92]
+      - table [ref=f40e97]:
+        - rowgroup [ref=f40e98]:
+          - row [ref=f40e99]:
+            - columnheader "Patient" [ref=f40e100]
+            - columnheader "Couverture" [ref=f40e101]
+            - columnheader "Sous-total" [ref=f40e102]
+            - columnheader "Assurance" [ref=f40e103]
+            - columnheader "À payer" [ref=f40e104]
+            - columnheader "Statut" [ref=f40e105]
+            - columnheader "Caissier" [ref=f40e106]
+            - columnheader "Service" [ref=f40e107]
+            - columnheader "Montant Total" [ref=f40e108]
+            - columnheader "Mode de paiement" [ref=f40e109]
+            - columnheader "Actions" [ref=f40e110]
+        - rowgroup [ref=f40e111]:
+          - row [ref=f40e112]:
+            - cell "QP QA PatientTest CSM-7880" [ref=f40e113]:
+              - generic [ref=f40e114]:
+                - generic [ref=f40e115]: QP
+                - generic [ref=f40e116]:
+                  - paragraph [ref=f40e117]: QA PatientTest
+                  - paragraph [ref=f40e118]: CSM-7880
+            - cell "Non assuré" [ref=f40e119]
+            - cell "15 000 FCFA" [ref=f40e120]
+            - cell "0 FCFA" [ref=f40e121]
+            - cell "15 000 FCFA" [ref=f40e122]
+            - cell "Payé" [ref=f40e123]
+            - cell "Dr. Gnlé" [ref=f40e127]
+            - cell "Consultation générale" [ref=f40e128]
+            - cell "15 000 FCFA" [ref=f40e129]
+            - cell "Espèces" [ref=f40e130]
+            - cell [ref=f40e131]:
+              - generic [ref=f40e132]:
+                - link "Détail" [ref=f40e133] [cursor=pointer]:
+                  - /url: http://localhost:8000/caisse/paniers/9
+                - link [ref=f40e134] [cursor=pointer]:
+                  - /url: http://localhost:8000/paiements/3/recu
+                  - button "Reçu" [ref=f40e135]

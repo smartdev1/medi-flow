@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CashierSession;
 use App\Models\Invoice;
-use App\Models\Payment;
 use App\Models\Visit;
+use App\Services\CashierService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use InvalidArgumentException;
+use RuntimeException;
 
 class InvoiceController extends Controller
 {
     public function index(): View
     {
+        $this->authorize('viewAny', Invoice::class);
         $invoices = Invoice::with(['patient', 'visit'])
             ->orderByDesc('created_at')
             ->get();
@@ -31,9 +35,15 @@ class InvoiceController extends Controller
 
     public function show(Invoice $invoice): View
     {
-        $invoice->load(['patient', 'visit.act', 'visit.payments', 'cashier']);
+        $this->authorize('view', $invoice);
+        $invoice->load(['patient.insuranceCompany', 'visit.act', 'visit.payments', 'cashier']);
         $patient = $invoice->patient;
         $visit = $invoice->visit;
+
+        $user = Auth::user();
+        $userName = $user?->name ?? 'Caissier';
+        $userRole = $user?->role?->label() ?? 'Caisse';
+        $userInitials = $user?->initials ?? $this->initialsFor($userName);
 
         $steps = collect();
 
@@ -85,56 +95,62 @@ class InvoiceController extends Controller
             ->all();
 
         return view('caisse.invoice_show', [
+            'invoice' => $invoice,
             'timeline' => $timeline,
+            'cashierSession' => CashierSession::where('cashier_id', $user?->id)
+                ->active()
+                ->orderByDesc('opened_at')
+                ->first(),
+            'userName' => $userName,
+            'userRole' => $userRole,
+            'userInitials' => $userInitials,
         ]);
     }
 
-    public function pay(Invoice $invoice): RedirectResponse
+    /**
+     * Encaissement d'une facture, total ou partiel.
+     *
+     * Passe obligatoirement par CashierService : c'est ce qui garantit qu'un
+     * encaissement est rattaché à une vacation et à un fonds déclaré. Un
+     * montant supérieur au solde restant est refusé, ici par la validation
+     * puis, si le solde a bougé entre-temps, par Invoice::settle().
+     */
+    public function pay(Request $request, Invoice $invoice, CashierService $cashier): RedirectResponse
     {
-        if (! $invoice->isPaid()) {
-            $invoice->markAsPaid(Auth::user());
+        $this->authorize('update', $invoice);
 
-            $visit = $invoice->visit;
-            $alreadySettled = $visit?->payments()->where('status', Payment::STATUS_PAID)->exists();
+        if ($invoice->isPaid()) {
+            return back()->with('error', 'Cette facture est déjà soldée.');
+        }
 
-            if (! $alreadySettled) {
-                $service = $visit?->act?->label ?? 'Consultation';
+        $invoice->recalculate();
+        $invoice->refresh();
 
-                $admissions = $visit->patient->admissions()
-                    ->where('admitted_at', '>=', $visit->arrived_at)
-                    ->get();
+        $remaining = $invoice->remaining_amount;
 
-                if ($admissions->isNotEmpty()) {
-                    $totalDays = 0;
-                    foreach ($admissions as $admission) {
-                        $endDate = $admission->discharged_at?->copy()->startOfDay() ?? now()->startOfDay();
-                        $totalDays += $admission->admitted_at->copy()->startOfDay()->diffInDays($endDate) + 1;
-                    }
+        $validated = $request->validate([
+            'amount' => ['nullable', 'integer', 'min:1', 'max:'.$remaining],
+            'method' => ['required', 'in:'.implode(',', array_keys(config('clinic.payment_methods')))],
+        ]);
 
-                    if ($totalDays > 0) {
-                        $service .= ' — Hospitalisation (' . $totalDays . ' jour(s))';
-                    }
-                }
+        $amount = (int) ($validated['amount'] ?? $remaining);
 
-                Payment::create([
-                    'patient_id' => $invoice->patient_id,
-                    'visit_id' => $invoice->visit_id,
-                    'service' => $service,
-                    'amount' => $invoice->patient_amount,
-                    'method' => 'Espèces',
-                    'status' => Payment::STATUS_PAID,
-                    'cashier_id' => Auth::id(),
-                ]);
-            }
+        try {
+            $cashier->settleInvoice($invoice, $amount, $validated['method'], auth()->user());
+        } catch (InvalidArgumentException|RuntimeException $e) {
+            return back()->with('error', $e->getMessage());
         }
 
         return redirect()
             ->route('caisse.index')
-            ->with('success', "Panier #{$invoice->id} encaissé avec succès.");
+            ->with('success', $amount >= $remaining
+                ? "Facture #{$invoice->id} soldée."
+                : "Encaissement partiel de {$amount} FCFA enregistré sur la facture #{$invoice->id}.");
     }
 
     public function print(Invoice $invoice): View
     {
+        $this->authorize('view', $invoice);
         $invoice->load(['patient', 'visit', 'cashier']);
         $invoice->markAsPrinted();
 
@@ -145,15 +161,6 @@ class InvoiceController extends Controller
 
     public function generateFromVisit(Visit $visit): Invoice
     {
-        $invoice = Invoice::firstOrCreate([
-            'visit_id' => $visit->id,
-        ], [
-            'patient_id' => $visit->patient_id,
-            'status' => Invoice::STATUS_PENDING,
-        ]);
-
-        $invoice->recalculate();
-
-        return $invoice;
+        return Invoice::forVisit($visit);
     }
 }

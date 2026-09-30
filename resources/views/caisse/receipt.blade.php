@@ -294,9 +294,6 @@
                         <p>Visite : <span>#{{ $payment->visit->id }}</span></p>
                     @endif
                     <p>Encaissé par : <span>{{ $payment->cashier?->name ?? '—' }}</span></p>
-                    @if ($payment->closed_at)
-                        <p>Caisse clôturée : <span>{{ $payment->closed_at->format('d/m/Y H:i') }}</span></p>
-                    @endif
                 </div>
             </div>
 

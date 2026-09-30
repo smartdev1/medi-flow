@@ -1,0 +1,102 @@
+- generic [ref=f7e2]:
+  - complementary [ref=f7e3]:
+    - generic [ref=f7e8]:
+      - paragraph [ref=f7e9]: Clinique Saint Matthieu
+      - paragraph [ref=f7e10]: Espace professionnel
+    - navigation [ref=f7e11]:
+      - link "Supervision" [ref=f7e13] [cursor=pointer]:
+        - /url: http://localhost:8000/docteur-general
+      - link "Accueil" [ref=f7e18] [cursor=pointer]:
+        - /url: http://localhost:8000/accueil
+      - link "Caisse" [ref=f7e23] [cursor=pointer]:
+        - /url: http://localhost:8000/caisse
+      - link "Salle d'attente 5" [ref=f7e28] [cursor=pointer]:
+        - /url: http://localhost:8000/salle-attente
+        - generic [ref=f7e31]: Salle d'attente
+        - generic [ref=f7e32]: "5"
+      - link "Médecin" [ref=f7e34] [cursor=pointer]:
+        - /url: http://localhost:8000/medecin
+      - link "Laboratoire" [ref=f7e39] [cursor=pointer]:
+        - /url: http://localhost:8000/laboratoire
+      - link "Pharmacie" [ref=f7e44] [cursor=pointer]:
+        - /url: http://localhost:8000/pharmacie
+      - button "Hospitalisation" [ref=f7e49] [cursor=pointer]
+      - link "Sortie patient" [ref=f7e56] [cursor=pointer]:
+        - /url: http://localhost:8000/sortie
+      - link "Logistique" [ref=f7e61] [cursor=pointer]:
+        - /url: http://localhost:8000/logistique
+      - button "Gestion clinique" [ref=f7e66] [cursor=pointer]
+      - link "Actes médicaux" [ref=f7e73] [cursor=pointer]:
+        - /url: http://localhost:8000/acts
+    - link "Paramètres" [ref=f7e78] [cursor=pointer]:
+      - /url: http://localhost:8000/profile
+  - generic [ref=f7e82]:
+    - banner [ref=f7e83]:
+      - textbox "Rechercher..." [ref=f7e85]
+      - generic [ref=f7e86]:
+        - button [ref=f7e87] [cursor=pointer]
+        - generic [ref=f7e94] [cursor=pointer]:
+          - generic [ref=f7e95]: DG
+          - generic [ref=f7e96]:
+            - paragraph [ref=f7e97]: Dr. Gnlé
+            - paragraph [ref=f7e98]: Docteur Général
+    - main [ref=f7e101]:
+      - generic [ref=f7e102]:
+        - generic [ref=f7e103]:
+          - generic [ref=f7e104]:
+            - heading "Accueil & Réception" [level=1] [ref=f7e105]
+            - paragraph [ref=f7e106]: Gestion des arrivées des patients — lundi 28 septembre.
+          - button "Nouveau patient" [ref=f7e109] [cursor=pointer]
+        - generic [ref=f7e112]:
+          - generic [ref=f7e113]:
+            - paragraph [ref=f7e115]: Arrivées aujourd'hui
+            - generic [ref=f7e119]:
+              - generic [ref=f7e120]: "0"
+              - generic [ref=f7e121]: Visites du jour
+          - generic [ref=f7e122]:
+            - paragraph [ref=f7e124]: En attente
+            - generic [ref=f7e128]:
+              - generic [ref=f7e129]: "0"
+              - generic [ref=f7e130]: Avant consultation
+          - generic [ref=f7e131]:
+            - paragraph [ref=f7e133]: Urgences
+            - generic [ref=f7e137]:
+              - generic [ref=f7e138]: "0"
+              - generic [ref=f7e139]: Priorité immédiate
+          - generic [ref=f7e140]:
+            - paragraph [ref=f7e142]: Taux d'occupation
+            - generic [ref=f7e146]:
+              - generic [ref=f7e147]: 7%
+              - generic [ref=f7e148]: Capacité clinique
+        - generic [ref=f7e149]:
+          - 'heading "Patients en observation : 1" [level=3] [ref=f7e154]'
+          - generic [ref=f7e156]:
+            - generic [ref=f7e157]:
+              - generic [ref=f7e158]: AA
+              - generic [ref=f7e159]:
+                - paragraph [ref=f7e160]: Aristide Adouko
+                - paragraph [ref=f7e161]: CSM-8147
+              - generic [ref=f7e162]: Chambre 5 — Chirurgie
+            - generic [ref=f7e163]: Mise en observation
+        - generic [ref=f7e165]:
+          - generic [ref=f7e166]: "Filtrer par prise en charge :"
+          - generic [ref=f7e169]:
+            - button "Tout" [ref=f7e170] [cursor=pointer]
+            - button "Assuré" [ref=f7e171] [cursor=pointer]
+            - button "Non assuré" [ref=f7e172] [cursor=pointer]
+          - generic [ref=f7e173]: lundi 28 septembre
+        - generic [ref=f7e176]:
+          - table [ref=f7e178]:
+            - rowgroup [ref=f7e179]:
+              - row [ref=f7e180]:
+                - columnheader "Patient" [ref=f7e181]
+                - columnheader "Arrivée" [ref=f7e182]
+                - columnheader "Prise en charge" [ref=f7e183]
+                - columnheader "Statut" [ref=f7e184]
+                - columnheader "Actions" [ref=f7e185]
+            - rowgroup
+          - generic [ref=f7e186]:
+            - paragraph [ref=f7e187]: arrivée(s) affichée(s) / 0 arrivée(s) enregistrée(s) aujourd'hui
+            - generic [ref=f7e188]:
+              - button [disabled] [ref=f7e189]
+              - button [ref=f7e192] [cursor=pointer]

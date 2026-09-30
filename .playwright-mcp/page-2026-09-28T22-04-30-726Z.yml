@@ -1,0 +1,41 @@
+- generic [ref=f40e3]:
+  - banner [ref=f40e4]:
+    - button "Ouvrir le menu" [ref=f40e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f40e9]
+    - generic [ref=f40e10]:
+      - button [ref=f40e11] [cursor=pointer]
+      - generic [ref=f40e16]: DG
+  - main [ref=f40e20]:
+    - generic [ref=f40e21]:
+      - generic [ref=f40e22]:
+        - generic [ref=f40e23]:
+          - heading "Historique des journées" [level=1] [ref=f40e24]
+          - paragraph [ref=f40e25]: Journées de caisse clôturées. Cliquez sur une journée pour consulter le détail des paiements.
+        - link [ref=f40e26] [cursor=pointer]:
+          - /url: http://localhost:8000/caisse
+          - button "Retour à la caisse" [ref=f40e27]
+      - table [ref=f40e32]:
+        - rowgroup [ref=f40e33]:
+          - row [ref=f40e34]:
+            - columnheader "Date" [ref=f40e35]
+            - columnheader "Clôturée le" [ref=f40e36]
+            - columnheader "Transactions" [ref=f40e37]
+            - columnheader "Encaissé" [ref=f40e38]
+            - columnheader "Impayé" [ref=f40e39]
+            - columnheader "Caissier" [ref=f40e40]
+            - columnheader "Action" [ref=f40e41]
+        - rowgroup [ref=f40e42]:
+          - row [ref=f40e43]:
+            - cell [ref=f40e44]:
+              - generic [ref=f40e48]:
+                - paragraph [ref=f40e49]: lundi 28 septembre 2026
+                - paragraph [ref=f40e50]: 28/09/2026
+            - cell "28/09/2026 16:44" [ref=f40e51]
+            - cell "1" [ref=f40e52]
+            - cell "15 000 FCFA" [ref=f40e53]
+            - cell "0 FCFA" [ref=f40e54]
+            - cell "Tous" [ref=f40e55]
+            - cell [ref=f40e56]:
+              - link [ref=f40e57] [cursor=pointer]:
+                - /url: http://localhost:8000/caisse/jour/2026-09-28
+                - button "Voir" [ref=f40e58]

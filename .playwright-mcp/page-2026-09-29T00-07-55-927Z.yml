@@ -1,0 +1,14 @@
+- generic [ref=f79e3]:
+  - banner [ref=f79e4]:
+    - button "Ouvrir le menu" [ref=f79e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f79e9]
+    - generic [ref=f79e10]:
+      - button [ref=f79e11] [cursor=pointer]
+      - generic [ref=f79e16]: "Y"
+  - main [ref=f79e20]:
+    - generic [ref=f79e22]:
+      - heading "Accès refusé" [level=1] [ref=f79e26]
+      - paragraph [ref=f79e27]: Vous n'avez pas les permissions nécessaires pour accéder à cette page. Si vous pensez qu'il s'agit d'une erreur, contactez votre administrateur.
+      - generic [ref=f79e28]: "Rôle connecté : Caissier (caissier)"
+      - link "Retour à l'accueil" [ref=f79e29] [cursor=pointer]:
+        - /url: http://localhost:8000/accueil

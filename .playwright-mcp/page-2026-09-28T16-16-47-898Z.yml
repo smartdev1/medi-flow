@@ -1,0 +1,120 @@
+- generic [ref=f3e3]:
+  - banner [ref=f3e4]:
+    - button "Ouvrir le menu" [ref=f3e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f3e9]
+    - generic [ref=f3e10]:
+      - button [ref=f3e11] [cursor=pointer]
+      - generic [ref=f3e16]: DG
+  - main [ref=f3e20]:
+    - generic [ref=f3e21]:
+      - generic [ref=f3e22]:
+        - generic [ref=f3e23]:
+          - heading "Supervision générale" [level=1] [ref=f3e24]
+          - paragraph [ref=f3e25]: "Période : Ce mois."
+        - generic [ref=f3e26]:
+          - generic [ref=f3e27]: Période
+          - link "Aujourd'hui" [ref=f3e28] [cursor=pointer]:
+            - /url: http://localhost:8000/docteur-general?period=today
+          - link "7 jours" [ref=f3e29] [cursor=pointer]:
+            - /url: http://localhost:8000/docteur-general?period=7d
+          - link "30 jours" [ref=f3e30] [cursor=pointer]:
+            - /url: http://localhost:8000/docteur-general?period=30d
+          - link "Ce mois" [ref=f3e31] [cursor=pointer]:
+            - /url: http://localhost:8000/docteur-general?period=month
+          - link "Cette année" [ref=f3e32] [cursor=pointer]:
+            - /url: http://localhost:8000/docteur-general?period=year
+      - generic [ref=f3e33]:
+        - generic [ref=f3e34]:
+          - button "Synthèse" [ref=f3e35] [cursor=pointer]
+          - button "Finance" [active] [ref=f3e36] [cursor=pointer]
+          - button "Opérations" [ref=f3e37] [cursor=pointer]
+        - generic [ref=f3e180]:
+          - generic [ref=f3e181]:
+            - generic [ref=f3e182]:
+              - paragraph [ref=f3e184]: Encaissé
+              - generic [ref=f3e188]: 32 100 FCFA
+            - generic [ref=f3e190]:
+              - paragraph [ref=f3e192]: Attendu
+              - generic [ref=f3e196]: 32 100 FCFA
+            - generic [ref=f3e198]:
+              - paragraph [ref=f3e200]: Impayé
+              - generic [ref=f3e204]: 0 FCFA
+            - generic [ref=f3e206]:
+              - paragraph [ref=f3e208]: Taux recouvrement
+              - generic [ref=f3e212]: 100 %
+            - generic [ref=f3e214]:
+              - paragraph [ref=f3e216]: Panier moyen
+              - generic [ref=f3e217]: 8 025 FCFA
+            - generic [ref=f3e219]:
+              - paragraph [ref=f3e221]: Patients facturés
+              - generic [ref=f3e225]: "4"
+          - generic [ref=f3e227]:
+            - generic [ref=f3e228]:
+              - heading "CA par service" [level=2] [ref=f3e229]
+              - generic [ref=f3e230]:
+                - generic [ref=f3e232]:
+                  - generic [ref=f3e233]: Consultation générale
+                  - generic [ref=f3e234]: 28 500 FCFA
+                - generic [ref=f3e238]:
+                  - generic [ref=f3e239]: Pharmacie — Paracétamol 1g × 1
+                  - generic [ref=f3e240]: 3 000 FCFA
+                - generic [ref=f3e244]:
+                  - generic [ref=f3e245]: Pharmacie — Fer + Acide folique × 1
+                  - generic [ref=f3e246]: 600 FCFA
+            - generic [ref=f3e249]:
+              - heading "Tendance du CA" [level=2] [ref=f3e250]
+              - generic [ref=f3e251]:
+                - generic "oct. 25" [ref=f3e252]
+                - generic "nov. 25" [ref=f3e254]
+                - generic "déc. 25" [ref=f3e256]
+                - generic "janv. 26" [ref=f3e258]
+                - generic "févr. 26" [ref=f3e260]
+                - generic "mars 26" [ref=f3e262]
+                - generic "avr. 26" [ref=f3e264]
+                - generic "mai 26" [ref=f3e266]
+                - generic "juin 26" [ref=f3e268]
+                - generic "juil. 26" [ref=f3e270]
+                - generic "août 26" [ref=f3e272]
+                - generic "sept. 26" [ref=f3e274]
+          - generic [ref=f3e276]:
+            - generic [ref=f3e278]:
+              - paragraph [ref=f3e279]: Consultation
+              - generic [ref=f3e280]: 18 500 FCFA
+            - generic [ref=f3e284]:
+              - paragraph [ref=f3e285]: Laboratoire
+              - generic [ref=f3e286]: 0 FCFA
+            - generic [ref=f3e289]:
+              - paragraph [ref=f3e290]: Pharmacie
+              - generic [ref=f3e291]: 0 FCFA
+            - generic [ref=f3e294]:
+              - paragraph [ref=f3e295]: Hospitalisation
+              - generic [ref=f3e296]: 35 000 FCFA
+            - generic [ref=f3e300]:
+              - paragraph [ref=f3e301]: Chirurgie
+              - generic [ref=f3e302]: 0 FCFA
+            - generic [ref=f3e305]:
+              - paragraph [ref=f3e306]: Autre
+              - generic [ref=f3e307]: 0 FCFA
+      - generic [ref=f3e167]:
+        - heading "Accès rapide" [level=2] [ref=f3e168]
+        - generic [ref=f3e169]:
+          - link "Accueil" [ref=f3e170] [cursor=pointer]:
+            - /url: http://localhost:8000/accueil
+          - link "Salle d'attente" [ref=f3e171] [cursor=pointer]:
+            - /url: http://localhost:8000/salle-attente
+          - link "Médecin" [ref=f3e172] [cursor=pointer]:
+            - /url: http://localhost:8000/medecin
+          - link "Laboratoire" [ref=f3e173] [cursor=pointer]:
+            - /url: http://localhost:8000/laboratoire
+          - link "Pharmacie" [ref=f3e174] [cursor=pointer]:
+            - /url: http://localhost:8000/pharmacie
+          - link "Caisse" [ref=f3e175] [cursor=pointer]:
+            - /url: http://localhost:8000/caisse
+          - link "Logistique" [ref=f3e176] [cursor=pointer]:
+            - /url: http://localhost:8000/logistique
+          - link "Hospitalisation" [ref=f3e177] [cursor=pointer]:
+            - /url: http://localhost:8000/hospitalisation
+          - link "Sortie" [ref=f3e178] [cursor=pointer]:
+            - /url: http://localhost:8000/sortie
+          - link "Chambres" [ref=f3e179] [cursor=pointer]:
+            - /url: http://localhost:8000/chambres

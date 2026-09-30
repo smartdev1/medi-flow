@@ -1,0 +1,31 @@
+{
+  "summary": {
+    "fatal": "page.waitForSelector: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.border-l-brand-500, .border-l-success, .border-l-danger, .border-l-warning, .border-l-line') to be visible\u001b[22m\n"
+  },
+  "steps": [
+    {
+      "step": "LOGIN",
+      "user": "both",
+      "status": "PASS",
+      "detail": "",
+      "ts": "2026-09-29T19:40:17.209Z"
+    },
+    {
+      "step": "REGISTER_PATIENT",
+      "user": "doctor",
+      "status": "UNKNOWN",
+      "detail": "code=?",
+      "ts": "2026-09-29T19:40:25.294Z"
+    }
+  ],
+  "bugs": [],
+  "networkFailures": [],
+  "jsErrors": [],
+  "screenshots": [
+    "2026-09-29T19-40-16_00_doctor_logged.png",
+    "2026-09-29T19-40-17_00_nurse_logged.png",
+    "2026-09-29T19-40-20_01_accueil.png",
+    "2026-09-29T19-40-21_01_slideover.png",
+    "2026-09-29T19-40-25_01_after_registration.png"
+  ]
+}

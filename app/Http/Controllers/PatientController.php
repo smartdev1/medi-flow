@@ -3,14 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePatientRequest;
+use App\Models\Invoice;
 use App\Models\Patient;
+use App\Models\Visit;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class PatientController extends Controller
 {
+    public function index(Request $request): View
+    {
+        $this->authorize('viewAny', Patient::class);
+        $user = Auth::user();
+        $userName = $user?->name ?? 'Utilisateur';
+        $userRole = $user?->role?->label() ?? 'Personnel clinique';
+        $userInitials = $user?->initials ?? $this->initialsFor($userName);
+
+        $patients = Patient::with(['insuranceCompany', 'visits' => fn ($q) => $q->latest('arrived_at')->limit(1)])
+            ->orderByDesc('created_at')
+            ->get();
+
+        return view('patients.index', [
+            'patients' => $patients,
+            'userName' => $userName,
+            'userRole' => $userRole,
+            'userInitials' => $userInitials,
+        ]);
+    }
+
     public function store(StorePatientRequest $request): RedirectResponse
     {
+        $this->authorize('create', Patient::class);
         $data = $request->validated();
         $urgent = (bool) ($data['urgent'] ?? false);
         $isReturningPatient = ! empty($data['existing_patient_id']);
@@ -25,16 +50,21 @@ class PatientController extends Controller
                 'birth_date' => $data['birth_date'] ?? null,
                 'phone' => $data['phone'] ?? null,
                 'coverage' => $data['coverage'],
+                'insurance_company_id' => $data['insurance_company_id'] ?? null,
             ]);
 
-        $patient->visits()->create([
+        $visit = $patient->visits()->create([
             'arrived_at' => now(),
-            'orientation' => $data['orientation'],
             'reason' => $data['reason'] ?? null,
+            'act_id' => $data['act_id'] ?? null,
             'registered_by' => Auth::id(),
-            'status' => $urgent ? 'Prioritaire' : 'En attente',
+            'status' => $urgent ? Visit::STATUS_URGENT : Visit::STATUS_WAITING,
             'urgent' => $urgent,
         ]);
+
+        // Toute visite ouvre une facture : c'est le panier qui recevra ensuite
+        // les examens, les ordonnances et les journées d'hospitalisation.
+        Invoice::forVisit($visit);
 
         $message = $isReturningPatient
             ? "Nouvelle visite enregistrée pour {$patient->full_name} ({$patient->code})."
@@ -45,6 +75,7 @@ class PatientController extends Controller
 
     public function show(Patient $patient)
     {
+        $this->authorize('view', $patient);
         // Charger toutes les données historiques du patient
         $patient->load([
             'visits.consultations',
@@ -64,7 +95,7 @@ class PatientController extends Controller
                 $timeline->push([
                     'date' => $visit->arrived_at,
                     'type' => 'visit',
-                    'title' => 'Visite - ' . ($visit->reason ?: $visit->orientation),
+                    'title' => 'Visite - ' . ($visit->reason ?: 'Consultation'),
                     'details' => $visit,
                     'icon' => 'calendar'
                 ]);

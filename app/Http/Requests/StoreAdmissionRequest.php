@@ -24,6 +24,8 @@ class StoreAdmissionRequest extends FormRequest
         return [
             'patient_id' => ['required', 'exists:patients,id'],
             'room_id' => ['required', 'exists:rooms,id'],
+            'bed_number' => ['nullable', 'integer', 'min:1'],
+            'type' => ['nullable', 'in:hospitalisation,observation'],
             'reason' => ['required', 'string', 'max:255'],
             'attending' => ['nullable', 'string', 'max:255'],
         ];

@@ -1,0 +1,184 @@
+- generic [ref=f11e3]:
+  - banner [ref=f11e4]:
+    - button "Ouvrir le menu" [ref=f11e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f11e9]
+    - generic [ref=f11e10]:
+      - button [ref=f11e11] [cursor=pointer]
+      - generic [ref=f11e16]: DG
+  - main [ref=f11e20]:
+    - generic [ref=f11e21]:
+      - generic [ref=f11e22]:
+        - generic [ref=f11e23]:
+          - heading "Pharmacie" [level=1] [ref=f11e24]
+          - paragraph [ref=f11e25]: Délivrance des ordonnances et encaissement des ventes.
+        - button "Nouvelle ordonnance" [ref=f11e28] [cursor=pointer]
+      - generic [ref=f11e31]:
+        - generic [ref=f11e32]:
+          - paragraph [ref=f11e34]: En attente de délivrance
+          - generic [ref=f11e38]:
+            - generic [ref=f11e39]: "6"
+            - generic [ref=f11e40]: Ordonnances reçues
+        - generic [ref=f11e41]:
+          - paragraph [ref=f11e43]: Alertes de stock
+          - generic [ref=f11e47]:
+            - generic [ref=f11e48]: "0"
+            - generic [ref=f11e49]: Réapprovisionnement requis
+        - generic [ref=f11e50]:
+          - paragraph [ref=f11e52]: Délivrées aujourd'hui
+          - generic [ref=f11e56]:
+            - generic [ref=f11e57]: "1"
+            - generic [ref=f11e58]: Dossiers clôturés
+      - generic [ref=f11e59]:
+        - generic [ref=f11e60]:
+          - generic [ref=f11e61]:
+            - heading "Ordonnances à traiter" [level=2] [ref=f11e62]
+            - generic [ref=f11e63]: 6 patients
+          - list [ref=f11e64]:
+            - listitem [ref=f11e65]:
+              - button "AA Aristide Adouko 00:00 Paracétamol 1g × 1" [ref=f11e66] [cursor=pointer]:
+                - generic [ref=f11e67]: AA
+                - generic [ref=f11e68]:
+                  - generic [ref=f11e69]:
+                    - paragraph [ref=f11e70]: Aristide Adouko
+                    - generic [ref=f11e71]: 00:00
+                  - paragraph [ref=f11e72]: Paracétamol 1g × 1
+            - listitem [ref=f11e73]:
+              - button "AA Aristide Adouko 00:00 Paracétamol 1g × 1" [ref=f11e74] [cursor=pointer]:
+                - generic [ref=f11e75]: AA
+                - generic [ref=f11e76]:
+                  - generic [ref=f11e77]:
+                    - paragraph [ref=f11e78]: Aristide Adouko
+                    - generic [ref=f11e79]: 00:00
+                  - paragraph [ref=f11e80]: Paracétamol 1g × 1
+            - listitem [ref=f11e81]:
+              - button "AA Aristide Adouko 00:00 Paracétamol 1g × 1" [ref=f11e82] [cursor=pointer]:
+                - generic [ref=f11e83]: AA
+                - generic [ref=f11e84]:
+                  - generic [ref=f11e85]:
+                    - paragraph [ref=f11e86]: Aristide Adouko
+                    - generic [ref=f11e87]: 00:00
+                  - paragraph [ref=f11e88]: Paracétamol 1g × 1
+            - listitem [ref=f11e89]:
+              - button "AA Aristide Adouko 00:00 Paracétamol 1g × 1" [ref=f11e90] [cursor=pointer]:
+                - generic [ref=f11e91]: AA
+                - generic [ref=f11e92]:
+                  - generic [ref=f11e93]:
+                    - paragraph [ref=f11e94]: Aristide Adouko
+                    - generic [ref=f11e95]: 00:00
+                  - paragraph [ref=f11e96]: Paracétamol 1g × 1
+            - listitem [ref=f11e97]:
+              - button "AA Aristide Adouko 00:00 Paracétamol 1g × 1" [ref=f11e98] [cursor=pointer]:
+                - generic [ref=f11e99]: AA
+                - generic [ref=f11e100]:
+                  - generic [ref=f11e101]:
+                    - paragraph [ref=f11e102]: Aristide Adouko
+                    - generic [ref=f11e103]: 00:00
+                  - paragraph [ref=f11e104]: Paracétamol 1g × 1
+            - listitem [ref=f11e105]:
+              - button "AA Aristide Adouko 00:00 Paracétamol 1g × 1" [ref=f11e106] [cursor=pointer]:
+                - generic [ref=f11e107]: AA
+                - generic [ref=f11e108]:
+                  - generic [ref=f11e109]:
+                    - paragraph [ref=f11e110]: Aristide Adouko
+                    - generic [ref=f11e111]: 00:00
+                  - paragraph [ref=f11e112]: Paracétamol 1g × 1
+        - table [ref=f11e115]:
+          - rowgroup [ref=f11e116]:
+            - row [ref=f11e117]:
+              - columnheader "Patient" [ref=f11e118]
+              - columnheader "Médicaments" [ref=f11e119]
+              - columnheader "Stock" [ref=f11e120]
+              - columnheader "Statut" [ref=f11e121]
+              - columnheader "Actions" [ref=f11e122]
+          - rowgroup [ref=f11e123]:
+            - row [ref=f11e124]:
+              - cell "PN Patient 2 Non-Assuré CSM-4025 Prescrit par Dr. Gnlé" [ref=f11e125]:
+                - generic [ref=f11e126]:
+                  - generic [ref=f11e127]: PN
+                  - generic [ref=f11e128]:
+                    - paragraph [ref=f11e129]: Patient 2 Non-Assuré
+                    - paragraph [ref=f11e130]: CSM-4025
+                    - paragraph [ref=f11e131]: Prescrit par Dr. Gnlé
+              - cell "Fer + Acide folique × 1" [ref=f11e132]
+              - cell "Disponible" [ref=f11e133]
+              - cell "Délivrée" [ref=f11e136]
+              - cell [ref=f11e139]:
+                - paragraph [ref=f11e140]: Par Dr. Gnlé
+            - row [ref=f11e141]:
+              - cell "AA Aristide Adouko CSM-8147 Prescrit par Dr. Gnlé" [ref=f11e142]:
+                - generic [ref=f11e143]:
+                  - generic [ref=f11e144]: AA
+                  - generic [ref=f11e145]:
+                    - paragraph [ref=f11e146]: Aristide Adouko
+                    - paragraph [ref=f11e147]: CSM-8147
+                    - paragraph [ref=f11e148]: Prescrit par Dr. Gnlé
+              - cell "Paracétamol 1g × 1" [ref=f11e149]
+              - cell "Disponible" [ref=f11e150]
+              - cell "En attente de délivrance" [ref=f11e153]
+              - cell [ref=f11e156]:
+                - button "Délivrer" [ref=f11e159] [cursor=pointer]
+            - row [ref=f11e160]:
+              - cell "AA Aristide Adouko CSM-8147 Prescrit par Dr. Gnlé" [ref=f11e161]:
+                - generic [ref=f11e162]:
+                  - generic [ref=f11e163]: AA
+                  - generic [ref=f11e164]:
+                    - paragraph [ref=f11e165]: Aristide Adouko
+                    - paragraph [ref=f11e166]: CSM-8147
+                    - paragraph [ref=f11e167]: Prescrit par Dr. Gnlé
+              - cell "Paracétamol 1g × 1" [ref=f11e168]
+              - cell "Disponible" [ref=f11e169]
+              - cell "En attente de délivrance" [ref=f11e172]
+              - cell [ref=f11e175]:
+                - button "Délivrer" [ref=f11e178] [cursor=pointer]
+            - row [ref=f11e179]:
+              - cell "AA Aristide Adouko CSM-8147 Prescrit par Dr. Gnlé" [ref=f11e180]:
+                - generic [ref=f11e181]:
+                  - generic [ref=f11e182]: AA
+                  - generic [ref=f11e183]:
+                    - paragraph [ref=f11e184]: Aristide Adouko
+                    - paragraph [ref=f11e185]: CSM-8147
+                    - paragraph [ref=f11e186]: Prescrit par Dr. Gnlé
+              - cell "Paracétamol 1g × 1" [ref=f11e187]
+              - cell "Disponible" [ref=f11e188]
+              - cell "En attente de délivrance" [ref=f11e191]
+              - cell [ref=f11e194]:
+                - button "Délivrer" [ref=f11e197] [cursor=pointer]
+            - row [ref=f11e198]:
+              - cell "AA Aristide Adouko CSM-8147 Prescrit par Dr. Gnlé" [ref=f11e199]:
+                - generic [ref=f11e200]:
+                  - generic [ref=f11e201]: AA
+                  - generic [ref=f11e202]:
+                    - paragraph [ref=f11e203]: Aristide Adouko
+                    - paragraph [ref=f11e204]: CSM-8147
+                    - paragraph [ref=f11e205]: Prescrit par Dr. Gnlé
+              - cell "Paracétamol 1g × 1" [ref=f11e206]
+              - cell "Disponible" [ref=f11e207]
+              - cell "En attente de délivrance" [ref=f11e210]
+              - cell [ref=f11e213]:
+                - button "Délivrer" [ref=f11e216] [cursor=pointer]
+            - row [ref=f11e217]:
+              - cell "AA Aristide Adouko CSM-8147 Prescrit par Dr. Gnlé" [ref=f11e218]:
+                - generic [ref=f11e219]:
+                  - generic [ref=f11e220]: AA
+                  - generic [ref=f11e221]:
+                    - paragraph [ref=f11e222]: Aristide Adouko
+                    - paragraph [ref=f11e223]: CSM-8147
+                    - paragraph [ref=f11e224]: Prescrit par Dr. Gnlé
+              - cell "Paracétamol 1g × 1" [ref=f11e225]
+              - cell "Disponible" [ref=f11e226]
+              - cell "En attente de délivrance" [ref=f11e229]
+              - cell [ref=f11e232]:
+                - button "Délivrer" [ref=f11e235] [cursor=pointer]
+            - row [ref=f11e236]:
+              - cell "AA Aristide Adouko CSM-8147 Prescrit par Dr. Gnlé" [ref=f11e237]:
+                - generic [ref=f11e238]:
+                  - generic [ref=f11e239]: AA
+                  - generic [ref=f11e240]:
+                    - paragraph [ref=f11e241]: Aristide Adouko
+                    - paragraph [ref=f11e242]: CSM-8147
+                    - paragraph [ref=f11e243]: Prescrit par Dr. Gnlé
+              - cell "Paracétamol 1g × 1" [ref=f11e244]
+              - cell "Disponible" [ref=f11e245]
+              - cell "En attente de délivrance" [ref=f11e248]
+              - cell [ref=f11e251]:
+                - button "Délivrer" [ref=f11e254] [cursor=pointer]

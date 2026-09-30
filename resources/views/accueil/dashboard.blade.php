@@ -168,6 +168,8 @@
                         <th class="px-5 py-3 font-semibold">Arrivée</th>
                         <th class="px-5 py-3 font-semibold">Prise en charge</th>
                         <th class="px-5 py-3 font-semibold">Statut</th>
+                        <th class="px-5 py-3 font-semibold text-right">Jours</th>
+                        <th class="px-5 py-3 font-semibold text-right">Montant en cours</th>
                         <th class="px-5 py-3 font-semibold text-right">Actions</th>
                     </tr>
                 </thead>
@@ -190,8 +192,38 @@
                             <td class="px-5 py-3.5">
                                 <x-ui.badge :tone="$patient['status_tone']">{{ $patient['status'] }}</x-ui.badge>
                             </td>
+                            <td class="px-5 py-3.5 text-right font-mono text-ink-soft">
+                                {{ $patient['stay_days'] ?? '—' }}
+                            </td>
                             <td class="px-5 py-3.5 text-right">
-                                <x-ui.button variant="secondary" size="sm">Détails</x-ui.button>
+                                @if ($patient['can_edit_stay_amount'])
+                                    <form id="stay-amount-{{ $patient['visit_id'] }}" method="POST" action="{{ route('accueil.visits.stay-amount', $patient['visit_id']) }}">
+                                        @csrf
+                                        <input type="text"
+                                               name="stay_amount"
+                                               inputmode="numeric"
+                                               value="{{ old('stay_amount', $patient['agreed_amount']) }}"
+                                               placeholder="{{ number_format($patient['automatic_amount'], 0, ',', ' ') }}"
+                                               class="w-full rounded-md border border-line bg-surface-sunken px-2 py-1.5 text-right font-mono text-sm text-ink focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-brand-500">
+                                    </form>
+                                    @if ($patient['agreed_amount'] === null)
+                                        <p class="mt-1 text-xs text-ink-muted">calculé sur {{ $patient['stay_days'] }} jour(s)</p>
+                                    @endif
+                                @elseif ($patient['stay_amount'] !== null)
+                                    <span class="font-mono text-ink">{{ number_format($patient['stay_amount'], 0, ',', ' ') }} FCFA</span>
+                                    @if ($patient['agreed_amount'] !== null)
+                                        <p class="mt-1 text-xs text-ink-muted">montant convenu</p>
+                                    @else
+                                        <p class="mt-1 text-xs text-ink-muted">sur {{ $patient['stay_days'] }} jour(s)</p>
+                                    @endif
+                                @else
+                                    —
+                                @endif
+                            </td>
+                            <td class="px-5 py-3.5 text-right">
+                                @if ($patient['can_edit_stay_amount'])
+                                    <x-ui.button type="submit" form="stay-amount-{{ $patient['visit_id'] }}" size="sm">Confirmer</x-ui.button>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

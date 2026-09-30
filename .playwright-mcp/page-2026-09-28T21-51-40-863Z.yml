@@ -1,0 +1,205 @@
+- generic [ref=f33e3]:
+  - banner [ref=f33e4]:
+    - button "Ouvrir le menu" [ref=f33e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f33e9]
+    - generic [ref=f33e10]:
+      - button [ref=f33e11] [cursor=pointer]
+      - generic [ref=f33e16]: DG
+  - main [ref=f33e20]:
+    - generic [ref=f33e21]:
+      - generic [ref=f33e22]:
+        - generic [ref=f33e23]:
+          - heading "Accueil & Réception" [level=1] [ref=f33e24]
+          - paragraph [ref=f33e25]: Gestion des arrivées des patients — lundi 28 septembre.
+        - generic [ref=f33e26]:
+          - button "Nouveau patient" [ref=f33e28] [cursor=pointer]
+          - generic [ref=f33e149]:
+            - generic [ref=f33e150]:
+              - heading "Nouveau patient" [level=2] [ref=f33e151]
+              - button [ref=f33e152] [cursor=pointer]
+            - generic [ref=f33e156]:
+              - generic [ref=f33e157]:
+                - generic [ref=f33e158]:
+                  - generic [ref=f33e159]: Patient déjà existant ?
+                  - textbox "Rechercher par CSM-XXXX ou par nom..." [ref=f33e161]: CSM-8147 — Aristide Adouko
+                - paragraph [ref=f33e162]: Laissez vide pour créer un nouveau dossier patient.
+                - paragraph [ref=f33e203]: Dossier existant chargé — les champs ci-dessous ont été pré-remplis.
+              - generic [ref=f33e163]:
+                - generic [ref=f33e165]:
+                  - generic [ref=f33e166]: Prénom
+                  - textbox "Prénom" [disabled] [ref=f33e168]: Aristide
+                - generic [ref=f33e170]:
+                  - generic [ref=f33e171]: Nom
+                  - textbox "Nom" [disabled] [ref=f33e173]: Adouko
+              - generic [ref=f33e175]:
+                - generic [ref=f33e176]: Sexe
+                - combobox "Sexe" [disabled] [ref=f33e177]:
+                  - option "Sélectionner" [disabled]
+                  - option "Masculin" [selected]
+                  - option "Féminin"
+              - generic [ref=f33e179]:
+                - generic [ref=f33e180]: Date de naissance
+                - textbox "Date de naissance" [disabled] [ref=f33e182]: 2026-05-01
+              - generic [ref=f33e184]:
+                - generic [ref=f33e185]: Téléphone
+                - textbox "Téléphone" [disabled] [ref=f33e187]:
+                  - /placeholder: +225 07 00 00 00 00
+                  - text: "+221774140000"
+              - generic [ref=f33e189]:
+                - generic [ref=f33e190]: Prise en charge
+                - combobox "Prise en charge" [disabled] [ref=f33e191]:
+                  - option "Sélectionner" [disabled]
+                  - option "Assuré" [selected]
+                  - option "Non assuré"
+              - generic [ref=f33e207]:
+                - generic [ref=f33e208]: Compagnie d'assurance
+                - combobox "Compagnie d'assurance" [ref=f33e209]:
+                  - option "Sélectionner" [disabled] [selected]
+                  - option "ASCOMA"
+                  - option "AXA Assurance"
+                  - option "CNAM"
+                  - option "COLAS"
+                  - option "MUGEFCI"
+                  - option "NSIA Assurance"
+                  - option "SAHAM Assurance"
+              - generic [ref=f33e210]:
+                - generic [ref=f33e211]:
+                  - generic [ref=f33e212]: Ticket modérateur (%)
+                  - spinbutton "Ticket modérateur (%)" [ref=f33e214]
+                - paragraph [ref=f33e215]: "Part payée par le patient (ex: 20 = 20%)"
+              - generic [ref=f33e192]:
+                - text: Acte demandé
+                - combobox [ref=f33e193]:
+                  - option "— Sélectionner l'acte —" [selected]
+                  - option "Bilan de santé / check-up complet"
+                  - option "Certificat médical"
+                  - option "Consultation dentaire"
+                  - option "Kinésithérapie / rééducation"
+                  - option "Vaccination"
+                  - option "Anesthésie générale"
+                  - option "Anesthésie locale"
+                  - option "Chirurgie majeure"
+                  - option "Chirurgie mineure"
+                  - option "Injection"
+                  - option "Pansement"
+                  - option "Petite chirurgie (kyste, abcès)"
+                  - option "Pose de perfusion"
+                  - option "Suture"
+                  - option "Consultation cardiologie"
+                  - option "Consultation d'urgence"
+                  - option "Consultation de suivi / contrôle"
+                  - option "Consultation dermatologie"
+                  - option "Consultation générale"
+                  - option "Consultation gynécologie"
+                  - option "Consultation ophtalmologie"
+                  - option "Consultation ORL"
+                  - option "Consultation pédiatrique"
+                  - option "Journée d'hospitalisation — chambre commune"
+                  - option "Journée d'hospitalisation — chambre individuelle"
+                  - option "Journée d'hospitalisation — chambre VIP"
+                  - option "Soins infirmiers en hospitalisation"
+                  - option "Surveillance médicale continue"
+                  - option "Échographie abdominale"
+                  - option "Échographie obstétricale"
+                  - option "Échographie pelvienne"
+                  - option "IRM"
+                  - option "Mammographie"
+                  - option "Radiographie standard"
+                  - option "Scanner / Tomodensitométrie"
+                  - option "Analyse bactériologique / microbiologique"
+                  - option "Analyse d'urines"
+                  - option "Bilan lipidique"
+                  - option "Glycémie"
+                  - option "NFS (numération formule sanguine)"
+                  - option "Sérologies hépatites (A,B,C)"
+                  - option "Test de grossesse"
+                  - option "Test sérologique VIH"
+                  - option "Accouchement normal"
+                  - option "Accouchement par césarienne"
+                  - option "Consultation prénatale"
+                  - option "Planning familial"
+                  - option "Suivi postnatal"
+                - paragraph [ref=f33e194]: Permet à la caisse de pré-remplir la facture automatiquement.
+              - generic [ref=f33e195]:
+                - checkbox "Cas prioritaire / urgent" [ref=f33e196]
+                - text: Cas prioritaire / urgent
+              - button "Enregistrer le patient" [ref=f33e198] [cursor=pointer]
+      - generic [ref=f33e31]:
+        - generic [ref=f33e32]:
+          - paragraph [ref=f33e34]: Arrivées aujourd'hui
+          - generic [ref=f33e38]:
+            - generic [ref=f33e39]: "3"
+            - generic [ref=f33e40]: Visites du jour
+        - generic [ref=f33e41]:
+          - paragraph [ref=f33e43]: En attente
+          - generic [ref=f33e47]:
+            - generic [ref=f33e48]: "3"
+            - generic [ref=f33e49]: Avant consultation
+        - generic [ref=f33e50]:
+          - paragraph [ref=f33e52]: Urgences
+          - generic [ref=f33e56]:
+            - generic [ref=f33e57]: "0"
+            - generic [ref=f33e58]: Priorité immédiate
+        - generic [ref=f33e59]:
+          - paragraph [ref=f33e61]: Taux d'occupation
+          - generic [ref=f33e65]:
+            - generic [ref=f33e66]: 0%
+            - generic [ref=f33e67]: Capacité clinique
+      - generic [ref=f33e68]:
+        - generic [ref=f33e69]: "Filtrer par prise en charge :"
+        - generic [ref=f33e72]:
+          - button "Tout" [ref=f33e73] [cursor=pointer]
+          - button "Assuré" [ref=f33e74] [cursor=pointer]
+          - button "Non assuré" [ref=f33e75] [cursor=pointer]
+        - generic [ref=f33e76]: lundi 28 septembre
+      - generic [ref=f33e79]:
+        - table [ref=f33e81]:
+          - rowgroup [ref=f33e82]:
+            - row [ref=f33e83]:
+              - columnheader "Patient" [ref=f33e84]
+              - columnheader "Arrivée" [ref=f33e85]
+              - columnheader "Prise en charge" [ref=f33e86]
+              - columnheader "Statut" [ref=f33e87]
+              - columnheader "Actions" [ref=f33e88]
+          - rowgroup [ref=f33e89]:
+            - row [ref=f33e90]:
+              - cell "LF Lisa Folawiyo CSM-6172" [ref=f33e91]:
+                - generic [ref=f33e92]:
+                  - generic [ref=f33e93]: LF
+                  - generic [ref=f33e94]:
+                    - paragraph [ref=f33e95]: Lisa Folawiyo
+                    - paragraph [ref=f33e96]: CSM-6172
+              - cell "20:41" [ref=f33e97]
+              - cell "Assuré" [ref=f33e98]
+              - cell "En attente" [ref=f33e101]
+              - cell [ref=f33e104]:
+                - button "Détails" [ref=f33e105] [cursor=pointer]
+            - row [ref=f33e106]:
+              - cell "AA Aristide Adouko CSM-8147" [ref=f33e107]:
+                - generic [ref=f33e108]:
+                  - generic [ref=f33e109]: AA
+                  - generic [ref=f33e110]:
+                    - paragraph [ref=f33e111]: Aristide Adouko
+                    - paragraph [ref=f33e112]: CSM-8147
+              - cell "21:30" [ref=f33e113]
+              - cell "Assuré" [ref=f33e114]
+              - cell "En attente" [ref=f33e117]
+              - cell [ref=f33e120]:
+                - button "Détails" [ref=f33e121] [cursor=pointer]
+            - row [ref=f33e122]:
+              - cell "PN Patient Non-Assuré CSM-5824" [ref=f33e123]:
+                - generic [ref=f33e124]:
+                  - generic [ref=f33e125]: PN
+                  - generic [ref=f33e126]:
+                    - paragraph [ref=f33e127]: Patient Non-Assuré
+                    - paragraph [ref=f33e128]: CSM-5824
+              - cell "21:34" [ref=f33e129]
+              - cell "Assuré" [ref=f33e130]
+              - cell "En attente" [ref=f33e133]
+              - cell [ref=f33e136]:
+                - button "Détails" [ref=f33e137] [cursor=pointer]
+        - generic [ref=f33e138]:
+          - paragraph [ref=f33e139]: 3 arrivée(s) affichée(s) / 3 arrivée(s) enregistrée(s) aujourd'hui
+          - generic [ref=f33e140]:
+            - button [disabled] [ref=f33e141]
+            - button [ref=f33e144] [cursor=pointer]

@@ -28,8 +28,9 @@ class StorePatientRequest extends FormRequest
             'sex' => ['required_without:existing_patient_id', 'in:M,F'],
             'birth_date' => ['nullable', 'date', 'before:today'],
             'phone' => ['nullable', 'string', 'max:30'],
-            'coverage' => ['required_without:existing_patient_id', 'in:Privé,CMU,Assurance'],
-            'orientation' => ['required', 'string', 'max:255'],
+            'coverage' => ['required_without:existing_patient_id', 'string', 'max:255'],
+            'insurance_company_id' => ['nullable', 'exists:insurance_companies,id'],
+            'act_id' => ['nullable', 'exists:acts,id'],
             'reason' => ['nullable', 'string', 'max:255'],
             'urgent' => ['nullable', 'boolean'],
         ];

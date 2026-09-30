@@ -1,0 +1,26 @@
+- generic [ref=f83e4]:
+  - generic [ref=f83e5]: Clinique Saint Matthieu
+  - paragraph [ref=f83e10]: Espace professionnel
+  - heading "Bon retour" [level=2] [ref=f83e11]
+  - paragraph [ref=f83e12]: Connectez-vous avec vos identifiants professionnels.
+  - generic [ref=f83e13]:
+    - generic [ref=f83e14]:
+      - generic [ref=f83e15]:
+        - generic [ref=f83e16]: Adresse e-mail
+        - textbox "Adresse e-mail" [active] [ref=f83e18]:
+          - /placeholder: prenom.nom@clinique-saintmatthieu.ci
+          - text: akissi.koffi@clinique-saintmatthieu.ci
+      - list [ref=f83e19]:
+        - listitem [ref=f83e20]: These credentials do not match our records.
+    - generic [ref=f83e22]:
+      - generic [ref=f83e23]: Mot de passe
+      - textbox "Mot de passe" [ref=f83e25]:
+        - /placeholder: ••••••••••
+    - generic [ref=f83e26]:
+      - generic [ref=f83e27]:
+        - checkbox "Se souvenir de moi" [ref=f83e28]
+        - text: Se souvenir de moi
+      - link "Mot de passe oublié ?" [ref=f83e29] [cursor=pointer]:
+        - /url: http://localhost:8000/forgot-password
+    - button "Se connecter" [ref=f83e30] [cursor=pointer]
+  - paragraph [ref=f83e33]: Accès restreint au personnel autorisé de la Clinique Saint Matthieu. Besoin d'aide ? Contactez votre administrateur système.

@@ -1,0 +1,31 @@
+- generic [ref=f37e3]:
+  - banner [ref=f37e4]:
+    - button "Ouvrir le menu" [ref=f37e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f37e9]
+    - generic [ref=f37e10]:
+      - button [ref=f37e11] [cursor=pointer]
+      - generic [ref=f37e16]: DG
+  - main [ref=f37e20]:
+    - generic [ref=f37e21]:
+      - generic [ref=f37e23]:
+        - heading "Sortie patient" [level=1] [ref=f37e24]
+        - paragraph [ref=f37e25]: Recherchez un patient pour consulter son résumé et clôturer sa visite.
+      - generic [ref=f37e27]:
+        - text: Rechercher un patient
+        - textbox "Rechercher par CSM-XXXX ou par nom..." [ref=f37e29]
+      - generic [ref=f37e30]:
+        - generic [ref=f37e32]:
+          - heading "Patients prêts pour la sortie" [level=3] [ref=f37e33]
+          - paragraph [ref=f37e34]: Sélectionnez un patient pour clôturer sa visite
+          - link "QP QA PatientTest CSM-7880 Arrivé il y a 34 minutes" [ref=f37e36] [cursor=pointer]:
+            - /url: http://localhost:8000/sortie?patient=9
+            - generic [ref=f37e37]:
+              - generic [ref=f37e38]:
+                - generic [ref=f37e39]: QP
+                - generic [ref=f37e40]:
+                  - paragraph [ref=f37e41]: QA PatientTest
+                  - paragraph [ref=f37e42]: CSM-7880
+              - paragraph [ref=f37e44]: Arrivé il y a 34 minutes
+        - generic [ref=f37e46]:
+          - heading "Recherche avancée" [level=3] [ref=f37e47]
+          - paragraph [ref=f37e48]: Utilisez la recherche ci-dessus pour trouver un patient spécifique

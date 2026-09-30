@@ -1,0 +1,316 @@
+- generic [ref=f39e3]:
+  - banner [ref=f39e4]:
+    - button "Ouvrir le menu" [ref=f39e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f39e9]
+    - generic [ref=f39e10]:
+      - button [ref=f39e11] [cursor=pointer]
+      - generic [ref=f39e16]: DG
+  - main [ref=f39e20]:
+    - generic [ref=f39e21]:
+      - generic [ref=f39e22]:
+        - generic [ref=f39e23]:
+          - heading "Caisse" [level=1] [ref=f39e24]
+          - paragraph [ref=f39e25]: Encaissement des consultations, analyses et ordonnances du jour.
+        - generic [ref=f39e26]:
+          - button "Clôturer ma caisse" [ref=f39e28] [cursor=pointer]
+          - button "Nouvel encaissement" [ref=f39e33] [cursor=pointer]
+      - generic [ref=f39e36]:
+        - generic [ref=f39e37]:
+          - paragraph [ref=f39e39]: Paniers en cours
+          - generic [ref=f39e43]:
+            - generic [ref=f39e44]: "4"
+            - generic [ref=f39e45]: Factures en cours
+        - generic [ref=f39e46]:
+          - paragraph [ref=f39e48]: À payer
+          - generic [ref=f39e52]:
+            - generic [ref=f39e53]: "0"
+            - generic [ref=f39e54]: En attente de paiement
+        - generic [ref=f39e55]:
+          - paragraph [ref=f39e57]: Payées
+          - generic [ref=f39e61]:
+            - generic [ref=f39e62]: "1"
+            - generic [ref=f39e63]: Factures réglées
+        - generic [ref=f39e64]:
+          - paragraph [ref=f39e66]: Journée en cours
+          - generic [ref=f39e70]:
+            - generic [ref=f39e71]: 6 ouvert(s)
+            - generic [ref=f39e72]: 1 déjà clôturé(s)
+      - generic [ref=f39e73]:
+        - generic [ref=f39e74]:
+          - generic [ref=f39e75]: "Filtrer par statut :"
+          - generic [ref=f39e78]:
+            - button "Tout" [ref=f39e79] [cursor=pointer]
+            - button "Payé" [ref=f39e80] [cursor=pointer]
+            - button "Partiellement payé" [ref=f39e81] [cursor=pointer]
+            - button "En attente" [ref=f39e82] [cursor=pointer]
+        - generic [ref=f39e83]:
+          - generic [ref=f39e84]:
+            - generic [ref=f39e85]: Date
+            - textbox "Date" [ref=f39e86]: 2026-09-28
+            - button "Afficher" [ref=f39e87] [cursor=pointer]
+          - link [ref=f39e88] [cursor=pointer]:
+            - /url: http://localhost:8000/caisse/historique
+            - button "Historique" [ref=f39e89]
+      - table [ref=f39e94]:
+        - rowgroup [ref=f39e95]:
+          - row [ref=f39e96]:
+            - columnheader "Patient" [ref=f39e97]
+            - columnheader "Couverture" [ref=f39e98]
+            - columnheader "Sous-total" [ref=f39e99]
+            - columnheader "Assurance" [ref=f39e100]
+            - columnheader "À payer" [ref=f39e101]
+            - columnheader "Statut" [ref=f39e102]
+            - columnheader "Caissier" [ref=f39e103]
+            - columnheader "Service" [ref=f39e104]
+            - columnheader "Montant Total" [ref=f39e105]
+            - columnheader "Mode de paiement" [ref=f39e106]
+            - columnheader "Actions" [ref=f39e107]
+        - rowgroup [ref=f39e108]:
+          - row [ref=f39e109]:
+            - cell "QP QA PatientTest CSM-7880" [ref=f39e110]:
+              - generic [ref=f39e111]:
+                - generic [ref=f39e112]: QP
+                - generic [ref=f39e113]:
+                  - paragraph [ref=f39e114]: QA PatientTest
+                  - paragraph [ref=f39e115]: CSM-7880
+            - cell "Non assuré" [ref=f39e116]
+            - cell "8 000 FCFA" [ref=f39e117]
+            - cell "0 FCFA" [ref=f39e118]
+            - cell "8 000 FCFA" [ref=f39e119]
+            - cell "En cours" [ref=f39e120]
+            - cell "—" [ref=f39e124]
+            - cell "Consultation dentaire" [ref=f39e125]
+            - cell "8 000 FCFA" [ref=f39e126]
+            - cell "—" [ref=f39e127]
+            - cell [ref=f39e128]:
+              - generic [ref=f39e129]:
+                - link "Détail" [ref=f39e130] [cursor=pointer]:
+                  - /url: http://localhost:8000/caisse/paniers/13
+                - button "Encaisser" [ref=f39e132] [cursor=pointer]
+          - row [ref=f39e133]:
+            - cell "PN Patient Non-Assuré CSM-5824" [ref=f39e134]:
+              - generic [ref=f39e135]:
+                - generic [ref=f39e136]: PN
+                - generic [ref=f39e137]:
+                  - paragraph [ref=f39e138]: Patient Non-Assuré
+                  - paragraph [ref=f39e139]: CSM-5824
+            - cell "Assuré" [ref=f39e140]
+            - cell "5 000 FCFA" [ref=f39e141]
+            - cell "0 FCFA" [ref=f39e142]
+            - cell "5 000 FCFA" [ref=f39e143]
+            - cell "En cours" [ref=f39e144]
+            - cell "—" [ref=f39e148]
+            - cell "Consultation générale" [ref=f39e149]
+            - cell "5 000 FCFA" [ref=f39e150]
+            - cell "—" [ref=f39e151]
+            - cell [ref=f39e152]:
+              - generic [ref=f39e153]:
+                - link "Détail" [ref=f39e154] [cursor=pointer]:
+                  - /url: http://localhost:8000/caisse/paniers/12
+                - button "Encaisser" [ref=f39e156] [cursor=pointer]
+          - row [ref=f39e157]:
+            - cell "AA Aristide Adouko CSM-8147" [ref=f39e158]:
+              - generic [ref=f39e159]:
+                - generic [ref=f39e160]: AA
+                - generic [ref=f39e161]:
+                  - paragraph [ref=f39e162]: Aristide Adouko
+                  - paragraph [ref=f39e163]: CSM-8147
+            - cell "Assuré" [ref=f39e164]
+            - cell "5 000 FCFA" [ref=f39e165]
+            - cell "0 FCFA" [ref=f39e166]
+            - cell "5 000 FCFA" [ref=f39e167]
+            - cell "En cours" [ref=f39e168]
+            - cell "—" [ref=f39e172]
+            - cell "Consultation générale" [ref=f39e173]
+            - cell "5 000 FCFA" [ref=f39e174]
+            - cell "—" [ref=f39e175]
+            - cell [ref=f39e176]:
+              - generic [ref=f39e177]:
+                - link "Détail" [ref=f39e178] [cursor=pointer]:
+                  - /url: http://localhost:8000/caisse/paniers/11
+                - button "Encaisser" [ref=f39e180] [cursor=pointer]
+          - row [ref=f39e181]:
+            - cell "LF Lisa Folawiyo CSM-6172" [ref=f39e182]:
+              - generic [ref=f39e183]:
+                - generic [ref=f39e184]: LF
+                - generic [ref=f39e185]:
+                  - paragraph [ref=f39e186]: Lisa Folawiyo
+                  - paragraph [ref=f39e187]: CSM-6172
+            - cell "NSIA Assurance" [ref=f39e188]
+            - cell "3 500 FCFA" [ref=f39e189]
+            - cell "0 FCFA" [ref=f39e190]
+            - cell "3 500 FCFA" [ref=f39e191]
+            - cell "En cours" [ref=f39e192]
+            - cell "—" [ref=f39e196]
+            - cell "Consultation générale" [ref=f39e197]
+            - cell "3 500 FCFA" [ref=f39e198]
+            - cell "—" [ref=f39e199]
+            - cell [ref=f39e200]:
+              - generic [ref=f39e201]:
+                - link "Détail" [ref=f39e202] [cursor=pointer]:
+                  - /url: http://localhost:8000/caisse/paniers/10
+                - button "Encaisser" [ref=f39e204] [cursor=pointer]
+          - row [ref=f39e205]:
+            - cell "QP QA PatientTest CSM-7880" [ref=f39e206]:
+              - generic [ref=f39e207]:
+                - generic [ref=f39e208]: QP
+                - generic [ref=f39e209]:
+                  - paragraph [ref=f39e210]: QA PatientTest
+                  - paragraph [ref=f39e211]: CSM-7880
+            - cell "Non assuré" [ref=f39e212]
+            - cell "15 000 FCFA" [ref=f39e213]
+            - cell "0 FCFA" [ref=f39e214]
+            - cell "15 000 FCFA" [ref=f39e215]
+            - cell [ref=f39e216]:
+              - generic [ref=f39e217]:
+                - generic [ref=f39e218]: Payé
+                - generic [ref=f39e220]: Clôturé 16:44
+            - cell "Dr. Gnlé" [ref=f39e224]
+            - cell "Consultation générale" [ref=f39e225]
+            - cell "15 000 FCFA" [ref=f39e226]
+            - cell "Espèces" [ref=f39e227]
+            - cell [ref=f39e228]:
+              - generic [ref=f39e229]:
+                - link "Détail" [ref=f39e230] [cursor=pointer]:
+                  - /url: http://localhost:8000/caisse/paniers/9
+                - link [ref=f39e231] [cursor=pointer]:
+                  - /url: http://localhost:8000/paiements/3/recu
+                  - button "Reçu" [ref=f39e232]
+          - row [ref=f39e235]:
+            - cell "AA Aristide Adouko CSM-8147" [ref=f39e236]:
+              - generic [ref=f39e237]:
+                - generic [ref=f39e238]: AA
+                - generic [ref=f39e239]:
+                  - paragraph [ref=f39e240]: Aristide Adouko
+                  - paragraph [ref=f39e241]: CSM-8147
+            - cell "Assuré" [ref=f39e242]
+            - cell "—" [ref=f39e243]
+            - cell "—" [ref=f39e244]
+            - cell "—" [ref=f39e245]
+            - cell [ref=f39e246]:
+              - generic [ref=f39e247]:
+                - generic [ref=f39e248]: Payé
+                - generic [ref=f39e250]: Encaissement
+            - cell "—" [ref=f39e252]
+            - cell "Pharmacie — Paracétamol 1g × 1" [ref=f39e253]
+            - cell "500 FCFA" [ref=f39e254]
+            - cell "Espèces" [ref=f39e255]
+            - cell [ref=f39e256]:
+              - link [ref=f39e258] [cursor=pointer]:
+                - /url: http://localhost:8000/paiements/9/recu
+                - button "Reçu" [ref=f39e259]
+          - row [ref=f39e262]:
+            - cell "AA Aristide Adouko CSM-8147" [ref=f39e263]:
+              - generic [ref=f39e264]:
+                - generic [ref=f39e265]: AA
+                - generic [ref=f39e266]:
+                  - paragraph [ref=f39e267]: Aristide Adouko
+                  - paragraph [ref=f39e268]: CSM-8147
+            - cell "Assuré" [ref=f39e269]
+            - cell "—" [ref=f39e270]
+            - cell "—" [ref=f39e271]
+            - cell "—" [ref=f39e272]
+            - cell [ref=f39e273]:
+              - generic [ref=f39e274]:
+                - generic [ref=f39e275]: Payé
+                - generic [ref=f39e277]: Encaissement
+            - cell "—" [ref=f39e279]
+            - cell "Pharmacie — Paracétamol 1g × 1" [ref=f39e280]
+            - cell "500 FCFA" [ref=f39e281]
+            - cell "Espèces" [ref=f39e282]
+            - cell [ref=f39e283]:
+              - link [ref=f39e285] [cursor=pointer]:
+                - /url: http://localhost:8000/paiements/8/recu
+                - button "Reçu" [ref=f39e286]
+          - row [ref=f39e289]:
+            - cell "AA Aristide Adouko CSM-8147" [ref=f39e290]:
+              - generic [ref=f39e291]:
+                - generic [ref=f39e292]: AA
+                - generic [ref=f39e293]:
+                  - paragraph [ref=f39e294]: Aristide Adouko
+                  - paragraph [ref=f39e295]: CSM-8147
+            - cell "Assuré" [ref=f39e296]
+            - cell "—" [ref=f39e297]
+            - cell "—" [ref=f39e298]
+            - cell "—" [ref=f39e299]
+            - cell [ref=f39e300]:
+              - generic [ref=f39e301]:
+                - generic [ref=f39e302]: Payé
+                - generic [ref=f39e304]: Encaissement
+            - cell "—" [ref=f39e306]
+            - cell "Pharmacie — Paracétamol 1g × 1" [ref=f39e307]
+            - cell "500 FCFA" [ref=f39e308]
+            - cell "Espèces" [ref=f39e309]
+            - cell [ref=f39e310]:
+              - link [ref=f39e312] [cursor=pointer]:
+                - /url: http://localhost:8000/paiements/7/recu
+                - button "Reçu" [ref=f39e313]
+          - row [ref=f39e316]:
+            - cell "AA Aristide Adouko CSM-8147" [ref=f39e317]:
+              - generic [ref=f39e318]:
+                - generic [ref=f39e319]: AA
+                - generic [ref=f39e320]:
+                  - paragraph [ref=f39e321]: Aristide Adouko
+                  - paragraph [ref=f39e322]: CSM-8147
+            - cell "Assuré" [ref=f39e323]
+            - cell "—" [ref=f39e324]
+            - cell "—" [ref=f39e325]
+            - cell "—" [ref=f39e326]
+            - cell [ref=f39e327]:
+              - generic [ref=f39e328]:
+                - generic [ref=f39e329]: Payé
+                - generic [ref=f39e331]: Encaissement
+            - cell "—" [ref=f39e333]
+            - cell "Pharmacie — Paracétamol 1g × 1" [ref=f39e334]
+            - cell "500 FCFA" [ref=f39e335]
+            - cell "Espèces" [ref=f39e336]
+            - cell [ref=f39e337]:
+              - link [ref=f39e339] [cursor=pointer]:
+                - /url: http://localhost:8000/paiements/6/recu
+                - button "Reçu" [ref=f39e340]
+          - row [ref=f39e343]:
+            - cell "AA Aristide Adouko CSM-8147" [ref=f39e344]:
+              - generic [ref=f39e345]:
+                - generic [ref=f39e346]: AA
+                - generic [ref=f39e347]:
+                  - paragraph [ref=f39e348]: Aristide Adouko
+                  - paragraph [ref=f39e349]: CSM-8147
+            - cell "Assuré" [ref=f39e350]
+            - cell "—" [ref=f39e351]
+            - cell "—" [ref=f39e352]
+            - cell "—" [ref=f39e353]
+            - cell [ref=f39e354]:
+              - generic [ref=f39e355]:
+                - generic [ref=f39e356]: Payé
+                - generic [ref=f39e358]: Encaissement
+            - cell "—" [ref=f39e360]
+            - cell "Pharmacie — Paracétamol 1g × 1" [ref=f39e361]
+            - cell "500 FCFA" [ref=f39e362]
+            - cell "Espèces" [ref=f39e363]
+            - cell [ref=f39e364]:
+              - link [ref=f39e366] [cursor=pointer]:
+                - /url: http://localhost:8000/paiements/5/recu
+                - button "Reçu" [ref=f39e367]
+          - row [ref=f39e370]:
+            - cell "AA Aristide Adouko CSM-8147" [ref=f39e371]:
+              - generic [ref=f39e372]:
+                - generic [ref=f39e373]: AA
+                - generic [ref=f39e374]:
+                  - paragraph [ref=f39e375]: Aristide Adouko
+                  - paragraph [ref=f39e376]: CSM-8147
+            - cell "Assuré" [ref=f39e377]
+            - cell "—" [ref=f39e378]
+            - cell "—" [ref=f39e379]
+            - cell "—" [ref=f39e380]
+            - cell [ref=f39e381]:
+              - generic [ref=f39e382]:
+                - generic [ref=f39e383]: Payé
+                - generic [ref=f39e385]: Encaissement
+            - cell "—" [ref=f39e387]
+            - cell "Pharmacie — Paracétamol 1g × 1" [ref=f39e388]
+            - cell "500 FCFA" [ref=f39e389]
+            - cell "Espèces" [ref=f39e390]
+            - cell [ref=f39e391]:
+              - link [ref=f39e393] [cursor=pointer]:
+                - /url: http://localhost:8000/paiements/4/recu
+                - button "Reçu" [ref=f39e394]

@@ -1,0 +1,1043 @@
+- generic [ref=f59e2]:
+  - navigation [ref=f59e3]:
+    - generic [ref=f59e4]:
+      - generic [ref=f59e6]:
+        - list [ref=f59e7]:
+          - listitem [ref=f59e8]:
+            - link [ref=f59e9] [cursor=pointer]:
+              - /url: "#stack"
+              - button [ref=f59e10]
+          - listitem [ref=f59e14]:
+            - link [ref=f59e15] [cursor=pointer]:
+              - /url: "#context"
+              - button [ref=f59e16]
+          - listitem [ref=f59e20]:
+            - link [ref=f59e21] [cursor=pointer]:
+              - /url: "#debug"
+              - button [ref=f59e22]
+          - listitem [ref=f59e26]:
+            - link [ref=f59e27] [cursor=pointer]:
+              - /url: https://flareapp.io/?utm_campaign=ignition&utm_source=ignition
+              - button [ref=f59e28]
+        - list [ref=f59e35]:
+          - listitem [ref=f59e36]:
+            - link [ref=f59e37] [cursor=pointer]:
+              - /url: "#share"
+              - button [ref=f59e38]
+            - generic:
+              - generic:
+                - generic:
+                  - heading "Share with Flare" [level=4]
+                  - link "Docs":
+                    - /url: https://flareapp.io/docs/ignition/introducing-ignition/sharing-errors?utm_campaign=ignition&utm_source=ignition
+                - list:
+                  - listitem:
+                    - generic:
+                      - checkbox "Stack" [checked]
+                      - generic: Stack
+                  - listitem:
+                    - generic:
+                      - checkbox "Context" [checked]
+                      - generic: Context
+                  - listitem:
+                    - generic:
+                      - checkbox "Debug" [checked]
+                      - generic: Debug
+                - generic:
+                  - button "Create Share"
+          - listitem [ref=f59e42]:
+            - link [ref=f59e43] [cursor=pointer]:
+              - /url: https://laravel.com/docs/
+              - button [ref=f59e44]
+          - listitem [ref=f59e48]:
+            - link [ref=f59e49] [cursor=pointer]:
+              - /url: "#settings"
+              - button [ref=f59e50]
+            - generic:
+              - generic:
+                - generic:
+                  - heading "Ignition Settings" [level=4]
+                  - link "Docs":
+                    - /url: https://flareapp.io/ignition?utm_campaign=ignition&utm_source=ignition
+                - generic:
+                  - text: Editor
+                  - generic:
+                    - combobox "Editor":
+                      - option "Clipboard"
+                      - option "Sublime"
+                      - option "TextMate"
+                      - option "Emacs"
+                      - option "MacVim"
+                      - option "PhpStorm" [selected]
+                      - option "PHPStorm Remote"
+                      - option "Idea"
+                      - option "VS Code"
+                      - option "VS Code Insiders"
+                      - option "VS Code Remote"
+                      - option "VS Code Insiders Remote"
+                      - option "VS Codium"
+                      - option "Cursor"
+                      - option "Atom"
+                      - option "Nova"
+                      - option "NetBeans"
+                      - option "Zed"
+                      - option "Windsurf"
+                      - option "Xdebug"
+                - generic:
+                  - text: Theme
+                  - button "auto"
+                - generic:
+                  - button "Save settings"
+                - paragraph:
+                  - text: Settings will be saved locally in
+                  - code: ~/.ignition.json
+                  - text: .
+      - link "Undefined variable $userName" [ref=f59e56] [cursor=pointer]:
+        - /url: "#top"
+  - main [ref=f59e58]:
+    - main [ref=f59e62]:
+      - generic [ref=f59e64]:
+        - generic [ref=f59e65]:
+          - generic [ref=f59e66]: ErrorException
+          - generic [ref=f59e69]:
+            - generic [ref=f59e70]: PHP 8.5.5
+            - generic [ref=f59e71]: 10.50.2
+        - generic [ref=f59e74]: Undefined variable $userName
+    - generic [ref=f59e78]:
+      - complementary [ref=f59e79]:
+        - generic [ref=f59e80]:
+          - button [ref=f59e82] [cursor=pointer]
+          - list [ref=f59e89]:
+            - listitem [ref=f59e90]:
+              - generic [ref=f59e92]:
+                - generic [ref=f59e93]: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\resources\views\docteurgeneral\dashboard.blade
+                - generic [ref=f59e94]: .php
+                - generic [ref=f59e95]: ": 1"
+              - generic [ref=f59e96]: require
+            - listitem [ref=f59e97]
+            - listitem [ref=f59e98] [cursor=pointer]: 13 vendor frames
+            - listitem [ref=f59e101] [cursor=pointer]:
+              - generic [ref=f59e103]:
+                - generic [ref=f59e104]: App
+                - generic [ref=f59e105]: \
+                - generic [ref=f59e106]: Http
+                - generic [ref=f59e107]: \
+                - generic [ref=f59e108]: Middleware
+                - generic [ref=f59e109]: \
+                - generic [ref=f59e110]: EnsureUserHasRole
+                - generic [ref=f59e111]: ": 27"
+              - generic [ref=f59e112]: handle
+            - listitem [ref=f59e113] [cursor=pointer]: 42 vendor frames
+            - listitem [ref=f59e116] [cursor=pointer]:
+              - generic [ref=f59e118]:
+                - generic [ref=f59e119]: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\public\index
+                - generic [ref=f59e120]: .php
+                - generic [ref=f59e121]: ": 51"
+              - generic [ref=f59e122]: require_once
+            - listitem [ref=f59e123] [cursor=pointer]: 1 vendor frame
+      - generic [ref=f59e126]:
+        - 'link "C:\\Users\\Aristide Adouko\\OneDrive\\Documents\\LATEST PROJECTS\\moderne\\resources\\views\\docteurgeneral\\dashboard.blade .php : 1" [ref=f59e128] [cursor=pointer]':
+          - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=1
+          - generic [ref=f59e129]:
+            - generic [ref=f59e130]: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\resources\views\docteurgeneral\dashboard.blade
+            - generic [ref=f59e131]: .php
+            - generic [ref=f59e132]: ": 1"
+        - main [ref=f59e133]:
+          - navigation [ref=f59e134]:
+            - generic [ref=f59e135]:
+              - paragraph [ref=f59e136]: "1"
+              - paragraph [ref=f59e137]: "2"
+              - paragraph [ref=f59e138]: "3"
+              - paragraph [ref=f59e139]: "4"
+              - paragraph [ref=f59e140]: "5"
+              - paragraph [ref=f59e141]: "6"
+              - paragraph [ref=f59e142]: "7"
+              - paragraph [ref=f59e143]: "8"
+              - paragraph [ref=f59e144]: "9"
+              - paragraph [ref=f59e145]: "10"
+              - paragraph [ref=f59e146]: "11"
+              - paragraph [ref=f59e147]: "12"
+              - paragraph [ref=f59e148]: "13"
+              - paragraph [ref=f59e149]: "14"
+              - paragraph [ref=f59e150]: "15"
+              - paragraph [ref=f59e151]: "16"
+              - paragraph [ref=f59e152]: "17"
+              - paragraph [ref=f59e153]: "18"
+              - paragraph [ref=f59e154]: "19"
+              - paragraph [ref=f59e155]: "20"
+              - paragraph [ref=f59e156]: "21"
+              - paragraph [ref=f59e157]: "22"
+              - paragraph [ref=f59e158]: "23"
+              - paragraph [ref=f59e159]: "24"
+              - paragraph [ref=f59e160]: "25"
+              - paragraph [ref=f59e161]: "26"
+              - paragraph [ref=f59e162]: "27"
+              - paragraph [ref=f59e163]: "28"
+              - paragraph [ref=f59e164]: "29"
+              - paragraph [ref=f59e165]: "30"
+          - code [ref=f59e168]:
+            - generic [ref=f59e169]:
+              - link [ref=f59e170] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=1
+                - button [ref=f59e171]
+              - generic [ref=f59e174]: <x-layout.app-shell title="Supervision — Docteur Général" active="docteurgeneral" :user-name="$userName" :user-role="$userRole"
+            - generic [ref=f59e176]:
+              - link [ref=f59e177] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=2
+                - button [ref=f59e178]
+              - generic [ref=f59e181]: :user-initials="$userInitials">
+            - link [ref=f59e184] [cursor=pointer]:
+              - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=3
+              - button [ref=f59e185]
+            - generic [ref=f59e189]:
+              - link [ref=f59e190] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=4
+                - button [ref=f59e191]
+              - generic [ref=f59e194]: "@php"
+            - generic [ref=f59e195]:
+              - link [ref=f59e196] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=5
+                - button [ref=f59e197]
+              - generic [ref=f59e200]: $fmt = fn(int $amount) => \App\Support\ClinicMetrics::formatMoney($amount);
+            - generic [ref=f59e202]:
+              - link [ref=f59e203] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=6
+                - button [ref=f59e204]
+              - generic [ref=f59e207]: $revenueTotals = array_column($monthlyRevenue ?? [], 'total');
+            - generic [ref=f59e209]:
+              - link [ref=f59e210] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=7
+                - button [ref=f59e211]
+              - generic [ref=f59e214]: "$revenueMax = max(1, ...$revenueTotals ?: [1]);"
+            - generic [ref=f59e216]:
+              - link [ref=f59e217] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=8
+                - button [ref=f59e218]
+              - generic [ref=f59e221]: $actsTotals = array_column($monthlyActs ?? [], 'total');
+            - generic [ref=f59e223]:
+              - link [ref=f59e224] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=9
+                - button [ref=f59e225]
+              - generic [ref=f59e228]: "$actsMax = max(1, ...$actsTotals ?: [1]);"
+            - generic [ref=f59e230]:
+              - link [ref=f59e231] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=10
+                - button [ref=f59e232]
+              - generic [ref=f59e235]: "@endphp"
+            - link [ref=f59e237] [cursor=pointer]:
+              - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=11
+              - button [ref=f59e238]
+            - generic [ref=f59e242]:
+              - link [ref=f59e243] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=12
+                - button [ref=f59e244]
+              - generic [ref=f59e247]: <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            - generic [ref=f59e249]:
+              - link [ref=f59e250] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=13
+                - button [ref=f59e251]
+              - generic [ref=f59e254]: <div>
+            - generic [ref=f59e255]:
+              - link [ref=f59e256] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=14
+                - button [ref=f59e257]
+              - generic [ref=f59e260]: <h1 class="text-2xl font-semibold text-ink">Supervision générale</h1>
+            - generic [ref=f59e262]:
+              - link [ref=f59e263] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=15
+                - button [ref=f59e264]
+              - generic [ref=f59e267]: "<p class=\"mt-1 text-sm text-ink-muted\">Période&nbsp;: {{ $periodLabel }}.</p>"
+            - generic [ref=f59e269]:
+              - link [ref=f59e270] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=16
+                - button [ref=f59e271]
+              - generic [ref=f59e274]: </div>
+            - generic [ref=f59e275]:
+              - link [ref=f59e276] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=17
+                - button [ref=f59e277]
+              - generic [ref=f59e280]: <div class="flex flex-wrap items-center gap-2">
+            - generic [ref=f59e282]:
+              - link [ref=f59e283] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=18
+                - button [ref=f59e284]
+              - generic [ref=f59e287]: <span class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Période</span>
+            - generic [ref=f59e289]:
+              - link [ref=f59e290] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=19
+                - button [ref=f59e291]
+              - generic [ref=f59e294]: "@foreach ($periods as $p)"
+            - generic [ref=f59e296]:
+              - link [ref=f59e297] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=20
+                - button [ref=f59e298]
+              - generic [ref=f59e301]: "<a href=\"{{ request()->fullUrlWithQuery(['period' => $p['key']]) }}\""
+            - generic [ref=f59e303]:
+              - link [ref=f59e304] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=21
+                - button [ref=f59e305]
+              - generic [ref=f59e308]: "class=\"rounded-md border px-3 py-1.5 text-xs font-medium transition-colors {{ $period === $p['key'] ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-line text-ink-soft hover:border-brand-300 hover:text-brand-700' }}\">"
+            - generic [ref=f59e310]:
+              - link [ref=f59e311] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=22
+                - button [ref=f59e312]
+              - generic [ref=f59e315]: "{{ $p['label'] }}"
+            - generic [ref=f59e317]:
+              - link [ref=f59e318] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=23
+                - button [ref=f59e319]
+              - generic [ref=f59e322]: </a>
+            - generic [ref=f59e324]:
+              - link [ref=f59e325] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=24
+                - button [ref=f59e326]
+              - generic [ref=f59e329]: "@endforeach"
+            - generic [ref=f59e331]:
+              - link [ref=f59e332] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=25
+                - button [ref=f59e333]
+              - generic [ref=f59e336]: </div>
+            - generic [ref=f59e338]:
+              - link [ref=f59e339] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=26
+                - button [ref=f59e340]
+              - generic [ref=f59e343]: </div>
+            - link [ref=f59e346] [cursor=pointer]:
+              - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=27
+              - button [ref=f59e347]
+            - generic [ref=f59e351]:
+              - link [ref=f59e352] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=28
+                - button [ref=f59e353]
+              - generic [ref=f59e356]: "{{-- Onglets --}}"
+            - generic [ref=f59e358]:
+              - link [ref=f59e359] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=29
+                - button [ref=f59e360]
+              - generic [ref=f59e363]: "<div x-data=\"{ tab: 'synthese' }\" class=\"mt-6\">"
+            - generic [ref=f59e365]:
+              - link [ref=f59e366] [cursor=pointer]:
+                - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=30
+                - button [ref=f59e367]
+              - generic [ref=f59e370]: <div class="flex flex-wrap gap-1 border-b border-line">
+    - generic [ref=f59e373]:
+      - navigation [ref=f59e374]:
+        - list [ref=f59e376]:
+          - listitem [ref=f59e377]:
+            - link "App" [ref=f59e378] [cursor=pointer]:
+              - /url: "#context-app"
+            - list [ref=f59e379]:
+              - listitem [ref=f59e380]:
+                - link "Routing" [ref=f59e381] [cursor=pointer]:
+                  - /url: "#context-app-routing"
+              - listitem [ref=f59e386]:
+                - link "Views" [ref=f59e387] [cursor=pointer]:
+                  - /url: "#context-app-views"
+          - listitem [ref=f59e392]:
+            - link "Request" [ref=f59e393] [cursor=pointer]:
+              - /url: "#context-request"
+            - list [ref=f59e394]:
+              - listitem [ref=f59e395]:
+                - link "Browser" [ref=f59e396] [cursor=pointer]:
+                  - /url: "#context-request-browser"
+              - listitem [ref=f59e401]:
+                - link "Headers" [ref=f59e402] [cursor=pointer]:
+                  - /url: "#context-request-headers"
+              - listitem [ref=f59e407]:
+                - link "Body" [ref=f59e408] [cursor=pointer]:
+                  - /url: "#context-request-body"
+          - listitem [ref=f59e413]:
+            - link "Context" [ref=f59e414] [cursor=pointer]:
+              - /url: "#context-context"
+            - list [ref=f59e415]:
+              - listitem [ref=f59e416]:
+                - link "User" [ref=f59e417] [cursor=pointer]:
+                  - /url: "#context-user-user"
+              - listitem [ref=f59e422]:
+                - link "Versions" [ref=f59e423] [cursor=pointer]:
+                  - /url: "#context-context-versions"
+      - generic [ref=f59e428]:
+        - generic [ref=f59e429]:
+          - heading "App" [level=2] [ref=f59e430]
+          - generic [ref=f59e431]:
+            - generic [ref=f59e432]:
+              - heading [level=1] [ref=f59e433]
+              - generic [ref=f59e437]:
+                - generic [ref=f59e438]:
+                  - term [ref=f59e439]: Controller
+                  - definition [ref=f59e440]:
+                    - generic [ref=f59e441]:
+                      - code [ref=f59e444]: App\Http\Controllers\DocteurGeneralController@index
+                      - button "Copy to clipboard" [ref=f59e446] [cursor=pointer]
+                - generic [ref=f59e449]:
+                  - term [ref=f59e450]: Route name
+                  - definition [ref=f59e451]:
+                    - generic [ref=f59e452]:
+                      - code [ref=f59e455]: docteurgeneral.index
+                      - button "Copy to clipboard" [ref=f59e457] [cursor=pointer]
+                - generic [ref=f59e460]:
+                  - term [ref=f59e461]: Middleware
+                  - definition [ref=f59e462]:
+                    - list [ref=f59e463]:
+                      - listitem [ref=f59e464]:
+                        - generic [ref=f59e465]:
+                          - code [ref=f59e468]: web
+                          - button "Copy to clipboard" [ref=f59e470] [cursor=pointer]
+                      - listitem [ref=f59e473]:
+                        - generic [ref=f59e474]:
+                          - code [ref=f59e477]: auth
+                          - button "Copy to clipboard" [ref=f59e479] [cursor=pointer]
+                      - listitem [ref=f59e482]:
+                        - generic [ref=f59e483]:
+                          - code [ref=f59e486]: verified
+                          - button "Copy to clipboard" [ref=f59e488] [cursor=pointer]
+                      - listitem [ref=f59e491]:
+                        - generic [ref=f59e492]:
+                          - code [ref=f59e495]: role:docteur_general
+                          - button "Copy to clipboard" [ref=f59e497] [cursor=pointer]
+            - generic [ref=f59e500]:
+              - heading [level=1] [ref=f59e501]
+              - generic [ref=f59e505]:
+                - generic [ref=f59e506]:
+                  - term [ref=f59e507]: View
+                  - definition [ref=f59e508]:
+                    - link "C:\\Users\\Aristide Adouko\\OneDrive\\Documents\\LATEST PROJECTS\\moderne\\resources\\views\\docteurgeneral\\dashboard.blade .php" [ref=f59e509] [cursor=pointer]:
+                      - /url: phpstorm://open?file=C%3A%5CUsers%5CAristide%20Adouko%5COneDrive%5CDocuments%5CLATEST%20PROJECTS%5Cmoderne%5Cresources%5Cviews%5Cdocteurgeneral%5Cdashboard.blade.php&line=1
+                      - generic [ref=f59e510]:
+                        - generic [ref=f59e511]: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\resources\views\docteurgeneral\dashboard.blade
+                        - generic [ref=f59e512]: .php
+                - generic [ref=f59e513]:
+                  - term [ref=f59e514]: Data
+                  - definition [ref=f59e515]:
+                    - generic [ref=f59e516]:
+                      - generic [ref=f59e517]:
+                        - term [ref=f59e518]: errors
+                        - definition [ref=f59e519]:
+                          - generic [ref=f59e521]:
+                            - text: "Illuminate\\Support\\ViewErrorBag {"
+                            - generic "[Ctrl+click] Expand all children" [ref=f59e522] [cursor=pointer]:
+                              - text: "#462"
+                              - generic [ref=f59e523]: ▼
+                            - generic [ref=f59e524]: "#bags: []"
+                            - text: "}"
+                      - generic [ref=f59e525]:
+                        - term [ref=f59e526]: period
+                        - definition [ref=f59e527]:
+                          - generic [ref=f59e528]: "\"month\""
+                      - generic [ref=f59e530]:
+                        - term [ref=f59e531]: periodLabel
+                        - definition [ref=f59e532]:
+                          - generic [ref=f59e533]: "\"Ce mois\""
+                      - generic [ref=f59e535]:
+                        - term [ref=f59e536]: periods
+                        - definition [ref=f59e537]:
+                          - generic [ref=f59e539]:
+                            - text: array:5 [
+                            - generic "[Ctrl+click] Expand all children" [ref=f59e540] [cursor=pointer]: ▼
+                            - generic [ref=f59e542]:
+                              - text: 0 => array:2 [
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e543] [cursor=pointer]: ▶
+                              - text: "] 1 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e545] [cursor=pointer]: ▶
+                              - text: "] 2 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e547] [cursor=pointer]: ▶
+                              - text: "] 3 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e549] [cursor=pointer]: ▶
+                              - text: "] 4 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e551] [cursor=pointer]: ▶
+                              - text: "]"
+                            - text: "]"
+                      - generic [ref=f59e553]:
+                        - term [ref=f59e554]: finance
+                        - definition [ref=f59e555]:
+                          - generic [ref=f59e557]:
+                            - text: array:10 [
+                            - generic "[Ctrl+click] Expand all children" [ref=f59e558] [cursor=pointer]: ▼
+                            - generic [ref=f59e560]:
+                              - text: "\"collected\" => 32100 \"pending\" => 0 \"expected\" => 32100 \"recovery_rate\" => 100.0 \"unpaid_rate\" => 0.0 \"unpaid_count\" => 0 \"avg_basket\" => 8025.0 \"paying_patients\" => 4 \"by_service\" =>"
+                              - generic "Illuminate\\Support\\Collection" [ref=f59e561]:
+                                - generic [ref=f59e562]: Illuminate\Support
+                                - generic [ref=f59e563]: \
+                                - text: Collection
+                              - text: "{"
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e564] [cursor=pointer]:
+                                - text: "#1182"
+                                - generic [ref=f59e565]: ▶
+                              - text: "} \"by_service_category\" => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e566] [cursor=pointer]: ▶
+                              - text: "]"
+                            - text: "]"
+                      - generic [ref=f59e568]:
+                        - term [ref=f59e569]: operations
+                        - definition [ref=f59e570]:
+                          - generic [ref=f59e572]:
+                            - text: array:7 [
+                            - generic "[Ctrl+click] Expand all children" [ref=f59e573] [cursor=pointer]: ▼
+                            - generic [ref=f59e575]:
+                              - text: "\"bed_capacity\" => 14 \"bed_occupied\" => 0 \"occupancy_rate\" => 0.0 \"avg_stay_days\" => 4.0 \"avg_wait_minutes\" => 3.0 \"discharged_count\" => 4 \"acts\" => array:5 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e576] [cursor=pointer]: ▶
+                              - text: "]"
+                            - text: "]"
+                      - generic [ref=f59e578]:
+                        - term [ref=f59e579]: monthlyRevenue
+                        - definition [ref=f59e580]:
+                          - generic [ref=f59e582]:
+                            - text: array:12 [
+                            - generic "[Ctrl+click] Expand all children" [ref=f59e583] [cursor=pointer]: ▼
+                            - generic [ref=f59e585]:
+                              - text: 0 => array:2 [
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e586] [cursor=pointer]: ▶
+                              - text: "] 1 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e588] [cursor=pointer]: ▶
+                              - text: "] 2 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e590] [cursor=pointer]: ▶
+                              - text: "] 3 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e592] [cursor=pointer]: ▶
+                              - text: "] 4 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e594] [cursor=pointer]: ▶
+                              - text: "] 5 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e596] [cursor=pointer]: ▶
+                              - text: "] 6 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e598] [cursor=pointer]: ▶
+                              - text: "] 7 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e600] [cursor=pointer]: ▶
+                              - text: "] 8 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e602] [cursor=pointer]: ▶
+                              - text: "] 9 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e604] [cursor=pointer]: ▶
+                              - text: "] 10 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e606] [cursor=pointer]: ▶
+                              - text: "] 11 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e608] [cursor=pointer]: ▶
+                              - text: "]"
+                            - text: "]"
+                      - generic [ref=f59e610]:
+                        - term [ref=f59e611]: monthlyActs
+                        - definition [ref=f59e612]:
+                          - generic [ref=f59e614]:
+                            - text: array:12 [
+                            - generic "[Ctrl+click] Expand all children" [ref=f59e615] [cursor=pointer]: ▼
+                            - generic [ref=f59e617]:
+                              - text: 0 => array:2 [
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e618] [cursor=pointer]: ▶
+                              - text: "] 1 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e620] [cursor=pointer]: ▶
+                              - text: "] 2 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e622] [cursor=pointer]: ▶
+                              - text: "] 3 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e624] [cursor=pointer]: ▶
+                              - text: "] 4 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e626] [cursor=pointer]: ▶
+                              - text: "] 5 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e628] [cursor=pointer]: ▶
+                              - text: "] 6 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e630] [cursor=pointer]: ▶
+                              - text: "] 7 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e632] [cursor=pointer]: ▶
+                              - text: "] 8 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e634] [cursor=pointer]: ▶
+                              - text: "] 9 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e636] [cursor=pointer]: ▶
+                              - text: "] 10 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e638] [cursor=pointer]: ▶
+                              - text: "] 11 => array:2 ["
+                              - generic "[Ctrl+click] Expand all children" [ref=f59e640] [cursor=pointer]: ▶
+                              - text: "]"
+                            - text: "]"
+        - generic [ref=f59e642]:
+          - heading "Request" [level=2] [ref=f59e643]
+          - generic [ref=f59e644]:
+            - generic [ref=f59e645]:
+              - generic [ref=f59e646]:
+                - generic [ref=f59e647]: http://localhost:8000/docteur-general
+                - generic [ref=f59e648]: GET
+              - generic [ref=f59e650] [cursor=pointer]:
+                - code [ref=f59e653]:
+                  - code [ref=f59e655]: "curl \"http://localhost:8000/docteur-general\" \\ -X GET \\ -H 'host: localhost:8000' \\ -H 'connection: keep-alive' \\ -H 'upgrade-insecure-requests: 1' \\ -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36' \\ -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \\ -H 'sec-fetch-site: none' \\ -H 'sec-fetch-mode: navigate' \\ -H 'sec-fetch-user: ?1' \\ -H 'sec-fetch-dest: document' \\ -H 'sec-ch-ua: \"Chromium\";v=\"154\", \"Google Chrome\";v=\"154\", \"Not A(Brand\";v=\"99\"' \\ -H 'sec-ch-ua-mobile: ?0' \\ -H 'sec-ch-ua-platform: \"Windows\"' \\ -H 'accept-encoding: gzip, deflate, br, zstd' \\ -H 'accept-language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7' \\ -H 'cookie: <CENSORED>';"
+                - button "Copy to clipboard" [ref=f59e657]
+                - button [ref=f59e660]
+            - generic [ref=f59e663]:
+              - heading [level=1] [ref=f59e664]
+              - generic [ref=f59e668]:
+                - code [ref=f59e671]: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36
+                - button "Copy to clipboard" [ref=f59e673] [cursor=pointer]
+            - generic [ref=f59e676]:
+              - heading [level=1] [ref=f59e677]
+              - generic [ref=f59e681]:
+                - generic [ref=f59e682]:
+                  - term [ref=f59e683]: host
+                  - definition [ref=f59e684]:
+                    - generic [ref=f59e685]:
+                      - code [ref=f59e688]: localhost:8000
+                      - button "Copy to clipboard" [ref=f59e690] [cursor=pointer]
+                - generic [ref=f59e693]:
+                  - term [ref=f59e694]: connection
+                  - definition [ref=f59e695]:
+                    - generic [ref=f59e696]:
+                      - code [ref=f59e699]: keep-alive
+                      - button "Copy to clipboard" [ref=f59e701] [cursor=pointer]
+                - generic [ref=f59e704]:
+                  - term [ref=f59e705]: upgrade-insecure-requests
+                  - definition [ref=f59e706]:
+                    - generic [ref=f59e707]:
+                      - code [ref=f59e710]: "1"
+                      - button "Copy to clipboard" [ref=f59e712] [cursor=pointer]
+                - generic [ref=f59e715]:
+                  - term [ref=f59e716]: user-agent
+                  - definition [ref=f59e717]:
+                    - generic [ref=f59e718]:
+                      - code [ref=f59e721]: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36
+                      - button "Copy to clipboard" [ref=f59e723] [cursor=pointer]
+                - generic [ref=f59e726]:
+                  - term [ref=f59e727]: accept
+                  - definition [ref=f59e728]:
+                    - generic [ref=f59e729]:
+                      - code [ref=f59e732]: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+                      - button "Copy to clipboard" [ref=f59e734] [cursor=pointer]
+                - generic [ref=f59e737]:
+                  - term [ref=f59e738]: sec-fetch-site
+                  - definition [ref=f59e739]:
+                    - generic [ref=f59e740]:
+                      - code [ref=f59e743]: none
+                      - button "Copy to clipboard" [ref=f59e745] [cursor=pointer]
+                - generic [ref=f59e748]:
+                  - term [ref=f59e749]: sec-fetch-mode
+                  - definition [ref=f59e750]:
+                    - generic [ref=f59e751]:
+                      - code [ref=f59e754]: navigate
+                      - button "Copy to clipboard" [ref=f59e756] [cursor=pointer]
+                - generic [ref=f59e759]:
+                  - term [ref=f59e760]: sec-fetch-user
+                  - definition [ref=f59e761]:
+                    - generic [ref=f59e762]:
+                      - code [ref=f59e765]: "?1"
+                      - button "Copy to clipboard" [ref=f59e767] [cursor=pointer]
+                - generic [ref=f59e770]:
+                  - term [ref=f59e771]: sec-fetch-dest
+                  - definition [ref=f59e772]:
+                    - generic [ref=f59e773]:
+                      - code [ref=f59e776]: document
+                      - button "Copy to clipboard" [ref=f59e778] [cursor=pointer]
+                - generic [ref=f59e781]:
+                  - term [ref=f59e782]: sec-ch-ua
+                  - definition [ref=f59e783]:
+                    - generic [ref=f59e784]:
+                      - code [ref=f59e787]: "\"Chromium\";v=\"154\", \"Google Chrome\";v=\"154\", \"Not A(Brand\";v=\"99\""
+                      - button "Copy to clipboard" [ref=f59e789] [cursor=pointer]
+                - generic [ref=f59e792]:
+                  - term [ref=f59e793]: sec-ch-ua-mobile
+                  - definition [ref=f59e794]:
+                    - generic [ref=f59e795]:
+                      - code [ref=f59e798]: "?0"
+                      - button "Copy to clipboard" [ref=f59e800] [cursor=pointer]
+                - generic [ref=f59e803]:
+                  - term [ref=f59e804]: sec-ch-ua-platform
+                  - definition [ref=f59e805]:
+                    - generic [ref=f59e806]:
+                      - code [ref=f59e809]: "\"Windows\""
+                      - button "Copy to clipboard" [ref=f59e811] [cursor=pointer]
+                - generic [ref=f59e814]:
+                  - term [ref=f59e815]: accept-encoding
+                  - definition [ref=f59e816]:
+                    - generic [ref=f59e817]:
+                      - code [ref=f59e820]: gzip, deflate, br, zstd
+                      - button "Copy to clipboard" [ref=f59e822] [cursor=pointer]
+                - generic [ref=f59e825]:
+                  - term [ref=f59e826]: accept-language
+                  - definition [ref=f59e827]:
+                    - generic [ref=f59e828]:
+                      - code [ref=f59e831]: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7
+                      - button "Copy to clipboard" [ref=f59e833] [cursor=pointer]
+                - generic [ref=f59e836]:
+                  - term [ref=f59e837]: cookie
+                  - definition [ref=f59e838]:
+                    - generic [ref=f59e839]:
+                      - code [ref=f59e842]: <CENSORED>
+                      - button "Copy to clipboard" [ref=f59e844] [cursor=pointer]
+            - generic [ref=f59e847]:
+              - heading [level=1] [ref=f59e848]
+              - generic [ref=f59e852]:
+                - code [ref=f59e855]: "[]"
+                - button "Copy to clipboard" [ref=f59e857] [cursor=pointer]
+        - generic [ref=f59e860]:
+          - heading "Context" [level=2] [ref=f59e861]
+          - generic [ref=f59e862]:
+            - generic [ref=f59e863]:
+              - heading [level=1] [ref=f59e864]
+              - generic [ref=f59e868]:
+                - img "dr.gnle@cmsm.com" [ref=f59e870]
+                - generic [ref=f59e871]:
+                  - paragraph [ref=f59e872]: Dr. Gnlé
+                  - paragraph [ref=f59e873]: dr.gnle@cmsm.com
+              - generic [ref=f59e874] [cursor=pointer]:
+                - code [ref=f59e877]:
+                  - code [ref=f59e879]: "{ \"id\": 9, \"name\": \"Dr. Gnlé\", \"email\": \"dr.gnle@cmsm.com\", \"role\": \"docteur_general\", \"is_active\": true, \"email_verified_at\": \"2026-09-11T16:45:22.000000Z\", \"created_at\": \"2026-09-11T16:45:22.000000Z\", \"updated_at\": \"2026-09-11T16:45:22.000000Z\" }"
+                - button "Copy to clipboard" [ref=f59e881]
+                - button [ref=f59e884]
+            - generic [ref=f59e887]:
+              - heading [level=1] [ref=f59e888]
+              - generic [ref=f59e892]:
+                - generic [ref=f59e893]:
+                  - term [ref=f59e894]: Php Version
+                  - definition [ref=f59e895]:
+                    - generic [ref=f59e896]:
+                      - code [ref=f59e899]: 8.5.5
+                      - button "Copy to clipboard" [ref=f59e901] [cursor=pointer]
+                - generic [ref=f59e904]:
+                  - term [ref=f59e905]: Laravel Version
+                  - definition [ref=f59e906]:
+                    - generic [ref=f59e907]:
+                      - code [ref=f59e910]: 10.50.2
+                      - button "Copy to clipboard" [ref=f59e912] [cursor=pointer]
+                - generic [ref=f59e915]:
+                  - term [ref=f59e916]: Laravel Locale
+                  - definition [ref=f59e917]:
+                    - generic [ref=f59e918]:
+                      - code [ref=f59e921]: fr
+                      - button "Copy to clipboard" [ref=f59e923] [cursor=pointer]
+                - generic [ref=f59e926]:
+                  - term [ref=f59e927]: Laravel Config Cached
+                  - definition [ref=f59e928]:
+                    - generic [ref=f59e929]: "false"
+                - generic [ref=f59e933]:
+                  - term [ref=f59e934]: App Debug
+                  - definition [ref=f59e935]:
+                    - generic [ref=f59e936]: "true"
+                - generic [ref=f59e940]:
+                  - term [ref=f59e941]: App Env
+                  - definition [ref=f59e942]:
+                    - generic [ref=f59e943]:
+                      - code [ref=f59e946]: local
+                      - button "Copy to clipboard" [ref=f59e948] [cursor=pointer]
+    - generic [ref=f59e952]:
+      - navigation:
+        - list [ref=f59e953]:
+          - listitem [ref=f59e954]:
+            - button "19 Queries" [ref=f59e955] [cursor=pointer]:
+              - generic [ref=f59e956]: "19"
+              - generic [ref=f59e957]: Queries
+          - listitem [ref=f59e958]:
+            - button "4 Logs" [ref=f59e959] [cursor=pointer]:
+              - generic [ref=f59e960]: "4"
+              - generic [ref=f59e961]: Logs
+      - generic [ref=f59e962]:
+        - generic [ref=f59e963]:
+          - generic [ref=f59e964]:
+            - generic [ref=f59e965]: 23:31:39
+            - generic [ref=f59e966]:
+              - img "Runtime" [ref=f59e967]
+              - text: 4.64ms
+            - generic [ref=f59e969]:
+              - img "Connection" [ref=f59e970]
+              - text: mysql
+          - generic [ref=f59e973]:
+            - generic [ref=f59e974] [cursor=pointer]:
+              - code [ref=f59e977]:
+                - code [ref=f59e979]: "select * from `users` where `id` = 9 limit 1"
+              - button "Copy to clipboard" [ref=f59e981]
+              - button [ref=f59e984]
+            - button "1 query parameter" [ref=f59e988] [cursor=pointer]
+        - generic [ref=f59e991]:
+          - generic [ref=f59e992]:
+            - generic [ref=f59e993]: 23:31:39
+            - generic [ref=f59e994]:
+              - img "Runtime" [ref=f59e995]
+              - text: 1.57ms
+            - generic [ref=f59e997]:
+              - img "Connection" [ref=f59e998]
+              - text: mysql
+          - generic [ref=f59e1001]:
+            - generic [ref=f59e1002] [cursor=pointer]:
+              - code [ref=f59e1005]:
+                - code [ref=f59e1007]: "select * from `payments` where `created_at` between 2026-09-01T00:00:00.000000Z and 2026-09-30T23:59:59.999999Z"
+              - button "Copy to clipboard" [ref=f59e1009]
+              - button [ref=f59e1012]
+            - button "2 query parameters" [ref=f59e1016] [cursor=pointer]
+        - generic [ref=f59e1019]:
+          - generic [ref=f59e1020]:
+            - generic [ref=f59e1021]: 23:31:39
+            - generic [ref=f59e1022]:
+              - img "Runtime" [ref=f59e1023]
+              - text: 1.62ms
+            - generic [ref=f59e1025]:
+              - img "Connection" [ref=f59e1026]
+              - text: mysql
+          - generic [ref=f59e1029]:
+            - generic [ref=f59e1030] [cursor=pointer]:
+              - code [ref=f59e1033]:
+                - code [ref=f59e1035]: "select count(distinct `patient_id`) as aggregate from `payments` where `created_at` between 2026-09-01T00:00:00.000000Z and 2026-09-30T23:59:59.999999Z and `status` = Payé"
+              - button "Copy to clipboard" [ref=f59e1037]
+              - button [ref=f59e1040]
+            - button "3 query parameters" [ref=f59e1044] [cursor=pointer]
+        - generic [ref=f59e1047]:
+          - generic [ref=f59e1048]:
+            - generic [ref=f59e1049]: 23:31:39
+            - generic [ref=f59e1050]:
+              - img "Runtime" [ref=f59e1051]
+              - text: 1.61ms
+            - generic [ref=f59e1053]:
+              - img "Connection" [ref=f59e1054]
+              - text: mysql
+          - generic [ref=f59e1057]:
+            - generic [ref=f59e1058] [cursor=pointer]:
+              - code [ref=f59e1061]:
+                - code [ref=f59e1063]: "select * from `payments` where `created_at` between 2026-09-01T00:00:00.000000Z and 2026-09-30T23:59:59.999999Z and `status` = Payé"
+              - button "Copy to clipboard" [ref=f59e1065]
+              - button [ref=f59e1068]
+            - button "3 query parameters" [ref=f59e1072] [cursor=pointer]
+        - generic [ref=f59e1075]:
+          - generic [ref=f59e1076]:
+            - generic [ref=f59e1077]: 23:31:39
+            - generic [ref=f59e1078]:
+              - img "Runtime" [ref=f59e1079]
+              - text: 1.29ms
+            - generic [ref=f59e1081]:
+              - img "Connection" [ref=f59e1082]
+              - text: mysql
+          - generic [ref=f59e1085]:
+            - generic [ref=f59e1086] [cursor=pointer]:
+              - code [ref=f59e1089]:
+                - code [ref=f59e1091]: "select * from `invoices` where `created_at` between 2026-09-01T00:00:00.000000Z and 2026-09-30T23:59:59.999999Z and `status` = paid"
+              - button "Copy to clipboard" [ref=f59e1093]
+              - button [ref=f59e1096]
+            - button "3 query parameters" [ref=f59e1100] [cursor=pointer]
+        - generic [ref=f59e1103]:
+          - generic [ref=f59e1104]:
+            - generic [ref=f59e1105]: 23:31:39
+            - generic [ref=f59e1106]:
+              - img "Runtime" [ref=f59e1107]
+              - text: 1.13ms
+            - generic [ref=f59e1109]:
+              - img "Connection" [ref=f59e1110]
+              - text: mysql
+          - generic [ref=f59e1113]:
+            - generic [ref=f59e1114] [cursor=pointer]:
+              - code [ref=f59e1117]:
+                - code [ref=f59e1119]: "select * from `rooms` where `maintenance` = false"
+              - button "Copy to clipboard" [ref=f59e1121]
+              - button [ref=f59e1124]
+            - button "1 query parameter" [ref=f59e1128] [cursor=pointer]
+        - generic [ref=f59e1131]:
+          - generic [ref=f59e1132]:
+            - generic [ref=f59e1133]: 23:31:39
+            - generic [ref=f59e1134]:
+              - img "Runtime" [ref=f59e1135]
+              - text: 1.18ms
+            - generic [ref=f59e1137]:
+              - img "Connection" [ref=f59e1138]
+              - text: mysql
+          - generic [ref=f59e1141] [cursor=pointer]:
+            - code [ref=f59e1144]:
+              - code [ref=f59e1146]: "select * from `admissions` where `discharged_at` is null and `admissions`.`room_id` in (1, 2, 3, 4, 5, 6, 7, 8)"
+            - button "Copy to clipboard" [ref=f59e1148]
+            - button [ref=f59e1151]
+        - generic [ref=f59e1154]:
+          - generic [ref=f59e1155]:
+            - generic [ref=f59e1156]: 23:31:39
+            - generic [ref=f59e1157]:
+              - img "Runtime" [ref=f59e1158]
+              - text: 1ms
+            - generic [ref=f59e1160]:
+              - img "Connection" [ref=f59e1161]
+              - text: mysql
+          - generic [ref=f59e1164]:
+            - generic [ref=f59e1165] [cursor=pointer]:
+              - code [ref=f59e1168]:
+                - code [ref=f59e1170]: "select * from `admissions` where `discharged_at` is not null and `discharged_at` between 2026-09-01T00:00:00.000000Z and 2026-09-30T23:59:59.999999Z"
+              - button "Copy to clipboard" [ref=f59e1172]
+              - button [ref=f59e1175]
+            - button "2 query parameters" [ref=f59e1179] [cursor=pointer]
+        - generic [ref=f59e1182]:
+          - generic [ref=f59e1183]:
+            - generic [ref=f59e1184]: 23:31:39
+            - generic [ref=f59e1185]:
+              - img "Runtime" [ref=f59e1186]
+              - text: 1.35ms
+            - generic [ref=f59e1188]:
+              - img "Connection" [ref=f59e1189]
+              - text: mysql
+          - generic [ref=f59e1192]:
+            - generic [ref=f59e1193] [cursor=pointer]:
+              - code [ref=f59e1196]:
+                - code [ref=f59e1198]: "select * from `visits` where `arrived_at` between 2026-09-01T00:00:00.000000Z and 2026-09-30T23:59:59.999999Z"
+              - button "Copy to clipboard" [ref=f59e1200]
+              - button [ref=f59e1203]
+            - button "2 query parameters" [ref=f59e1207] [cursor=pointer]
+        - generic [ref=f59e1210]:
+          - generic [ref=f59e1211]:
+            - generic [ref=f59e1212]: 23:31:39
+            - generic [ref=f59e1213]:
+              - img "Runtime" [ref=f59e1214]
+              - text: 1.78ms
+            - generic [ref=f59e1216]:
+              - img "Connection" [ref=f59e1217]
+              - text: mysql
+          - generic [ref=f59e1220] [cursor=pointer]:
+            - code [ref=f59e1223]:
+              - code [ref=f59e1225]: "select * from `consultations` where `consultations`.`visit_id` in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13) and `started_at` is not null"
+            - button "Copy to clipboard" [ref=f59e1227]
+            - button [ref=f59e1230]
+        - generic [ref=f59e1233]:
+          - generic [ref=f59e1234]:
+            - generic [ref=f59e1235]: 23:31:39
+            - generic [ref=f59e1236]:
+              - img "Runtime" [ref=f59e1237]
+              - text: 1.07ms
+            - generic [ref=f59e1239]:
+              - img "Connection" [ref=f59e1240]
+              - text: mysql
+          - generic [ref=f59e1243]:
+            - generic [ref=f59e1244] [cursor=pointer]:
+              - code [ref=f59e1247]:
+                - code [ref=f59e1249]: "select count(*) as aggregate from `consultations` where `started_at` between 2026-09-01T00:00:00.000000Z and 2026-09-30T23:59:59.999999Z"
+              - button "Copy to clipboard" [ref=f59e1251]
+              - button [ref=f59e1254]
+            - button "2 query parameters" [ref=f59e1258] [cursor=pointer]
+        - generic [ref=f59e1261]:
+          - generic [ref=f59e1262]:
+            - generic [ref=f59e1263]: 23:31:39
+            - generic [ref=f59e1264]:
+              - img "Runtime" [ref=f59e1265]
+              - text: 0.83ms
+            - generic [ref=f59e1267]:
+              - img "Connection" [ref=f59e1268]
+              - text: mysql
+          - generic [ref=f59e1271]:
+            - generic [ref=f59e1272] [cursor=pointer]:
+              - code [ref=f59e1275]:
+                - code [ref=f59e1277]: "select count(*) as aggregate from `exams` where `requested_at` between 2026-09-01T00:00:00.000000Z and 2026-09-30T23:59:59.999999Z"
+              - button "Copy to clipboard" [ref=f59e1279]
+              - button [ref=f59e1282]
+            - button "2 query parameters" [ref=f59e1286] [cursor=pointer]
+        - generic [ref=f59e1289]:
+          - generic [ref=f59e1290]:
+            - generic [ref=f59e1291]: 23:31:39
+            - generic [ref=f59e1292]:
+              - img "Runtime" [ref=f59e1293]
+              - text: 3.18ms
+            - generic [ref=f59e1295]:
+              - img "Connection" [ref=f59e1296]
+              - text: mysql
+          - generic [ref=f59e1299]:
+            - generic [ref=f59e1300] [cursor=pointer]:
+              - code [ref=f59e1303]:
+                - code [ref=f59e1305]: "select count(*) as aggregate from `prescriptions` where `requested_at` between 2026-09-01T00:00:00.000000Z and 2026-09-30T23:59:59.999999Z"
+              - button "Copy to clipboard" [ref=f59e1307]
+              - button [ref=f59e1310]
+            - button "2 query parameters" [ref=f59e1314] [cursor=pointer]
+        - generic [ref=f59e1317]:
+          - generic [ref=f59e1318]:
+            - generic [ref=f59e1319]: 23:31:39
+            - generic [ref=f59e1320]:
+              - img "Runtime" [ref=f59e1321]
+              - text: 0.92ms
+            - generic [ref=f59e1323]:
+              - img "Connection" [ref=f59e1324]
+              - text: mysql
+          - generic [ref=f59e1327]:
+            - generic [ref=f59e1328] [cursor=pointer]:
+              - code [ref=f59e1331]:
+                - code [ref=f59e1333]: "select count(*) as aggregate from `admissions` where `admitted_at` between 2026-09-01T00:00:00.000000Z and 2026-09-30T23:59:59.999999Z"
+              - button "Copy to clipboard" [ref=f59e1335]
+              - button [ref=f59e1338]
+            - button "2 query parameters" [ref=f59e1342] [cursor=pointer]
+        - generic [ref=f59e1345]:
+          - generic [ref=f59e1346]:
+            - generic [ref=f59e1347]: 23:31:39
+            - generic [ref=f59e1348]:
+              - img "Runtime" [ref=f59e1349]
+              - text: 1.18ms
+            - generic [ref=f59e1351]:
+              - img "Connection" [ref=f59e1352]
+              - text: mysql
+          - generic [ref=f59e1355]:
+            - generic [ref=f59e1356] [cursor=pointer]:
+              - code [ref=f59e1359]:
+                - code [ref=f59e1361]: "select * from `payments` where `status` = Payé and `created_at` >= 2025-10-01T00:00:00.000000Z"
+              - button "Copy to clipboard" [ref=f59e1363]
+              - button [ref=f59e1366]
+            - button "2 query parameters" [ref=f59e1370] [cursor=pointer]
+        - generic [ref=f59e1373]:
+          - generic [ref=f59e1374]:
+            - generic [ref=f59e1375]: 23:31:39
+            - generic [ref=f59e1376]:
+              - img "Runtime" [ref=f59e1377]
+              - text: 1.03ms
+            - generic [ref=f59e1379]:
+              - img "Connection" [ref=f59e1380]
+              - text: mysql
+          - generic [ref=f59e1383]:
+            - generic [ref=f59e1384] [cursor=pointer]:
+              - code [ref=f59e1387]:
+                - code [ref=f59e1389]: "select * from `consultations` where `started_at` >= 2025-10-01T00:00:00.000000Z"
+              - button "Copy to clipboard" [ref=f59e1391]
+              - button [ref=f59e1394]
+            - button "1 query parameter" [ref=f59e1398] [cursor=pointer]
+        - generic [ref=f59e1401]:
+          - generic [ref=f59e1402]:
+            - generic [ref=f59e1403]: 23:31:39
+            - generic [ref=f59e1404]:
+              - img "Runtime" [ref=f59e1405]
+              - text: 0.77ms
+            - generic [ref=f59e1407]:
+              - img "Connection" [ref=f59e1408]
+              - text: mysql
+          - generic [ref=f59e1411]:
+            - generic [ref=f59e1412] [cursor=pointer]:
+              - code [ref=f59e1415]:
+                - code [ref=f59e1417]: "select * from `exams` where `requested_at` >= 2025-10-01T00:00:00.000000Z"
+              - button "Copy to clipboard" [ref=f59e1419]
+              - button [ref=f59e1422]
+            - button "1 query parameter" [ref=f59e1426] [cursor=pointer]
+        - generic [ref=f59e1429]:
+          - generic [ref=f59e1430]:
+            - generic [ref=f59e1431]: 23:31:39
+            - generic [ref=f59e1432]:
+              - img "Runtime" [ref=f59e1433]
+              - text: 0.83ms
+            - generic [ref=f59e1435]:
+              - img "Connection" [ref=f59e1436]
+              - text: mysql
+          - generic [ref=f59e1439]:
+            - generic [ref=f59e1440] [cursor=pointer]:
+              - code [ref=f59e1443]:
+                - code [ref=f59e1445]: "select * from `prescriptions` where `requested_at` >= 2025-10-01T00:00:00.000000Z"
+              - button "Copy to clipboard" [ref=f59e1447]
+              - button [ref=f59e1450]
+            - button "1 query parameter" [ref=f59e1454] [cursor=pointer]
+        - generic [ref=f59e1457]:
+          - generic [ref=f59e1458]:
+            - generic [ref=f59e1459]: 23:31:39
+            - generic [ref=f59e1460]:
+              - img "Runtime" [ref=f59e1461]
+              - text: 0.92ms
+            - generic [ref=f59e1463]:
+              - img "Connection" [ref=f59e1464]
+              - text: mysql
+          - generic [ref=f59e1467]:
+            - generic [ref=f59e1468] [cursor=pointer]:
+              - code [ref=f59e1471]:
+                - code [ref=f59e1473]: "select * from `admissions` where `admitted_at` >= 2025-10-01T00:00:00.000000Z"
+              - button "Copy to clipboard" [ref=f59e1475]
+              - button [ref=f59e1478]
+            - button "1 query parameter" [ref=f59e1482] [cursor=pointer]
+    - generic [ref=f59e1486]:
+      - list [ref=f59e1487]:
+        - listitem [ref=f59e1488]
+        - listitem [ref=f59e1497]: ·
+        - listitem [ref=f59e1498]:
+          - link "Source" [ref=f59e1499] [cursor=pointer]:
+            - /url: https://github.com/spatie/laravel-ignition
+        - listitem [ref=f59e1500]: ·
+        - listitem [ref=f59e1501]:
+          - link "Docs" [ref=f59e1502] [cursor=pointer]:
+            - /url: https://flareapp.io/docs/ignition/introducing-ignition/overview
+        - listitem [ref=f59e1503]: ·
+        - listitem [ref=f59e1504]:
+          - link "Laravel" [ref=f59e1505] [cursor=pointer]:
+            - /url: https://laravel.com
+      - paragraph [ref=f59e1507]:
+        - text: Ignition is built by
+        - link "Flare" [ref=f59e1508] [cursor=pointer]:
+          - /url: https://flareapp.io/?utm_campaign=ignition&utm_source=ignition
+        - text: ", the Laravel error reporting service."

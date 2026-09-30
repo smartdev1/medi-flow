@@ -1,0 +1,72 @@
+- generic [ref=f76e3]:
+  - banner [ref=f76e4]:
+    - button "Ouvrir le menu" [ref=f76e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f76e9]
+    - generic [ref=f76e10]:
+      - button [ref=f76e11] [cursor=pointer]
+      - generic [ref=f76e16]: YK
+  - main [ref=f76e20]:
+    - generic [ref=f76e21]:
+      - generic [ref=f76e22]:
+        - generic [ref=f76e23]:
+          - generic [ref=f76e24]:
+            - heading "Caisse" [level=1] [ref=f76e25]
+            - paragraph [ref=f76e26]: Encaissement des consultations, analyses et ordonnances du jour.
+          - generic [ref=f76e27]:
+            - generic [ref=f76e28]: Aucune session ouverte
+            - link [ref=f76e30] [cursor=pointer]:
+              - /url: http://localhost:8000/caisse/session/open
+              - button "Ouvrir une session" [ref=f76e31]
+        - link [ref=f76e35] [cursor=pointer]:
+          - /url: http://localhost:8000/caisse/historique
+          - button "Historique" [ref=f76e36]
+      - generic [ref=f76e39]:
+        - generic [ref=f76e40]:
+          - paragraph [ref=f76e42]: Paniers en cours
+          - generic [ref=f76e46]:
+            - generic [ref=f76e47]: "0"
+            - generic [ref=f76e48]: Factures en cours
+        - generic [ref=f76e49]:
+          - paragraph [ref=f76e51]: A payer
+          - generic [ref=f76e55]:
+            - generic [ref=f76e56]: "0"
+            - generic [ref=f76e57]: En attente de paiement
+        - generic [ref=f76e58]:
+          - paragraph [ref=f76e60]: Payees
+          - generic [ref=f76e64]:
+            - generic [ref=f76e65]: "0"
+            - generic [ref=f76e66]: Factures reglees
+        - generic [ref=f76e67]:
+          - paragraph [ref=f76e69]: Journee en cours
+          - generic [ref=f76e73]:
+            - generic [ref=f76e74]: 0 ouvert(s)
+            - generic [ref=f76e75]: 0 deja cloture(s)
+      - generic [ref=f76e76]:
+        - generic [ref=f76e77]:
+          - generic [ref=f76e78]: "Filtrer par statut :"
+          - generic [ref=f76e81]:
+            - button "Tout" [ref=f76e82] [cursor=pointer]
+            - button "Payé" [ref=f76e83] [cursor=pointer]
+            - button "Partiellement payé" [ref=f76e84] [cursor=pointer]
+            - button "En attente" [ref=f76e85] [cursor=pointer]
+        - generic [ref=f76e87]:
+          - generic [ref=f76e88]: Date
+          - textbox "Date" [ref=f76e89]: 2026-09-29
+          - button "Afficher" [ref=f76e90] [cursor=pointer]
+      - table [ref=f76e93]:
+        - rowgroup [ref=f76e94]:
+          - row [ref=f76e95]:
+            - columnheader "Patient" [ref=f76e96]
+            - columnheader "Couverture" [ref=f76e97]
+            - columnheader "Sous-total" [ref=f76e98]
+            - columnheader "Assurance" [ref=f76e99]
+            - columnheader "A payer" [ref=f76e100]
+            - columnheader "Statut" [ref=f76e101]
+            - columnheader "Caissier" [ref=f76e102]
+            - columnheader "Service" [ref=f76e103]
+            - columnheader "Montant Total" [ref=f76e104]
+            - columnheader "Mode de paiement" [ref=f76e105]
+            - columnheader "Actions" [ref=f76e106]
+        - rowgroup [ref=f76e107]:
+          - row [ref=f76e108]:
+            - cell "Aucun encaissement enregistre pour votre caisse ce jour." [ref=f76e109]

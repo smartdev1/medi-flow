@@ -20,6 +20,7 @@
             <table class="w-full text-left text-sm">
                 <thead>
                     <tr class="border-b border-line bg-surface-sunken text-xs uppercase tracking-wide text-ink-muted">
+                        <th class="px-5 py-3 font-semibold">Caissier</th>
                         <th class="px-5 py-3 font-semibold">Date</th>
                         <th class="px-5 py-3 font-semibold">Heure ouverture</th>
                         <th class="px-5 py-3 font-semibold">Heure fermeture</th>
@@ -44,6 +45,9 @@
                                 : '—';
                         @endphp
                         <tr class="hover:bg-surface-sunken">
+                            <td class="px-5 py-3.5 text-ink-soft">
+                                {{ $session->cashier?->name ?? '—' }}
+                            </td>
                             <td class="px-5 py-3.5">
                                 <div class="flex items-center gap-3">
                                     <x-ui.icon name="calendar" class="h-4 w-4 text-ink-muted" />

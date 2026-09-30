@@ -1,0 +1,71 @@
+- generic [ref=f38e3]:
+  - banner [ref=f38e4]:
+    - button "Ouvrir le menu" [ref=f38e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f38e9]
+    - generic [ref=f38e10]:
+      - button [ref=f38e11] [cursor=pointer]
+      - generic [ref=f38e16]: DG
+  - main [ref=f38e20]:
+    - generic [ref=f38e21]:
+      - generic [ref=f38e23]:
+        - heading "Sortie patient" [level=1] [ref=f38e24]
+        - paragraph [ref=f38e25]: Recherchez un patient pour consulter son résumé et clôturer sa visite.
+      - generic [ref=f38e27]:
+        - text: Rechercher un patient
+        - textbox "Rechercher par CSM-XXXX ou par nom..." [ref=f38e29]: CSM-7880 — QA PatientTest
+      - generic [ref=f38e30]:
+        - generic [ref=f38e31]:
+          - generic [ref=f38e33]:
+            - generic [ref=f38e34]:
+              - generic [ref=f38e35]: QP
+              - generic [ref=f38e36]:
+                - heading "QA PatientTest" [level=2] [ref=f38e37]
+                - paragraph [ref=f38e38]: CSM-7880
+                - generic [ref=f38e39]:
+                  - generic [ref=f38e40]: 36 ans · M
+                  - generic [ref=f38e42]: Non assuré
+                  - generic [ref=f38e44]: Visite en cours
+            - generic [ref=f38e46]:
+              - generic [ref=f38e47]: Facture en cours
+              - paragraph [ref=f38e51]: "Le patient a une facture de 15 000 FCFA en attente de paiement (statut : À payer). Le dossier ne peut pas être clôturé tant que la facture n'est pas réglée."
+          - generic [ref=f38e52]:
+            - heading "Paiements" [level=3] [ref=f38e53]
+            - paragraph [ref=f38e54]: Aucun paiement enregistré.
+          - generic [ref=f38e55]:
+            - heading "Consultations" [level=3] [ref=f38e56]
+            - generic [ref=f38e59]:
+              - paragraph [ref=f38e60]: Dr. Gnlé
+              - generic [ref=f38e61]: Clôturée
+          - generic [ref=f38e63]:
+            - heading "Examens de laboratoire" [level=3] [ref=f38e64]
+            - paragraph [ref=f38e65]: Aucun examen demandé.
+          - generic [ref=f38e66]:
+            - heading "Ordonnances & délivrance" [level=3] [ref=f38e67]
+            - paragraph [ref=f38e68]: Aucune ordonnance enregistrée.
+        - generic [ref=f38e69]:
+          - heading "Parcours complet" [level=3] [ref=f38e70]
+          - list [ref=f38e71]:
+            - listitem [ref=f38e72]:
+              - generic [ref=f38e77]:
+                - generic [ref=f38e78]:
+                  - paragraph [ref=f38e79]: Accueil
+                  - generic [ref=f38e80]: 11:25
+                - paragraph [ref=f38e81]: Akissi Koffi
+            - listitem [ref=f38e82]:
+              - generic [ref=f38e87]:
+                - generic [ref=f38e88]:
+                  - paragraph [ref=f38e89]: Consultation
+                  - generic [ref=f38e90]: 11:34
+                - paragraph [ref=f38e91]: Dr. Gnlé
+            - listitem [ref=f38e92]:
+              - generic [ref=f38e97]:
+                - generic [ref=f38e98]:
+                  - paragraph [ref=f38e99]: Hospitalisation
+                  - generic [ref=f38e100]: 11:41
+                - paragraph [ref=f38e101]: Chambre 10 — Hospitalisation
+            - listitem [ref=f38e102]:
+              - generic [ref=f38e106]:
+                - generic [ref=f38e107]:
+                  - paragraph [ref=f38e108]: Fin d'hospitalisation
+                  - generic [ref=f38e109]: 11:55
+                - paragraph [ref=f38e110]: Chambre 10

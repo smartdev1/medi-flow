@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <template x-for="patient in stage.patients" :key="patient.patient_id || patient.id">
+                        <template x-for="patient in stage.patients" :key="(patient.patient_id || patient.id) + '-' + (patient.vitals_taken_at ? '1' : '0')">
                             <div class="rounded-md border border-line border-l-4 bg-white p-3 shadow-card"
                                 :class="stage.label === 'Consultation' ? (
                                     patient.vitals_taken_at ? 'border-l-success' : (patient.tone === 'danger' ? 'border-l-danger' : 'border-l-brand-500')
@@ -78,30 +78,29 @@
                                        x-text="patient.meta"></p>
                                 </template>
 
-                                <template x-if="stage.label === 'Consultation'">
-                                    <template x-if="patient.vitals_taken_at">
-                                        <div x-show="!canTakeVitals" class="mt-2 flex items-center gap-2 text-xs font-medium text-success">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <div x-show="stage.label === 'Consultation'" class="mt-2">
+                                    <div x-show="patient.vitals_taken_at && !canTakeVitals" class="flex items-center gap-2 text-xs font-medium text-success">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span x-text="'Constantes prises par ' + patient.vitals_taken_by"></span>
+                                    </div>
+                                    <label x-show="patient.vitals_taken_at && canTakeVitals" class="flex cursor-not-allowed items-center gap-2 text-xs font-medium text-success">
+                                        <input type="checkbox" checked disabled class="h-4 w-4 rounded border-line text-brand-500">
+                                        <span x-text="'Constantes prises par ' + patient.vitals_taken_by"></span>
+                                    </label>
+                                    <form x-show="!patient.vitals_taken_at && canTakeVitals" method="POST" :action="'/visites/' + patient.visit_id + '/constantes'" class="mt-1"
+                                          onsubmit="return confirm('Confirmer que les constantes ont été prises pour ce patient ?')">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="patient_id" :value="patient.id">
+                                        <button type="submit" class="flex cursor-pointer items-center gap-2 text-xs font-medium text-ink-soft hover:text-ink">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 text-success">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
-                                            <span x-text="'Constantes prises par ' + patient.vitals_taken_by"></span>
-                                        </div>
-                                        <label x-show="canTakeVitals" class="mt-2 flex cursor-not-allowed items-center gap-2 text-xs font-medium text-success">
-                                            <input type="checkbox" checked disabled class="h-4 w-4 rounded border-line text-brand-500">
-                                            <span x-text="'Constantes prises par ' + patient.vitals_taken_by"></span>
-                                        </label>
-                                    </template>
-                                    <template x-if="!patient.vitals_taken_at && canTakeVitals">
-                                        <form method="POST" :action="'/visites/' + patient.visit_id + '/constantes'" class="mt-2">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <label class="flex cursor-pointer items-center gap-2 text-xs font-medium text-ink-soft hover:text-ink">
-                                                <input type="checkbox" class="h-4 w-4 rounded border-line text-brand-500 focus:ring-brand-500"
-                                                    @change="if ($event.target.checked) { if (confirm('Confirmer que les constantes du patient ' + patient.id + ' ont été prises ?')) { $event.target.closest('form').submit(); } else { $event.target.checked = false; } }">
-                                                Confirmer les constantes
-                                            </label>
-                                        </form>
-                                    </template>
-                                </template>
+                                            Confirmer les constantes
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </template>
                         <div x-show="!stage.patients || stage.patients.length === 0" class="rounded-md border border-dashed border-line px-3 py-4 text-center text-xs text-ink-muted">

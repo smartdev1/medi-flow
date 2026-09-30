@@ -1,0 +1,31 @@
+- generic [ref=f10e2]:
+  - complementary [ref=f10e3]:
+    - generic [ref=f10e8]:
+      - paragraph [ref=f10e9]: Clinique Saint Matthieu
+      - paragraph [ref=f10e10]: Espace professionnel
+    - navigation "Navigation principale" [ref=f10e11]:
+      - paragraph [ref=f10e13]: Parcours Patient
+      - link "Médecin 2" [ref=f10e15] [cursor=pointer]:
+        - /url: http://localhost:8000/medecin
+        - generic [ref=f10e18]: Médecin
+        - generic [ref=f10e19]: "2"
+      - button "Hospitalisation" [ref=f10e21] [cursor=pointer]
+      - paragraph [ref=f10e29]: Administratif
+      - link "Sortie patient" [ref=f10e31] [cursor=pointer]:
+        - /url: http://localhost:8000/sortie
+  - generic [ref=f10e35]:
+    - banner [ref=f10e36]:
+      - textbox "Rechercher..." [ref=f10e38]
+      - generic [ref=f10e39]:
+        - button [ref=f10e40] [cursor=pointer]
+        - generic [ref=f10e47] [cursor=pointer]:
+          - generic [ref=f10e48]: A
+          - generic [ref=f10e49]:
+            - paragraph [ref=f10e50]: Adama Traoré
+            - paragraph [ref=f10e51]: Médecin
+    - main [ref=f10e54]:
+      - generic [ref=f10e56]:
+        - heading "Accès refusé" [level=1] [ref=f10e60]
+        - paragraph [ref=f10e61]: Vous n'avez pas les permissions nécessaires pour accéder à cette page. Si vous pensez qu'il s'agit d'une erreur, contactez votre administrateur.
+        - link "Retour à l'accueil" [ref=f10e62] [cursor=pointer]:
+          - /url: http://localhost:8000/accueil

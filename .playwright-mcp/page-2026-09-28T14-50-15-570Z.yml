@@ -1,0 +1,59 @@
+- generic [ref=f4e3]:
+  - banner [ref=f4e4]:
+    - button "Ouvrir le menu" [ref=f4e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f4e9]
+    - generic [ref=f4e10]:
+      - button [ref=f4e11] [cursor=pointer]
+      - generic [ref=f4e16]: DG
+  - main [ref=f4e20]:
+    - generic [ref=f4e21]:
+      - generic [ref=f4e22]:
+        - generic [ref=f4e23]:
+          - heading "Pharmacie" [level=1] [ref=f4e24]
+          - paragraph [ref=f4e25]: Délivrance des ordonnances et encaissement des ventes.
+        - button "Nouvelle ordonnance" [ref=f4e28] [cursor=pointer]
+      - generic [ref=f4e31]:
+        - generic [ref=f4e32]:
+          - paragraph [ref=f4e34]: En attente de délivrance
+          - generic [ref=f4e38]:
+            - generic [ref=f4e39]: "0"
+            - generic [ref=f4e40]: Ordonnances reçues
+        - generic [ref=f4e41]:
+          - paragraph [ref=f4e43]: Alertes de stock
+          - generic [ref=f4e47]:
+            - generic [ref=f4e48]: "0"
+            - generic [ref=f4e49]: Réapprovisionnement requis
+        - generic [ref=f4e50]:
+          - paragraph [ref=f4e52]: Délivrées aujourd'hui
+          - generic [ref=f4e56]:
+            - generic [ref=f4e57]: "1"
+            - generic [ref=f4e58]: Dossiers clôturés
+      - generic [ref=f4e59]:
+        - generic [ref=f4e60]:
+          - generic [ref=f4e61]:
+            - heading "Ordonnances à traiter" [level=2] [ref=f4e62]
+            - generic [ref=f4e63]: 0 patients
+          - list [ref=f4e64]:
+            - listitem [ref=f4e65]: Aucun patient dans cette file.
+        - table [ref=f4e68]:
+          - rowgroup [ref=f4e69]:
+            - row [ref=f4e70]:
+              - columnheader "Patient" [ref=f4e71]
+              - columnheader "Médicaments" [ref=f4e72]
+              - columnheader "Stock" [ref=f4e73]
+              - columnheader "Statut" [ref=f4e74]
+              - columnheader "Actions" [ref=f4e75]
+          - rowgroup [ref=f4e76]:
+            - row [ref=f4e77]:
+              - cell "PN Patient 2 Non-Assuré CSM-4025 Prescrit par Dr. Gnlé" [ref=f4e78]:
+                - generic [ref=f4e79]:
+                  - generic [ref=f4e80]: PN
+                  - generic [ref=f4e81]:
+                    - paragraph [ref=f4e82]: Patient 2 Non-Assuré
+                    - paragraph [ref=f4e83]: CSM-4025
+                    - paragraph [ref=f4e84]: Prescrit par Dr. Gnlé
+              - cell "Fer + Acide folique × 1" [ref=f4e85]
+              - cell "Disponible" [ref=f4e86]
+              - cell "Délivrée" [ref=f4e89]
+              - cell [ref=f4e92]:
+                - paragraph [ref=f4e93]: Par Dr. Gnlé

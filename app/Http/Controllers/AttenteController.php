@@ -31,9 +31,17 @@ class AttenteController extends Controller
 
         $canTakeVitals = auth()->user()?->role?->value === 'aide_soignante';
 
+        $user = Auth::user();
+        $userName = $user?->name ?? 'Réceptionniste';
+        $userRole = $user?->role?->label() ?? 'Réception';
+        $userInitials = $user?->initials ?? $this->initialsFor($userName);
+
         return view('attente.board', [
             'stages' => $stages,
             'canTakeVitals' => $canTakeVitals,
+            'userName' => $userName,
+            'userRole' => $userRole,
+            'userInitials' => $userInitials,
         ]);
     }
 
@@ -58,9 +66,9 @@ class AttenteController extends Controller
     private function getStagesData(): array
     {
         $visits = Visit::with([
-            'patient.insuranceCompany',
-            'patient.exams',
+            'patient',
             'patient.admissions.room',
+            'patient.exams',
             'vitalsTakenBy',
         ])->active()
             ->whereDate('arrived_at', today())
@@ -70,6 +78,11 @@ class AttenteController extends Controller
         $cardsByStage = collect(array_keys(self::STAGES))->mapWithKeys(fn (string $stage) => [$stage => collect()]);
 
         foreach ($visits as $visit) {
+            // Preload admissions/exams on the patient model for buildCard()
+            if (! $visit->patient->relationLoaded('admissions')) {
+                $visit->patient->load(['admissions.room', 'exams']);
+            }
+
             $card = $this->buildCard($visit->patient, $visit);
 
             if ($card) {
@@ -97,27 +110,27 @@ class AttenteController extends Controller
 
         $admission = $patient->admissions->whereNull('discharged_at')->first();
         if ($admission) {
-            $tone = $visit?->urgent ? 'danger' : ($admission->status === Admission::STATUS_DISCHARGE_PLANNED ? 'warning' : 'neutral');
+            $tone = $visit?->urgent ? 'danger' : ($admission->isDischargePlanned() ? 'warning' : 'neutral');
             $badge = match (true) {
                 (bool) $visit?->urgent => ['label' => 'Urgent', 'tone' => 'danger'],
-                $admission->status === Admission::STATUS_DISCHARGE_PLANNED => ['label' => 'Sortie prévue', 'tone' => 'warning'],
+                $admission->isDischargePlanned() => ['label' => 'Sortie prévue', 'tone' => 'warning'],
                 default => null,
             };
 
-            $stage = $admission->status === Admission::STATUS_OBSERVATION ? 'Mise en Observation' : 'Hospitalisation';
-            return $this->card($patient, $stage, "{$admission->room->number} — {$admission->reason}", $tone, $badge);
+            $stage = $admission->unit() === Admission::STATUS_OBSERVATION ? 'Mise en Observation' : 'Hospitalisation';
+            return $this->card($patient, $stage, "{$admission->room->number} — {$admission->reason}", $tone, $badge, $visit);
         }
 
         if ($visit && str_starts_with($visit->status, 'Demande ')) {
             $stage = $visit->status === Visit::STATUS_OBSERVATION_REQUESTED ? 'Mise en Observation' : 'Hospitalisation';
-            return $this->card($patient, $stage, $visit->reason ?: $stage, 'warning', ['label' => 'En attente validation', 'tone' => 'warning']);
+            return $this->card($patient, $stage, $visit->reason ?: $stage, 'warning', ['label' => 'En attente validation', 'tone' => 'warning'], $visit);
         }
 
         $pendingExam = $patient->exams->first(fn (Exam $exam) => in_array($exam->status, [Exam::STATUS_AWAITING_SAMPLE, Exam::STATUS_IN_PROGRESS], true));
         if ($pendingExam) {
             $tone = $pendingExam->status === Exam::STATUS_IN_PROGRESS ? 'brand' : 'neutral';
 
-            return $this->card($patient, 'Laboratoire', "{$pendingExam->name} — ".lcfirst($pendingExam->status), $tone);
+            return $this->card($patient, 'Laboratoire', "{$pendingExam->name} — ".lcfirst($pendingExam->status), $tone, badge: null, visit: $visit);
         }
 
         if ($visit) {
@@ -128,15 +141,16 @@ class AttenteController extends Controller
             $tone = $visit->urgent ? 'danger' : 'brand';
             $badge = $visit->urgent ? ['label' => 'Urgent', 'tone' => 'danger'] : null;
 
-            return $this->card($patient, 'Consultation', $visit->reason ?: 'Consultation', $tone, $badge);
+            return $this->card($patient, 'Consultation', $visit->reason ?: 'Consultation', $tone, $badge, $visit);
         }
 
         return null;
     }
 
-    private function card(Patient $patient, string $stage, string $meta, string $tone, ?array $badge = null): array
+    private function card(Patient $patient, string $stage, string $meta, string $tone, ?array $badge = null, ?Visit $visit = null): array
     {
-        $activeVisit = $patient->visits->first(fn (Visit $visit) => $visit->isClosed() === false);
+        $activeVisit = $visit
+            ?? $patient->visits->first(fn (Visit $v) => ! $v->isClosed());
 
         return [
             'stage' => $stage,

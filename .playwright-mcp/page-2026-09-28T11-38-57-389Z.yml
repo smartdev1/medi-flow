@@ -1,0 +1,53 @@
+- generic [ref=f22e3]:
+  - banner [ref=f22e4]:
+    - button "Ouvrir le menu" [ref=f22e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f22e9]
+    - generic [ref=f22e10]:
+      - button [ref=f22e11] [cursor=pointer]
+      - generic [ref=f22e16]: AS
+  - main [ref=f22e20]:
+    - generic [ref=f22e22]:
+      - generic [ref=f22e23]:
+        - generic [ref=f22e24]:
+          - heading "Circuit patient — vue d'ensemble" [level=1] [ref=f22e25]
+          - paragraph [ref=f22e26]: Position de chaque patient dans le parcours de soins, en temps réel.
+        - generic [ref=f22e27]:
+          - generic [ref=f22e28]: "Dernière MAJ : 11:38:56"
+          - button "Rafraîchir" [ref=f22e33] [cursor=pointer]
+      - generic [ref=f22e37]:
+        - generic [ref=f22e38]:
+          - generic [ref=f22e39]:
+            - generic [ref=f22e40]: Consultation
+            - generic [ref=f22e43]: "0"
+          - generic [ref=f22e44]: Aucun patient
+        - generic [ref=f22e46]:
+          - generic [ref=f22e47]:
+            - generic [ref=f22e48]: Hospitalisation
+            - generic [ref=f22e51]: "1"
+          - link "QA PatientTest En attente validation CSM-7880 Hospitalisation" [ref=f22e53] [cursor=pointer]:
+            - /url: http://localhost:8000/admission-requests
+            - generic [ref=f22e54]:
+              - paragraph [ref=f22e55]: QA PatientTest
+              - generic [ref=f22e56]: En attente validation
+            - paragraph [ref=f22e57]: CSM-7880
+            - paragraph [ref=f22e58]: Hospitalisation
+        - generic [ref=f22e59]:
+          - generic [ref=f22e60]:
+            - generic [ref=f22e61]: Mise en Observation
+            - generic [ref=f22e64]: "0"
+          - generic [ref=f22e65]: Aucun patient
+        - generic [ref=f22e67]:
+          - generic [ref=f22e68]:
+            - generic [ref=f22e69]: Laboratoire
+            - generic [ref=f22e72]: "0"
+          - generic [ref=f22e73]: Aucun patient
+        - generic [ref=f22e75]:
+          - generic [ref=f22e76]:
+            - generic [ref=f22e77]: Retour médecin
+            - generic [ref=f22e80]: "0"
+          - generic [ref=f22e81]: Aucun patient
+        - generic [ref=f22e83]:
+          - generic [ref=f22e84]:
+            - generic [ref=f22e85]: Sortie
+            - generic [ref=f22e88]: "0"
+          - generic [ref=f22e89]: Aucun patient

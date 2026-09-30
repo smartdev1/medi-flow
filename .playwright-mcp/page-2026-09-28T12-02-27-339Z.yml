@@ -1,0 +1,87 @@
+- generic [ref=f39e3]:
+  - banner [ref=f39e4]:
+    - button "Ouvrir le menu" [ref=f39e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f39e9]
+    - generic [ref=f39e10]:
+      - button [ref=f39e11] [cursor=pointer]
+      - generic [ref=f39e16]: DG
+  - main [ref=f39e20]:
+    - generic [ref=f39e21]:
+      - generic [ref=f39e22]:
+        - generic [ref=f39e23]:
+          - heading "Caisse" [level=1] [ref=f39e24]
+          - paragraph [ref=f39e25]: Encaissement des consultations, analyses et ordonnances du jour.
+        - button "Nouvel encaissement" [ref=f39e29] [cursor=pointer]
+      - generic [ref=f39e32]:
+        - generic [ref=f39e33]:
+          - paragraph [ref=f39e35]: Paniers en cours
+          - generic [ref=f39e39]:
+            - generic [ref=f39e40]: "0"
+            - generic [ref=f39e41]: Factures en cours
+        - generic [ref=f39e42]:
+          - paragraph [ref=f39e44]: À payer
+          - generic [ref=f39e48]:
+            - generic [ref=f39e49]: "1"
+            - generic [ref=f39e50]: En attente de paiement
+        - generic [ref=f39e51]:
+          - paragraph [ref=f39e53]: Payées
+          - generic [ref=f39e57]:
+            - generic [ref=f39e58]: "0"
+            - generic [ref=f39e59]: Factures réglées
+        - generic [ref=f39e60]:
+          - paragraph [ref=f39e62]: Journée en cours
+          - generic [ref=f39e66]:
+            - generic [ref=f39e67]: 0 ouvert(s)
+            - generic [ref=f39e68]: 0 déjà clôturé(s)
+      - generic [ref=f39e69]:
+        - generic [ref=f39e70]:
+          - generic [ref=f39e71]: "Filtrer par statut :"
+          - generic [ref=f39e74]:
+            - button "Tout" [ref=f39e75] [cursor=pointer]
+            - button "Payé" [ref=f39e76] [cursor=pointer]
+            - button "Partiellement payé" [ref=f39e77] [cursor=pointer]
+            - button "En attente" [ref=f39e78] [cursor=pointer]
+        - generic [ref=f39e79]:
+          - generic [ref=f39e80]:
+            - generic [ref=f39e81]: Date
+            - textbox "Date" [ref=f39e82]: 2026-09-28
+            - button "Afficher" [ref=f39e83] [cursor=pointer]
+          - link [ref=f39e84] [cursor=pointer]:
+            - /url: http://localhost:8000/caisse/historique
+            - button "Historique" [ref=f39e85]
+      - table [ref=f39e90]:
+        - rowgroup [ref=f39e91]:
+          - row [ref=f39e92]:
+            - columnheader "Patient" [ref=f39e93]
+            - columnheader "Couverture" [ref=f39e94]
+            - columnheader "Sous-total" [ref=f39e95]
+            - columnheader "Assurance" [ref=f39e96]
+            - columnheader "À payer" [ref=f39e97]
+            - columnheader "Statut" [ref=f39e98]
+            - columnheader "Caissier" [ref=f39e99]
+            - columnheader "Service" [ref=f39e100]
+            - columnheader "Montant Total" [ref=f39e101]
+            - columnheader "Mode de paiement" [ref=f39e102]
+            - columnheader "Actions" [ref=f39e103]
+        - rowgroup [ref=f39e104]:
+          - row [ref=f39e105]:
+            - cell "QP QA PatientTest CSM-7880" [ref=f39e106]:
+              - generic [ref=f39e107]:
+                - generic [ref=f39e108]: QP
+                - generic [ref=f39e109]:
+                  - paragraph [ref=f39e110]: QA PatientTest
+                  - paragraph [ref=f39e111]: CSM-7880
+            - cell "Non assuré" [ref=f39e112]
+            - cell "15 000 FCFA" [ref=f39e113]
+            - cell "0 FCFA" [ref=f39e114]
+            - cell "15 000 FCFA" [ref=f39e115]
+            - cell "À payer" [ref=f39e116]
+            - cell "—" [ref=f39e120]
+            - cell "Consultation générale" [ref=f39e121]
+            - cell "15 000 FCFA" [ref=f39e122]
+            - cell "—" [ref=f39e123]
+            - cell [ref=f39e124]:
+              - generic [ref=f39e125]:
+                - link "Détail" [ref=f39e126] [cursor=pointer]:
+                  - /url: http://localhost:8000/caisse/paniers/9
+                - button "Encaisser" [ref=f39e128] [cursor=pointer]

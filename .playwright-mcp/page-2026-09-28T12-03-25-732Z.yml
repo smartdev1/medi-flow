@@ -1,0 +1,79 @@
+- generic [ref=f41e3]:
+  - banner [ref=f41e4]:
+    - button "Ouvrir le menu" [ref=f41e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f41e9]
+    - generic [ref=f41e10]:
+      - button [ref=f41e11] [cursor=pointer]
+      - generic [ref=f41e16]: DG
+  - main [ref=f41e20]:
+    - generic [ref=f41e21]:
+      - generic [ref=f41e23]:
+        - heading "Sortie patient" [level=1] [ref=f41e24]
+        - paragraph [ref=f41e25]: Recherchez un patient pour consulter son résumé et clôturer sa visite.
+      - generic [ref=f41e27]:
+        - text: Rechercher un patient
+        - textbox "Rechercher par CSM-XXXX ou par nom..." [ref=f41e29]: CSM-7880 — QA PatientTest
+      - generic [ref=f41e30]:
+        - generic [ref=f41e31]:
+          - generic [ref=f41e33]:
+            - generic [ref=f41e34]:
+              - generic [ref=f41e35]: QP
+              - generic [ref=f41e36]:
+                - heading "QA PatientTest" [level=2] [ref=f41e37]
+                - paragraph [ref=f41e38]: CSM-7880
+                - generic [ref=f41e39]:
+                  - generic [ref=f41e40]: 36 ans · M
+                  - generic [ref=f41e42]: Non assuré
+                  - generic [ref=f41e44]: Visite en cours
+            - button "Clôturer le dossier" [ref=f41e47] [cursor=pointer]
+          - generic [ref=f41e50]:
+            - heading "Paiements" [level=3] [ref=f41e51]
+            - generic [ref=f41e53]:
+              - generic [ref=f41e54]: Consultation générale
+              - generic [ref=f41e55]:
+                - generic [ref=f41e56]: 15 000 FCFA
+                - generic [ref=f41e57]: Payé
+          - generic [ref=f41e59]:
+            - heading "Consultations" [level=3] [ref=f41e60]
+            - generic [ref=f41e63]:
+              - paragraph [ref=f41e64]: Dr. Gnlé
+              - generic [ref=f41e65]: Clôturée
+          - generic [ref=f41e67]:
+            - heading "Examens de laboratoire" [level=3] [ref=f41e68]
+            - paragraph [ref=f41e69]: Aucun examen demandé.
+          - generic [ref=f41e70]:
+            - heading "Ordonnances & délivrance" [level=3] [ref=f41e71]
+            - paragraph [ref=f41e72]: Aucune ordonnance enregistrée.
+        - generic [ref=f41e73]:
+          - heading "Parcours complet" [level=3] [ref=f41e74]
+          - list [ref=f41e75]:
+            - listitem [ref=f41e76]:
+              - generic [ref=f41e81]:
+                - generic [ref=f41e82]:
+                  - paragraph [ref=f41e83]: Accueil
+                  - generic [ref=f41e84]: 11:25
+                - paragraph [ref=f41e85]: Akissi Koffi
+            - listitem [ref=f41e86]:
+              - generic [ref=f41e91]:
+                - generic [ref=f41e92]:
+                  - paragraph [ref=f41e93]: Consultation
+                  - generic [ref=f41e94]: 11:34
+                - paragraph [ref=f41e95]: Dr. Gnlé
+            - listitem [ref=f41e96]:
+              - generic [ref=f41e101]:
+                - generic [ref=f41e102]:
+                  - paragraph [ref=f41e103]: Hospitalisation
+                  - generic [ref=f41e104]: 11:41
+                - paragraph [ref=f41e105]: Chambre 10 — Hospitalisation
+            - listitem [ref=f41e106]:
+              - generic [ref=f41e111]:
+                - generic [ref=f41e112]:
+                  - paragraph [ref=f41e113]: Fin d'hospitalisation
+                  - generic [ref=f41e114]: 11:55
+                - paragraph [ref=f41e115]: Chambre 10
+            - listitem [ref=f41e116]:
+              - generic [ref=f41e120]:
+                - generic [ref=f41e121]:
+                  - paragraph [ref=f41e122]: Paiement
+                  - generic [ref=f41e123]: 12:02
+                - paragraph [ref=f41e124]: Consultation générale — Payé

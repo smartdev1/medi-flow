@@ -80,4 +80,11 @@ class PersonnelController extends Controller
 
         return redirect()->route('personnel.index')->with('success', $message);
     }
+
+    public function storeInsuranceCompany(StoreInsuranceCompanyRequest $request): RedirectResponse
+    {
+        $company = \App\Models\InsuranceCompany::create($request->validated());
+
+        return redirect()->route('personnel.index')->with('success', "Compagnie d'assurance « {$company->name} » enregistrée.");
+    }
 }

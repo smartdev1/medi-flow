@@ -1,0 +1,53 @@
+- generic [ref=f14e3]:
+  - banner [ref=f14e4]:
+    - button "Ouvrir le menu" [ref=f14e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f14e9]
+    - generic [ref=f14e10]:
+      - button [ref=f14e11] [cursor=pointer]
+      - generic [ref=f14e16]: AS
+  - main [ref=f14e20]:
+    - generic [ref=f14e22]:
+      - generic [ref=f14e23]:
+        - generic [ref=f14e24]:
+          - heading "Circuit patient — vue d'ensemble" [level=1] [ref=f14e25]
+          - paragraph [ref=f14e26]: Position de chaque patient dans le parcours de soins, en temps réel.
+        - generic [ref=f14e27]:
+          - generic [ref=f14e28]: "Dernière MAJ : 11:27:37"
+          - button "Rafraîchir" [ref=f14e33] [cursor=pointer]
+      - generic [ref=f14e37]:
+        - generic [ref=f14e38]:
+          - generic [ref=f14e39]:
+            - generic [ref=f14e40]: Consultation
+            - generic [ref=f14e43]: "1"
+          - generic [ref=f14e45]:
+            - paragraph [ref=f14e47]: QA PatientTest
+            - paragraph [ref=f14e48]: CSM-7880
+            - paragraph [ref=f14e49]: Consultation
+            - generic [ref=f14e51] [cursor=pointer]:
+              - checkbox "Confirmer les constantes" [ref=f14e52]
+              - text: Confirmer les constantes
+        - generic [ref=f14e53]:
+          - generic [ref=f14e54]:
+            - generic [ref=f14e55]: Hospitalisation
+            - generic [ref=f14e58]: "0"
+          - generic [ref=f14e59]: Aucun patient
+        - generic [ref=f14e61]:
+          - generic [ref=f14e62]:
+            - generic [ref=f14e63]: Mise en Observation
+            - generic [ref=f14e66]: "0"
+          - generic [ref=f14e67]: Aucun patient
+        - generic [ref=f14e69]:
+          - generic [ref=f14e70]:
+            - generic [ref=f14e71]: Laboratoire
+            - generic [ref=f14e74]: "0"
+          - generic [ref=f14e75]: Aucun patient
+        - generic [ref=f14e77]:
+          - generic [ref=f14e78]:
+            - generic [ref=f14e79]: Retour médecin
+            - generic [ref=f14e82]: "0"
+          - generic [ref=f14e83]: Aucun patient
+        - generic [ref=f14e85]:
+          - generic [ref=f14e86]:
+            - generic [ref=f14e87]: Sortie
+            - generic [ref=f14e90]: "0"
+          - generic [ref=f14e91]: Aucun patient

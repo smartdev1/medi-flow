@@ -1,0 +1,71 @@
+- generic [ref=f4e2]:
+  - complementary [ref=f4e3]:
+    - generic [ref=f4e8]:
+      - paragraph [ref=f4e9]: Clinique Saint Matthieu
+      - paragraph [ref=f4e10]: Espace professionnel
+    - navigation [ref=f4e11]:
+      - link "Salle d'attente 5" [ref=f4e13] [cursor=pointer]:
+        - /url: http://localhost:8000/salle-attente
+        - generic [ref=f4e16]: Salle d'attente
+        - generic [ref=f4e17]: "5"
+      - button "Hospitalisation" [ref=f4e19] [cursor=pointer]
+    - link "Paramètres" [ref=f4e26] [cursor=pointer]:
+      - /url: http://localhost:8000/profile
+  - generic [ref=f4e30]:
+    - banner [ref=f4e31]:
+      - textbox "Rechercher..." [ref=f4e33]
+      - generic [ref=f4e34]:
+        - button [ref=f4e35] [cursor=pointer]
+        - generic [ref=f4e40]:
+          - generic [ref=f4e42] [cursor=pointer]:
+            - generic [ref=f4e43]: AS
+            - generic [ref=f4e44]:
+              - paragraph [ref=f4e45]: Aide Soignante
+              - paragraph [ref=f4e46]: Aide-soignante
+          - generic [ref=f4e117]:
+            - generic [ref=f4e118]:
+              - paragraph [ref=f4e119]: Aide Soignante
+              - paragraph [ref=f4e120]: Aide-soignante
+            - link "Paramètres du compte" [ref=f4e121] [cursor=pointer]:
+              - /url: http://localhost:8000/profile
+            - button "Se déconnecter" [ref=f4e125] [cursor=pointer]
+    - main [ref=f4e49]:
+      - generic [ref=f4e51]:
+        - generic [ref=f4e52]:
+          - generic [ref=f4e53]:
+            - heading "Circuit patient — vue d'ensemble" [level=1] [ref=f4e54]
+            - paragraph [ref=f4e55]: Position de chaque patient dans le parcours de soins, en temps réel.
+          - generic [ref=f4e56]:
+            - generic [ref=f4e57]: "Dernière MAJ : 11:13:04"
+            - button "Rafraîchir" [ref=f4e62] [cursor=pointer]
+        - generic [ref=f4e66]:
+          - generic [ref=f4e67]:
+            - generic [ref=f4e68]:
+              - generic [ref=f4e69]: Consultation
+              - generic [ref=f4e72]: "0"
+            - generic [ref=f4e73]: Aucun patient
+          - generic [ref=f4e75]:
+            - generic [ref=f4e76]:
+              - generic [ref=f4e77]: Hospitalisation
+              - generic [ref=f4e80]: "0"
+            - generic [ref=f4e81]: Aucun patient
+          - generic [ref=f4e83]:
+            - generic [ref=f4e84]:
+              - generic [ref=f4e85]: Mise en Observation
+              - generic [ref=f4e88]: "0"
+            - generic [ref=f4e89]: Aucun patient
+          - generic [ref=f4e91]:
+            - generic [ref=f4e92]:
+              - generic [ref=f4e93]: Laboratoire
+              - generic [ref=f4e96]: "0"
+            - generic [ref=f4e97]: Aucun patient
+          - generic [ref=f4e99]:
+            - generic [ref=f4e100]:
+              - generic [ref=f4e101]: Retour médecin
+              - generic [ref=f4e104]: "0"
+            - generic [ref=f4e105]: Aucun patient
+          - generic [ref=f4e107]:
+            - generic [ref=f4e108]:
+              - generic [ref=f4e109]: Sortie
+              - generic [ref=f4e112]: "0"
+            - generic [ref=f4e113]: Aucun patient

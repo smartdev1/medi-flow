@@ -1,0 +1,56 @@
+- generic [ref=f33e2]:
+  - complementary [ref=f33e3]:
+    - generic [ref=f33e8]:
+      - paragraph [ref=f33e9]: Clinique Saint Matthieu
+      - paragraph [ref=f33e10]: Espace professionnel
+    - navigation "Navigation principale" [ref=f33e11]:
+      - paragraph [ref=f33e13]: Parcours Patient
+      - link "Médecin 2" [ref=f33e15] [cursor=pointer]:
+        - /url: http://localhost:8000/medecin
+        - generic [ref=f33e18]: Médecin
+        - generic [ref=f33e19]: "2"
+      - button "Hospitalisation" [ref=f33e21] [cursor=pointer]
+      - paragraph [ref=f33e29]: Administratif
+      - link "Sortie patient" [ref=f33e31] [cursor=pointer]:
+        - /url: http://localhost:8000/sortie
+  - generic [ref=f33e35]:
+    - banner [ref=f33e36]:
+      - textbox "Rechercher..." [ref=f33e38]
+      - generic [ref=f33e39]:
+        - button [ref=f33e40] [cursor=pointer]
+        - generic [ref=f33e47] [cursor=pointer]:
+          - generic [ref=f33e48]: AT
+          - generic [ref=f33e49]:
+            - paragraph [ref=f33e50]: Adama Traoré
+            - paragraph [ref=f33e51]: Médecin
+    - main [ref=f33e54]:
+      - generic [ref=f33e56]:
+        - generic [ref=f33e57]:
+          - generic [ref=f33e58]:
+            - heading "Espace Médecin" [level=1] [ref=f33e59]
+            - paragraph [ref=f33e60]: 2 patient(s) en attente de consultation aujourd'hui.
+          - generic [ref=f33e61]:
+            - generic [ref=f33e62]: "Dernière MAJ : 12:03:25"
+            - button "Rafraîchir" [ref=f33e65] [cursor=pointer]
+        - generic [ref=f33e69]:
+          - generic [ref=f33e70]:
+            - generic [ref=f33e71]:
+              - heading "File d'attente" [level=2] [ref=f33e72]
+              - generic [ref=f33e73]: 2 patients
+            - button "TC Tim Coock 2 heures d'attente Consultation" [ref=f33e74] [cursor=pointer]:
+              - generic [ref=f33e75]: TC
+              - generic [ref=f33e76]:
+                - generic [ref=f33e77]:
+                  - paragraph [ref=f33e78]: Tim Coock
+                  - generic [ref=f33e79]: 2 heures d'attente
+                - paragraph [ref=f33e80]: Consultation
+            - button "AA Aristide Adouko 1 heure d'attente Consultation" [ref=f33e81] [cursor=pointer]:
+              - generic [ref=f33e82]: AA
+              - generic [ref=f33e83]:
+                - generic [ref=f33e84]:
+                  - paragraph [ref=f33e85]: Aristide Adouko
+                  - generic [ref=f33e86]: 1 heure d'attente
+                - paragraph [ref=f33e87]: Consultation
+          - generic [ref=f33e89]:
+            - paragraph [ref=f33e92]: Aucun patient sélectionné
+            - paragraph [ref=f33e93]: Sélectionnez un patient dans la file d'attente pour commencer la consultation.

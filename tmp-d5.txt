@@ -1,0 +1,11 @@
+PHPUnit 10.5.63 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.14
+Configuration: C:\Users\Aristide Adouko\OneDrive\Documents\LATEST PROJECTS\moderne\phpunit.xml
+
+.                                                                   1 / 1 (100%)
+
+Time: 00:04.486, Memory: 44.00 MB
+
+OK, but there were issues!
+Tests: 1, Assertions: 3, PHPUnit Deprecations: 1.

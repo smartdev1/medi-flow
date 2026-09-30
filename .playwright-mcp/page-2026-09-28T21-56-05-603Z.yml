@@ -1,0 +1,105 @@
+- generic [ref=f38e3]:
+  - banner [ref=f38e4]:
+    - button "Ouvrir le menu" [ref=f38e5] [cursor=pointer]
+    - textbox "Rechercher..." [ref=f38e9]
+    - generic [ref=f38e10]:
+      - button [ref=f38e11] [cursor=pointer]
+      - generic [ref=f38e16]: DG
+  - main [ref=f38e20]:
+    - generic [ref=f38e21]:
+      - generic [ref=f38e22]:
+        - generic [ref=f38e23]:
+          - heading "Accueil & Réception" [level=1] [ref=f38e24]
+          - paragraph [ref=f38e25]: Gestion des arrivées des patients — lundi 28 septembre.
+        - button "Nouveau patient" [ref=f38e28] [cursor=pointer]
+      - generic [ref=f38e31]:
+        - generic [ref=f38e32]:
+          - paragraph [ref=f38e34]: Arrivées aujourd'hui
+          - generic [ref=f38e38]:
+            - generic [ref=f38e39]: "4"
+            - generic [ref=f38e40]: Visites du jour
+        - generic [ref=f38e41]:
+          - paragraph [ref=f38e43]: En attente
+          - generic [ref=f38e47]:
+            - generic [ref=f38e48]: "4"
+            - generic [ref=f38e49]: Avant consultation
+        - generic [ref=f38e50]:
+          - paragraph [ref=f38e52]: Urgences
+          - generic [ref=f38e56]:
+            - generic [ref=f38e57]: "0"
+            - generic [ref=f38e58]: Priorité immédiate
+        - generic [ref=f38e59]:
+          - paragraph [ref=f38e61]: Taux d'occupation
+          - generic [ref=f38e65]:
+            - generic [ref=f38e66]: 0%
+            - generic [ref=f38e67]: Capacité clinique
+      - generic [ref=f38e68]:
+        - generic [ref=f38e69]: "Filtrer par prise en charge :"
+        - generic [ref=f38e72]:
+          - button "Tout" [ref=f38e73] [cursor=pointer]
+          - button "Assuré" [ref=f38e74] [cursor=pointer]
+          - button "Non assuré" [ref=f38e75] [cursor=pointer]
+        - generic [ref=f38e76]: lundi 28 septembre
+      - generic [ref=f38e79]:
+        - table [ref=f38e81]:
+          - rowgroup [ref=f38e82]:
+            - row [ref=f38e83]:
+              - columnheader "Patient" [ref=f38e84]
+              - columnheader "Arrivée" [ref=f38e85]
+              - columnheader "Prise en charge" [ref=f38e86]
+              - columnheader "Statut" [ref=f38e87]
+              - columnheader "Actions" [ref=f38e88]
+          - rowgroup [ref=f38e89]:
+            - row [ref=f38e90]:
+              - cell "LF Lisa Folawiyo CSM-6172" [ref=f38e91]:
+                - generic [ref=f38e92]:
+                  - generic [ref=f38e93]: LF
+                  - generic [ref=f38e94]:
+                    - paragraph [ref=f38e95]: Lisa Folawiyo
+                    - paragraph [ref=f38e96]: CSM-6172
+              - cell "20:41" [ref=f38e97]
+              - cell "Assuré" [ref=f38e98]
+              - cell "En attente" [ref=f38e101]
+              - cell [ref=f38e104]:
+                - button "Détails" [ref=f38e105] [cursor=pointer]
+            - row [ref=f38e106]:
+              - cell "AA Aristide Adouko CSM-8147" [ref=f38e107]:
+                - generic [ref=f38e108]:
+                  - generic [ref=f38e109]: AA
+                  - generic [ref=f38e110]:
+                    - paragraph [ref=f38e111]: Aristide Adouko
+                    - paragraph [ref=f38e112]: CSM-8147
+              - cell "21:30" [ref=f38e113]
+              - cell "Assuré" [ref=f38e114]
+              - cell "En attente" [ref=f38e117]
+              - cell [ref=f38e120]:
+                - button "Détails" [ref=f38e121] [cursor=pointer]
+            - row [ref=f38e122]:
+              - cell "PN Patient Non-Assuré CSM-5824" [ref=f38e123]:
+                - generic [ref=f38e124]:
+                  - generic [ref=f38e125]: PN
+                  - generic [ref=f38e126]:
+                    - paragraph [ref=f38e127]: Patient Non-Assuré
+                    - paragraph [ref=f38e128]: CSM-5824
+              - cell "21:34" [ref=f38e129]
+              - cell "Assuré" [ref=f38e130]
+              - cell "En attente" [ref=f38e133]
+              - cell [ref=f38e136]:
+                - button "Détails" [ref=f38e137] [cursor=pointer]
+            - row [ref=f38e138]:
+              - cell "QP QA PatientTest CSM-7880" [ref=f38e139]:
+                - generic [ref=f38e140]:
+                  - generic [ref=f38e141]: QP
+                  - generic [ref=f38e142]:
+                    - paragraph [ref=f38e143]: QA PatientTest
+                    - paragraph [ref=f38e144]: CSM-7880
+              - cell "21:53" [ref=f38e145]
+              - cell "Non assuré" [ref=f38e146]
+              - cell "En attente" [ref=f38e149]
+              - cell [ref=f38e152]:
+                - button "Détails" [ref=f38e153] [cursor=pointer]
+        - generic [ref=f38e154]:
+          - paragraph [ref=f38e155]: 4 arrivée(s) affichée(s) / 4 arrivée(s) enregistrée(s) aujourd'hui
+          - generic [ref=f38e156]:
+            - button [disabled] [ref=f38e157]
+            - button [ref=f38e160] [cursor=pointer]

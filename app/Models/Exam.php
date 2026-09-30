@@ -17,19 +17,31 @@ class Exam extends Model
 
     protected $fillable = [
         'patient_id',
+        'visit_id',
         'name',
+        'price',
         'status',
         'result',
         'requested_at',
     ];
 
     protected $casts = [
+        'price' => 'integer',
         'requested_at' => 'datetime',
     ];
 
     public function patient(): BelongsTo
     {
         return $this->belongsTo(Patient::class);
+    }
+
+    /**
+     * Visite ayant demandé l'examen. Nulle pour une demande saisie au
+     * laboratoire hors consultation.
+     */
+    public function visit(): BelongsTo
+    {
+        return $this->belongsTo(Visit::class);
     }
 
     public function getStatusToneAttribute(): string
