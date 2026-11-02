@@ -146,9 +146,15 @@
                         </div>
 
                         @if ($activeVisit)
+                            @if ($depiquagePending)
+                                <div class="mb-3 flex items-center gap-2 rounded-md border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-800">
+                                    <x-ui.icon name="alert-triangle" class="h-4 w-4 flex-shrink-0" />
+                                    En attente de validation du dépiquage par les aides-soignantes
+                                </div>
+                            @endif
                             <form method="POST" action="{{ route('sortie.close', $activeVisit) }}">
                                 @csrf
-                                <x-ui.button type="submit">
+                                <x-ui.button type="submit" :disabled="$depiquagePending">
                                     <x-ui.icon name="check-circle" class="h-4 w-4" />
                                     Clôturer le dossier
                                 </x-ui.button>

@@ -40,6 +40,8 @@ class DatabaseSeeder extends Seeder
             );
         }
 
+        $this->call(ActSeeder::class);
+        $this->call(LabExamSeeder::class);
         $this->call(ClinicSeeder::class);
     }
 }

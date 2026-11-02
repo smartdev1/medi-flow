@@ -16,3 +16,8 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Tests de bout en bout : artefacts et base locale.
+/test-results
+/playwright-report
+/database/e2e.sqlite

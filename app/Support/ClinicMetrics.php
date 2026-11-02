@@ -47,7 +47,7 @@ class ClinicMetrics
             ActCategory::Hospitalisation->value => 'Hospitalisation',
             ActCategory::Chirurgie->value => 'Chirurgie',
             ActCategory::Maternite->value => 'Autre',
-            ActCategory::Bloc->value => 'Autre',
+            ActCategory::Bloc->value => 'Bloc opératoire',
             ActCategory::Autre->value => 'Autre',
         ];
 

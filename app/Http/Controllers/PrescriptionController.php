@@ -8,6 +8,7 @@ use App\Models\Medication;
 use App\Models\Patient;
 use App\Models\Payment;
 use App\Models\Prescription;
+use App\Models\Visit;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,23 @@ class PrescriptionController extends Controller
         $data = $request->validated();
         $patient = Patient::findOrFail($data['patient_id']);
 
+        // La pharmacie est un acte de la consultation : sans ce lien, une
+        // ordonnance se retrouverait facturée sur toutes les factures suivantes
+        // du patient, au taux de chacune.
+        $visit = null;
+
+        if (! empty($data['visit_id'])) {
+            $visit = Visit::findOrFail($data['visit_id']);
+
+            abort_unless(
+                $visit->patient_id === $patient->id,
+                422,
+                'La visite sélectionnée ne correspond pas au patient choisi.'
+            );
+        }
+
         $prescription = $patient->prescriptions()->create([
+            'visit_id' => $visit?->id,
             'prescribed_by' => Auth::id(),
             'stock_status' => 'Disponible',
             'status' => Prescription::STATUS_AWAITING_DISPENSE,

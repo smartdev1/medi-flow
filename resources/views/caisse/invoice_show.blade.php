@@ -118,7 +118,7 @@
                         <p class="text-sm font-medium text-ink">
                             {{ $invoice->patient->insuranceCompany?->name ?? 'Aucune' }}
                             @if ($invoice->patient->insuranceCompany)
-                                ({{ $invoice->patient->insuranceCompany->rate }}%)
+                                (ticket modérateur {{ rtrim(rtrim((string) $invoice->ticket_moderateur, '0'), '.') ?: '0' }} %)
                             @endif
                         </p>
                     </div>

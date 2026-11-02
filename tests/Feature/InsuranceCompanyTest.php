@@ -21,30 +21,25 @@ class InsuranceCompanyTest extends TestCase
         ]);
 
         $response = $this->actingAs($admin)
-            ->post(route('insurance.store'), [
-                'name' => 'SICAM Admin',
-                'rate' => 80,
-            ]);
+            ->post(route('insurance.store'), ['name' => 'SICAM Admin']);
 
         $response->assertRedirect(route('insurance.index'));
         $response->assertSessionHas('success');
-        $this->assertDatabaseHas('insurance_companies', ['name' => 'SICAM Admin', 'rate' => 80]);
+        $this->assertDatabaseHas('insurance_companies', ['name' => 'SICAM Admin']);
     }
 
-    public function test_an_insurance_company_requires_a_coverage_rate(): void
+    public function test_an_insurance_company_still_requires_a_name(): void
     {
         $admin = User::factory()->create([
             'role' => Role::Admin->value,
             'email_verified_at' => now(),
         ]);
 
-        // Sans taux, la facture de chaque patient de cette assurance lui
-        // ferait payer la totalité des actes.
         $this->actingAs($admin)
-            ->post(route('insurance.store'), ['name' => 'SICAM Sans Taux'])
-            ->assertSessionHasErrors('rate');
+            ->post(route('insurance.store'), ['name' => ''])
+            ->assertSessionHasErrors('name');
 
-        $this->assertDatabaseMissing('insurance_companies', ['name' => 'SICAM Sans Taux']);
+        $this->assertDatabaseCount('insurance_companies', 0);
     }
 
     public function test_patient_registration_can_be_linked_to_an_insurance_company(): void
@@ -62,6 +57,7 @@ class InsuranceCompanyTest extends TestCase
                 'sex' => 'M',
                 'coverage' => 'Assuré',
                 'insurance_company_id' => $company->id,
+                'ticket_moderateur' => 80,
             ]);
 
         $response->assertRedirect(route('accueil.index'));

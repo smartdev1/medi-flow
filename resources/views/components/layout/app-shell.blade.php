@@ -32,6 +32,8 @@
             'label' => 'Supervision',
             'items' => [
                 'supervision' => ['label' => "Vue d'ensemble", 'icon' => 'grid', 'href' => route('docteurgeneral.index'), 'roles' => ['docteur_general'], 'active_routes' => ['docteurgeneral.index']],
+                'raf-dashboard' => ['label' => 'Supervision financière', 'icon' => 'chart-bar', 'href' => route('caisse.raf.dashboard'), 'roles' => ['raf', 'docteur_general', 'admin'], 'active_routes' => ['caisse.raf.dashboard']],
+                'etat-quotidien' => ['label' => 'État quotidien', 'icon' => 'clipboard-document', 'href' => route('etat-quotidien.index'), 'roles' => ['accueil', 'docteur_general', 'admin', 'aide_soignante'], 'active_routes' => ['etat-quotidien.index']],
             ],
         ],
 
@@ -45,6 +47,7 @@
                 'accueil'     => ['label' => 'Accueil',          'icon' => 'user-plus',     'href' => route('accueil.index'),     'roles' => ['accueil', 'docteur_general', 'aide_soignante'],         'active_routes' => ['accueil.index']],
                 'attente'     => ['label' => "Salle d'attente",   'icon' => 'users',         'href' => route('attente.index'),     'roles' => ['accueil', 'docteur_general', 'aide_soignante'],         'active_routes' => ['attente.index']],
                 'medecin'     => ['label' => 'Médecin',           'icon' => 'stethoscope',   'href' => route('medecin.index'),     'roles' => ['medecin', 'pediatre', 'docteur_general'],         'active_routes' => ['medecin.index']],
+                'bloc'        => ['label' => 'Bloc opératoire',  'icon' => 'scissors',      'href' => route('bloc.index'),        'roles' => ['medecin', 'aide_soignante'],                           'active_routes' => ['bloc.index']],
                 'laboratoire' => ['label' => 'Laboratoire',       'icon' => 'beaker',        'href' => route('laboratoire.index'), 'roles' => ['laborantin', 'docteur_general'],                       'active_routes' => ['laboratoire.index']],
                 'pharmacie'   => ['label' => 'Pharmacie',         'icon' => 'capsule',       'href' => route('pharmacie.index'),   'roles' => ['pharmacien', 'docteur_general'],                       'active_routes' => ['pharmacie.index']],
             ],
@@ -60,7 +63,7 @@
             'roles'    => ['medecin', 'pediatre', 'docteur_general', 'aide_soignante'],
             'active_routes' => ['hospitalisation.index', 'admission-requests.index', 'observation.index', 'chambres.index'],
             'children' => [
-                ['label' => 'Hospitalisation',     'icon' => 'building',           'href' => route('hospitalisation.index'),    'route' => 'hospitalisation.index',    'roles' => ['medecin', 'pediatre', 'docteur_general']],
+                ['label' => 'Hospitalisation',     'icon' => 'building',           'href' => route('hospitalisation.index'),    'route' => 'hospitalisation.index',    'roles' => ['medecin', 'pediatre', 'docteur_general', 'aide_soignante']],
                 ['label' => "Demandes d'admission", 'icon' => 'clipboard-document', 'href' => route('admission-requests.index'), 'route' => 'admission-requests.index', 'roles' => ['aide_soignante', 'medecin', 'pediatre', 'docteur_general']],
                 ['label' => 'Mise en Observation',  'icon' => 'eye',                'href' => route('observation.index'),         'route' => 'observation.index',         'roles' => ['medecin', 'pediatre', 'docteur_general']],
                 ['label' => 'Chambres',             'icon' => 'bed',                'href' => route('chambres.index'),            'route' => 'chambres.index',            'roles' => ['medecin', 'pediatre', 'docteur_general']],
@@ -73,7 +76,7 @@
             'label' => 'Administratif',
             'items' => [
                 'caisse'      => ['label' => 'Caisse',         'icon' => 'credit-card',  'href' => route('caisse.index'),      'roles' => ['caissier', 'docteur_general'], 'active_routes' => ['caisse.index', 'caisse.paniers.show']],
-                'vacations'   => ['label' => 'Vacations',      'icon' => 'clock',        'href' => route('caisse.sessions.index'), 'roles' => ['caissier', 'docteur_general'], 'active_routes' => ['caisse.sessions.index', 'caisse.sessions.show', 'caisse.historique', 'caisse.jour']],
+                'vacations'   => ['label' => 'Vacations',      'icon' => 'clock',        'href' => route('caisse.sessions.index'), 'roles' => ['caissier', 'docteur_general', 'raf'], 'active_routes' => ['caisse.sessions.index', 'caisse.sessions.show', 'caisse.sessions.emergency-close-form', 'caisse.sessions.emergency-close', 'caisse.historique', 'caisse.jour']],
                 'sortie'      => ['label' => 'Sortie patient',  'icon' => 'check-circle', 'href' => route('sortie.index'),      'roles' => ['accueil', 'docteur_general'],   'active_routes' => ['sortie.index']],
                 'logistique'  => ['label' => 'Logistique',     'icon' => 'archive-box',  'href' => route('logistique.index'),  'roles' => ['logistique', 'docteur_general'], 'active_routes' => ['logistique.index']],
             ],

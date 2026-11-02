@@ -17,11 +17,15 @@ class CashierSession extends Model
 
     protected $fillable = [
         'cashier_id',
+        'is_cash_point',
         'opened_at',
         'closed_at',
         'opening_balance',
         'closing_balance',
         'notes',
+        'emergency_closed_by',
+        'emergency_closed_at',
+        'emergency_closure_reason',
     ];
 
     protected static function newFactory()
@@ -30,10 +34,13 @@ class CashierSession extends Model
     }
 
     protected $casts = [
+        'is_cash_point' => 'boolean',
         'opened_at' => 'datetime',
         'closed_at' => 'datetime',
         'opening_balance' => 'integer',
         'closing_balance' => 'integer',
+        'emergency_closed_at' => 'datetime',
+        'emergency_closed_by' => 'integer',
     ];
 
     public function cashier(): BelongsTo
@@ -92,13 +99,38 @@ class CashierSession extends Model
         return (int) $this->payments()->settled()->sum('amount');
     }
 
+    /**
+     * Theoretical closing balance = opening_balance + all settled payments
+     * (PAID + PARTIAL) made during this session. This is what the cashier
+     * should have before counting physical cash.
+     */
+    public function theoreticalBalance(): int
+    {
+        return (int) ($this->opening_balance + $this->settledAmount());
+    }
+
     public function cashVariance(): ?int
     {
-        if ($this->closed_at === null) {
+        if ($this->closed_at === null || $this->closing_balance === null) {
             return null;
         }
 
         return $this->opening_balance + $this->settledAmount() - $this->closing_balance;
+    }
+
+    public function isEmergencyClosed(): bool
+    {
+        return $this->emergency_closed_by !== null;
+    }
+
+    public function canBeEmergencyClosed(): bool
+    {
+        return $this->isActive() && ! $this->isEmergencyClosed();
+    }
+
+    public function pendingAudit(): bool
+    {
+        return $this->isEmergencyClosed() && $this->closing_balance === null;
     }
 
     /**
@@ -136,6 +168,17 @@ class CashierSession extends Model
     public function scopeForCashier($query, int $cashierId)
     {
         return $query->where('cashier_id', $cashierId);
+    }
+
+    /**
+     * Vacances du point de vente pharmacie.
+     *
+     * Elles portent des fonds distincts de ceux de la caisse : un relevé qui
+     * les confondrait rendrait le rapprochement faux sans erreur visible.
+     */
+    public function scopeCashPoint($query)
+    {
+        return $query->where('is_cash_point', true);
     }
 
     public function scopeActive($query)

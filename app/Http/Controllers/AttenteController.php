@@ -126,7 +126,7 @@ class AttenteController extends Controller
             return $this->card($patient, $stage, $visit->reason ?: $stage, 'warning', ['label' => 'En attente validation', 'tone' => 'warning'], $visit);
         }
 
-        $pendingExam = $patient->exams->first(fn (Exam $exam) => in_array($exam->status, [Exam::STATUS_AWAITING_SAMPLE, Exam::STATUS_IN_PROGRESS], true));
+        $pendingExam = $patient->exams->first(fn (Exam $exam) => in_array($exam->status, Exam::PENDING_IN_LABORATORY, true));
         if ($pendingExam) {
             $tone = $pendingExam->status === Exam::STATUS_IN_PROGRESS ? 'brand' : 'neutral';
 

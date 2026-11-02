@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Admission;
+use App\Models\CashierSession;
 use App\Models\Exam;
 use App\Models\Invoice;
 use App\Models\Payment;
@@ -17,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
+        Admission::class => \App\Policies\AdmissionPolicy::class,
         Patient::class => \App\Policies\PatientPolicy::class,
         Payment::class => \App\Policies\PaymentPolicy::class,
         Exam::class => \App\Policies\ExamPolicy::class,

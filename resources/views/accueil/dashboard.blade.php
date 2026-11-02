@@ -84,7 +84,7 @@
 
                 <div>
                     <label class="text-sm font-medium text-ink">Acte demandé</label>
-                    <select name="act_id" x-model="patient.act_id" @change="updateRouting()" class="mt-1 w-full rounded-md border border-line bg-white py-2.5 px-3 text-sm text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                    <select name="act_id" x-ref="actSelect" x-model="patient.act_id" @change="updateRouting()" class="mt-1 w-full rounded-md border border-line bg-white py-2.5 px-3 text-sm text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
                         <option value="">— Sélectionner l'acte —</option>
                         @foreach ($acts->groupBy('category') as $category => $categoryActs)
                             <optgroup label="{{ \App\Enums\ActCategory::from($category)->label() }}">
@@ -101,6 +101,17 @@
                     </div>
                     <p class="mt-1 text-xs text-ink-muted">Permet à la caisse de pré-remplir la facture automatiquement.</p>
                     <x-input-error :messages="$errors->get('act_id')" class="mt-1" />
+                </div>
+
+                <div x-show="isSurgeryCategory" x-cloak>
+                    <x-ui.select label="Type de chirurgie" name="surgery_type" placeholder="Sélectionner" :options="['interne' => 'Interne (chirurgien de la clinique)', 'externe' => 'Externe (chirurgien extérieur)']" x-model="patient.surgery_type" />
+                    <x-input-error :messages="$errors->get('surgery_type')" class="mt-1" />
+                    <p class="mt-1 text-xs text-ink-muted">Externe = location de bloc opératoire facturée en supplément.</p>
+                </div>
+
+                <div x-show="patient.surgery_type === 'externe'" x-cloak>
+                    <x-ui.field label="Nom du chirurgien externe" name="referring_doctor_name" placeholder="Dr. Nom Prénom" x-model="patient.referring_doctor_name" />
+                    <x-input-error :messages="$errors->get('referring_doctor_name')" class="mt-1" />
                 </div>
 
                 <label class="flex items-center gap-2 text-sm text-ink-soft">
@@ -262,8 +273,11 @@
                 insurance_company_id: (oldData && oldData.insurance_company_id) || '',
                 ticket_moderateur: (oldData && oldData.ticket_moderateur) || '',
                 act_id: (oldData && oldData.act_id) || '',
+                surgery_type: (oldData && oldData.surgery_type) || '',
+                referring_doctor_name: (oldData && oldData.referring_doctor_name) || '',
             },
             routingDestination: '',
+            isSurgeryCategory: false,
 
             handlePatientSelected(option) {
                 this.existingPatientId = option.id;
@@ -277,8 +291,11 @@
                     insurance_company_id: '',
                     ticket_moderateur: '',
                     act_id: '',
+                    surgery_type: '',
+                    referring_doctor_name: '',
                 };
                 this.routingDestination = '';
+                this.isSurgeryCategory = false;
             },
 
             handlePatientSearchCleared() {
@@ -286,12 +303,17 @@
             },
 
             updateRouting() {
-                const select = this.$el.querySelector('select[name="act_id"]');
+                const select = this.$refs.actSelect || this.$el.querySelector('select[name="act_id"]');
                 if (!select) { this.routingDestination = ''; return; }
                 const selectedOption = select.options[select.selectedIndex];
                 if (!selectedOption || !selectedOption.dataset.code) { this.routingDestination = ''; return; }
 
                 const code = selectedOption.dataset.code;
+                this.isSurgeryCategory = code.startsWith('CHIR-') || code.startsWith('BLOC-');
+                if (!this.isSurgeryCategory) {
+                    this.patient.surgery_type = '';
+                    this.patient.referring_doctor_name = '';
+                }
                 const firstLetter = code.charAt(0).toUpperCase();
                 const destinations = {
                     'C': 'Caisse',

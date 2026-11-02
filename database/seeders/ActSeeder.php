@@ -72,6 +72,7 @@ class ActSeeder extends Seeder
             ['BLOC-MAJEURE', 'Chirurgie majeure', ActCategory::Bloc, 120000, 90000, ['medecin']],
             ['BLOC-ANESTH-LOC', 'Anesthésie locale', ActCategory::Bloc, 10000, 7000, ['medecin']],
             ['BLOC-ANESTH-GEN', 'Anesthésie générale', ActCategory::Bloc, 25000, 18000, ['medecin']],
+            ['BLOC-LOCATION', 'Location de bloc opératoire (forfait)', ActCategory::Bloc, 50000, 35000, ['medecin']],
 
             // 8. Autres actes courants
             ['AUT-VACCIN', 'Vaccination', ActCategory::Autre, 3000, 2000, ['medecin', 'pediatre']],

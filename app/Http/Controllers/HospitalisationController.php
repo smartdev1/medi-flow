@@ -42,6 +42,56 @@ class HospitalisationController extends Controller
         $userName = $user?->name ?? 'Utilisateur';
         $userRole = $user?->role?->label() ?? 'Personnel clinique';
         $userInitials = $user?->initials ?? $this->initialsFor($userName);
+        $isAideSoignante = $user->hasRole(Role::AideSoignante);
+
+        // Nursing aide data: admissions needing depiquage validation or room release
+        $attenteDepiquage = Admission::with(['patient', 'room'])
+            ->whereNotNull('discharged_at')
+            ->whereNull('depiquage_valide_par')
+            ->orderBy('discharged_at')
+            ->get()
+            ->map(fn (Admission $a) => [
+                'id' => $a->id,
+                'name' => $a->patient->full_name,
+                'initials' => $a->patient->initials,
+                'code' => $a->patient->code,
+                'room' => "{$a->room->number} · Lit {$a->bed_number}",
+                'discharged_at' => $a->discharged_at->diffForHumans(),
+                'can_depique' => $a->canBeDepiqued(),
+            ])
+            ->all();
+
+        $chambresALiberer = Admission::with(['patient', 'room'])
+            ->whereNotNull('depiquage_valide_par')
+            ->whereNotNull('discharged_at')
+            ->whereNull('room_released_at')
+            ->orderBy('depiquage_valide_le')
+            ->get()
+            ->map(fn (Admission $a) => [
+                'id' => $a->id,
+                'name' => $a->patient->full_name,
+                'initials' => $a->patient->initials,
+                'code' => $a->patient->code,
+                'room' => "{$a->room->number} · Lit {$a->bed_number}",
+                'depiquage_valide_le' => $a->depiquage_valide_le?->diffForHumans(),
+                'can_liberer' => $a->canBeLiberee(),
+            ])
+            ->all();
+
+        $depiquagesAujourdhui = Admission::with(['patient', 'room', 'depiquageValidePar'])
+            ->whereDate('depiquage_valide_le', today())
+            ->orderByDesc('depiquage_valide_le')
+            ->get()
+            ->map(fn (Admission $a) => [
+                'id' => $a->id,
+                'name' => $a->patient->full_name,
+                'initials' => $a->patient->initials,
+                'code' => $a->patient->code,
+                'room' => "{$a->room->number} · Lit {$a->bed_number}",
+                'valide_le' => $a->depiquage_valide_le->format('H:i'),
+                'valide_par' => $a->depiquageValidePar?->name,
+            ])
+            ->all();
 
         return view('hospitalisation.dashboard', [
             'patients' => $patients,
@@ -57,6 +107,10 @@ class HospitalisationController extends Controller
             'userName' => $userName,
             'userRole' => $userRole,
             'userInitials' => $userInitials,
+            'isAideSoignante' => $isAideSoignante,
+            'attenteDepiquage' => $attenteDepiquage,
+            'chambresALiberer' => $chambresALiberer,
+            'depiquagesAujourdhui' => $depiquagesAujourdhui,
         ]);
     }
 
@@ -101,12 +155,14 @@ class HospitalisationController extends Controller
         $userName = $user?->name ?? 'Utilisateur';
         $userRole = $user?->role?->label() ?? 'Personnel clinique';
         $userInitials = $user?->initials ?? $this->initialsFor($userName);
+        $isAideSoignante = $user?->hasRole(Role::AideSoignante) ?? false;
 
         return view('hospitalisation.observation', [
             'patients' => $patients,
             'userName' => $userName,
             'userRole' => $userRole,
             'userInitials' => $userInitials,
+            'isAideSoignante' => $isAideSoignante,
         ]);
     }
 

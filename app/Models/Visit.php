@@ -23,6 +23,8 @@ class Visit extends Model
         'registered_by',
         'status',
         'urgent',
+        'ticket_moderateur',
+        'surgery_type',
         'discharged_at',
         'vitals_taken_at',
         'vitals_taken_by',
@@ -31,6 +33,7 @@ class Visit extends Model
     protected $casts = [
         'arrived_at' => 'datetime',
         'urgent' => 'boolean',
+        'ticket_moderateur' => 'decimal:2',
         'discharged_at' => 'datetime',
         'vitals_taken_at' => 'datetime',
     ];
@@ -97,6 +100,11 @@ class Visit extends Model
     public function admissionRequests(): HasMany
     {
         return $this->hasMany(AdmissionRequest::class);
+    }
+
+    public function surgeries(): HasMany
+    {
+        return $this->hasMany(Surgery::class);
     }
 
     public function getStatusToneAttribute(): string

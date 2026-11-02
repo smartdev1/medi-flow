@@ -38,6 +38,13 @@
                 <p class="text-lg font-semibold text-ink">{{ number_format($session->opening_balance, 0, ',', ' ') }} FCFA</p>
             </div>
 
+            @if (isset($theoreticalBalance))
+                <div class="mb-5 rounded-md border border-success/20 bg-success/5 p-3">
+                    <p class="text-sm text-ink-muted">Fond théorique</p>
+                    <p class="text-lg font-semibold text-success">{{ number_format($theoreticalBalance, 0, ',', ' ') }} FCFA</p>
+                </div>
+            @endif
+
             <form method="POST" action="{{ route('caisse.sessions.close') }}" class="flex flex-col gap-5">
                 @csrf
 
@@ -48,7 +55,7 @@
                         id="closing_balance"
                         type="number"
                         placeholder="0"
-                        :value="old('closing_balance')"
+                        :value="old('closing_balance', $theoreticalBalance ?? null)"
                         min="0"
                         required
                     />
@@ -77,5 +84,39 @@
             </form>
         </x-ui.card>
     </div>
+
+    @if (isset($settledPayments) && $settledPayments->count() > 0)
+        <div class="mt-6 max-w-2xl">
+            <h2 class="text-lg font-semibold text-ink mb-3">Encaissements de la session</h2>
+            <div class="overflow-x-auto rounded-lg border border-border bg-white">
+                <table class="min-w-full text-sm">
+                    <thead class="bg-surface-sunken">
+                        <tr>
+                            <th class="px-4 py-2 text-left font-medium text-ink-muted">Patient</th>
+                            <th class="px-4 py-2 text-left font-medium text-ink-muted">Acte</th>
+                            <th class="px-4 py-2 text-right font-medium text-ink-muted">Montant</th>
+                            <th class="px-4 py-2 text-left font-medium text-ink-muted">Méthode</th>
+                            <th class="px-4 py-2 text-left font-medium text-ink-muted">Heure</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-border">
+                        @foreach ($settledPayments as $payment)
+                            <tr>
+                                <td class="px-4 py-2">{{ $payment->patient->full_name ?? 'N/A' }}</td>
+                                <td class="px-4 py-2">{{ $payment->act->label ?? 'N/A' }}</td>
+                                <td class="px-4 py-2 text-right">{{ number_format($payment->amount, 0, ',', ' ') }} FCFA</td>
+                                <td class="px-4 py-2">{{ $payment->method }}</td>
+                                <td class="px-4 py-2">{{ $payment->created_at?->format('H:i') }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @elseif (isset($settledPayments))
+        <div class="mt-6 max-w-lg">
+            <p class="text-sm text-ink-muted italic">Aucun encaissement cette session.</p>
+        </div>
+    @endif
 
 </x-layout.app-shell>

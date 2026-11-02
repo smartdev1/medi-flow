@@ -42,7 +42,7 @@ class CashierSessionScreensTest extends TestCase
     public function test_the_cashier_can_close_a_session(): void
     {
         $cashier = $this->cashier();
-        CashierSession::factory()->active()->create([
+        $session = CashierSession::factory()->active()->create([
             'cashier_id' => $cashier->id,
             'opening_balance' => 5_000,
         ]);
@@ -56,10 +56,14 @@ class CashierSessionScreensTest extends TestCase
             ->post(route('caisse.sessions.close.store'), ['closing_balance' => 5_000])
             ->assertRedirect(route('caisse.index'));
 
-        $this->assertDatabaseHas('cashier_sessions', [
-            'cashier_id' => $cashier->id,
-            'closed_at' => now()->toDateTimeString(),
-        ]);
+        // Comparer `closed_at` à la seconde fait échouer le test dès que la
+        // requête franchit une seconde entre la lecture de l'heure et
+        // l'enregistrement : seule la fermeture compte ici.
+        $session->refresh();
+
+        $this->assertNotNull($session->closed_at, 'La vacation doit être clôturée.');
+        $this->assertTrue($session->isClosed());
+        $this->assertSame(5_000, $session->closing_balance);
     }
 
     public function test_the_session_list_renders(): void

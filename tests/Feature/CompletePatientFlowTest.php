@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Enums\ActCategory;
 use App\Enums\Role;
 use App\Models\Act;
 use App\Models\Admission;
@@ -137,6 +138,20 @@ class CompletePatientFlowTest extends TestCase
         $admission->refresh();
         $this->assertNotNull($admission->discharged_at);
 
+        // La sortie administrative suit le dépiquage, geste de nursing : sans
+        // lui, la clôture du dossier est refusée même facture soldée.
+        $aide = User::factory()->create([
+            'role' => Role::AideSoignante->value,
+            'email_verified_at' => now(),
+        ]);
+
+        $this->actingAs($aide)
+            ->post(route('admissions.valider-depiquage', $admission))
+            ->assertRedirect();
+
+        $admission->refresh();
+        $this->assertNotNull($admission->depiquage_valide_par);
+
         // ==========================================
         // ÉTAPE 7: Facturation - paiement
         // ==========================================
@@ -208,7 +223,13 @@ class CompletePatientFlowTest extends TestCase
         $doctor = User::factory()->create(['role' => Role::Medecin->value, 'email_verified_at' => now()]);
         $laborantin = User::factory()->create(['role' => Role::Laborantin->value, 'email_verified_at' => now()]);
 
-        $act = Act::factory()->create(['base_price' => 5000]);
+        // La catégorie est fixée : l'usine la tire au hasard, et un acte classé
+        // « Laboratoire » tomberait dans le même seau que l'examen — la ligne
+        // de détail de l'examen serait alors noyée.
+        $act = Act::factory()->create([
+            'base_price' => 5000,
+            'category' => ActCategory::Consultation->value,
+        ]);
 
         // Enregistrement
         $this->actingAs($accueil)
@@ -238,11 +259,18 @@ class CompletePatientFlowTest extends TestCase
         $this->assertSame(Visit::STATUS_IN_CONSULTATION, $visit->status);
 
         // Demande d'examen
+        $nfs = \App\Models\LabExam::create([
+            'name' => 'NFS',
+            'category' => 'Hématologie',
+            'price' => 8000,
+        ]);
+
         $response = $this->actingAs($doctor)
             ->post(route('exams.store'), [
                 'patient_id' => $patient->id,
-                'name' => 'NFS',
-                'price' => 8000,
+                'items' => [
+                    ['lab_exam_id' => $nfs->id, 'name' => 'NFS'],
+                ],
             ]);
 
         $response->assertSessionHasNoErrors();

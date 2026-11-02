@@ -33,7 +33,7 @@ class Room extends Model
 
     public function activeAdmissions(): HasMany
     {
-        return $this->admissions()->whereNull('discharged_at');
+        return $this->admissions()->whereNull('discharged_at')->whereNull('room_released_at');
     }
 
     public function getOccupiedCountAttribute(): int

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ActCategory;
 use App\Exceptions\PaymentRefusedException;
+use App\Models\Act;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -172,13 +173,14 @@ class Invoice extends Model
      * Récupère — ou crée — la facture d'une visite et la recalcule.
      *
      * Point d'entrée unique de la facturation : toute création de ligne
-     * payable (acte, examen, journée d'hospitalisation) passe par ici, ce qui
-     * garantit qu'aucun service consommé n'échappe à la facture du dossier.
+     * payable (acte, examen, ordonnance, journée d'hospitalisation) passe par
+     * ici, ce qui garantit qu'aucun service consommé n'échappe à la facture du
+     * dossier.
      *
-     * Une facture neuve hérite du taux de l'assurance du patient. Sans cela le
-     * ticket modérateur resterait nul et le tiers payant ne serait jamais
-     * déduit : le patient paierait la totalité, en silence. Une facture déjà
-     * ajustée par la caisse conserve son taux.
+     * Le ticket modérateur est celui de la venue, saisi par l'accueil : il est
+     * propre à chaque consultation. Sans cela le taux resterait nul et le tiers
+     * payant ne serait jamais déduit : le patient paierait la totalité, en
+     * silence. Une facture déjà ajustée par la caisse conserve son taux.
      */
     public static function forVisit(Visit $visit): self
     {
@@ -187,7 +189,8 @@ class Invoice extends Model
             [
                 'patient_id' => $visit->patient_id,
                 'status' => self::STATUS_PENDING,
-                'ticket_moderateur' => $visit->patient?->insuranceCompany?->rate ?? 0,
+                'ticket_moderateur' => $visit->ticket_moderateur
+                    ?? config('clinic.default_ticket_rate', 20),
             ]
         );
 
@@ -210,16 +213,29 @@ class Invoice extends Model
         $breakdown = [];
 
         if ($visit->act) {
-            $price = $patient->insurance_company_id && $visit->act->insured_price
-                ? $visit->act->insured_price
-                : $visit->act->base_price;
-            $actsTotal += $price;
+            if ($visit->surgery_type === 'externe' && $visit->act->category === ActCategory::Chirurgie) {
+                $blocAct = Act::where('code', 'BLOC-LOCATION')->first();
+                if ($blocAct) {
+                    $price = $patient->insurance_company_id && $blocAct->insured_price
+                        ? $blocAct->insured_price
+                        : $blocAct->base_price;
+                    $actsTotal += $price;
+                    if ($price > 0) {
+                        $breakdown[ActCategory::Bloc->value] = ($breakdown[ActCategory::Bloc->value] ?? 0) + $price;
+                    }
+                }
+            } else {
+                $price = $patient->insurance_company_id && $visit->act->insured_price
+                    ? $visit->act->insured_price
+                    : $visit->act->base_price;
+                $actsTotal += $price;
 
-            if ($price > 0) {
-                $category = $visit->act->category instanceof ActCategory
-                    ? $visit->act->category
-                    : ActCategory::Consultation;
-                $breakdown[$category->value] = ($breakdown[$category->value] ?? 0) + $price;
+                if ($price > 0) {
+                    $category = $visit->act->category instanceof ActCategory
+                        ? $visit->act->category
+                        : ActCategory::Consultation;
+                    $breakdown[$category->value] = ($breakdown[$category->value] ?? 0) + $price;
+                }
             }
         }
 
@@ -239,11 +255,16 @@ $actsTotal += $examsTotal;
         }
 
         $prescriptionsTotal = $this->prescriptionsTotal($patient, $visit);
-        $actsTotal += $prescriptionsTotal;
 
         if ($prescriptionsTotal > 0) {
             $breakdown[ActCategory::Pharmacie->value] = ($breakdown[ActCategory::Pharmacie->value] ?? 0) + $prescriptionsTotal;
         }
+
+        // La pharmacie est exclue de la base du ticket modérateur : elle n'est
+        // pas ajoutée à `$actsTotal`, qui reste la base des actes et des
+        // examens. Elle est en revanche conservée au sous-total, sans quoi le
+        // montant réclamé au patient serait inférieur au coût réel.
+        $pharmacyTotal = $prescriptionsTotal;
 
         $admissions = $patient->admissions()
             ->where('admitted_at', '>=', $visit->arrived_at)
@@ -270,6 +291,37 @@ $actsTotal += $examsTotal;
             $breakdown[ActCategory::Hospitalisation->value] = ($breakdown[ActCategory::Hospitalisation->value] ?? 0) + $stayTotal;
         }
 
+        // Surgery anesthesia billing: for each completed surgery with an
+        // anesthetist, add the standard general-anesthesia act (BLOC-ANESTH-GEN).
+        // The surgical act itself is already handled above via visit->act; this
+        // block only adds the anesthesia line.
+        if (! $visit->relationLoaded('surgeries')) {
+            $visit->load('surgeries');
+        }
+
+        $completedSurgeries = $visit->surgeries->filter(
+            fn (Surgery $surgery) => $surgery->status === Surgery::STATUS_COMPLETED
+                && $surgery->anesthetist_id !== null
+        );
+
+        if ($completedSurgeries->isNotEmpty()) {
+            $anesthAct = Act::where('code', 'BLOC-ANESTH-GEN')->first();
+
+            if ($anesthAct) {
+                foreach ($completedSurgeries as $surgery) {
+                    $anesthPrice = $patient->insurance_company_id && $anesthAct->insured_price
+                        ? $anesthAct->insured_price
+                        : $anesthAct->base_price;
+
+                    $actsTotal += $anesthPrice;
+
+                    if ($anesthPrice > 0) {
+                        $breakdown[ActCategory::Bloc->value] = ($breakdown[ActCategory::Bloc->value] ?? 0) + $anesthPrice;
+                    }
+                }
+            }
+        }
+
 // Le montant du séjour est normalement le cumul des journées facturées au prix
 // de la chambre. `agreed_stay_amount` porte le montant convenu que l'accueil
 // arrête depuis son tableau : il s'y substitue intégralement, et c'est cette
@@ -278,21 +330,22 @@ $agreedStay = $this->agreed_stay_amount !== null
     ? (int) $this->agreed_stay_amount
     : $stayTotal;
 
-        $subtotal = $actsTotal + $agreedStay;
+        $subtotal = $actsTotal + $pharmacyTotal + $agreedStay;
 
-        // Le ticket modérateur ne porte que sur les actes. L'hospitalisation et
-        // la mise en observation en sont exclues et restent entièrement à la
-        // charge du patient. Un patient non assuré ne bénéficie d'aucun taux et
-        // ne donne lieu à aucun tiers payant.
+        // Le ticket modérateur ne porte que sur les actes et les examens.
+        // L'hospitalisation, la mise en observation et la pharmacie en sont
+        // exclues et restent entièrement à la charge du patient. Un patient non
+        // assuré ne bénéficie d'aucun taux et ne donne lieu à aucun tiers
+        // payant.
         $isInsured = (bool) $patient->insurance_company_id;
 
         if ($isInsured) {
             $rate = ((float) $this->ticket_moderateur) / 100;
             $ticket = (int) round($actsTotal * $rate);
-            $patientAmount = $ticket + $agreedStay;
+            $patientAmount = $ticket + $pharmacyTotal + $agreedStay;
             $insuranceAmount = $actsTotal - $ticket;
         } else {
-            $patientAmount = $actsTotal + $agreedStay;
+            $patientAmount = $actsTotal + $pharmacyTotal + $agreedStay;
             $insuranceAmount = 0;
         }
 
@@ -304,23 +357,36 @@ $agreedStay = $this->agreed_stay_amount !== null
         ]);
     }
 
-    /**
-     * Coût des ordonnances de la visite : la pharmacie est un acte et suit
-     * donc le ticket modérateur.
-     */
-    private function prescriptionsTotal(Patient $patient, Visit $visit): int
-    {
-        $prescriptions = $patient->prescriptions()
-            ->where('requested_at', '>=', $visit->arrived_at)
-            ->with('items')
-            ->get();
+/**
+ * Coût des ordonnances de la venue : la pharmacie n'est pas un acte assujetti
+ * au ticket modérateur et n'est donc pas incluse dans `$actsTotal`.
+ *
+ * Comme les examens, une ordonnance appartient à la consultation qui l'a
+ * prescrite. Le filtre par date seule laisserait remonter sur la facture d'une
+ * consultation ancienne toutes les ordonnances des consultations suivantes, à
+ * son propre taux.
+ */
+private function prescriptionsTotal(Patient $patient, Visit $visit): int
+{
+    $prescriptions = $patient->prescriptions()
+        ->where(function ($query) use ($visit) {
+            $query->where('visit_id', $visit->id)
+                ->orWhere(function ($inner) use ($visit) {
+                    // Ordonnance saisie avant l'existence du lien : imputée à
+                    // la consultation ouverte au moment de la demande.
+                    $inner->whereNull('visit_id')
+                        ->where('requested_at', '>=', $visit->arrived_at);
+                });
+        })
+        ->with('items')
+        ->get();
 
-        return (int) $prescriptions->sum(
-            fn (Prescription $prescription) => $prescription->items->sum(
-                fn (PrescriptionItem $item) => (int) $item->quantity * (int) $item->unit_price
-            )
-        );
-    }
+    return (int) $prescriptions->sum(
+        fn (Prescription $prescription) => $prescription->items->sum(
+            fn (PrescriptionItem $item) => (int) $item->quantity * (int) $item->unit_price
+        )
+    );
+}
 
     public function markAsAwaitingPayment(): void
     {

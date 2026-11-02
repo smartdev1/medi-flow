@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\PaymentRefusedException;
+use App\Http\Requests\StorePharmacySaleRequest;
+use App\Models\Medication;
+use App\Models\Patient;
 use App\Models\Prescription;
+use App\Services\CashierService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -37,13 +44,16 @@ class PharmacieController extends Controller
             'awaitingCount' => $awaiting->count(),
             'shortageCount' => $awaiting->filter(fn (Prescription $order) => ! $order->hasSufficientStock())->count(),
             'dispensedCount' => $orders->where('status', Prescription::STATUS_DISPENSED)->count(),
-            'methodOptions' => [
+            // Les moyens de paiement sont présentés comme une liste simple, et
+            // non comme une clé/valeur : le sélecteur de l'application attend
+            // des options indexées par valeur.
+            'methodOptions' => array_values([
                 'Espèces' => 'Espèces',
                 'Carte bancaire' => 'Carte bancaire',
                 'Mobile Money' => 'Mobile Money',
                 'Assurance CNAM' => 'Assurance CNAM',
                 'CMU' => 'CMU',
-            ],
+            ]),
             'userName' => $userName,
             'userRole' => $userRole,
             'userInitials' => $userInitials,
@@ -84,5 +94,37 @@ class PharmacieController extends Controller
             ->get(['id', 'name', 'unit', 'unit_price', 'stock_quantity']);
 
         return response()->json($medications);
+    }
+
+    /**
+     * Enregistre une vente de médicaments au point de vente.
+     *
+     * Le prix est résolu par `CashierService` depuis le catalogue, jamais lu
+     * dans la requête : un montant saisi au navigateur pourrait être inférieur
+     * au coût réel. Le stock est décrémenté dans la même transaction que
+     * l'encaissement, donc une vente refusée pour stock insuffisant ne laisse
+     * aucun paiement derrière elle.
+     */
+    public function sell(StorePharmacySaleRequest $request, CashierService $cashier): RedirectResponse
+    {
+        $patient = Patient::query()->findOrFail($request->validated('patient_id'));
+
+        try {
+            $payment = $cashier->recordPharmacySale(Auth::user(), [
+                'patient_id' => $patient->id,
+                'service' => 'Vente pharmacie',
+                'method' => $request->validated('method'),
+                'items' => $request->validated('items'),
+            ]);
+        } catch (PaymentRefusedException $exception) {
+            return redirect()
+                ->route('pharmacie.index')
+                ->withInput()
+                ->with('error', $exception->getMessage());
+        }
+
+        return redirect()
+            ->route('pharmacie.index')
+            ->with('success', 'Vente encaissée pour '.$patient->full_name.' ('.number_format($payment->amount, 0, ',', ' ').' FCFA).');
     }
 }

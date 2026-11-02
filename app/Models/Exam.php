@@ -15,6 +15,26 @@ class Exam extends Model
     public const STATUS_READY = 'Résultat prêt';
     public const STATUS_SENT = 'Envoyé au médecin';
 
+    /**
+     * Examens qui retiennent le patient au laboratoire : tant que l'un d'eux
+     * est dans cet état, le patient n'appartient plus à la file du médecin.
+     *
+     * Le résultat prêt ne retient plus le patient : il revient chez le
+     * médecin, qui le trouve déjà dans sa file et le lit dans sa chronologie.
+     */
+    public const PENDING_IN_LABORATORY = [
+        self::STATUS_AWAITING_SAMPLE,
+        self::STATUS_IN_PROGRESS,
+    ];
+
+    /**
+     * Restreint aux examens encore en cours de traitement au laboratoire.
+     */
+    public function scopePendingInLaboratory($query)
+    {
+        return $query->whereIn('status', self::PENDING_IN_LABORATORY);
+    }
+
     protected $fillable = [
         'patient_id',
         'visit_id',

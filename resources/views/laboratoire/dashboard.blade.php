@@ -22,8 +22,9 @@
                 </div>
 
                 <div>
-                    <x-ui.field label="Examen demandé" name="name" placeholder="Ex : Bilan sanguin complet (NFS)" :value="old('name')" required />
-                    <x-input-error :messages="$errors->get('name')" class="mt-1" />
+                    <x-ui.lab-exam-picker />
+                    <x-input-error :messages="$errors->get('items')" class="mt-1" />
+                    <x-input-error :messages="$errors->get('items.*.lab_exam_id')" class="mt-1" />
                 </div>
 
                 <div class="mt-2 flex justify-end gap-2 border-t border-line pt-4">

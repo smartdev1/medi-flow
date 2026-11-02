@@ -7,12 +7,22 @@
                 Session du {{ $session->opened_at->translatedFormat('l j F Y') }} — Ouverte à {{ $session->opened_at->format('H:i') }}
             </p>
         </div>
-        <a href="{{ route('caisse.sessions.index') }}">
-            <x-ui.button variant="secondary" size="sm">
-                <x-ui.icon name="arrow-left" class="h-4 w-4" />
-                Retour aux sessions
-            </x-ui.button>
-        </a>
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-end">
+            @if ($session->isActive() && $isRaf)
+                <a href="{{ route('caisse.sessions.emergency-close-form', $session) }}">
+                    <x-ui.button variant="danger" size="sm">
+                        <x-ui.icon name="alert-triangle" class="h-4 w-4" />
+                        Fermeture d'urgence
+                    </x-ui.button>
+                </a>
+            @endif
+            <a href="{{ route('caisse.sessions.index') }}">
+                <x-ui.button variant="secondary" size="sm">
+                    <x-ui.icon name="arrow-left" class="h-4 w-4" />
+                    Retour aux sessions
+                </x-ui.button>
+            </a>
+        </div>
     </div>
 
     <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">

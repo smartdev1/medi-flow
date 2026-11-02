@@ -22,6 +22,7 @@ class VisitFactory extends Factory
             'vitals_taken_by' => null,
             'vitals_taken_at' => null,
             'discharged_at' => null,
+            'surgery_type' => null,
         ];
     }
 
@@ -59,6 +60,20 @@ class VisitFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'discharged_at' => now(),
+        ]);
+    }
+
+    public function surgeryInterne(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'surgery_type' => 'interne',
+        ]);
+    }
+
+    public function surgeryExterne(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'surgery_type' => 'externe',
         ]);
     }
 }

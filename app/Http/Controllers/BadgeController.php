@@ -7,6 +7,7 @@ use App\Models\AdmissionRequest;
 use App\Models\Exam;
 use App\Models\Invoice;
 use App\Models\Visit;
+use App\Support\DoctorQueue;
 use Illuminate\Http\JsonResponse;
 
 class BadgeController extends Controller
@@ -16,8 +17,8 @@ class BadgeController extends Controller
         $counts = [
             'caisse' => Invoice::whereIn('status', [Invoice::STATUS_PENDING, Invoice::STATUS_AWAITING_PAYMENT])->whereDate('created_at', today())->count(),
             'attente' => Visit::whereNull('discharged_at')->whereDate('arrived_at', today())->where('status', Visit::STATUS_WAITING)->whereNull('vitals_taken_at')->count(),
-            'medecin' => Visit::whereNull('discharged_at')->whereDate('arrived_at', today())->whereIn('status', [Visit::STATUS_WAITING, Visit::STATUS_RETURNED_FROM_OBSERVATION])->whereNotNull('vitals_taken_at')->count(),
-            'laboratoire' => Exam::whereIn('status', [Exam::STATUS_AWAITING_SAMPLE, Exam::STATUS_IN_PROGRESS])->count(),
+            'medecin' => DoctorQueue::count(),
+            'laboratoire' => Exam::pendingInLaboratory()->count(),
             'admission-requests' => AdmissionRequest::pending()->count(),
             'hospitalisation' => Admission::active()->where('status', Admission::STATUS_STABLE)->count(),
             'observation' => Admission::where('status', Admission::STATUS_OBSERVATION)->active()->count(),

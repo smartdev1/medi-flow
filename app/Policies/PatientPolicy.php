@@ -44,7 +44,7 @@ class PatientPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('accueil', 'admin');
+        return $user->hasRole('accueil', 'admin', 'docteur_general');
     }
 
     /**

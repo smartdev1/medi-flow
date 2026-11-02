@@ -21,10 +21,6 @@
                 <x-ui.field label="Nom de l’assurance" name="name" :value="old('name')" placeholder="Ex : SICAM" required autofocus />
                 <x-input-error :messages="$errors->get('name')" class="mt-1" />
             </div>
-            <div>
-                <x-ui.field label="Taux de couverture (%)" name="rate" type="number" min="0" max="100" step="0.01" :value="old('rate', '100')" required />
-                <x-input-error :messages="$errors->get('rate')" class="mt-1" />
-            </div>
             <div class="mt-2 flex justify-end gap-2 border-t border-line pt-4">
                 <x-ui.button type="submit" class="w-full justify-center">Enregistrer</x-ui.button>
             </div>
@@ -39,7 +35,6 @@
                 <thead>
                     <tr class="border-b border-line bg-surface-sunken text-xs uppercase tracking-wide text-ink-muted">
                         <th class="px-5 py-3 font-semibold">Nom</th>
-                        <th class="px-5 py-3 font-semibold text-right">Taux</th>
                         @if (auth()->user()?->isAdmin())
                         <th class="px-5 py-3 font-semibold text-right">Actions</th>
                         @endif
@@ -49,7 +44,6 @@
                     @foreach ($insuranceCompanies as $company)
                         <tr class="hover:bg-surface-sunken">
                             <td class="px-5 py-3.5 font-medium text-ink">{{ $company->name }}</td>
-                            <td class="px-5 py-3.5 text-right tabular-nums text-ink-soft">{{ $company->rate }} %</td>
                             @if (auth()->user()?->isAdmin())
                             <td class="px-5 py-3.5 text-right">
                                 <div class="flex justify-end gap-2">
@@ -87,13 +81,9 @@
             <form method="POST" action="{{ route('insurance.update', $editingCompany) }}" class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-end">
                 @csrf
                 @method('PUT')
-            <div class="flex-1">
+<div class="flex-1">
                 <x-ui.field label="Nom de l’assurance" name="name" :value="old('name', $editingCompany->name)" required />
                 <x-input-error :messages="$errors->get('name')" class="mt-1" />
-            </div>
-            <div class="w-40">
-                <x-ui.field label="Taux (%)" name="rate" type="number" min="0" max="100" step="0.01" :value="old('rate', $editingCompany->rate)" required />
-                <x-input-error :messages="$errors->get('rate')" class="mt-1" />
             </div>
                 <div class="flex gap-2">
                     <x-ui.button type="submit">Enregistrer</x-ui.button>

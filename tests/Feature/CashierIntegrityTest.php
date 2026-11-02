@@ -118,7 +118,7 @@ class CashierIntegrityTest extends TestCase
         $this->actingAs($cashier)
             ->get(route('caisse.paniers.show', $invoice))
             ->assertOk()
-            ->assertSee("Le formulaire n'a pas pu")
+            ->assertSee("Le formulaire n'a pas pu", false)
             ->assertSee('name="method"', false)
             ->assertSee('name="amount"', false);
     }

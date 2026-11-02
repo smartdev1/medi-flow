@@ -25,11 +25,17 @@ class Admission extends Model
         'status',
         'admitted_at',
         'discharged_at',
+        'depiquage_valide_par',
+        'depiquage_valide_le',
+        'room_released_at',
     ];
 
     protected $casts = [
         'admitted_at' => 'datetime',
         'discharged_at' => 'datetime',
+        'depiquage_valide_le' => 'datetime',
+        'depiquage_valide_par' => 'integer',
+        'room_released_at' => 'datetime',
     ];
 
     public function patient(): BelongsTo
@@ -47,9 +53,36 @@ class Admission extends Model
         return $this->belongsTo(Room::class);
     }
 
+    public function depiquageValidePar(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'depiquage_valide_par');
+    }
+
     public function scopeActive($query)
     {
         return $query->whereNull('discharged_at');
+    }
+
+    public function isDepiquageValide(): bool
+    {
+        return $this->depiquage_valide_par !== null;
+    }
+
+    public function canBeDepiqued(): bool
+    {
+        return $this->discharged_at !== null && ! $this->isDepiquageValide();
+    }
+
+    public function canBeLiberee(): bool
+    {
+        return $this->isDepiquageValide()
+            && $this->discharged_at !== null
+            && $this->room_released_at === null;
+    }
+
+    public function isRoomReleased(): bool
+    {
+        return $this->room_released_at !== null;
     }
 
     public function dayLines(): HasMany

@@ -47,16 +47,13 @@ class InsuranceController extends Controller
     }
 
     /**
-     * Le taux est aussi important que le nom : c'est lui qui détermine le
-     * ticket modérateur des factures de tous les patients de cette assurance.
-     * Une compagnie enregistrée à 0 % ferait payer l'intégralité des actes à
-     * des patients qui ne doivent rien, sans aucun signe visible.
+     * Seuls le nom et l'unicité sont validés ici : le taux de couverture est
+     * porté par la consultation, saisie par l'accueil à chaque venue.
      */
     private function validated(Request $request, ?int $ignoreId = null): array
     {
         return $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:insurance_companies,name'.($ignoreId ? ','.$ignoreId : '')],
-            'rate' => ['required', 'numeric', 'min:0', 'max:100'],
         ]);
     }
 

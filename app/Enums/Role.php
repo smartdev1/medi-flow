@@ -13,6 +13,7 @@ enum Role: string
     case Logistique = 'logistique';
     case AideSoignante = 'aide_soignante';
     case DocteurGeneral = 'docteur_general';
+    case Raf = 'raf';
     case Admin = 'admin';
 
     public function label(): string
@@ -27,6 +28,7 @@ enum Role: string
             self::Logistique => 'Agent de logistique',
             self::AideSoignante => 'Aide-soignante',
             self::DocteurGeneral => 'Docteur Général',
+            self::Raf => "Responsable d'Activité Financière",
             self::Admin => 'Administrateur du système',
         };
     }
@@ -41,6 +43,7 @@ enum Role: string
             self::Pharmacien => 'pharmacie.index',
             self::Logistique => 'logistique.index',
             self::DocteurGeneral => 'docteurgeneral.index',
+            self::Raf => 'caisse.raf.dashboard',
             self::AideSoignante => 'attente.index',
         };
     }

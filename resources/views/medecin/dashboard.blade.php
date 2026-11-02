@@ -111,8 +111,9 @@
                                         <input type="hidden" name="visit_id" value="{{ $patient['visit_id'] }}">
                                         <p class="text-sm text-ink-muted">Patient&nbsp;: <span class="font-medium text-ink">{{ $patient['name'] }}</span> ({{ $patient['id'] }})</p>
                                         <div>
-                                            <x-ui.field label="Examen demandé" name="name" placeholder="Ex : Bilan sanguin complet (NFS)" :value="old('name')" required autofocus />
-                                            <x-input-error :messages="$errors->get('name')" class="mt-1" />
+                                            <x-ui.lab-exam-picker />
+                                            <x-input-error :messages="$errors->get('items')" class="mt-1" />
+                                            <x-input-error :messages="$errors->get('items.*.lab_exam_id')" class="mt-1" />
                                         </div>
                                         <div class="mt-2 flex justify-end gap-2 border-t border-line pt-4">
                                             <x-ui.button type="submit" class="w-full justify-center">Envoyer au laboratoire</x-ui.button>
@@ -130,6 +131,7 @@
                                     <form method="POST" action="{{ route('prescriptions.store') }}" class="flex flex-col gap-4">
                                         @csrf
                                         <input type="hidden" name="patient_id" value="{{ $patient['record_id'] }}">
+                                        <input type="hidden" name="visit_id" value="{{ $patient['visit_id'] }}">
                                         <p class="text-sm text-ink-muted">Patient&nbsp;: <span class="font-medium text-ink">{{ $patient['name'] }}</span> ({{ $patient['id'] }})</p>
                                         <div>
                                             <x-ui.field label="Date de l'ordonnance" name="date" type="date" :value="old('date', now()->format('Y-m-d'))" required />
@@ -280,6 +282,120 @@
                             </div>
                         @endif
                     </x-ui.card>
+
+                    @if ($selectedVisit && $selectedVisit->surgery_type)
+                        <x-ui.card>
+                            <div x-data="{ showSurgeryForm: false }" class="flex flex-col gap-4">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-sm font-semibold text-ink">Programmer une chirurgie</h3>
+                                    <button type="button" @click="showSurgeryForm = !showSurgeryForm"
+                                        class="flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700">
+                                        <x-ui.icon name="plus" class="h-4 w-4" />
+                                        <span x-text="showSurgeryForm ? 'Masquer' : 'Nouvelle chirurgie'"></span>
+                                    </button>
+                                </div>
+
+                                <form x-show="showSurgeryForm" x-cloak method="POST"
+                                    action="{{ route('surgery.store', $selectedVisit) }}"
+                                    class="flex flex-col gap-3 rounded-md border border-line bg-surface-sunken p-4">
+                                    @csrf
+                                    <div>
+                                        <label class="text-sm font-medium text-ink" for="procedure_name">Nom de l'intervention</label>
+                                        <input type="text" name="procedure_name" id="procedure_name" required maxlength="255"
+                                            value="{{ old('procedure_name') }}"
+                                            placeholder="Ex : Appendicectomie"
+                                            class="mt-1 w-full rounded-md border border-line bg-white py-2.5 px-3 text-sm text-ink placeholder:text-ink-muted focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                                        <x-input-error :messages="$errors->get('procedure_name')" class="mt-1" />
+                                    </div>
+                                    <div>
+                                        <label class="text-sm font-medium text-ink" for="scheduled_at">Date et heure prévues</label>
+                                        <input type="datetime-local" name="scheduled_at" id="scheduled_at"
+                                            value="{{ old('scheduled_at') }}"
+                                            class="mt-1 w-full rounded-md border border-line bg-white py-2.5 px-3 text-sm text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                                        <x-input-error :messages="$errors->get('scheduled_at')" class="mt-1" />
+                                    </div>
+                                    @if ($selectedVisit->surgery_type === 'externe')
+                                        <div>
+                                            <label class="text-sm font-medium text-ink" for="referring_doctor_name">Médecin référent externe</label>
+                                            <input type="text" name="referring_doctor_name" id="referring_doctor_name" maxlength="255"
+                                                value="{{ old('referring_doctor_name') }}"
+                                                placeholder="Nom du médecin ayant référé le patient"
+                                                class="mt-1 w-full rounded-md border border-line bg-white py-2.5 px-3 text-sm text-ink placeholder:text-ink-muted focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                                            <x-input-error :messages="$errors->get('referring_doctor_name')" class="mt-1" />
+                                        </div>
+                                    @endif
+                                    <div>
+                                        <label class="text-sm font-medium text-ink" for="anesthetist_id">Anesthésiste</label>
+                                        <select name="anesthetist_id" id="anesthetist_id"
+                                            class="mt-1 w-full rounded-md border border-line bg-white py-2.5 px-3 text-sm text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                                            <option value="">— Aucun —</option>
+                                            @foreach ($medecins as $medecin)
+                                                <option value="{{ $medecin->id }}" @selected(old('anesthetist_id') == $medecin->id)>
+                                                    {{ $medecin->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <x-input-error :messages="$errors->get('anesthetist_id')" class="mt-1" />
+                                    </div>
+                                    <div class="flex justify-end border-t border-line pt-3">
+                                        <x-ui.button size="sm" type="submit">Programmer</x-ui.button>
+                                    </div>
+                                </form>
+
+                                @if ($selectedVisit->surgeries->isNotEmpty())
+                                    <div class="flex flex-col gap-2">
+                                        <p class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Chirurgies programmées</p>
+                                        @foreach ($selectedVisit->surgeries as $surgery)
+                                            <div class="flex items-center justify-between rounded-md border border-line bg-surface-sunken px-3 py-2">
+                                                <div class="min-w-0 flex-1">
+                                                    <p class="text-sm font-medium text-ink">{{ $surgery->procedure_name }}</p>
+                                                    <p class="text-xs text-ink-muted">
+                                                        @if ($surgery->scheduled_at)
+                                                            {{ $surgery->scheduled_at->format('d/m/Y H:i') }}
+                                                        @else
+                                                            Date non définie
+                                                        @endif
+                                                        @if ($surgery->anesthetist)
+                                                            &middot; Anesthésiste : {{ $surgery->anesthetist->name }}
+                                                        @endif
+                                                    </p>
+                                                </div>
+                                                <div class="flex items-center gap-2">
+                                                    <x-ui.badge :tone="match($surgery->status) {
+                                                        'scheduled' => 'brand',
+                                                        'consent_signed' => 'warning',
+                                                        'in_progress' => 'danger',
+                                                        'completed' => 'success',
+                                                        'cancelled' => 'neutral',
+                                                        default => 'neutral',
+                                                    }">
+                                                        {{ match($surgery->status) {
+                                                            'scheduled' => 'Programmée',
+                                                            'consent_signed' => 'Consentement signé',
+                                                            'in_progress' => 'En cours',
+                                                            'completed' => 'Terminée',
+                                                            'cancelled' => 'Annulée',
+                                                            default => $surgery->status,
+                                                        } }}
+                                                    </x-ui.badge>
+                                                    @if ($surgery->status === 'scheduled')
+                                                        <form method="POST" action="{{ route('surgery.destroy', $surgery) }}"
+                                                            onsubmit="return confirm('Annuler cette chirurgie ?')">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="rounded-md p-1 text-ink-muted hover:bg-surface-muted hover:text-danger" title="Annuler">
+                                                                <x-ui.icon name="x-circle" class="h-4 w-4" />
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
+                        </x-ui.card>
+                    @endif
 
                     <x-ui.card>
                         <h3 class="mb-2 text-sm font-semibold text-ink">Parcours de la visite</h3>

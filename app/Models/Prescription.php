@@ -17,6 +17,7 @@ class Prescription extends Model
 
     protected $fillable = [
         'patient_id',
+        'visit_id',
         'prescribed_by',
         'stock_status',
         'status',
@@ -33,6 +34,15 @@ class Prescription extends Model
     public function patient(): BelongsTo
     {
         return $this->belongsTo(Patient::class);
+    }
+
+    /**
+     * Consultation ayant prescrit l'ordonnance. Nulle pour une ordonnance
+     * saisie hors consultation.
+     */
+    public function visit(): BelongsTo
+    {
+        return $this->belongsTo(Visit::class);
     }
 
     public function items(): HasMany

@@ -23,6 +23,10 @@ class StorePrescriptionRequest extends FormRequest
     {
         return [
             'patient_id' => ['required', 'exists:patients,id'],
+            // Renseigné par la consultation qui prescrive. Facultatif : une
+            // ordonnance saisie au guichet, hors consultation, n'a pas de
+            // rattachement et reste imputée à la venue en cours.
+            'visit_id' => ['nullable', 'exists:visits,id'],
             'date' => ['required', 'date'],
             'items' => ['required', 'array', 'min:1'],
             'items.*.medication_id' => ['required', 'exists:medications,id'],

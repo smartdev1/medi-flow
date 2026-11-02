@@ -16,10 +16,19 @@ class SortieController extends Controller
     public function index(Request $request): View
     {
         $patient = $request->integer('patient')
-            ? Patient::with(['visits', 'payments', 'consultations', 'exams', 'prescriptions.items', 'admissions.room'])->find($request->integer('patient'))
+            ? Patient::with(['visits', 'visits.admissions', 'payments', 'consultations', 'exams', 'prescriptions.items', 'admissions.room'])->find($request->integer('patient'))
             : null;
 
         $activeVisit = $patient?->visits->whereNull('discharged_at')->sortByDesc('arrived_at')->first();
+
+        // Determine whether the active visit has a medically-discharged admission
+        // that still awaits depiquage validation by nursing aides.
+        // Uses the eager-loaded visits.admissions collection to avoid an extra query.
+        $depiquagePending = false;
+        if ($activeVisit) {
+            $depiquagePending = $activeVisit->admissions
+                ->contains(fn ($a) => $a->discharged_at && ! $a->depiquage_valide_par);
+        }
 
         $activeInvoice = $activeVisit
             ? Invoice::where('visit_id', $activeVisit->id)->where('status', '!=', Invoice::STATUS_PAID)->first()
@@ -48,6 +57,7 @@ class SortieController extends Controller
             'patient' => $patient,
             'activeVisit' => $activeVisit,
             'activeInvoice' => $activeInvoice,
+            'depiquagePending' => $depiquagePending,
             'timeline' => $patient ? PatientTimeline::build($patient) : [],
             'patientOptions' => Patient::orderBy('first_name')->get(),
             'patientsReadyForDischarge' => $patientsReadyForDischarge,
@@ -58,16 +68,22 @@ class SortieController extends Controller
     }
 
     /**
-     * Un dossier est prêt à être clôturé lorsque la consultation est terminée
-     * ou lorsque le patient a quitté l'unité (hospitalisation ou observation).
+     * Un dossier est prêt à être clôturé lorsque :
+     * - Le patient a quitté l'unité (hospitalisation ou observation) ET le
+     *   dépiquage a été validé par les aides-soignantes ; ou
+     * - La consultation est terminée sans admission.
      */
     private function isReadyForClosure(Visit $visit): bool
     {
-        if ($visit->status === Visit::STATUS_CONSULTATION_CLOSED) {
-            return true;
+        $dischargedAdmissions = $visit->admissions->whereNotNull('discharged_at');
+
+        if ($dischargedAdmissions->isNotEmpty()) {
+            // AC2: All medically-discharged admissions must have depiquage validated.
+            return $dischargedAdmissions->every(fn ($a) => $a->depiquage_valide_par !== null);
         }
 
-        return $visit->admissions->whereNotNull('discharged_at')->isNotEmpty();
+        // Consultation-only patients (no admissions) — unaffected by depiquage.
+        return $visit->status === Visit::STATUS_CONSULTATION_CLOSED;
     }
 
     /**
@@ -76,9 +92,25 @@ class SortieController extends Controller
      * Refusée tant que la facture porte un solde restant. Le médecin, lui, peut
      * clôturer sa consultation sans que la caisse ait soldé : les deux gestes
      * sont distincts et le second est le seul qui libère le patient.
+     *
+     * Refusée également tant que le dépiquage du patient (hospitalisation ou
+     * observation) n'a pas été validé par les aides-soignantes.
      */
     public function close(Visit $visit): RedirectResponse
     {
+        // AC1: Guard — depiquage must be validated before administrative closure
+        // for any patient coming from hospitalisation or observation.
+        $admissionNeedingDepiquage = $visit->admissions()
+            ->whereNotNull('discharged_at')
+            ->whereNull('depiquage_valide_par')
+            ->exists();
+
+        if ($admissionNeedingDepiquage) {
+            return redirect()
+                ->route('sortie.index', ['patient' => $visit->patient_id])
+                ->with('error', "Clôture impossible : le dépiquage du patient n'a pas été validé par les aides-soignantes.");
+        }
+
         $invoice = Invoice::where('visit_id', $visit->id)
             ->where('status', '!=', Invoice::STATUS_PAID)
             ->first();

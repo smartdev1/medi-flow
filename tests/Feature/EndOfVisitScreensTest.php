@@ -156,9 +156,14 @@ class EndOfVisitScreensTest extends TestCase
             'status' => Visit::STATUS_HOSPITALIZED,
         ]);
 
+        // Un séjour sorti médicalement n'est prêt qu'une fois le dépiquage
+        // validé par le nursing : tant qu'il ne l'est pas, le dossier figure
+        // à l'accueil mais la clôture reste refusée.
         Admission::factory()->forPatient($patient)->create([
             'visit_id' => $visit->id,
             'discharged_at' => now(),
+            'depiquage_valide_par' => User::factory()->withRole(Role::AideSoignante)->create()->id,
+            'depiquage_valide_le' => now(),
         ]);
 
         $this->actingAs($user)

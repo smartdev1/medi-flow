@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Role;
 use App\Models\CashierSession;
 use App\Models\Payment;
+use App\Support\ClinicMetrics;
+use App\Traits\ResolvesPeriod;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,18 +15,19 @@ use Illuminate\View\View;
 
 class CashierSessionController extends Controller
 {
+    use ResolvesPeriod;
     public function index(Request $request): View
     {
         $this->authorize('viewAny', CashierSession::class);
 
-        $isDocteurGeneral = Auth::user()->hasRole('docteur_general');
+        $isSupervisor = Auth::user()->hasRole(Role::DocteurGeneral) || Auth::user()->hasRole(Role::Raf);
 
         $query = CashierSession::query()
             ->with(['cashier'])
             ->withCount('payments')
             ->orderByDesc('opened_at');
 
-        if (! $isDocteurGeneral) {
+        if (! $isSupervisor) {
             $query->forCashier(Auth::id());
         }
 
@@ -41,11 +46,13 @@ class CashierSessionController extends Controller
 
         $variance = $cashierSession->cashVariance();
         $duration = $cashierSession->duration();
+        $isRaf = Auth::user()->hasRole(Role::Raf);
 
         return view('caisse.sessions.show', array_merge($this->layout(), [
             'session' => $cashierSession,
             'variance' => $variance,
             'duration' => $duration,
+            'isRaf' => $isRaf,
         ]));
     }
 
@@ -116,9 +123,17 @@ class CashierSessionController extends Controller
             ->whereIn('status', [Payment::STATUS_PENDING, Payment::STATUS_PARTIAL])
             ->count();
 
+        $theoreticalBalance = $activeSession->theoreticalBalance();
+        $settledPayments = $activeSession->payments()
+            ->settled()
+            ->with(['patient', 'act'])
+            ->get();
+
         return view('caisse.sessions.close', array_merge($this->layout(), [
             'session' => $activeSession,
             'openPaymentsCount' => $openPaymentsCount,
+            'theoreticalBalance' => $theoreticalBalance,
+            'settledPayments' => $settledPayments,
         ]));
     }
 
@@ -156,6 +171,85 @@ class CashierSessionController extends Controller
         return redirect()
             ->route('caisse.index')
             ->with('success', "Session de caisse fermée avec un fond de clôture de ".number_format($validated['closing_balance'], 0, ',', ' ')." FCFA.".$varianceMessage);
+    }
+
+    public function emergencyCloseForm(CashierSession $cashierSession): View|RedirectResponse
+    {
+        $this->authorize('update', $cashierSession);
+
+        if (! $cashierSession->canBeEmergencyClosed()) {
+            return redirect()
+                ->route('caisse.sessions.index')
+                ->with('error', 'Cette session ne peut pas être fermée en urgence.');
+        }
+
+        return view('caisse.sessions.emergency-close', array_merge($this->layout(), [
+            'session' => $cashierSession,
+        ]));
+    }
+
+    public function emergencyClose(Request $request, CashierSession $cashierSession): RedirectResponse
+    {
+        $this->authorize('update', $cashierSession);
+
+        $validated = $request->validate([
+            'emergency_closure_reason' => ['required', 'string', 'max:1000'],
+        ]);
+
+        if (! $cashierSession->canBeEmergencyClosed()) {
+            return redirect()
+                ->route('caisse.sessions.index')
+                ->with('error', 'Cette session ne peut pas être fermée en urgence.');
+        }
+
+        $cashierSession->update([
+            'closed_at' => now(),
+            'emergency_closed_by' => Auth::id(),
+            'emergency_closed_at' => now(),
+            'emergency_closure_reason' => $validated['emergency_closure_reason'],
+        ]);
+
+        return redirect()
+            ->route('caisse.sessions.index')
+            ->with('success', 'Session fermée en urgence. En attente d\'audit.');
+    }
+
+    /**
+     * RAF dashboard — financial indicators across all cashier sessions.
+     */
+    public function rafDashboard(Request $request): View
+    {
+        $this->authorize('viewAny', CashierSession::class);
+
+        $period = $request->string('period')->toString() ?: 'month';
+        [$from, $to, $periodLabel] = $this->resolvePeriod($period);
+
+        $finance = ClinicMetrics::finance($from, $to);
+        $monthlyRevenue = ClinicMetrics::monthlyRevenue();
+
+        $periods = [
+            ['key' => 'today', 'label' => "Aujourd'hui"],
+            ['key' => '7d', 'label' => '7 jours'],
+            ['key' => '30d', 'label' => '30 jours'],
+            ['key' => 'month', 'label' => 'Ce mois'],
+            ['key' => 'year', 'label' => 'Cette année'],
+        ];
+
+        $user = Auth::user();
+        $userName = $user?->name ?? 'RAF';
+        $userRole = $user?->role?->label() ?? 'Supervision financière';
+        $userInitials = $user?->initials ?? $this->initialsFor($userName);
+
+        return view('caisse.raf.dashboard', [
+            'period' => $period,
+            'periodLabel' => $periodLabel,
+            'periods' => $periods,
+            'finance' => $finance,
+            'monthlyRevenue' => $monthlyRevenue,
+            'userName' => $userName,
+            'userRole' => $userRole,
+            'userInitials' => $userInitials,
+        ]);
     }
 
     /**

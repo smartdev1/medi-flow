@@ -70,6 +70,11 @@ class Patient extends Model
         return $this->hasMany(Consultation::class);
     }
 
+    public function surgeries(): HasMany
+    {
+        return $this->hasMany(Surgery::class);
+    }
+
     public function getFullNameAttribute(): string
     {
         return "{$this->first_name} {$this->last_name}";

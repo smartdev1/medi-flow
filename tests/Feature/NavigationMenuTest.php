@@ -127,7 +127,11 @@ class NavigationMenuTest extends TestCase
                 ->getContent();
 
             foreach ($sections as $label => $childRoutes) {
-                if (! str_contains($content, '>'.$label.'<')) {
+                // Le libellé est cherché dans la navigation, et non dans toute
+                // la page : le tableau de chiffre d'affaires du RAF porte lui
+                // aussi « Hospitalisation », pour une catégorie de prestation.
+                // Le chercher partout ferait croire à une section vide.
+                if (! str_contains($content, '>'.$label.'</span>')) {
                     continue;
                 }
 

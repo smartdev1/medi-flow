@@ -18,6 +18,10 @@ class CashierSessionPolicy
             return true;
         }
 
+        if ($user->hasRole(Role::Raf)) {
+            return true;
+        }
+
         return $user->hasRole(Role::Caissier);
     }
 
@@ -28,6 +32,10 @@ class CashierSessionPolicy
         }
 
         if ($user->hasRole(Role::DocteurGeneral)) {
+            return true;
+        }
+
+        if ($user->hasRole(Role::Raf)) {
             return true;
         }
 
@@ -47,6 +55,10 @@ class CashierSessionPolicy
     {
         if ($user->isAdmin()) {
             return true;
+        }
+
+        if ($user->hasRole(Role::Raf)) {
+            return $cashierSession->isActive();
         }
 
         return $user->hasRole(Role::Caissier)

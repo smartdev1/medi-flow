@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Role;
 use App\Models\Act;
 use App\Models\AdmissionRequest;
 use App\Models\Consultation;
 use App\Models\Medication;
 use App\Models\Referral;
+use App\Models\User;
 use App\Models\Visit;
+use App\Support\DoctorQueue;
 use App\Support\PatientTimeline;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,24 +25,11 @@ class MedecinController extends Controller
         /** @var \App\Models\User $doctor */
         $doctor = Auth::user();
 
-        $visits = Visit::with(['patient', 'consultations', 'patient.admissions'])
-            ->active()
-            ->whereNotNull('vitals_taken_at')
-            ->orderBy('arrived_at')
-            ->get()
-            ->reject(function (Visit $visit) {
-                $latest = $visit->consultations->sortByDesc('started_at')->first();
-
-                return $latest && $latest->status === Consultation::STATUS_CLOSED;
-            })
-            ->reject(function (Visit $visit) {
-                return $visit->patient->admissions()->whereNull('discharged_at')->exists();
-            })
-            ->values();
+        $visits = DoctorQueue::visits();
 
         $selectedVisitId = $request->integer('patient');
         $selectedVisit = $selectedVisitId
-            ? $visits->firstWhere('id', $selectedVisitId)
+            ? $this->findOpenVisit($selectedVisitId)
             : null;
 
         $queue = $visits->map(fn (Visit $visit) => [
@@ -95,16 +85,33 @@ class MedecinController extends Controller
             'queue' => $queue,
             'patient' => $patientData,
             'consultation' => $consultation,
+            'selectedVisit' => $selectedVisit,
             'timeline' => $selectedVisit ? PatientTimeline::build($selectedVisit->patient) : [],
             'serviceOptions' => $serviceOptions,
             'medications' => Medication::orderBy('name')->get(),
             'acts' => Act::orderBy('category')->orderBy('label')->get(),
             'currentActId' => $selectedVisit?->act_id,
+            'medecins' => User::where('role', Role::Medecin)->get(),
             'isOnCallToday' => $doctor->isDoctor() && $doctor->isOnCallToday(),
             'userName' => $doctor->name,
             'userRole' => $doctor->role->label(),
             'userInitials' => $this->initialsFor($doctor->name),
         ]);
+    }
+
+    /**
+     * Résout la visite à afficher, indépendamment de la file.
+     *
+     * Un patient parti au laboratoire n'est plus dans la file, mais son
+     * dossier doit rester accessible par lien direct : le médecin continue de
+     * suivre la consultation et de lire les résultats. La file ne governait
+     * donc jamais l'accès au dossier.
+     */
+    private function findOpenVisit(int $visitId): ?Visit
+    {
+        return Visit::with(['patient', 'consultations', 'surgeries.anesthetist'])
+            ->active()
+            ->find($visitId);
     }
 
     public function takeVisit(Request $request, Visit $visit): RedirectResponse
@@ -197,22 +204,7 @@ class MedecinController extends Controller
 
     public function refresh(): \Illuminate\Http\JsonResponse
     {
-        $visits = Visit::with(['patient', 'consultations', 'patient.admissions'])
-            ->active()
-            ->whereNotNull('vitals_taken_at')
-            ->orderBy('arrived_at')
-            ->get()
-            ->reject(function (Visit $visit) {
-                $latest = $visit->consultations->sortByDesc('started_at')->first();
-
-                return $latest && $latest->status === \App\Models\Consultation::STATUS_CLOSED;
-            })
-            ->reject(function (Visit $visit) {
-                return $visit->patient->admissions()->whereNull('discharged_at')->exists();
-            })
-            ->values();
-
-        $queue = $visits->map(fn (Visit $visit) => [
+        $queue = DoctorQueue::visits()->map(fn (Visit $visit) => [
             'name' => $visit->patient->full_name,
             'initials' => $visit->patient->initials,
             'time' => $visit->arrived_at->diffForHumans(null, true).' d\'attente',

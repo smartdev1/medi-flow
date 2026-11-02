@@ -13,6 +13,36 @@
         <x-ui.stat-card label="Délivrées aujourd'hui" value="{{ $dispensedCount }}" icon="check-circle" trend="Dossiers clôturés" trend-tone="success" />
     </div>
 
+    {{--
+        Vente directe : un patient peut se présenter sans ordonnance — des gants
+        demandés par le médecin, par exemple.
+
+        La recherche du patient est dans le flux de la page, et non derrière un
+        tiroir : le pharmacien doit pouvoir composer la vente en gardant la
+        file des ordonnances visible, et non masquer la moitié de son écran pour
+        saisir un nom.
+    --}}
+    <x-ui.card class="mt-6">
+        <form method="POST" action="{{ route('pharmacie.sell') }}" class="flex flex-col gap-4">
+            @csrf
+
+            <div class="flex flex-col gap-1 border-b border-line pb-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <h2 class="text-base font-semibold text-ink">Vente au comptoir</h2>
+                    <p class="mt-0.5 text-sm text-ink-muted">
+                        Médicaments vendus sans ordonnance. Le prix est celui du catalogue.
+                    </p>
+                </div>
+            </div>
+
+            <x-ui.pharmacy-sale :method-options="$methodOptions" />
+
+            <div class="flex justify-end gap-2 border-t border-line pt-4">
+                <x-ui.button type="submit" class="w-full justify-center sm:w-auto">Encaisser la vente</x-ui.button>
+            </div>
+        </form>
+    </x-ui.card>
+
     <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
         <x-ui.queue-list title="Ordonnances à traiter" :items="$queue" class="lg:col-span-1" />
 

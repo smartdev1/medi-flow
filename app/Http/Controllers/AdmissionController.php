@@ -97,6 +97,52 @@ class AdmissionController extends Controller
     }
 
     /**
+     * Étape 3 du circuit de sortie : l'aide-soignante valide que le patient
+     * a été dépiqué (préparé, nettoyé, prêt à partir). Cette validation est
+     * un prérequis avant que la chambre puisse être libérée.
+     */
+    public function validateDepiquage(Admission $admission): RedirectResponse
+    {
+        $this->authorize('validateDepiquage', $admission);
+
+        if (! $admission->canBeDepiqued()) {
+            $reason = ! $admission->discharged_at
+                ? 'Le patient n\'a pas encore eu de sortie médicale.'
+                : 'Le dépiquage a déjà été validé.';
+
+            return back()->with('error', $reason);
+        }
+
+        $admission->update([
+            'depiquage_valide_par' => auth()->id(),
+            'depiquage_valide_le' => now(),
+        ]);
+
+        return back()->with('success', "Dépiquage validé pour {$admission->patient->full_name} — la chambre peut maintenant être libérée.");
+    }
+
+    /**
+     * Étape 4 du circuit de sortie : libération effective de la chambre.
+     * Nécessite une validation de dépiquage préalable (vérifiée par policy +
+     * modèle).
+     *
+     * Cette action est purement logistique — elle ne ré-exécute pas discharge()
+     * car c'est la responsabilité du médecin (billing, statut visite).
+     */
+    public function libererChambre(Admission $admission): RedirectResponse
+    {
+        $this->authorize('libererChambre', $admission);
+
+        if (! $admission->canBeLiberee()) {
+            return back()->with('error', 'Cette chambre ne peut pas être libérée : le dépiquage n\'a pas été validé.');
+        }
+
+        $admission->update(['room_released_at' => now()]);
+
+        return back()->with('success', "Chambre {$admission->room->number} libérée — disponible pour le prochain patient.");
+    }
+
+    /**
      * Étape 2 : sortie effective de l'unité.
      *
      * Cette action est la sortie *médicale*. Elle ne clôture pas le dossier :

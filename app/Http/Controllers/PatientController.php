@@ -60,6 +60,9 @@ class PatientController extends Controller
             'registered_by' => Auth::id(),
             'status' => $urgent ? Visit::STATUS_URGENT : Visit::STATUS_WAITING,
             'urgent' => $urgent,
+            'ticket_moderateur' => $data['ticket_moderateur']
+                ?? (float) config('clinic.default_ticket_rate', 20),
+            'surgery_type' => $data['surgery_type'] ?? null,
         ]);
 
         // Toute visite ouvre une facture : c'est le panier qui recevra ensuite

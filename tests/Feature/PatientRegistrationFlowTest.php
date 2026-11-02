@@ -74,6 +74,7 @@ class PatientRegistrationFlowTest extends TestCase
                 'existing_patient_id' => $existingPatient->id,
                 'coverage' => 'Assuré',
                 'act_id' => $act->id,
+                'ticket_moderateur' => 80,
             ]);
 
         $response->assertRedirect(route('accueil.index'));
@@ -83,6 +84,52 @@ class PatientRegistrationFlowTest extends TestCase
             'patient_id' => $existingPatient->id,
             'status' => Visit::STATUS_WAITING,
         ]);
+    }
+
+    public function test_an_insured_registration_requires_a_moderator_ticket(): void
+    {
+        $accueil = User::factory()->create([
+            'role' => Role::Accueil->value,
+            'email_verified_at' => now(),
+        ]);
+
+        $act = Act::factory()->create();
+
+        // Le taux n'étant plus porté par l'assurance, une visite assurée sans
+        // ticket saisi ferait facturer la totalité des actes au patient.
+        $this->actingAs($accueil)
+            ->post(route('patients.store'), [
+                'first_name' => 'Koffi',
+                'last_name' => 'Amani',
+                'sex' => 'M',
+                'coverage' => 'Assuré',
+                'act_id' => $act->id,
+            ])
+            ->assertSessionHasErrors('ticket_moderateur');
+
+        $this->assertDatabaseMissing('patients', ['last_name' => 'Amani']);
+    }
+
+    public function test_an_uninsured_registration_does_not_require_a_moderator_ticket(): void
+    {
+        $accueil = User::factory()->create([
+            'role' => Role::Accueil->value,
+            'email_verified_at' => now(),
+        ]);
+
+        $act = Act::factory()->create();
+
+        $this->actingAs($accueil)
+            ->post(route('patients.store'), [
+                'first_name' => 'Yao',
+                'last_name' => 'NGuessan',
+                'sex' => 'M',
+                'coverage' => 'Non assuré',
+                'act_id' => $act->id,
+            ])
+            ->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('patients', ['last_name' => 'NGuessan']);
     }
 
     public function test_new_patient_visit_is_urgent_when_requested(): void
