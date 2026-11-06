@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ActSeeder::class);
         $this->call(LabExamSeeder::class);
+        $this->call(InsuranceCompanySeeder::class);
         $this->call(ClinicSeeder::class);
     }
 }
