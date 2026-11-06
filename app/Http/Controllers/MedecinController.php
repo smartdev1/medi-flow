@@ -93,7 +93,7 @@ class MedecinController extends Controller
             'medications' => Medication::orderBy('name')->get(),
             'acts' => Act::orderBy('category')->orderBy('label')->get(),
             'currentActId' => $selectedVisit?->act_id,
-            'medecins' => User::where('role', Role::Medecin)->get(),
+            'medecins' => User::doctors()->get(),
             'isOnCallToday' => $doctor->isDoctor() && $doctor->isOnCallToday(),
             'userName' => $doctor->name,
             'userRole' => $doctor->role->label(),

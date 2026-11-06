@@ -31,7 +31,7 @@ class HospitalisationController extends Controller
 
         $averageStayDays = $admissions->avg(fn (Admission $admission) => $admission->admitted_at->diffInHours(now()) / 24);
 
-        $onCallDoctors = User::whereIn('role', [Role::Medecin->value, Role::Pediatre->value])
+        $onCallDoctors = User::doctors()
             ->whereHas('onCallShifts', function ($query) {
                 $query->whereDate('date', today());
             })

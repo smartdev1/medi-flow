@@ -63,7 +63,11 @@ class User extends Authenticatable
 
     public function isDoctor(): bool
     {
-        return $this->hasRole(Role::Medecin, Role::Pediatre);
+        return $this->hasRole(
+            Role::Medecin, Role::Pediatre, Role::Chirurgien, Role::Anesthesiste,
+            Role::Cardiologue, Role::Dermatologue, Role::Orl, Role::Ophtalmo,
+            Role::Dentiste,
+        );
     }
 
     public function onCallShifts(): HasMany
@@ -78,7 +82,11 @@ class User extends Authenticatable
 
     public function scopeDoctors($query)
     {
-        return $query->whereIn('role', [Role::Medecin->value, Role::Pediatre->value]);
+        return $query->whereIn('role', [
+            Role::Medecin->value, Role::Pediatre->value, Role::Chirurgien->value,
+            Role::Anesthesiste->value, Role::Cardiologue->value, Role::Dermatologue->value,
+            Role::Orl->value, Role::Ophtalmo->value, Role::Dentiste->value,
+        ]);
     }
 
     public function getInitialsAttribute(): string

@@ -55,7 +55,7 @@ Route::middleware(["auth", "verified"])->group(function () {
         Route::post("/accueil/visites/{visit}/montant-sejour", [AccueilController::class, "updateStayAmount"])->name("accueil.visits.stay-amount");
     });
 
-    Route::middleware("role:aide_soignante,medecin,pediatre,docteur_general")->group(function () {
+    Route::middleware("role:aide_soignante,medecin,pediatre,chirurgien,anesthesiste,cardiologue,dermatologue,orl,ophtalmo,dentiste,docteur_general")->group(function () {
         Route::post("/visites/{visit}/constantes", [AttenteController::class, "markVitals"])->name("visits.vitals");
         Route::get("/admission-requests", [HospitalisationController::class, "pendingRequests"])->name("admission-requests.index");
         Route::post("/admission-requests/{admissionRequest}/approve", [HospitalisationController::class, "approveRequest"])->name("admission-requests.approve");
@@ -96,7 +96,7 @@ Route::middleware(["auth", "verified"])->group(function () {
         Route::get("/caisse/raf", [App\Http\Controllers\CashierSessionController::class, "rafDashboard"])->name("caisse.raf.dashboard");
     });
 
-    Route::middleware("role:medecin,pediatre,docteur_general")->group(function () {
+    Route::middleware("role:medecin,pediatre,chirurgien,anesthesiste,cardiologue,dermatologue,orl,ophtalmo,dentiste,docteur_general")->group(function () {
         Route::get("/medecin", [MedecinController::class, "index"])->name("medecin.index");
         Route::get("/medecin/refresh", [MedecinController::class, "refresh"])->name("medecin.refresh");
         Route::post("/medecin/visites/{visit}/take", [MedecinController::class, "takeVisit"])->name("medecin.visits.take");
@@ -121,17 +121,17 @@ Route::middleware(["auth", "verified"])->group(function () {
         Route::post("/surgeries/{surgery}/operative-report", [SurgeryOperativeReportController::class, "store"])->name("surgery.operative-report");
     });
 
-    Route::middleware("role:medecin,pediatre,aide_soignante,docteur_general")->group(function () {
+    Route::middleware("role:medecin,pediatre,chirurgien,anesthesiste,cardiologue,dermatologue,orl,ophtalmo,dentiste,aide_soignante,docteur_general")->group(function () {
         Route::post("/surgeries/{surgery}/recovery/start", [SurgeryRecoveryController::class, "start"])->name("surgery.recovery.start");
         Route::post("/surgeries/{surgery}/recovery/end", [SurgeryRecoveryController::class, "end"])->name("surgery.recovery.end");
     });
 
-    Route::middleware("role:medecin,aide_soignante")->group(function () {
+    Route::middleware("role:medecin,pediatre,chirurgien,anesthesiste,cardiologue,dermatologue,orl,ophtalmo,dentiste,aide_soignante")->group(function () {
         Route::get("/bloc", [BlocController::class, "index"])->name("bloc.index");
         Route::get("/bloc/refresh", [BlocController::class, "refresh"])->name("bloc.refresh");
     });
 
-    Route::middleware("role:medecin,pediatre,aide_soignante,admin,docteur_general")->group(function () {
+    Route::middleware("role:medecin,pediatre,chirurgien,anesthesiste,cardiologue,dermatologue,orl,ophtalmo,dentiste,aide_soignante,admin,docteur_general")->group(function () {
         Route::get("/hospitalisation", [HospitalisationController::class, "index"])->name("hospitalisation.index");
         Route::get("/hospitalisation/refresh", [HospitalisationController::class, "refresh"])->name("hospitalisation.refresh");
         Route::get("/observation", [HospitalisationController::class, "observation"])->name("observation.index");
@@ -181,7 +181,7 @@ Route::middleware(["auth", "verified"])->group(function () {
         Route::delete("/acts/{act}", [ActController::class, "destroy"])->name("acts.destroy");
     });
 
-    Route::middleware("role:laborantin,medecin,pediatre,docteur_general")->group(function () {
+    Route::middleware("role:laborantin,medecin,pediatre,chirurgien,anesthesiste,cardiologue,dermatologue,orl,ophtalmo,dentiste,docteur_general")->group(function () {
         Route::post("/examens", [ExamController::class, "store"])->name("exams.store");
         Route::get("/examens/recherche", [ExamController::class, "search"])->name("exams.search");
     });
@@ -192,7 +192,7 @@ Route::middleware(["auth", "verified"])->group(function () {
         Route::post("/examens/{exam}/avancer", [ExamController::class, "advance"])->name("exams.advance");
     });
 
-    Route::middleware("role:medecin,pediatre,docteur_general")->group(function () {
+    Route::middleware("role:medecin,pediatre,chirurgien,anesthesiste,cardiologue,dermatologue,orl,ophtalmo,dentiste,docteur_general")->group(function () {
         Route::post("/ordonnances", [PrescriptionController::class, "store"])->name("prescriptions.store");
     });
 
