@@ -1,5 +1,5 @@
 {{--
-    Operative Report (Compte-rendu opératoire) component.
+    Operative Report (Compte-rendu opÃ©ratoire) component.
     Expected variable: $surgery (App\Models\Surgery)
     Include with: @include("surgery.operative-report.index", ["surgery" => $surgery])
 --}}
@@ -12,13 +12,13 @@
 
 <x-ui.card>
     <div class="flex items-center justify-between mb-4">
-        <h3 class="text-sm font-semibold text-ink">Compte-rendu opératoire</h3>
+        <h3 class="text-sm font-semibold text-ink">Compte-rendu opÃ©ratoire</h3>
         @if ($hasReport)
             <x-ui.badge tone="success">
                 <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                Rédigé
+                RÃ©digÃ©
             </x-ui.badge>
         @else
             <x-ui.badge tone="warning">En attente</x-ui.badge>
@@ -36,7 +36,7 @@
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <span>Rédigé par {{ $reportBy }} le {{ $reportAt->format("d/m/Y H:i") }}</span>
+                <span>RÃ©digÃ© par {{ $reportBy }} le {{ $reportAt->format("d/m/Y H:i") }}</span>
             </div>
 
             <div class="flex justify-end">
@@ -54,14 +54,14 @@
             @csrf
 
             <label for="operative_report" class="block text-sm font-medium text-ink mb-1">
-                Compte-rendu opératoire (min. 50 caractères)
+                Compte-rendu opÃ©ratoire (min. 50 caractÃ¨res)
             </label>
             <textarea id="operative_report"
                       name="operative_report"
                       rows="10"
                       required
                       minlength="50"
-                      placeholder="Décrivez l'intervention, les constatations, les suites opératoires prévues..."
+                      placeholder="DÃ©crivez l'intervention, les constatations, les suites opÃ©ratoires prÃ©vues..."
                       class="w-full rounded-md border border-line bg-white px-3 py-2 text-sm text-ink placeholder:text-ink-muted focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">{{ old("operative_report") }}</textarea>
 
             @error("operative_report")

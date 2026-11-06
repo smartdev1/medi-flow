@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Exam;
 use App\Models\Patient;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -67,6 +68,44 @@ class LaboratoireController extends Controller
             'userRole' => $userRole,
             'userInitials' => $userInitials,
             'showDebugInfo' => $exams->isEmpty(), // Afficher info de debug si pas d'examens
+        ]);
+    }
+
+    public function refresh(): JsonResponse
+    {
+        $exams = Exam::with('patient')
+            ->whereDate('requested_at', '>=', now()->subDays(30))
+            ->orderBy('requested_at', 'desc')
+            ->get()
+            ->filter(function (Exam $exam) {
+                $visit = \App\Models\Visit::where('patient_id', $exam->patient_id)
+                    ->whereDate('arrived_at', '=', $exam->requested_at->format('Y-m-d'))
+                    ->first();
+                return $visit ? !$visit->isClosed() : true;
+            });
+
+        $queue = $exams
+            ->whereIn('status', [Exam::STATUS_AWAITING_SAMPLE, Exam::STATUS_IN_PROGRESS])
+            ->values()
+            ->map(fn (Exam $exam, int $index) => [
+                'name' => $exam->patient->full_name,
+                'initials' => $exam->patient->initials,
+                'time' => $exam->requested_at->format('H:i'),
+                'meta' => "{$exam->name} — ".lcfirst($exam->status),
+                'urgent' => false,
+                'selected' => $index === 0,
+                'badge' => $exam->status === Exam::STATUS_IN_PROGRESS
+                    ? ['label' => 'En analyse', 'tone' => 'brand']
+                    : null,
+            ]);
+
+        return response()->json([
+            'queue' => $queue->values(),
+            'awaitingCount' => $exams->where('status', Exam::STATUS_AWAITING_SAMPLE)->count(),
+            'inProgressCount' => $exams->where('status', Exam::STATUS_IN_PROGRESS)->count(),
+            'readyCount' => $exams->where('status', Exam::STATUS_READY)->count(),
+            'sentCount' => $exams->where('status', Exam::STATUS_SENT)->count(),
+            'totalExams' => $exams->count(),
         ]);
     }
 }

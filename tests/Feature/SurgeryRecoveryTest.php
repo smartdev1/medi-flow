@@ -183,7 +183,7 @@ class SurgeryRecoveryTest extends TestCase
 
         $response = $this->actingAs($otherNurse)
             ->post(route("surgery.recovery.end", $this->surgery), [
-                "recovery_notes" => "Fin de surveillance par une autre infirmière.",
+                "recovery_notes" => "Fin de surveillance par une autre infirmiÃ¨re.",
             ]);
 
         $response->assertStatus(302);

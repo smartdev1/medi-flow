@@ -36,7 +36,7 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice): View
     {
         $this->authorize('view', $invoice);
-        $invoice->load(['patient.insuranceCompany', 'visit.act', 'visit.payments', 'cashier']);
+        $invoice->load(['patient.insuranceCompany', 'visit.act', 'visit.payments', 'visit.surgeries', 'cashier']);
         $patient = $invoice->patient;
         $visit = $invoice->visit;
 
@@ -47,45 +47,68 @@ class InvoiceController extends Controller
 
         $steps = collect();
 
-        if ($visit->act) {
-            $steps->push([
-                'time' => $visit->arrived_at,
-                'label' => 'Consultation',
-                'meta' => $visit->act->label,
-                'amount' => $visit->act->base_price,
-                'icon' => 'stethoscope',
-            ]);
-        }
+        $hasSurgery = $visit->surgeries
+            ->where('status', '!=', \App\Models\Surgery::STATUS_CANCELLED)
+            ->filter(fn ($s) => $s->cost > 0)
+            ->isNotEmpty();
 
-        foreach ($patient->exams as $exam) {
-            $steps->push([
-                'time' => $exam->requested_at,
-                'label' => 'Examen laboratoire',
-                'meta' => $exam->name,
-                'amount' => $exam->price,
-                'icon' => 'beaker',
-            ]);
-        }
-
-        foreach ($patient->admissions()
-            ->where('admitted_at', '>=', $visit->arrived_at)
-            ->with(['room', 'dayLines'])
-            ->get() as $admission) {
-            $admission->load('dayLines');
-            foreach ($admission->dayLines as $dayLine) {
-                $dayIndex = $dayLine->day_date->diffInDays($admission->admitted_at->copy()->startOfDay()) + 1;
-                $isLastDay = $dayLine->day_date->eq($admission->discharged_at?->copy()->startOfDay());
-                $label = $admission->discharged_at && $isLastDay
-                    ? 'Fin d\'hospitalisation'
-                    : 'Hospitalisation';
-
+        if ($hasSurgery) {
+            foreach ($visit->surgeries as $surgery) {
+                if ($surgery->status !== \App\Models\Surgery::STATUS_CANCELLED && $surgery->cost) {
+                    $statusLabel = match ($surgery->status) {
+                        \App\Models\Surgery::STATUS_SCHEDULED => ' (programmée)',
+                        \App\Models\Surgery::STATUS_IN_PROGRESS => ' (en cours)',
+                        default => '',
+                    };
+                    $steps->push([
+                        'time' => $surgery->completed_at ?? $surgery->started_at ?? $surgery->created_at,
+                        'label' => 'Chirurgie' . $statusLabel . ' — forfait global',
+                        'meta' => $surgery->procedure_name . ' (consultation, hospitalisation, médicaments inclus)',
+                        'amount' => $surgery->cost,
+                        'icon' => 'scissors',
+                    ]);
+                }
+            }
+        } else {
+            if ($visit->act) {
                 $steps->push([
-                    'time' => $dayLine->day_date,
-                    'label' => $label,
-                    'meta' => $admission->reason . ' — ' . $admission->room?->number . ' (Lit ' . $admission->bed_number . ') · ' . $dayLine->day_date->format('d/m/Y'),
-                    'amount' => $dayLine->amount,
-                    'icon' => 'building',
+                    'time' => $visit->arrived_at,
+                    'label' => 'Consultation',
+                    'meta' => $visit->act->label,
+                    'amount' => $visit->act->base_price,
+                    'icon' => 'stethoscope',
                 ]);
+            }
+
+            foreach ($patient->exams as $exam) {
+                $steps->push([
+                    'time' => $exam->requested_at,
+                    'label' => 'Examen laboratoire',
+                    'meta' => $exam->name,
+                    'amount' => $exam->price,
+                    'icon' => 'beaker',
+                ]);
+            }
+
+            foreach ($patient->admissions()
+                ->where('admitted_at', '>=', $visit->arrived_at)
+                ->with(['room', 'dayLines'])
+                ->get() as $admission) {
+                $admission->load('dayLines');
+                foreach ($admission->dayLines as $dayLine) {
+                    $isLastDay = $dayLine->day_date->eq($admission->discharged_at?->copy()->startOfDay());
+                    $label = $admission->discharged_at && $isLastDay
+                        ? 'Fin d\'hospitalisation'
+                        : 'Hospitalisation';
+
+                    $steps->push([
+                        'time' => $dayLine->day_date,
+                        'label' => $label,
+                        'meta' => $admission->reason . ' — ' . $admission->room?->number . ' (Lit ' . $admission->bed_number . ') · ' . $dayLine->day_date->format('d/m/Y'),
+                        'amount' => $dayLine->amount,
+                        'icon' => 'building',
+                    ]);
+                }
             }
         }
 

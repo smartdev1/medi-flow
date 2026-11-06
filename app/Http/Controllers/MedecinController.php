@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Visit;
 use App\Support\DoctorQueue;
 use App\Support\PatientTimeline;
+use App\Traits\GuardsClosedVisit;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ use Illuminate\View\View;
 
 class MedecinController extends Controller
 {
+    use GuardsClosedVisit;
 
     public function index(Request $request): View
     {
@@ -116,6 +118,7 @@ class MedecinController extends Controller
 
     public function takeVisit(Request $request, Visit $visit): RedirectResponse
     {
+        $this->abortIfVisitClosed($visit);
         $visit->update([
             'status' => Visit::STATUS_IN_CONSULTATION,
             'vitals_taken_at' => $visit->vitals_taken_at ?: now(),
@@ -139,6 +142,7 @@ class MedecinController extends Controller
 
     public function requestHospitalization(Request $request, Visit $visit): RedirectResponse
     {
+        $this->abortIfVisitClosed($visit);
         $patient = $visit->patient;
 
         if ($patient->admissions()->whereNull('discharged_at')->exists()) {
@@ -165,6 +169,7 @@ class MedecinController extends Controller
 
     public function requestObservation(Request $request, Visit $visit): RedirectResponse
     {
+        $this->abortIfVisitClosed($visit);
         $patient = $visit->patient;
 
         if ($patient->admissions()->whereNull('discharged_at')->exists()) {

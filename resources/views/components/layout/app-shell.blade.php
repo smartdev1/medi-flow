@@ -16,11 +16,13 @@
     $badgeCounts = [
         'caisse' => \App\Models\Invoice::whereIn('status', [\App\Models\Invoice::STATUS_PENDING, \App\Models\Invoice::STATUS_AWAITING_PAYMENT])->whereDate('created_at', today())->count(),
         'attente' => \App\Models\Visit::whereNull('discharged_at')->whereDate('arrived_at', today())->where('status', \App\Models\Visit::STATUS_WAITING)->whereNull('vitals_taken_at')->count(),
-        'medecin' => \App\Models\Visit::whereNull('discharged_at')->whereDate('arrived_at', today())->whereIn('status', [\App\Models\Visit::STATUS_WAITING, \App\Models\Visit::STATUS_RETURNED_FROM_OBSERVATION])->whereNotNull('vitals_taken_at')->count(),
-        'laboratoire' => \App\Models\Exam::whereIn('status', [\App\Models\Exam::STATUS_AWAITING_SAMPLE, \App\Models\Exam::STATUS_IN_PROGRESS])->count(),
-        'hospitalisation' => \App\Models\AdmissionRequest::pending()->count() + \App\Models\Admission::active()->where('status', \App\Models\Admission::STATUS_STABLE)->count() + \App\Models\Admission::where('status', \App\Models\Admission::STATUS_OBSERVATION)->active()->count(),
-        'sortie' => \App\Models\Visit::where('status', 'Consultation terminée')->whereNull('discharged_at')->count(),
-        'observation' => \App\Models\Admission::where('status', \App\Models\Admission::STATUS_OBSERVATION)->whereNull('discharged_at')->count(),
+        'medecin' => \App\Support\DoctorQueue::count(),
+        'bloc' => \App\Models\Surgery::where('status', \App\Models\Surgery::STATUS_IN_PROGRESS)->count(),
+        'laboratoire' => \App\Models\Exam::pendingInLaboratory()->count(),
+        'admission-requests' => \App\Models\AdmissionRequest::pending()->count(),
+        'hospitalisation' => \App\Models\Admission::active()->where('status', \App\Models\Admission::STATUS_STABLE)->count(),
+        'observation' => \App\Models\Admission::where('status', \App\Models\Admission::STATUS_OBSERVATION)->active()->count(),
+        'sortie' => \App\Models\Visit::where('status', \App\Models\Visit::STATUS_CONSULTATION_CLOSED)->whereNull('discharged_at')->count(),
     ];
 
     $nav = collect([

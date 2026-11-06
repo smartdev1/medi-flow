@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Surgery;
+use App\Traits\GuardsClosedVisit;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,13 +11,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SurgeryOperativeReportController extends Controller
 {
+    use GuardsClosedVisit;
     /**
      * Store the operative report for a completed surgery.
      */
     public function store(Request $request, Surgery $surgery): RedirectResponse
     {
+        $this->abortIfVisitClosed($surgery->visit);
         if ($surgery->status !== Surgery::STATUS_COMPLETED) {
-            return redirect()->back()->with("error", "Le compte-rendu ne peut Ítre rÈdigÈ que pour une chirurgie terminÈe.");
+            return redirect()->back()->with("error", "Le compte-rendu ne peut √™tre r√©dig√© que pour une chirurgie termin√©e.");
         }
 
         $validated = $request->validate([
@@ -35,6 +38,6 @@ class SurgeryOperativeReportController extends Controller
             "operative_report_at" => $surgery->operative_report_at->toISOString(),
         ], $request);
 
-        return redirect()->back()->with("success", "Compte-rendu opÈratoire enregistrÈ avec succËs.");
+        return redirect()->back()->with("success", "Compte-rendu op√©ratoire enregistr√© avec succ√®s.");
     }
 }

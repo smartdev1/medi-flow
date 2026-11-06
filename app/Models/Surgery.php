@@ -6,14 +6,12 @@ use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Surgery extends Model
 {
     use HasFactory, Auditable;
 
     const STATUS_SCHEDULED = "scheduled";
-    const STATUS_CONSENT_SIGNED = "consent_signed";
     const STATUS_IN_PROGRESS = "in_progress";
     const STATUS_COMPLETED = "completed";
     const STATUS_CANCELLED = "cancelled";
@@ -28,6 +26,7 @@ class Surgery extends Model
         "surgery_type",
         "referring_doctor_name",
         "procedure_name",
+        "cost",
         "pre_anesthetic_notes",
         "consent_signed_at",
         "consent_signed_by",
@@ -71,11 +70,6 @@ class Surgery extends Model
     public function anesthetist(): BelongsTo
     {
         return $this->belongsTo(User::class, "anesthetist_id");
-    }
-
-    public function checklists(): HasMany
-    {
-        return $this->hasMany(SurgeryChecklist::class);
     }
 
     public function operativeReportBy(): BelongsTo

@@ -146,15 +146,24 @@
                         </div>
 
                         @if ($activeVisit)
+                            @php
+                                $canClose = !$depiquagePending && !$activeInvoice;
+                            @endphp
                             @if ($depiquagePending)
                                 <div class="mb-3 flex items-center gap-2 rounded-md border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-800">
                                     <x-ui.icon name="alert-triangle" class="h-4 w-4 flex-shrink-0" />
                                     En attente de validation du dépiquage par les aides-soignantes
                                 </div>
                             @endif
+                            @if ($activeInvoice)
+                                <div class="mb-3 flex items-center gap-2 rounded-md border border-red-200 bg-red-50 px-4 py-2.5 text-sm text-red-800">
+                                    <x-ui.icon name="x-circle" class="h-4 w-4 flex-shrink-0" />
+                                    Facture impayée : {{ number_format($activeInvoice->remaining_amount, 0, ',', ' ') }} FCFA restant(s)
+                                </div>
+                            @endif
                             <form method="POST" action="{{ route('sortie.close', $activeVisit) }}">
                                 @csrf
-                                <x-ui.button type="submit" :disabled="$depiquagePending">
+                                <x-ui.button type="submit" :disabled="!$canClose">
                                     <x-ui.icon name="check-circle" class="h-4 w-4" />
                                     Clôturer le dossier
                                 </x-ui.button>

@@ -109,32 +109,6 @@ class SurgerySchedulingTest extends TestCase
         $this->assertSame('2026-12-01 14:00:00', $surgery->scheduled_at->format('Y-m-d H:i:s'));
     }
 
-    public function test_update_allowed_when_consent_signed(): void
-    {
-        $medecin = User::factory()->withRole(Role::Medecin)->create();
-        $patient = Patient::factory()->create();
-        $visit = Visit::factory()->surgeryInterne()->create([
-            'patient_id' => $patient->id,
-        ]);
-
-        $surgery = Surgery::create([
-            'visit_id' => $visit->id,
-            'patient_id' => $patient->id,
-            'surgeon_id' => $medecin->id,
-            'procedure_name' => 'Original',
-            'surgery_type' => 'interne',
-            'status' => Surgery::STATUS_CONSENT_SIGNED,
-        ]);
-
-        $response = $this->actingAs($medecin)->patch(route('surgery.update', $surgery), [
-            'procedure_name' => 'Modified after consent',
-        ]);
-
-        $response->assertRedirect();
-        $surgery->refresh();
-        $this->assertSame('Modified after consent', $surgery->procedure_name);
-    }
-
     public function test_cancel_sets_status_to_cancelled(): void
     {
         $medecin = User::factory()->withRole(Role::Medecin)->create();

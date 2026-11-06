@@ -1,5 +1,21 @@
 <x-layout.app-shell title="Hospitalisation" active="hospitalisation" :user-name="$userName" :user-role="$userRole" :user-initials="$userInitials">
 
+    <div x-data="{
+        patientCount: {{ count($patients) }},
+        init() {
+            setInterval(() => {
+                fetch('{{ route('hospitalisation.refresh') }}', {
+                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(r => r.ok ? r.json() : Promise.reject())
+                .then(data => {
+                    if (data.patients.length !== this.patientCount) { window.location.reload(); }
+                })
+                .catch(() => {});
+            }, 10000);
+        }
+    }"></div>
+
     @if ($isAideSoignante)
         {{-- Nursing aide dashboard --}}
         <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">

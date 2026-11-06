@@ -4,6 +4,7 @@ namespace App\Support;
 
 use App\Models\Consultation;
 use App\Models\Exam;
+use App\Models\Surgery;
 use App\Models\Visit;
 use Illuminate\Support\Collection;
 
@@ -23,7 +24,7 @@ class DoctorQueue
      */
     public static function visits(): Collection
     {
-        return Visit::with(['patient', 'consultations', 'patient.admissions', 'patient.exams'])
+        return Visit::with(['patient', 'consultations', 'patient.admissions', 'patient.exams', 'surgeries'])
             ->active()
             ->whereNotNull('vitals_taken_at')
             ->orderBy('arrived_at')
@@ -38,6 +39,9 @@ class DoctorQueue
             ))
             ->reject(fn (Visit $visit) => $visit->patient->exams->contains(
                 fn (Exam $exam) => in_array($exam->status, Exam::PENDING_IN_LABORATORY, true)
+            ))
+            ->reject(fn (Visit $visit) => $visit->surgeries->contains(
+                fn (Surgery $s) => $s->status !== Surgery::STATUS_CANCELLED
             ))
             ->values();
     }

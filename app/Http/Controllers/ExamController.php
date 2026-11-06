@@ -8,17 +8,22 @@ use App\Models\Invoice;
 use App\Models\LabExam;
 use App\Models\Patient;
 use App\Models\Visit;
+use App\Traits\GuardsClosedVisit;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
 {
+    use GuardsClosedVisit;
     public function store(StoreExamRequest $request): RedirectResponse
     {
         $this->authorize('create', Exam::class);
         $data = $request->validated();
         $patient = Patient::findOrFail($data['patient_id']);
+
+        $activeVisit = $patient->visits()->active()->latest('arrived_at')->first();
+        $this->abortIfVisitClosed($activeVisit);
 
         // L'examen est la conséquence d'une consultation : il est rattaché à la
         // visite qui l'a demandé. Une demande saisie au laboratoire, hors

@@ -244,6 +244,23 @@ class CaisseController extends Controller
         ]);
     }
 
+    public function refresh(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $date = $this->resolveDate($request->string('date')->toString() ?: null);
+
+        $invoiceQuery = Invoice::with(['patient.insuranceCompany', 'visit.act'])
+            ->activeOn($date)
+            ->orderByDesc('updated_at');
+
+        return response()->json([
+            'pendingCount' => (clone $invoiceQuery)->open()->count(),
+            'aPayer' => (clone $invoiceQuery)->awaitingPayment()->count(),
+            'payes' => (clone $invoiceQuery)->paid()->count(),
+            'paniersEnCours' => (clone $invoiceQuery)->pending()->count(),
+            'partialCount' => (clone $invoiceQuery)->where('status', Invoice::STATUS_PARTIAL)->count(),
+        ]);
+    }
+
     private function resolveDate(?string $value): Carbon
     {
         if ($value && preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {

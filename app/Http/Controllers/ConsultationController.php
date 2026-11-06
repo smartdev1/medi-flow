@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateConsultationRequest;
 use App\Models\Consultation;
 use App\Models\Invoice;
+use App\Traits\GuardsClosedVisit;
 use Illuminate\Http\RedirectResponse;
 
 class ConsultationController extends Controller
 {
+    use GuardsClosedVisit;
     /**
      * Fiche de consultation : constantes, notes et acte réalisé.
      *
@@ -20,6 +22,7 @@ class ConsultationController extends Controller
      */
     public function update(UpdateConsultationRequest $request, Consultation $consultation): RedirectResponse
     {
+        $this->abortIfVisitClosed($consultation->visit);
         $data = $request->validated();
 
         $payload = ['notes' => $data['notes'] ?? null];
@@ -55,6 +58,7 @@ class ConsultationController extends Controller
 
     public function close(Consultation $consultation): RedirectResponse
     {
+        $this->abortIfVisitClosed($consultation->visit);
         $consultation->close();
 
         return redirect()

@@ -32,7 +32,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\SortieController;
 use App\Http\Controllers\SurgeryConsentController;
-use App\Http\Controllers\SurgeryChecklistController;
 use App\Http\Controllers\SurgeryController;
 use App\Http\Controllers\SurgeryOperativeReportController;
 use App\Http\Controllers\SurgeryRecoveryController;
@@ -69,7 +68,9 @@ Route::middleware(["auth", "verified"])->group(function () {
     });
 
     Route::middleware("role:caissier,docteur_general,raf")->group(function () {
+        Route::patch("/surgeries/{surgery}/cost", [SurgeryController::class, "updateCost"])->name("surgery.update-cost");
         Route::get("/caisse", [CaisseController::class, "index"])->name("caisse.index");
+        Route::get("/caisse/refresh", [CaisseController::class, "refresh"])->name("caisse.refresh");
         Route::get("/caisse/historique", [CaisseController::class, "history"])->name("caisse.historique");
         Route::get("/caisse/jour/{date}", [CaisseController::class, "showDay"])->name("caisse.jour");
         Route::post("/paiements", [PaymentController::class, "store"])->name("payments.store");
@@ -115,8 +116,6 @@ Route::middleware(["auth", "verified"])->group(function () {
         Route::patch("/surgeries/{surgery}", [SurgeryController::class, "update"])->name("surgery.update");
         Route::delete("/surgeries/{surgery}", [SurgeryController::class, "destroy"])->name("surgery.destroy");
         Route::patch("/surgeries/{surgery}/pre-anesthetic", [SurgeryConsentController::class, "preAnesthetic"])->name("surgery.pre-anesthetic");
-        Route::post("/surgeries/{surgery}/consent", [SurgeryConsentController::class, "signConsent"])->name("surgery.consent");
-        Route::post("/surgeries/{surgery}/checklist/{phase}", [SurgeryChecklistController::class, "store"])->name("surgery.checklist");
         Route::post("/surgeries/{surgery}/start", [SurgeryController::class, "start"])->name("surgery.start");
         Route::post("/surgeries/{surgery}/complete", [SurgeryController::class, "complete"])->name("surgery.complete");
         Route::post("/surgeries/{surgery}/operative-report", [SurgeryOperativeReportController::class, "store"])->name("surgery.operative-report");
@@ -129,11 +128,14 @@ Route::middleware(["auth", "verified"])->group(function () {
 
     Route::middleware("role:medecin,aide_soignante")->group(function () {
         Route::get("/bloc", [BlocController::class, "index"])->name("bloc.index");
+        Route::get("/bloc/refresh", [BlocController::class, "refresh"])->name("bloc.refresh");
     });
 
     Route::middleware("role:medecin,pediatre,aide_soignante,admin,docteur_general")->group(function () {
         Route::get("/hospitalisation", [HospitalisationController::class, "index"])->name("hospitalisation.index");
+        Route::get("/hospitalisation/refresh", [HospitalisationController::class, "refresh"])->name("hospitalisation.refresh");
         Route::get("/observation", [HospitalisationController::class, "observation"])->name("observation.index");
+        Route::get("/observation/refresh", [HospitalisationController::class, "observationRefresh"])->name("observation.refresh");
         Route::get("/chambres", [ChambreController::class, "index"])->name("chambres.index");
     });
 
@@ -186,6 +188,7 @@ Route::middleware(["auth", "verified"])->group(function () {
 
     Route::middleware("role:laborantin,docteur_general")->group(function () {
         Route::get("/laboratoire", [LaboratoireController::class, "index"])->name("laboratoire.index");
+        Route::get("/laboratoire/refresh", [LaboratoireController::class, "refresh"])->name("laboratoire.refresh");
         Route::post("/examens/{exam}/avancer", [ExamController::class, "advance"])->name("exams.advance");
     });
 

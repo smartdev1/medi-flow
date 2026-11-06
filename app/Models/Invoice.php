@@ -204,51 +204,68 @@ class Invoice extends Model
         $visit = $this->visit->fresh() ?? $this->visit;
         $patient = $this->patient->fresh() ?? $this->patient;
 
+        if (! $visit->relationLoaded('surgeries')) {
+            $visit->load('surgeries');
+        }
+
+        $surgeryCost = $visit->surgeries
+            ->where('status', '!=', Surgery::STATUS_CANCELLED)
+            ->sum('cost');
+
+        // Surgery cost is all-inclusive: consultation, hospitalization,
+        // anesthesia, medication, room — everything is in the global amount.
+        if ($surgeryCost > 0) {
+            $breakdown = [ActCategory::Chirurgie->value => $surgeryCost];
+            $isInsured = (bool) $patient->insurance_company_id;
+
+            if ($isInsured) {
+                $rate = ((float) $this->ticket_moderateur) / 100;
+                $ticket = (int) round($surgeryCost * $rate);
+                $insuranceAmount = $surgeryCost - $ticket;
+                $patientAmount = $ticket;
+            } else {
+                $patientAmount = $surgeryCost;
+                $insuranceAmount = 0;
+            }
+
+            $this->update([
+                'subtotal' => $surgeryCost,
+                'insurance_amount' => $insuranceAmount,
+                'patient_amount' => $patientAmount,
+                'breakdown' => $breakdown,
+            ]);
+
+            return;
+        }
+
+        // Non-surgery visit: standard billing (act + exams + pharmacy + stay).
         if (! $visit->relationLoaded('act')) {
             $visit->load('act');
         }
 
         $actsTotal = 0;
-        $stayTotal = 0;
         $breakdown = [];
 
         if ($visit->act) {
-            if ($visit->surgery_type === 'externe' && $visit->act->category === ActCategory::Chirurgie) {
-                $blocAct = Act::where('code', 'BLOC-LOCATION')->first();
-                if ($blocAct) {
-                    $price = $patient->insurance_company_id && $blocAct->insured_price
-                        ? $blocAct->insured_price
-                        : $blocAct->base_price;
-                    $actsTotal += $price;
-                    if ($price > 0) {
-                        $breakdown[ActCategory::Bloc->value] = ($breakdown[ActCategory::Bloc->value] ?? 0) + $price;
-                    }
-                }
-            } else {
-                $price = $patient->insurance_company_id && $visit->act->insured_price
-                    ? $visit->act->insured_price
-                    : $visit->act->base_price;
-                $actsTotal += $price;
+            $price = $patient->insurance_company_id && $visit->act->insured_price
+                ? $visit->act->insured_price
+                : $visit->act->base_price;
+            $actsTotal += $price;
 
-                if ($price > 0) {
-                    $category = $visit->act->category instanceof ActCategory
-                        ? $visit->act->category
-                        : ActCategory::Consultation;
-                    $breakdown[$category->value] = ($breakdown[$category->value] ?? 0) + $price;
-                }
+            if ($price > 0) {
+                $category = $visit->act->category instanceof ActCategory
+                    ? $visit->act->category
+                    : ActCategory::Consultation;
+                $breakdown[$category->value] = ($breakdown[$category->value] ?? 0) + $price;
             }
         }
 
-// Un examen est facturé sur la visite qui l'a demandé. Additionner tous les
-// examens du patient ferait porter sur cette facture des prestations d'autres
-// consultations. Un examen sans rattachement — demande saisie au laboratoire
-// hors consultation — reste imputé à la venue en cours.
-$visitExams = $patient->exams->filter(
-    fn (Exam $exam) => $exam->visit_id === null || $exam->visit_id === $visit->id
-);
+        $visitExams = $patient->exams->filter(
+            fn (Exam $exam) => $exam->visit_id === null || $exam->visit_id === $visit->id
+        );
 
-$examsTotal = $visitExams->sum('price');
-$actsTotal += $examsTotal;
+        $examsTotal = $visitExams->sum('price');
+        $actsTotal += $examsTotal;
 
         if ($examsTotal > 0) {
             $breakdown[ActCategory::Laboratoire->value] = ($breakdown[ActCategory::Laboratoire->value] ?? 0) + $examsTotal;
@@ -260,10 +277,6 @@ $actsTotal += $examsTotal;
             $breakdown[ActCategory::Pharmacie->value] = ($breakdown[ActCategory::Pharmacie->value] ?? 0) + $prescriptionsTotal;
         }
 
-        // La pharmacie est exclue de la base du ticket modérateur : elle n'est
-        // pas ajoutée à `$actsTotal`, qui reste la base des actes et des
-        // examens. Elle est en revanche conservée au sous-total, sans quoi le
-        // montant réclamé au patient serait inférieur au coût réel.
         $pharmacyTotal = $prescriptionsTotal;
 
         $admissions = $patient->admissions()
@@ -273,9 +286,6 @@ $actsTotal += $examsTotal;
             ->filter(fn (Admission $admission) => $admission->visit_id === null || $admission->visit_id === $this->visit_id)
             ->values();
 
-        // Un séjour encore en cours est facturé jusqu'à aujourd'hui. Sans cette
-        // synchronisation, la facture resterait figée à la journée d'admission
-        // et n'afficherait pas le montant que voit l'accueil.
         foreach ($admissions as $admission) {
             if ($admission->discharged_at === null) {
                 $admission->syncDayLines();
@@ -291,52 +301,12 @@ $actsTotal += $examsTotal;
             $breakdown[ActCategory::Hospitalisation->value] = ($breakdown[ActCategory::Hospitalisation->value] ?? 0) + $stayTotal;
         }
 
-        // Surgery anesthesia billing: for each completed surgery with an
-        // anesthetist, add the standard general-anesthesia act (BLOC-ANESTH-GEN).
-        // The surgical act itself is already handled above via visit->act; this
-        // block only adds the anesthesia line.
-        if (! $visit->relationLoaded('surgeries')) {
-            $visit->load('surgeries');
-        }
-
-        $completedSurgeries = $visit->surgeries->filter(
-            fn (Surgery $surgery) => $surgery->status === Surgery::STATUS_COMPLETED
-                && $surgery->anesthetist_id !== null
-        );
-
-        if ($completedSurgeries->isNotEmpty()) {
-            $anesthAct = Act::where('code', 'BLOC-ANESTH-GEN')->first();
-
-            if ($anesthAct) {
-                foreach ($completedSurgeries as $surgery) {
-                    $anesthPrice = $patient->insurance_company_id && $anesthAct->insured_price
-                        ? $anesthAct->insured_price
-                        : $anesthAct->base_price;
-
-                    $actsTotal += $anesthPrice;
-
-                    if ($anesthPrice > 0) {
-                        $breakdown[ActCategory::Bloc->value] = ($breakdown[ActCategory::Bloc->value] ?? 0) + $anesthPrice;
-                    }
-                }
-            }
-        }
-
-// Le montant du séjour est normalement le cumul des journées facturées au prix
-// de la chambre. `agreed_stay_amount` porte le montant convenu que l'accueil
-// arrête depuis son tableau : il s'y substitue intégralement, et c'est cette
-// somme que la caisse encaisse.
-$agreedStay = $this->agreed_stay_amount !== null
-    ? (int) $this->agreed_stay_amount
-    : $stayTotal;
+        $agreedStay = $this->agreed_stay_amount !== null
+            ? (int) $this->agreed_stay_amount
+            : $stayTotal;
 
         $subtotal = $actsTotal + $pharmacyTotal + $agreedStay;
 
-        // Le ticket modérateur ne porte que sur les actes et les examens.
-        // L'hospitalisation, la mise en observation et la pharmacie en sont
-        // exclues et restent entièrement à la charge du patient. Un patient non
-        // assuré ne bénéficie d'aucun taux et ne donne lieu à aucun tiers
-        // payant.
         $isInsured = (bool) $patient->insurance_company_id;
 
         if ($isInsured) {

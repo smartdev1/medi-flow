@@ -7,17 +7,22 @@ use App\Models\Admission;
 use App\Models\Invoice;
 use App\Models\Patient;
 use App\Models\Room;
+use App\Traits\GuardsClosedVisit;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class AdmissionController extends Controller
 {
+    use GuardsClosedVisit;
     public function store(StoreAdmissionRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $patient = Patient::findOrFail($data['patient_id']);
         $room = Room::findOrFail($data['room_id']);
+
+        $activeVisit = $patient->visits()->active()->latest('arrived_at')->first();
+        $this->abortIfVisitClosed($activeVisit);
 
         if ($patient->admissions()->whereNull('discharged_at')->exists()) {
             throw ValidationException::withMessages([

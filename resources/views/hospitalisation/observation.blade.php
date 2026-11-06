@@ -1,5 +1,21 @@
 <x-layout.app-shell title="Mise en Observation" active="hospitalisation" :user-name="$userName" :user-role="$userRole" :user-initials="$userInitials">
 
+    <div x-data="{
+        patientCount: {{ count($patients) }},
+        init() {
+            setInterval(() => {
+                fetch('{{ route('observation.refresh') }}', {
+                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(r => r.ok ? r.json() : Promise.reject())
+                .then(data => {
+                    if (data.patients.length !== this.patientCount) { window.location.reload(); }
+                })
+                .catch(() => {});
+            }, 10000);
+        }
+    }"></div>
+
     <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
             <h1 class="text-lg font-semibold text-ink">Patients en observation</h1>

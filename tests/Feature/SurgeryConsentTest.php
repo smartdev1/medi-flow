@@ -12,10 +12,6 @@ class SurgeryConsentTest extends TestCase
 {
     use RefreshDatabase;
 
-    // ------------------------------------------------------------------
-    // Pre-anesthetic notes
-    // ------------------------------------------------------------------
-
     public function test_anesthetist_can_fill_pre_anesthetic_notes(): void
     {
         $anesthetist = User::factory()->withRole(Role::Medecin)->create();
@@ -60,41 +56,17 @@ class SurgeryConsentTest extends TestCase
         );
     }
 
-    public function test_non_assigned_medecin_cannot_fill_if_anesthetist_exists(): void
-    {
-        $assignedAnesthetist = User::factory()->withRole(Role::Medecin)->create();
-        $otherMedecin = User::factory()->withRole(Role::Medecin)->create();
-
-        $surgery = Surgery::factory()->create([
-            'anesthetist_id' => $assignedAnesthetist->id,
-        ]);
-
-        $response = $this->actingAs($otherMedecin)
-            ->patch(route('surgery.pre-anesthetic', $surgery), [
-                'pre_anesthetic_notes' => 'Trying to write notes as non-assigned medecin.',
-            ]);
-
-        $response->assertStatus(403);
-
-        $this->assertNull($surgery->fresh()->pre_anesthetic_notes);
-    }
-
-    // ------------------------------------------------------------------
-    // Consent signing
-    // ------------------------------------------------------------------
-
-    public function test_consent_signing_transitions_status(): void
+    public function test_consent_recorded_when_starting_surgery(): void
     {
         $medecin = User::factory()->withRole(Role::Medecin)->create();
 
         $surgery = Surgery::factory()->create([
-            'pre_anesthetic_notes' => 'Patient cleared for surgery.',
             'status' => Surgery::STATUS_SCHEDULED,
         ]);
 
         $response = $this->actingAs($medecin)
-            ->post(route('surgery.consent', $surgery), [
-                'consent_signed_by' => 'Jean Dupont',
+            ->post(route('surgery.start', $surgery), [
+                'consent' => '1',
             ]);
 
         $response->assertRedirect();
@@ -102,50 +74,25 @@ class SurgeryConsentTest extends TestCase
 
         $surgery->refresh();
 
-        $this->assertSame(Surgery::STATUS_CONSENT_SIGNED, $surgery->status);
+        $this->assertSame(Surgery::STATUS_IN_PROGRESS, $surgery->status);
         $this->assertNotNull($surgery->consent_signed_at);
-        $this->assertSame('Jean Dupont', $surgery->consent_signed_by);
+        $this->assertNotNull($surgery->started_at);
     }
 
-    public function test_consent_blocked_without_pre_anesthetic_notes(): void
+    public function test_start_requires_consent_checkbox(): void
     {
         $medecin = User::factory()->withRole(Role::Medecin)->create();
 
         $surgery = Surgery::factory()->create([
-            'pre_anesthetic_notes' => null,
             'status' => Surgery::STATUS_SCHEDULED,
         ]);
 
         $response = $this->actingAs($medecin)
-            ->post(route('surgery.consent', $surgery), [
-                'consent_signed_by' => 'Jean Dupont',
-            ]);
+            ->post(route('surgery.start', $surgery), []);
 
-        $response->assertStatus(422);
+        $response->assertSessionHasErrors('consent');
 
         $surgery->refresh();
-
         $this->assertSame(Surgery::STATUS_SCHEDULED, $surgery->status);
-        $this->assertNull($surgery->consent_signed_at);
-    }
-
-    public function test_consent_signed_by_is_recorded(): void
-    {
-        $medecin = User::factory()->withRole(Role::Medecin)->create();
-
-        $surgery = Surgery::factory()->create([
-            'pre_anesthetic_notes' => 'All checks passed. Fit for surgery.',
-            'status' => Surgery::STATUS_SCHEDULED,
-        ]);
-
-        $this->actingAs($medecin)
-            ->post(route('surgery.consent', $surgery), [
-                'consent_signed_by' => 'Marie Konan (tutrice)',
-            ]);
-
-        $this->assertDatabaseHas('surgeries', [
-            'id' => $surgery->id,
-            'consent_signed_by' => 'Marie Konan (tutrice)',
-        ]);
     }
 }

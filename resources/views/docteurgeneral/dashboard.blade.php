@@ -44,10 +44,9 @@
 
         {{-- ===================== SYNTHÈSE ===================== --}}
         <div x-show="tab === 'synthese'" class="pt-6">
-            <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-6">
+            <div class="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-5">
                 <x-ui.stat-card label="CA (période)" :value="$fmt($finance['collected'])" icon="credit-card" />
                 <x-ui.stat-card label="Taux d'occupation" :value="$operations['occupancy_rate'] . ' %'" icon="building" />
-                <x-ui.stat-card label="Marge" value="À connecter" icon="chart-bar" />
                 <x-ui.stat-card label="Taux d'impayés" :value="$finance['unpaid_rate'] . ' %'" icon="x-circle" trendTone="danger" />
                 <x-ui.stat-card label="Actes réalisés" :value="$operations['acts']['total']" icon="check-circle" />
                 <x-ui.stat-card label="Temps d'attente" :value="$operations['avg_wait_minutes'] . ' min'" icon="clock" />

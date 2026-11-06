@@ -10,6 +10,7 @@ use App\Models\Patient;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Visit;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
@@ -197,6 +198,71 @@ class HospitalisationController extends Controller
             'userName' => $userName,
             'userRole' => $userRole,
             'userInitials' => $userInitials,
+        ]);
+    }
+
+    public function refresh(): JsonResponse
+    {
+        $admissions = Admission::with(['patient', 'room', 'visit'])
+            ->active()
+            ->get()
+            ->reject(fn (Admission $admission) => $admission->unit() === Admission::STATUS_OBSERVATION)
+            ->sortBy('admitted_at')
+            ->values();
+
+        $user = auth()->user();
+        $isAideSoignante = $user->hasRole(Role::AideSoignante);
+
+        $data = [
+            'patients' => $this->present($admissions),
+            'plannedDischarges' => $admissions->filter(fn (Admission $a) => $a->isDischargePlanned())->count(),
+            'averageStay' => ($avg = $admissions->avg(fn (Admission $a) => $a->admitted_at->diffInHours(now()) / 24))
+                ? number_format($avg, 1, ',', ' ').' jour(s)' : '—',
+        ];
+
+        if ($isAideSoignante) {
+            $data['attenteDepiquage'] = Admission::with(['patient', 'room'])
+                ->whereNotNull('discharged_at')
+                ->whereNull('depiquage_valide_par')
+                ->orderBy('discharged_at')
+                ->get()
+                ->map(fn (Admission $a) => [
+                    'id' => $a->id,
+                    'name' => $a->patient->full_name,
+                    'room' => "{$a->room->number} · Lit {$a->bed_number}",
+                    'discharged_at' => $a->discharged_at->diffForHumans(),
+                ])
+                ->all();
+
+            $data['chambresALiberer'] = Admission::with(['patient', 'room'])
+                ->whereNotNull('depiquage_valide_par')
+                ->whereNotNull('discharged_at')
+                ->whereNull('room_released_at')
+                ->orderBy('depiquage_valide_le')
+                ->get()
+                ->map(fn (Admission $a) => [
+                    'id' => $a->id,
+                    'name' => $a->patient->full_name,
+                    'room' => "{$a->room->number} · Lit {$a->bed_number}",
+                    'depiquage_valide_le' => $a->depiquage_valide_le?->diffForHumans(),
+                ])
+                ->all();
+        }
+
+        return response()->json($data);
+    }
+
+    public function observationRefresh(): JsonResponse
+    {
+        $admissions = Admission::with(['patient', 'room', 'visit'])
+            ->active()
+            ->get()
+            ->filter(fn (Admission $admission) => $admission->unit() === Admission::STATUS_OBSERVATION)
+            ->sortBy('admitted_at')
+            ->values();
+
+        return response()->json([
+            'patients' => $this->present($admissions),
         ]);
     }
 

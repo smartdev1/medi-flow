@@ -34,7 +34,23 @@
         </x-ui.slide-over>
     </div>
 
-    <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3" x-data="{
+        counts: { awaiting: {{ $awaitingCount }}, inProgress: {{ $inProgressCount }}, ready: {{ $readyCount }} },
+        init() {
+            setInterval(() => {
+                fetch('{{ route('laboratoire.refresh') }}', {
+                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(r => r.ok ? r.json() : Promise.reject())
+                .then(data => {
+                    if (data.awaitingCount !== this.counts.awaiting || data.inProgressCount !== this.counts.inProgress || data.readyCount !== this.counts.ready) {
+                        window.location.reload();
+                    }
+                })
+                .catch(() => {});
+            }, 15000);
+        }
+    }">
         <x-ui.stat-card label="Patients attendus" value="{{ $awaitingCount }}" icon="users" trend="En attente de prélèvement" trend-tone="neutral" />
         <x-ui.stat-card label="Résultats en cours" value="{{ $inProgressCount }}" icon="beaker" trend="Analyse en laboratoire" trend-tone="brand" />
         <x-ui.stat-card label="Résultats prêts" value="{{ $readyCount }}" icon="check-circle" trend="À transmettre" trend-tone="success" />

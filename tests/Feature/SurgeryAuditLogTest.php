@@ -6,7 +6,6 @@ use App\Enums\Role;
 use App\Models\AuditLog;
 use App\Models\Patient;
 use App\Models\Surgery;
-use App\Models\SurgeryChecklist;
 use App\Models\User;
 use App\Models\Visit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -42,7 +41,7 @@ class SurgeryAuditLogTest extends TestCase
             "anesthetist_id" => $this->anesthetist->id,
             "procedure_name" => "Appendicectomie",
             "surgery_type" => "interne",
-            "status" => Surgery::STATUS_CONSENT_SIGNED,
+            "status" => Surgery::STATUS_SCHEDULED,
         ]);
     }
 
@@ -51,31 +50,21 @@ class SurgeryAuditLogTest extends TestCase
         $this->assertTrue(\Schema::hasTable("audit_logs"));
     }
 
-    public function test_checklist_completion_creates_audit_log(): void
+    public function test_starting_surgery_creates_audit_log(): void
     {
         $this->assertEquals(0, AuditLog::count());
 
-        $response = $this->actingAs($this->anesthetist)
-            ->post(route("surgery.checklist", ["surgery" => $this->surgery, "phase" => "sign_in"]), [
-                "items" => ["identity_confirmed" => true, "site_marked" => true],
-                "notes" => "Patient verified",
+        $response = $this->actingAs($this->medecin)
+            ->post(route("surgery.start", $this->surgery), [
+                "consent" => "1",
             ]);
-
-        if ($response->status() !== 302) {
-            dump("Status: " . $response->status());
-            dump("Content: " . $response->getContent());
-        }
 
         $response->assertStatus(302);
         $this->assertEquals(1, AuditLog::count());
 
         $log = AuditLog::first();
-        dump("Audit log: " . json_encode($log ? $log->toArray() : "null"));
-
-        $this->assertEquals("checklist_completed", $log->action);
-        $this->assertEquals("sign_in", $log->new_values["phase"]);
-        $this->assertArrayHasKey("items", $log->new_values);
-        $this->assertArrayHasKey("checklist_id", $log->new_values);
-        $this->assertEquals($this->anesthetist->id, $log->user_id);
+        $this->assertEquals("status_changed", $log->action);
+        $this->assertEquals(Surgery::STATUS_IN_PROGRESS, $log->new_values["status"]);
+        $this->assertEquals($this->medecin->id, $log->user_id);
     }
 }

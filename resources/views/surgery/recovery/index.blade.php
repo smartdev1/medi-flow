@@ -1,5 +1,5 @@
 {{--
-    Recovery Room (Salle de réveil) component.
+    Recovery Room (Salle de rÃ©veil) component.
     Expected variable: $surgery (App\Models\Surgery)
     Include with: @include("surgery.recovery.index", ["surgery" => $surgery])
 --}}
@@ -14,13 +14,13 @@
 
 <x-ui.card>
     <div class="flex items-center justify-between mb-4">
-        <h3 class="text-sm font-semibold text-ink">Salle de réveil</h3>
+        <h3 class="text-sm font-semibold text-ink">Salle de rÃ©veil</h3>
         @if ($hasEnded)
             <x-ui.badge tone="success">
                 <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                Terminée
+                TerminÃ©e
             </x-ui.badge>
         @elseif ($hasStarted)
             <x-ui.badge tone="warning">
@@ -38,11 +38,11 @@
         {{-- Start button --}}
         <form method="POST" action="{{ route("surgery.recovery.start", $surgery) }}" class="text-center py-4">
             @csrf
-            <p class="text-sm text-ink-muted mb-4">Démarrer la surveillance post-anesthésique pour ce patient.</p>
+            <p class="text-sm text-ink-muted mb-4">DÃ©marrer la surveillance post-anesthÃ©sique pour ce patient.</p>
             <button type="submit"
                     class="inline-flex items-center rounded-md bg-brand-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
                 <x-ui.icon name="play" class="h-4 w-4 mr-2" />
-                Débuter la surveillance
+                DÃ©buter la surveillance
             </button>
         </form>
 
@@ -50,7 +50,7 @@
         {{-- Timer + End form --}}
         <div class="space-y-4" x-data="{ elapsed: 0 }" x-init="setInterval(() => elapsed++, 1000)">
             <div class="text-center">
-                <p class="text-xs text-ink-muted">Temps écoulé</p>
+                <p class="text-xs text-ink-muted">Temps Ã©coulÃ©</p>
                 <p class="text-3xl font-mono font-bold text-ink" x-text="formatTime(elapsed)"></p>
             </div>
 
@@ -58,14 +58,14 @@
                 @csrf
 
                 <label for="recovery_notes" class="block text-sm font-medium text-ink mb-1">
-                    Notes de surveillance (min. 10 caractères)
+                    Notes de surveillance (min. 10 caractÃ¨res)
                 </label>
                 <textarea id="recovery_notes"
                           name="recovery_notes"
                           rows="5"
                           required
                           minlength="10"
-                          placeholder="État du patient, constantes, douleurs, incidents..."
+                          placeholder="Ã‰tat du patient, constantes, douleurs, incidents..."
                           class="w-full rounded-md border border-line bg-white px-3 py-2 text-sm text-ink placeholder:text-ink-muted focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"></textarea>
 
                 @error("recovery_notes")
@@ -98,13 +98,13 @@
                 <dt class="text-ink-muted">Infirmier(e)</dt>
                 <dd class="text-ink font-medium">{{ $nurse }}</dd>
 
-                <dt class="text-ink-muted">Début</dt>
+                <dt class="text-ink-muted">DÃ©but</dt>
                 <dd class="text-ink">{{ $startedAt->format("d/m/Y H:i") }}</dd>
 
                 <dt class="text-ink-muted">Fin</dt>
                 <dd class="text-ink">{{ $endedAt->format("d/m/Y H:i") }}</dd>
 
-                <dt class="text-ink-muted">Durée</dt>
+                <dt class="text-ink-muted">DurÃ©e</dt>
                 <dd class="text-ink">{{ $startedAt->diffForHumans($endedAt, true) }}</dd>
             </dl>
 

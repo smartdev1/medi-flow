@@ -1,6 +1,23 @@
 <x-layout.app-shell title="Caisse" active="caisse" :user-name="$userName" :user-role="$userRole" :user-initials="$userInitials">
 
-    <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-6" x-data="{
+        counts: { pending: {{ $paniersEnCours }}, aPayer: {{ $aPayer }}, payes: {{ $payes }} },
+        init() {
+            setInterval(() => {
+                const params = new URLSearchParams(window.location.search);
+                fetch('{{ route('caisse.refresh') }}?' + params.toString(), {
+                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(r => r.ok ? r.json() : Promise.reject())
+                .then(data => {
+                    if (data.paniersEnCours !== this.counts.pending || data.aPayer !== this.counts.aPayer || data.payes !== this.counts.payes) {
+                        window.location.reload();
+                    }
+                })
+                .catch(() => {});
+            }, 15000);
+        }
+    }">
         <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
                 <h1 class="text-2xl font-semibold text-ink">Caisse</h1>

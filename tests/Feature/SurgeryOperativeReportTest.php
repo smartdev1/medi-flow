@@ -75,7 +75,7 @@ class SurgeryOperativeReportTest extends TestCase
 
     public function test_operative_report_can_be_stored_after_completed(): void
     {
-        $reportText = "L'appendicectomie a été réalisée sans complication. L'appendice était enflammé mais non perforé. Fermeture pariétale en deux plans. Suites simples prévues.";
+        $reportText = "L'appendicectomie a Ã©tÃ© rÃ©alisÃ©e sans complication. L'appendice Ã©tait enflammÃ© mais non perforÃ©. Fermeture pariÃ©tale en deux plans. Suites simples prÃ©vues.";
 
         $response = $this->actingAs($this->medecin)
             ->post(route("surgery.operative-report", $this->surgery), [

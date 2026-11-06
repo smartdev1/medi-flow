@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdmissionRequest;
+use App\Models\Invoice;
 use App\Models\Surgery;
 use App\Models\Visit;
+use App\Traits\GuardsClosedVisit;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,16 +14,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SurgeryController extends Controller
 {
-    /**
-     * Schedule a new surgery for a visit.
-     */
+    use GuardsClosedVisit;
     public function store(Request $request, Visit $visit): RedirectResponse
     {
+        $this->abortIfVisitClosed($visit);
         $validated = $request->validate([
             "procedure_name" => "required|string|max:255",
             "scheduled_at" => "nullable|date",
             "anesthetist_id" => "nullable|exists:users,id",
             "referring_doctor_name" => "nullable|string|max:255",
+            "cost" => "required|integer|min:0",
         ]);
 
         $surgery = Surgery::create([
@@ -30,6 +33,7 @@ class SurgeryController extends Controller
             "anesthetist_id" => $validated["anesthetist_id"] ?? null,
             "scheduled_at" => $validated["scheduled_at"] ?? null,
             "procedure_name" => $validated["procedure_name"],
+            "cost" => $validated["cost"],
             "surgery_type" => $visit->surgery_type,
             "referring_doctor_name" => $visit->surgery_type === "externe"
                 ? ($validated["referring_doctor_name"] ?? null)
@@ -39,18 +43,16 @@ class SurgeryController extends Controller
 
         $surgery->recordAudit("created", null, $surgery->toArray(), $request);
 
-        return redirect()->back()->with("success", "Chirurgie programmée avec succès.");
+        Invoice::forVisit($visit);
+
+        return redirect()->back()->with("success", "Chirurgie programmÃ©e avec succÃ¨s.");
     }
 
-    /**
-     * Update surgery schedule, anesthetist, notes, or procedure name.
-     *
-     * Only allowed when surgery is in "scheduled" or "consent_signed" status.
-     */
     public function update(Request $request, Surgery $surgery): RedirectResponse
     {
-        if (!in_array($surgery->status, [Surgery::STATUS_SCHEDULED, Surgery::STATUS_CONSENT_SIGNED])) {
-            abort(Response::HTTP_FORBIDDEN, "Cette chirurgie ne peut plus être modifiée.");
+        $this->abortIfVisitClosed($surgery->visit);
+        if ($surgery->status !== Surgery::STATUS_SCHEDULED) {
+            abort(Response::HTTP_FORBIDDEN, "Cette chirurgie ne peut plus Ãªtre modifiÃ©e.");
         }
 
         $validated = $request->validate([
@@ -64,67 +66,56 @@ class SurgeryController extends Controller
         $surgery->update($validated);
         $surgery->recordAudit("updated", $oldValues, $surgery->fresh()->only(["procedure_name", "scheduled_at", "anesthetist_id", "notes"]), $request);
 
-        return redirect()->back()->with("success", "Chirurgie mise à jour avec succès.");
+        return redirect()->back()->with("success", "Chirurgie mise Ã  jour avec succÃ¨s.");
     }
 
-    /**
-     * Cancel a scheduled surgery (does NOT delete — sets status to cancelled).
-     *
-     * Only allowed when surgery status is "scheduled".
-     */
     public function destroy(Surgery $surgery): RedirectResponse
     {
+        $this->abortIfVisitClosed($surgery->visit);
         if ($surgery->status !== Surgery::STATUS_SCHEDULED) {
-            abort(Response::HTTP_FORBIDDEN, "Seule une chirurgie programmée peut être annulée.");
+            abort(Response::HTTP_FORBIDDEN, "Seule une chirurgie programmÃ©e peut Ãªtre annulÃ©e.");
         }
 
         $oldStatus = $surgery->status;
         $surgery->update(["status" => Surgery::STATUS_CANCELLED]);
         $surgery->recordAudit("status_changed", ["status" => $oldStatus], ["status" => Surgery::STATUS_CANCELLED]);
 
-        return redirect()->back()->with("success", "Chirurgie annulée.");
+        $visit = $surgery->visit;
+        if ($visit) {
+            Invoice::forVisit($visit);
+        }
+
+        return redirect()->back()->with("success", "Chirurgie annulÃ©e.");
     }
 
-    /**
-     * Start surgery (transition to in_progress).
-     *
-     * Requires Sign In checklist to be completed.
-     */
     public function start(Request $request, Surgery $surgery): RedirectResponse
     {
-        if ($surgery->status !== Surgery::STATUS_CONSENT_SIGNED) {
-            return redirect()->back()->with("error", "La chirurgie doit avoir le consentement signé pour être démarrée.");
+        $this->abortIfVisitClosed($surgery->visit);
+        if ($surgery->status !== Surgery::STATUS_SCHEDULED) {
+            return redirect()->back()->with("error", "Seule une chirurgie programmÃ©e peut Ãªtre dÃ©marrÃ©e.");
         }
 
-        $hasSignIn = $surgery->checklists()->where("phase", "sign_in")->exists();
-        if (!$hasSignIn) {
-            return redirect()->back()->with("error", "La checklist Sign In doit être complétée avant de démarrer la chirurgie.");
-        }
+        $validated = $request->validate([
+            "consent" => "accepted",
+        ]);
 
         $oldStatus = $surgery->status;
         $surgery->update([
             "status" => Surgery::STATUS_IN_PROGRESS,
             "started_at" => now(),
+            "consent_signed_at" => $surgery->consent_signed_at ?? now(),
+            "consent_signed_by" => $surgery->consent_signed_by ?? Auth::user()->name,
         ]);
         $surgery->recordAudit("status_changed", ["status" => $oldStatus], ["status" => Surgery::STATUS_IN_PROGRESS], $request);
 
-        return redirect()->back()->with("success", "Chirurgie démarrée.");
+        return redirect()->back()->with("success", "Chirurgie dÃ©marrÃ©e.");
     }
 
-    /**
-     * Complete surgery (transition to completed).
-     *
-     * Requires Sign Out checklist to be completed.
-     */
     public function complete(Request $request, Surgery $surgery): RedirectResponse
     {
+        $this->abortIfVisitClosed($surgery->visit);
         if ($surgery->status !== Surgery::STATUS_IN_PROGRESS) {
-            return redirect()->back()->with("error", "Seule une chirurgie en cours peut être terminée.");
-        }
-
-        $hasSignOut = $surgery->checklists()->where("phase", "sign_out")->exists();
-        if (!$hasSignOut) {
-            return redirect()->back()->with("error", "La checklist Sign Out doit être complétée avant de terminer la chirurgie.");
+            return redirect()->back()->with("error", "Seule une chirurgie en cours peut Ãªtre terminÃ©e.");
         }
 
         $oldStatus = $surgery->status;
@@ -134,6 +125,45 @@ class SurgeryController extends Controller
         ]);
         $surgery->recordAudit("status_changed", ["status" => $oldStatus], ["status" => Surgery::STATUS_COMPLETED], $request);
 
-        return redirect()->back()->with("success", "Chirurgie terminée.");
+        $visit = $surgery->visit;
+        Invoice::forVisit($visit);
+        $alreadyRequested = AdmissionRequest::where("visit_id", $visit->id)
+            ->where("status", AdmissionRequest::STATUS_PENDING)
+            ->exists();
+        $alreadyAdmitted = $surgery->patient->admissions()
+            ->whereNull("discharged_at")
+            ->exists();
+
+        if (!$alreadyRequested && !$alreadyAdmitted) {
+            AdmissionRequest::create([
+                "visit_id" => $visit->id,
+                "patient_id" => $surgery->patient_id,
+                "requested_by" => Auth::id(),
+                "type" => "hospitalisation",
+                "reason" => "Post-opÃ©ratoire â€” " . $surgery->procedure_name,
+                "status" => AdmissionRequest::STATUS_PENDING,
+            ]);
+        }
+
+        return redirect()->back()->with("success", "Chirurgie terminÃ©e. Demande d'hospitalisation crÃ©Ã©e.");
+    }
+
+    public function updateCost(Request $request, Surgery $surgery): RedirectResponse
+    {
+        $this->abortIfVisitClosed($surgery->visit);
+        $validated = $request->validate([
+            "cost" => "required|integer|min:0",
+        ]);
+
+        $oldCost = $surgery->cost;
+        $surgery->update(["cost" => $validated["cost"]]);
+        $surgery->recordAudit("cost_updated", ["cost" => $oldCost], ["cost" => $validated["cost"]], $request);
+
+        $invoice = $surgery->visit->invoice;
+        if ($invoice) {
+            $invoice->recalculate();
+        }
+
+        return redirect()->back()->with("success", "Montant chirurgie mis Ã  jour.");
     }
 }

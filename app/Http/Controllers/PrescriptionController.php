@@ -9,16 +9,22 @@ use App\Models\Patient;
 use App\Models\Payment;
 use App\Models\Prescription;
 use App\Models\Visit;
+use App\Traits\GuardsClosedVisit;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class PrescriptionController extends Controller
 {
+    use GuardsClosedVisit;
+
     public function store(StorePrescriptionRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $patient = Patient::findOrFail($data['patient_id']);
+
+        $activeVisit = $patient->visits()->active()->latest('arrived_at')->first();
+        $this->abortIfVisitClosed($activeVisit);
 
         // La pharmacie est un acte de la consultation : sans ce lien, une
         // ordonnance se retrouverait facturée sur toutes les factures suivantes

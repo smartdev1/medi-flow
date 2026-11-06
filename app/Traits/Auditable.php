@@ -24,7 +24,7 @@ trait Auditable
      * @param array|null $newValues New values
      * @param Request|null $request Optional request for IP address
      */
-    protected function recordAudit(
+    public function recordAudit(
         string $action,
         ?array $oldValues = null,
         ?array $newValues = null,

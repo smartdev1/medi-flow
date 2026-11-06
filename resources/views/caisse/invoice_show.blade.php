@@ -70,6 +70,33 @@
         </div>
     @endif
 
+    {{-- Surgery cost adjustment --}}
+    @if ($invoice->visit->surgeries->where('status', \App\Models\Surgery::STATUS_COMPLETED)->isNotEmpty() && ($invoice->isAwaitingPayment() || $invoice->isPending()))
+        <div class="mt-4">
+            <x-ui.card>
+                <h2 class="mb-3 text-sm font-semibold text-ink">Frais chirurgicaux</h2>
+                @foreach ($invoice->visit->surgeries->where('status', \App\Models\Surgery::STATUS_COMPLETED) as $surgery)
+                    <form method="POST" action="{{ route('surgery.update-cost', $surgery) }}" class="flex flex-wrap items-end gap-3 @if(!$loop->last) mb-3 pb-3 border-b border-line @endif">
+                        @csrf
+                        @method('PATCH')
+                        <div class="flex-1 min-w-[200px]">
+                            <p class="text-xs text-ink-muted">{{ $surgery->procedure_name }}</p>
+                        </div>
+                        <div>
+                            <label for="cost_{{ $surgery->id }}" class="text-xs font-medium text-ink-soft">Montant (FCFA)</label>
+                            <input type="number" name="cost" id="cost_{{ $surgery->id }}" min="0" step="1"
+                                   value="{{ old('cost', $surgery->cost) }}"
+                                   class="mt-1 w-36 rounded-md border border-line bg-white px-2 py-2 text-right font-mono text-sm text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                        </div>
+                        <button type="submit" class="rounded-md border border-brand-500 px-3 py-2 text-xs font-medium text-brand-600 hover:bg-brand-50">
+                            Modifier
+                        </button>
+                    </form>
+                @endforeach
+            </x-ui.card>
+        </div>
+    @endif
+
     <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div class="lg:col-span-2">
             <x-ui.card>

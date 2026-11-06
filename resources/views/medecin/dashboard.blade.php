@@ -325,6 +325,15 @@
                                         </div>
                                     @endif
                                     <div>
+                                        <label class="text-sm font-medium text-ink" for="cost">Montant global (FCFA)</label>
+                                        <input type="number" name="cost" id="cost" required min="0" step="1"
+                                            value="{{ old('cost') }}"
+                                            placeholder="Ex : 150000"
+                                            class="mt-1 w-full rounded-md border border-line bg-white py-2.5 px-3 text-sm text-ink placeholder:text-ink-muted focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                                        <p class="mt-1 text-xs text-ink-muted">Inclut tous les frais : chirurgie, anesthésie, bloc.</p>
+                                        <x-input-error :messages="$errors->get('cost')" class="mt-1" />
+                                    </div>
+                                    <div>
                                         <label class="text-sm font-medium text-ink" for="anesthetist_id">Anesthésiste</label>
                                         <select name="anesthetist_id" id="anesthetist_id"
                                             class="mt-1 w-full rounded-md border border-line bg-white py-2.5 px-3 text-sm text-ink focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500">
@@ -363,15 +372,13 @@
                                                 <div class="flex items-center gap-2">
                                                     <x-ui.badge :tone="match($surgery->status) {
                                                         'scheduled' => 'brand',
-                                                        'consent_signed' => 'warning',
-                                                        'in_progress' => 'danger',
+                                                        'in_progress' => 'warning',
                                                         'completed' => 'success',
                                                         'cancelled' => 'neutral',
                                                         default => 'neutral',
                                                     }">
                                                         {{ match($surgery->status) {
                                                             'scheduled' => 'Programmée',
-                                                            'consent_signed' => 'Consentement signé',
                                                             'in_progress' => 'En cours',
                                                             'completed' => 'Terminée',
                                                             'cancelled' => 'Annulée',

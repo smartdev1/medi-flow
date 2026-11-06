@@ -11,6 +11,7 @@ use App\Models\Patient;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Visit;
+use App\Traits\GuardsClosedVisit;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,8 @@ use Illuminate\View\View;
 
 class AccueilController extends Controller
 {
+    use GuardsClosedVisit;
+
     public function index(): View
     {
         $user = Auth::user();
@@ -131,6 +134,7 @@ class AccueilController extends Controller
      */
     public function updateStayAmount(Request $request, Visit $visit): RedirectResponse
     {
+        $this->abortIfVisitClosed($visit);
         abort_unless(
             $request->user()?->hasRole(Role::Accueil->value),
             403,

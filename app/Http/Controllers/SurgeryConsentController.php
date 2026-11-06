@@ -3,24 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Surgery;
+use App\Traits\GuardsClosedVisit;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class SurgeryConsentController extends Controller
 {
-    /**
-     * Record pre-anesthetic evaluation notes.
-     *
-     * Only the assigned anesthetist may submit. If no anesthetist is assigned,
-     * any authenticated medecin (already enforced by route middleware) may act.
-     */
+    use GuardsClosedVisit;
+
     public function preAnesthetic(Request $request, Surgery $surgery)
     {
-        if ($surgery->anesthetist_id !== null
-            && $surgery->anesthetist_id !== $request->user()->id) {
-            abort(403, "Seul l'anesthÈsiste assignÈ peut remplir la consultation prÈ-anesthÈsique.");
-        }
-
+        $this->abortIfVisitClosed($surgery->visit);
         $validated = $request->validate([
             "pre_anesthetic_notes" => ["required", "string", "min:10"],
         ]);
@@ -32,36 +24,6 @@ class SurgeryConsentController extends Controller
 
         $surgery->recordAudit("pre_anesthetic_notes_filled", ["pre_anesthetic_notes" => $oldNotes], ["pre_anesthetic_notes" => $validated["pre_anesthetic_notes"]], $request);
 
-        return redirect()->back()->with("success", "Notes prÈ-anesthÈsiques enregistrÈes.");
-    }
-
-    /**
-     * Sign the surgical consent form.
-     *
-     * Pre-anesthetic notes must be filled before consent can be signed.
-     */
-    public function signConsent(Request $request, Surgery $surgery)
-    {
-        if (empty($surgery->pre_anesthetic_notes)) {
-            abort(422, "La consultation prÈ-anesthÈsique doit Ítre remplie avant la signature du consentement.");
-        }
-
-        $validated = $request->validate([
-            "consent_signed_by" => ["required", "string", "max:255"],
-        ]);
-
-        $surgery->update([
-            "consent_signed_at" => now(),
-            "consent_signed_by" => $validated["consent_signed_by"],
-            "status" => Surgery::STATUS_CONSENT_SIGNED,
-        ]);
-
-        $surgery->recordAudit("consent_signed", null, [
-            "consent_signed_by" => $validated["consent_signed_by"],
-            "consent_signed_at" => $surgery->consent_signed_at->toISOString(),
-            "status" => Surgery::STATUS_CONSENT_SIGNED,
-        ], $request);
-
-        return redirect()->back()->with("success", "Consentement signÈ avec succËs.");
+        return redirect()->back()->with("success", "Notes pr√©-anesth√©siques enregistr√©es.");
     }
 }

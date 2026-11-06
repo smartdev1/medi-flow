@@ -3,23 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Surgery;
+use App\Traits\GuardsClosedVisit;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SurgeryRecoveryController extends Controller
 {
-    /**
-     * Start recovery room monitoring for a completed surgery.
-     */
+    use GuardsClosedVisit;
+
     public function start(Request $request, Surgery $surgery): RedirectResponse
     {
+        $this->abortIfVisitClosed($surgery->visit);
         if ($surgery->status !== Surgery::STATUS_COMPLETED) {
-            return redirect()->back()->with("error", "La surveillance en salle de rÈveil ne peut commencer que pour une chirurgie terminÈe.");
+            return redirect()->back()->with("error", "La surveillance en salle de r√©veil ne peut commencer que pour une chirurgie termin√©e.");
         }
 
         if ($surgery->recovery_started_at !== null) {
-            return redirect()->back()->with("error", "La surveillance a dÈj‡ commencÈ.");
+            return redirect()->back()->with("error", "La surveillance a d√©j√† commenc√©.");
         }
 
         $surgery->update([
@@ -32,20 +33,18 @@ class SurgeryRecoveryController extends Controller
             "recovery_nurse_id" => Auth::id(),
         ], $request);
 
-        return redirect()->back()->with("success", "Surveillance en salle de rÈveil commencÈe.");
+        return redirect()->back()->with("success", "Surveillance en salle de r√©veil commenc√©e.");
     }
 
-    /**
-     * End recovery room monitoring.
-     */
     public function end(Request $request, Surgery $surgery): RedirectResponse
     {
+        $this->abortIfVisitClosed($surgery->visit);
         if ($surgery->recovery_started_at === null) {
-            return redirect()->back()->with("error", "La surveillance n'a pas encore commencÈ.");
+            return redirect()->back()->with("error", "La surveillance n'a pas encore commenc√©.");
         }
 
         if ($surgery->recovery_ended_at !== null) {
-            return redirect()->back()->with("error", "La surveillance est dÈj‡ terminÈe.");
+            return redirect()->back()->with("error", "La surveillance est d√©j√† termin√©e.");
         }
 
         $validated = $request->validate([
@@ -62,6 +61,6 @@ class SurgeryRecoveryController extends Controller
             "recovery_notes" => $validated["recovery_notes"],
         ], $request);
 
-        return redirect()->back()->with("success", "Surveillance en salle de rÈveil terminÈe.");
+        return redirect()->back()->with("success", "Surveillance en salle de r√©veil termin√©e.");
     }
 }
